@@ -1,0 +1,23 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/band-ai-openapi-original.json
+summary:
+  types:
+  - apiKey
+  - http
+  api_key_in:
+  - header
+schemes:
+- name: ApiKeyAuth
+  type: apiKey
+  in: header
+  parameter: X-API-Key
+  description: Enter your API key for programmatic access
+  sources:
+  - openapi/band-ai-openapi-original.json
+- name: bearerAuth
+  type: http
+  scheme: bearer
+  description: Enter your JWT token (without the 'Bearer ' prefix)
+  sources:
+  - openapi/band-ai-openapi-original.json
