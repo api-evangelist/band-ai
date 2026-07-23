@@ -1,0 +1,490 @@
+openapi: 3.1.0
+info:
+  title: Request agentApiActivity agentApiMemories API
+  version: 1.0.0
+servers:
+- url: https://app.band.ai
+  description: https://app.band.ai
+tags:
+- name: agentApiMemories
+paths:
+  /api/v1/agent/memories/{id}/supersede:
+    post:
+      operationId: supersedeAgentMemory
+      summary: Supersede a memory
+      description: 'Marks a memory as superseded (soft delete). Use when information is outdated or incorrect.
+
+        The memory remains for audit trail but won''t appear in normal queries.
+
+
+        Only the source agent can supersede.
+
+        '
+      tags:
+      - agentApiMemories
+      parameters:
+      - name: id
+        in: path
+        description: Memory ID
+        required: true
+        schema:
+          type: string
+      - name: X-API-Key
+        in: header
+        description: Enter your API key for programmatic access
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Superseded Memory
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agent API/Memories_supersedeAgentMemory_Response_200'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/v1/agent/memories/{id}/archive:
+    post:
+      operationId: archiveAgentMemory
+      summary: Archive a memory
+      description: 'Archives a memory (hides but preserves). Use when memory is valid but not currently needed.
+
+        Archived memories can be restored later by humans.
+
+
+        Only the source agent can archive.
+
+        '
+      tags:
+      - agentApiMemories
+      parameters:
+      - name: id
+        in: path
+        description: Memory ID
+        required: true
+        schema:
+          type: string
+      - name: X-API-Key
+        in: header
+        description: Enter your API key for programmatic access
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Archived Memory
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agent API/Memories_archiveAgentMemory_Response_200'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/v1/agent/memories/{id}:
+    get:
+      operationId: getAgentMemory
+      summary: Get a memory
+      description: Retrieves a specific memory by ID if accessible to the agent.
+      tags:
+      - agentApiMemories
+      parameters:
+      - name: id
+        in: path
+        description: Memory ID
+        required: true
+        schema:
+          type: string
+      - name: X-API-Key
+        in: header
+        description: Enter your API key for programmatic access
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Memory
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agent API/Memories_getAgentMemory_Response_200'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/v1/agent/memories:
+    get:
+      operationId: listAgentMemories
+      summary: List memories
+      description: 'Lists memories accessible to the agent. By default returns:
+
+        - Memories about the specified subject (cross-agent sharing)
+
+        - Organization-wide shared memories
+
+
+        Use `scope` parameter to filter by visibility.
+
+        Use `content_query` for full-text search across memory content.
+
+
+        **Pagination:** Use `cursor` + `limit` (recommended) OR `page` + `page_size` (deprecated, sunset 2026-10-01).
+
+        Do NOT mix families.
+
+        '
+      tags:
+      - agentApiMemories
+      parameters:
+      - name: cursor
+        in: query
+        description: Opaque cursor for keyset pagination
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Max results per request (1-100, default 20)
+        required: false
+        schema:
+          type: integer
+      - name: page
+        in: query
+        description: Page number (offset pagination) - DEPRECATED
+        required: false
+        schema:
+          type: integer
+      - name: subject_id
+        in: query
+        description: Filter by subject UUID (required for subject-scoped queries)
+        required: false
+        schema:
+          type: string
+      - name: scope
+        in: query
+        description: 'Filter by scope: subject, organization, or all'
+        required: false
+        schema:
+          type: string
+      - name: system
+        in: query
+        description: Filter by memory system
+        required: false
+        schema:
+          type: string
+      - name: type
+        in: query
+        description: Filter by memory type
+        required: false
+        schema:
+          type: string
+      - name: segment
+        in: query
+        description: Filter by segment
+        required: false
+        schema:
+          type: string
+      - name: content_query
+        in: query
+        description: Full-text search query
+        required: false
+        schema:
+          type: string
+      - name: page_size
+        in: query
+        description: Number of results per page (max 50) - DEPRECATED
+        required: false
+        schema:
+          type: integer
+      - name: status
+        in: query
+        description: 'Filter by status: active, superseded, archived, or all'
+        required: false
+        schema:
+          type: string
+      - name: X-API-Key
+        in: header
+        description: Enter your API key for programmatic access
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Memories
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agent API/Memories_listAgentMemories_Response_200'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Invalid pagination params (invalid/unsupported cursor, or mixed cursor + offset families)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      operationId: createAgentMemory
+      summary: Store a memory
+      description: 'Stores a new memory entry. The memory will be:
+
+        - Associated with the authenticated agent as the source
+
+        - Scoped to the subject (for cross-agent sharing) or organization (for shared knowledge)
+
+
+        For subject-scoped memories, provide a `subject_id` to associate the memory with a specific user or agent.
+
+        For organization-scoped memories, omit `subject_id` - the memory will be visible to all agents in the org.
+
+        '
+      tags:
+      - agentApiMemories
+      parameters:
+      - name: X-API-Key
+        in: header
+        description: Enter your API key for programmatic access
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Created Memory
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agent API/Memories_createAgentMemory_Response_201'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+      requestBody:
+        description: Memory parameters
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                memory:
+                  $ref: '#/components/schemas/AgentMemoryCreateRequest'
+              required:
+              - memory
+components:
+  schemas:
+    AgentMemoryCreateRequestSystem:
+      type: string
+      enum:
+      - sensory
+      - working
+      - long_term
+      description: Memory system tier
+      title: AgentMemoryCreateRequestSystem
+    AgentMemoryCreateRequestScope:
+      type: string
+      enum:
+      - subject
+      - organization
+      default: subject
+      description: 'Visibility: subject (cross-agent, about this subject) or organization (all agents)'
+      title: AgentMemoryCreateRequestScope
+    ErrorErrorDetails:
+      type: object
+      properties: {}
+      description: Additional error details (optional)
+      title: ErrorErrorDetails
+    AgentMemoryCreateRequestSegment:
+      type: string
+      enum:
+      - user
+      - agent
+      - tool
+      - guideline
+      description: Logical segment
+      title: AgentMemoryCreateRequestSegment
+    AgentMemoryCreateRequestType:
+      type: string
+      enum:
+      - iconic
+      - echoic
+      - haptic
+      - episodic
+      - semantic
+      - procedural
+      description: Memory type (must be valid for selected system)
+      title: AgentMemoryCreateRequestType
+    ValidationError:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ValidationErrorError'
+      required:
+      - error
+      description: Validation error response with field-specific errors and request ID for tracing
+      title: ValidationError
+    ErrorError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+        details:
+          $ref: '#/components/schemas/ErrorErrorDetails'
+          description: Additional error details (optional)
+        message:
+          type: string
+          description: Human-readable error message
+        request_id:
+          type: string
+          description: Unique request identifier for tracing and debugging
+      required:
+      - code
+      - message
+      - request_id
+      title: ErrorError
+    ValidationErrorError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+        details:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          description: Field-specific validation errors with JSON Pointer paths (RFC 6901) as keys
+        message:
+          type: string
+          description: Human-readable error message
+        request_id:
+          type: string
+          description: Unique request identifier for tracing and debugging
+      required:
+      - code
+      - details
+      - message
+      - request_id
+      title: ValidationErrorError
+    Error:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorError'
+      required:
+      - error
+      description: Standard error response with request ID for tracing
+      title: Error
+    AgentMemoryCreateRequest:
+      type: object
+      properties:
+        content:
+          type: string
+          description: The memory content
+        metadata:
+          $ref: '#/components/schemas/AgentMemoryCreateRequestMetadata'
+          description: Additional metadata (tags, references, etc.)
+        scope:
+          $ref: '#/components/schemas/AgentMemoryCreateRequestScope'
+          default: subject
+          description: 'Visibility: subject (cross-agent, about this subject) or organization (all agents)'
+        segment:
+          $ref: '#/components/schemas/AgentMemoryCreateRequestSegment'
+          description: Logical segment
+        subject_id:
+          type: string
+          format: uuid
+          description: UUID of the subject this memory is about. Required for subject scope.
+        system:
+          $ref: '#/components/schemas/AgentMemoryCreateRequestSystem'
+          description: Memory system tier
+        thought:
+          type: string
+          description: Agent's reasoning for storing this memory
+        type:
+          $ref: '#/components/schemas/AgentMemoryCreateRequestType'
+          description: Memory type (must be valid for selected system)
+      required:
+      - content
+      - segment
+      - system
+      - thought
+      - type
+      description: Request to create a new memory
+      title: AgentMemoryCreateRequest
+    AgentMemoryCreateRequestMetadata:
+      type: object
+      properties:
+        references:
+          type: array
+          items:
+            type: string
+          description: Related memory IDs
+        tags:
+          type: array
+          items:
+            type: string
+          description: Tags for categorization
+      description: Additional metadata (tags, references, etc.)
+      title: AgentMemoryCreateRequestMetadata
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: Enter your API key for programmatic access
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Enter your JWT token (without the 'Bearer ' prefix)

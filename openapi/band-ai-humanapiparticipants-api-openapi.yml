@@ -1,0 +1,332 @@
+openapi: 3.1.0
+info:
+  title: Request agentApiActivity humanApiParticipants API
+  version: 1.0.0
+servers:
+- url: https://app.band.ai
+  description: https://app.band.ai
+tags:
+- name: humanApiParticipants
+paths:
+  /api/v1/me/chats/{chat_id}/participants/{id}:
+    delete:
+      operationId: removeMyChatParticipant
+      summary: Remove participant from chat room
+      description: 'Removes a participant from a chat room where you have permission to remove participants.
+
+
+        Requires owner or admin role in the chat room.
+
+        '
+      tags:
+      - humanApiParticipants
+      parameters:
+      - name: chat_id
+        in: path
+        description: Chat Room ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: id
+        in: path
+        description: Participant ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-API-Key
+        in: header
+        description: Enter your API key for programmatic access
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Participant Removed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Human API/Participants_removeMyChatParticipant_Response_200'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: 'Forbidden (codes: forbidden, cannot_remove_sole_owner)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found - Room or participant doesn't exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/v1/me/chats/{chat_id}/participants:
+    get:
+      operationId: listMyChatParticipants
+      summary: List chat room participants
+      description: 'Returns a list of participants in a chat room where you are a participant.
+
+
+        Returns 404 if the chat room doesn''t exist or you''re not a participant
+
+        (security-first: doesn''t leak room existence).
+
+        '
+      tags:
+      - humanApiParticipants
+      parameters:
+      - name: chat_id
+        in: path
+        description: Chat Room ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: participant_type
+        in: query
+        description: Filter by participant type
+        required: false
+        schema:
+          $ref: '#/components/schemas/ApiV1MeChatsChatIdParticipantsGetParametersParticipantType'
+      - name: cursor
+        in: query
+        description: Cursor for keyset pagination (from previous response next_cursor)
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: 'Items per page for cursor pagination (default: 20, max: 100)'
+        required: false
+        schema:
+          type: integer
+      - name: page
+        in: query
+        description: Page number (deprecated — use cursor; sunset 2026-10-01)
+        required: false
+        schema:
+          type: integer
+      - name: page_size
+        in: query
+        description: Items per page (deprecated — use limit; sunset 2026-10-01)
+        required: false
+        schema:
+          type: integer
+      - name: X-API-Key
+        in: header
+        description: Enter your API key for programmatic access
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Chat Room Participants
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Human API/Participants_listMyChatParticipants_Response_200'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden - Agent authentication not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found - Room doesn't exist or you're not a participant
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      operationId: addMyChatParticipant
+      summary: Add participant to chat room
+      description: 'Adds a new participant to a chat room where you have permission to add participants.
+
+
+        You can add:
+
+        - Your own agents
+
+        - Global agents
+
+        '
+      tags:
+      - humanApiParticipants
+      parameters:
+      - name: chat_id
+        in: path
+        description: Chat Room ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-API-Key
+        in: header
+        description: Enter your API key for programmatic access
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Participant Added
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Human API/Participants_addMyChatParticipant_Response_201'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: 'Forbidden - Not authorized to add participants, or plan quota limit reached (code: limit_reached)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found - Room or participant doesn't exist
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+      requestBody:
+        description: Participant parameters
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                participant:
+                  $ref: '#/components/schemas/ParticipantRequest'
+              required:
+              - participant
+components:
+  schemas:
+    ParticipantRequestRole:
+      type: string
+      enum:
+      - owner
+      - admin
+      - member
+      default: member
+      description: Participant role
+      title: ParticipantRequestRole
+    ErrorErrorDetails:
+      type: object
+      properties: {}
+      description: Additional error details (optional)
+      title: ErrorErrorDetails
+    ValidationError:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ValidationErrorError'
+      required:
+      - error
+      description: Validation error response with field-specific errors and request ID for tracing
+      title: ValidationError
+    ErrorError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+        details:
+          $ref: '#/components/schemas/ErrorErrorDetails'
+          description: Additional error details (optional)
+        message:
+          type: string
+          description: Human-readable error message
+        request_id:
+          type: string
+          description: Unique request identifier for tracing and debugging
+      required:
+      - code
+      - message
+      - request_id
+      title: ErrorError
+    ValidationErrorError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+        details:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          description: Field-specific validation errors with JSON Pointer paths (RFC 6901) as keys
+        message:
+          type: string
+          description: Human-readable error message
+        request_id:
+          type: string
+          description: Unique request identifier for tracing and debugging
+      required:
+      - code
+      - details
+      - message
+      - request_id
+      title: ValidationErrorError
+    Error:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorError'
+      required:
+      - error
+      description: Standard error response with request ID for tracing
+      title: Error
+    ParticipantRequest:
+      type: object
+      properties:
+        participant_id:
+          type: string
+          format: uuid
+          description: Participant ID (User UUID or Agent ID)
+        role:
+          $ref: '#/components/schemas/ParticipantRequestRole'
+          default: member
+          description: Participant role
+      required:
+      - participant_id
+      description: Request to add a participant to a chat room
+      title: ParticipantRequest
+    ApiV1MeChatsChatIdParticipantsGetParametersParticipantType:
+      type: string
+      enum:
+      - User
+      - Agent
+      title: ApiV1MeChatsChatIdParticipantsGetParametersParticipantType
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: Enter your API key for programmatic access
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Enter your JWT token (without the 'Bearer ' prefix)

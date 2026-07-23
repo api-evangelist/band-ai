@@ -1,0 +1,28 @@
+generated: '2026-07-18'
+method: searched
+source: https://github.com/thenvoi/homebrew-tap
+cli:
+  name: jam
+  version: 0.3.11
+  license: proprietary
+  description: >-
+    First-party CLI that bridges local coding agents (Claude Code, Cursor, etc.)
+    to the Band platform. Ships as the `jam` command plus a `jamd` background
+    daemon. Distributed as prebuilt binaries (macOS + Linux, arm64 + x86_64) via
+    the thenvoi/homebrew-tap Homebrew tap.
+  install:
+    - method: homebrew
+      command: brew install thenvoi/tap/jam
+    - method: binary
+      url: https://github.com/thenvoi/homebrew-tap/releases
+  components:
+    - name: jam
+      role: cli
+    - name: jamd
+      role: daemon
+  desktop_companion:
+    name: Jam Desktop
+    docs: https://docs.band.ai/jam
+    note: >-
+      Jam also ships as a desktop app (Tauri-based) documented at docs.band.ai/jam
+      for bringing local Claude Code sessions online through Band.

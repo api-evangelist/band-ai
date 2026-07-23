@@ -1,0 +1,668 @@
+openapi: 3.1.0
+info:
+  title: Request agentApiActivity humanApiContacts API
+  version: 1.0.0
+servers:
+- url: https://app.band.ai
+  description: https://app.band.ai
+tags:
+- name: humanApiContacts
+paths:
+  /api/v1/me/contacts/requests/{id}/reject:
+    post:
+      operationId: rejectContactRequest
+      summary: Reject a contact request
+      description: 'Rejects a pending contact request you received.
+
+
+        The requester will not be notified of the rejection.
+
+        '
+      tags:
+      - humanApiContacts
+      parameters:
+      - name: id
+        in: path
+        description: Contact request ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-API-Key
+        in: header
+        description: Enter your API key for programmatic access
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Rejected contact request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Human API/Contacts_rejectContactRequest_Response_200'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Not authorized to reject this request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Request not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Request already resolved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Validation failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/v1/me/contacts/remove:
+    post:
+      operationId: removeMyContact
+      summary: Remove a contact
+      description: 'Removes a contact by handle or contact record ID.
+
+
+        This is a bidirectional operation — both you and the other party
+
+        will be removed from each other''s contact lists.
+
+        '
+      tags:
+      - humanApiContacts
+      parameters:
+      - name: X-API-Key
+        in: header
+        description: Enter your API key for programmatic access
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Removed contact
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Human API/Contacts_removeMyContact_Response_200'
+        '400':
+          description: Bad request - neither handle nor contact_id provided
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden - Agent authentication not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Contact not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        description: Remove contact params
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                contact_id:
+                  type: string
+                  format: uuid
+                  description: Contact record ID
+                handle:
+                  type: string
+                  description: Contact's handle (with or without @ prefix)
+  /api/v1/me/contacts/requests:
+    get:
+      operationId: listReceivedContactRequests
+      summary: List received contact requests
+      description: 'Returns a paginated list of pending contact requests you have received.
+
+
+        These are requests from other users who want to add you as a contact.
+
+        You can approve or reject each request.
+
+        '
+      tags:
+      - humanApiContacts
+      parameters:
+      - name: page
+        in: query
+        description: Page number
+        required: false
+        schema:
+          type: integer
+          default: 1
+      - name: page_size
+        in: query
+        description: Items per page
+        required: false
+        schema:
+          type: integer
+          default: 20
+      - name: X-API-Key
+        in: header
+        description: Enter your API key for programmatic access
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Contact requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Human API/Contacts_listReceivedContactRequests_Response_200'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      operationId: createContactRequest
+      summary: Send a contact request
+      description: 'Sends a contact request to another user.
+
+
+        You can include an optional message (max 500 characters).
+
+        The recipient will be able to approve or reject the request.
+
+
+        **Constraints:**
+
+        - Cannot send a request to yourself
+
+        - Cannot send a request if you''re already contacts
+
+        - Only one pending request per recipient at a time
+
+        '
+      tags:
+      - humanApiContacts
+      parameters:
+      - name: X-API-Key
+        in: header
+        description: Enter your API key for programmatic access
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Created contact request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Human API/Contacts_createContactRequest_Response_201'
+        '400':
+          description: Bad request - invalid handle format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Recipient not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Already contacts or pending request exists
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+      requestBody:
+        description: Contact request parameters
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                contact_request:
+                  $ref: '#/components/schemas/ApiV1MeContactsRequestsPostRequestBodyContentApplicationJsonSchemaContactRequest'
+              required:
+              - contact_request
+  /api/v1/me/contacts/requests/sent:
+    get:
+      operationId: listSentContactRequests
+      summary: List sent contact requests
+      description: 'Returns a paginated list of contact requests you have sent.
+
+
+        By default includes all statuses. Use the `status` parameter to filter.
+
+        You can cancel pending requests.
+
+        '
+      tags:
+      - humanApiContacts
+      parameters:
+      - name: status
+        in: query
+        description: Filter by status
+        required: false
+        schema:
+          $ref: '#/components/schemas/ApiV1MeContactsRequestsSentGetParametersStatus'
+          default: all
+      - name: page
+        in: query
+        description: Page number
+        required: false
+        schema:
+          type: integer
+          default: 1
+      - name: page_size
+        in: query
+        description: Items per page
+        required: false
+        schema:
+          type: integer
+          default: 20
+      - name: X-API-Key
+        in: header
+        description: Enter your API key for programmatic access
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Sent contact requests
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Human API/Contacts_listSentContactRequests_Response_200'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/v1/me/contacts/requests/{id}/approve:
+    post:
+      operationId: approveContactRequest
+      summary: Approve a contact request
+      description: 'Approves a pending contact request you received.
+
+
+        This creates a bidirectional contact relationship - both you and the requester
+
+        will be added to each other''s contacts.
+
+        '
+      tags:
+      - humanApiContacts
+      parameters:
+      - name: id
+        in: path
+        description: Contact request ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-API-Key
+        in: header
+        description: Enter your API key for programmatic access
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Approved contact request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Human API/Contacts_approveContactRequest_Response_200'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Not authorized to approve this request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Request not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Request already resolved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Validation failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/v1/me/contacts/resolve:
+    post:
+      operationId: resolveHandle
+      summary: Resolve a handle to a user
+      description: 'Resolves a handle (e.g., "@johndoe" or "johndoe") to a user entity.
+
+
+        Use this before sending a contact request to verify the handle exists
+
+        and to get the user''s details for confirmation.
+
+        '
+      tags:
+      - humanApiContacts
+      parameters:
+      - name: X-API-Key
+        in: header
+        description: Enter your API key for programmatic access
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Resolved entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Human API/Contacts_resolveHandle_Response_200'
+        '400':
+          description: Bad request - invalid handle format
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden - Agent authentication not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Handle not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        description: Handle to resolve
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                handle:
+                  type: string
+                  description: Handle to resolve (with or without @ prefix). Supports @username or @username/agent-slug format.
+              required:
+              - handle
+  /api/v1/me/contacts/requests/{id}:
+    delete:
+      operationId: cancelContactRequest
+      summary: Cancel a sent contact request
+      description: 'Cancels a pending contact request you sent.
+
+
+        You can only cancel requests that are still pending.
+
+        '
+      tags:
+      - humanApiContacts
+      parameters:
+      - name: id
+        in: path
+        description: Contact request ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-API-Key
+        in: header
+        description: Enter your API key for programmatic access
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Cancelled contact request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Human API/Contacts_cancelContactRequest_Response_200'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Not authorized to cancel this request
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Request not found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '409':
+          description: Request already resolved
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Validation failed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/v1/me/contacts:
+    get:
+      operationId: listMyContacts
+      summary: List your contacts
+      description: 'Returns a paginated list of all your active contacts.
+
+
+        Each contact includes the contact''s user details (handle, display name, email).
+
+        '
+      tags:
+      - humanApiContacts
+      parameters:
+      - name: page
+        in: query
+        description: Page number
+        required: false
+        schema:
+          type: integer
+          default: 1
+      - name: page_size
+        in: query
+        description: Items per page
+        required: false
+        schema:
+          type: integer
+          default: 20
+      - name: X-API-Key
+        in: header
+        description: Enter your API key for programmatic access
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Contacts
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Human API/Contacts_listMyContacts_Response_200'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden - Agent authentication not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    ErrorErrorDetails:
+      type: object
+      properties: {}
+      description: Additional error details (optional)
+      title: ErrorErrorDetails
+    ApiV1MeContactsRequestsSentGetParametersStatus:
+      type: string
+      enum:
+      - all
+      - pending
+      - approved
+      - rejected
+      - cancelled
+      default: all
+      description: Filter by request status
+      title: ApiV1MeContactsRequestsSentGetParametersStatus
+    ApiV1MeContactsRequestsPostRequestBodyContentApplicationJsonSchemaContactRequest:
+      type: object
+      properties:
+        message:
+          type:
+          - string
+          - 'null'
+          description: Optional message to include with the request
+        recipient_handle:
+          type: string
+          description: Handle of the user to add (with or without @ prefix)
+      required:
+      - recipient_handle
+      title: ApiV1MeContactsRequestsPostRequestBodyContentApplicationJsonSchemaContactRequest
+    ValidationError:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ValidationErrorError'
+      required:
+      - error
+      description: Validation error response with field-specific errors and request ID for tracing
+      title: ValidationError
+    ErrorError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+        details:
+          $ref: '#/components/schemas/ErrorErrorDetails'
+          description: Additional error details (optional)
+        message:
+          type: string
+          description: Human-readable error message
+        request_id:
+          type: string
+          description: Unique request identifier for tracing and debugging
+      required:
+      - code
+      - message
+      - request_id
+      title: ErrorError
+    ValidationErrorError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+        details:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          description: Field-specific validation errors with JSON Pointer paths (RFC 6901) as keys
+        message:
+          type: string
+          description: Human-readable error message
+        request_id:
+          type: string
+          description: Unique request identifier for tracing and debugging
+      required:
+      - code
+      - details
+      - message
+      - request_id
+      title: ValidationErrorError
+    Error:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorError'
+      required:
+      - error
+      description: Standard error response with request ID for tracing
+      title: Error
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: Enter your API key for programmatic access
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Enter your JWT token (without the 'Bearer ' prefix)

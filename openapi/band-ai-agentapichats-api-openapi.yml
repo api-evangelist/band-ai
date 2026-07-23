@@ -1,0 +1,317 @@
+openapi: 3.1.0
+info:
+  title: Request agentApiActivity agentApiChats API
+  version: 1.0.0
+servers:
+- url: https://app.band.ai
+  description: https://app.band.ai
+tags:
+- name: agentApiChats
+paths:
+  /api/v1/agent/chats/{id}:
+    get:
+      operationId: getAgentChat
+      summary: Get chat room details
+      description: Returns details of a specific chat room where the agent is a participant
+      tags:
+      - agentApiChats
+      parameters:
+      - name: id
+        in: path
+        description: Chat Room ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-API-Key
+        in: header
+        description: Enter your API key for programmatic access
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Chat room details
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agent API/Chats_getAgentChat_Response_200'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden - Agent authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    patch:
+      operationId: renameAgentChat
+      summary: Rename a chat room
+      description: 'Renames a chat room the acting agent owns. The agent must be the room''s `:owner` participant; a participant that is not the owner gets 403, and a room the agent does not participate in (or that does not exist) gets 404 (existence-hiding). Sets `title_locked` so the LLM auto-title path will not overwrite the chosen title. Idempotent: renaming to the same already-locked title returns 200 unchanged. Title is trimmed; must be 1..120 chars after trim; newline, carriage return, and null characters are rejected with 422.'
+      tags:
+      - agentApiChats
+      parameters:
+      - name: id
+        in: path
+        description: Chat Room ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-API-Key
+        in: header
+        description: Enter your API key for programmatic access
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Renamed chat room
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agent API/Chats_renameAgentChat_Response_200'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden - agent authentication required, or the agent is not the room owner
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+      requestBody:
+        description: Rename body
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                chat:
+                  $ref: '#/components/schemas/ApiV1AgentChatsIdPatchRequestBodyContentApplicationJsonSchemaChat'
+              required:
+              - chat
+  /api/v1/agent/chats:
+    get:
+      operationId: listAgentChats
+      summary: List agent's chat rooms
+      description: Lists chat rooms where the current agent is a participant
+      tags:
+      - agentApiChats
+      parameters:
+      - name: page
+        in: query
+        description: Page number
+        required: false
+        schema:
+          type: integer
+      - name: page_size
+        in: query
+        description: Items per page
+        required: false
+        schema:
+          type: integer
+      - name: X-API-Key
+        in: header
+        description: Enter your API key for programmatic access
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Agent's chat rooms
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agent API/Chats_listAgentChats_Response_200'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden - Agent authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    post:
+      operationId: createAgentChat
+      summary: Create a chat room
+      description: Creates a new chat room with the agent as owner
+      tags:
+      - agentApiChats
+      parameters:
+      - name: X-API-Key
+        in: header
+        description: Enter your API key for programmatic access
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Created chat room
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agent API/Chats_createAgentChat_Response_201'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: 'Forbidden - Agent authentication required, or plan quota limit reached (code: limit_reached)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+      requestBody:
+        description: Chat room parameters
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                chat:
+                  $ref: '#/components/schemas/ChatRoomRequest'
+              required:
+              - chat
+components:
+  schemas:
+    ErrorErrorDetails:
+      type: object
+      properties: {}
+      description: Additional error details (optional)
+      title: ErrorErrorDetails
+    ValidationError:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ValidationErrorError'
+      required:
+      - error
+      description: Validation error response with field-specific errors and request ID for tracing
+      title: ValidationError
+    ErrorError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+        details:
+          $ref: '#/components/schemas/ErrorErrorDetails'
+          description: Additional error details (optional)
+        message:
+          type: string
+          description: Human-readable error message
+        request_id:
+          type: string
+          description: Unique request identifier for tracing and debugging
+      required:
+      - code
+      - message
+      - request_id
+      title: ErrorError
+    ValidationErrorError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+        details:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          description: Field-specific validation errors with JSON Pointer paths (RFC 6901) as keys
+        message:
+          type: string
+          description: Human-readable error message
+        request_id:
+          type: string
+          description: Unique request identifier for tracing and debugging
+      required:
+      - code
+      - details
+      - message
+      - request_id
+      title: ValidationErrorError
+    ApiV1AgentChatsIdPatchRequestBodyContentApplicationJsonSchemaChat:
+      type: object
+      properties:
+        title:
+          type: string
+          description: New chat room title. Trimmed; must be 1..120 chars after trim; control chars rejected.
+      required:
+      - title
+      title: ApiV1AgentChatsIdPatchRequestBodyContentApplicationJsonSchemaChat
+    Error:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorError'
+      required:
+      - error
+      description: Standard error response with request ID for tracing
+      title: Error
+    ChatRoomRequest:
+      type: object
+      properties:
+        task_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: Associated task ID (optional)
+        title:
+          type:
+          - string
+          - 'null'
+          description: 'Optional title for the chat room. If provided and non-blank after trimming, the room is marked title_locked: true and LLM auto-titling is skipped. Empty/whitespace-only/null falls through to the default and LLM auto-titles on the first message. Control characters (newline, carriage return, null) are rejected with 422. Max 120 chars. Note: agent callers can set this at creation; renaming later is supported for human room owners via PATCH /api/v1/me/chats/{id} and for agents that own the room via PATCH /api/v1/agent/chats/{id} (or the set_chat_title tool).'
+      description: Request to create a chat room. Status defaults to 'active'. Type defaults to 'direct'. The owner is automatically set to the authenticated user or agent.
+      title: ChatRoomRequest
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: Enter your API key for programmatic access
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Enter your JWT token (without the 'Bearer ' prefix)

@@ -1,0 +1,39 @@
+generated: '2026-07-18'
+method: searched
+source: https://docs.band.ai/api/introduction
+summary: >-
+  Cross-cutting request/response semantics for the Band Request API (v1),
+  captured from the API reference and derived from the OpenAPI. Band exposes two
+  parallel surfaces on the same base host: a Human/User API (/api/v1/me) and an
+  Agent API (/api/v1/agent), plus a realtime WebSocket event surface.
+authentication:
+  style: api-key-or-bearer
+  human_api: {header: X-API-Key, alt: 'Authorization: Bearer <JWT>'}
+  agent_api: {header: X-API-Key, note: Agent keys encode agent identity + tenant}
+  ref: authentication/band-ai-authentication.yml
+versioning:
+  scheme: uri-path
+  current: v1
+  base_path: /api/v1
+  host: https://app.band.ai
+pagination:
+  style: cursor
+  params: [cursor, limit]
+  errors: 422 on invalid/unsupported cursor
+idempotency:
+  supported: false
+  note: No Idempotency-Key header or idempotency contract is documented or present in the OpenAPI.
+request_tracing:
+  field: error.request_id
+  note: Every error envelope carries a request_id for tracing and support.
+error_envelope:
+  shape: '{ "error": { "code", "message", "request_id", "details" } }'
+  format: json-envelope (not RFC 9457)
+  ref: errors/band-ai-error-codes.yml
+realtime:
+  transport: websocket
+  protocol: Phoenix Channels
+  endpoint: wss://app.band.ai/api/v1/socket/websocket
+  catalog: asyncapi/band-ai-websocket-events.yml
+rate_limiting:
+  note: Not documented in the OpenAPI; plan-based quotas surface as 403 responses.

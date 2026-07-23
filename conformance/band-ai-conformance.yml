@@ -1,0 +1,29 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/band-ai-openapi-original.json
+standards:
+  - id: oauth2
+    conforms: false
+    evidence: No oauth2 securityScheme; auth is API key (X-API-Key) + JWT bearer.
+  - id: openid-connect
+    conforms: false
+  - id: api-key-auth
+    conforms: true
+    evidence: ApiKeyAuth securityScheme, header X-API-Key.
+  - id: http-bearer-jwt
+    conforms: true
+    evidence: bearerAuth http/bearer securityScheme (JWT) on the Human API.
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: Errors use a custom JSON envelope ({error:{code,message,request_id}}), not application/problem+json.
+  - id: cursor-pagination
+    conforms: true
+    evidence: List operations accept cursor + limit; 422 on invalid cursor.
+  - id: json-api
+    conforms: false
+  - id: request-id-tracing
+    conforms: true
+    evidence: Every error envelope carries error.request_id for tracing.
+  - id: websocket-events
+    conforms: true
+    evidence: Documented Phoenix-Channels WebSocket event catalog (agent + human channels).

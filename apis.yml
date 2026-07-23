@@ -1,22 +1,316 @@
 aid: band-ai
 name: Band AI
-description: 'Band AI is a company surfaced as a portfolio company of sierra-ventures and added to the
-  API Evangelist network as a stub for enrichment. Sector: ai. This profile is a lead awaiting the enrichment
-  pipeline.'
+description: >-
+  Band (BAND AI) is enterprise-grade interaction infrastructure for distributed
+  AI agents. Its platform provides a real-time collaboration and control plane
+  that lets agents built on any framework (LangGraph, CrewAI, Anthropic, Pydantic
+  AI, Claude Agent SDK, and more) discover each other, share context, delegate
+  tasks, and collaborate across systems and organizations, while enforcing policy,
+  authority boundaries, and visibility. Band exposes a REST Request API with
+  parallel Human (/api/v1/me) and Agent (/api/v1/agent) surfaces, a realtime
+  WebSocket event stream, a Python SDK with framework adapters, a hosted MCP
+  server, and the Jam CLI/desktop bridge for local coding agents. Founded by
+  Arick Goomanovsky and Vlad Luzin; backed by a $17M seed from Sierra Ventures,
+  Hetz Ventures, and Team8.
 url: https://raw.githubusercontent.com/api-evangelist/band-ai/refs/heads/main/apis.yml
 x-type: company
 x-source: vc-portfolio
 x-backed-by:
 - sierra-ventures
-x-tier: stub
-x-tier-reason: portfolio-lead
+x-tier: active
+x-tier-reason: enriched-real-api-surface
+accessModel:
+  pricing: unknown
+  onboarding: self-serve
+  trial: false
+  try_now: false
+  public: false
+  label: Self-serve signup
+  confidence: medium
+  source:
+  - authentication
+  generated: '2026-07-22'
+  method: derived
 specificationVersion: '0.20'
 created: '2026-07-17'
-modified: '2026-07-17'
+modified: '2026-07-18'
+image: https://www.band.ai/apple-touch-icon.png
 tags:
 - Company
-- Ai
-apis: []
+- AI
+- AI Agents
+- Multi-Agent
+- Agent Infrastructure
+- Agent Collaboration
+- Interoperability
+- Developer Tools
+apis:
+- aid: band-ai:band-ai-agentapiactivity-api
+  name: Band AI agentApiActivity API
+  description: The agentApiActivity API from Band AI — 1 operation(s) for agentapiactivity.
+  humanURL: https://docs.band.ai/api/introduction
+  baseURL: https://app.band.ai
+  tags:
+  - agentApiActivity
+  properties:
+  - type: OpenAPI
+    url: openapi/band-ai-agentapiactivity-api-openapi.yml
+  - type: APIReference
+    url: https://docs.band.ai/api/introduction
+  - type: Documentation
+    url: https://docs.band.ai/
+- aid: band-ai:band-ai-agentapichats-api
+  name: Band AI agentApiChats API
+  description: The agentApiChats API from Band AI — 2 operation(s) for agentapichats.
+  humanURL: https://docs.band.ai/api/introduction
+  baseURL: https://app.band.ai
+  tags:
+  - agentApiChats
+  properties:
+  - type: OpenAPI
+    url: openapi/band-ai-agentapichats-api-openapi.yml
+  - type: APIReference
+    url: https://docs.band.ai/api/introduction
+  - type: Documentation
+    url: https://docs.band.ai/
+- aid: band-ai:band-ai-agentapichattasks-api
+  name: Band AI agentApiChatTasks API
+  description: The agentApiChatTasks API from Band AI — 4 operation(s) for agentapichattasks.
+  humanURL: https://docs.band.ai/api/introduction
+  baseURL: https://app.band.ai
+  tags:
+  - agentApiChatTasks
+  properties:
+  - type: OpenAPI
+    url: openapi/band-ai-agentapichattasks-api-openapi.yml
+  - type: APIReference
+    url: https://docs.band.ai/api/introduction
+  - type: Documentation
+    url: https://docs.band.ai/
+- aid: band-ai:band-ai-agentapicontacts-api
+  name: Band AI agentApiContacts API
+  description: The agentApiContacts API from Band AI — 5 operation(s) for agentapicontacts.
+  humanURL: https://docs.band.ai/api/introduction
+  baseURL: https://app.band.ai
+  tags:
+  - agentApiContacts
+  properties:
+  - type: OpenAPI
+    url: openapi/band-ai-agentapicontacts-api-openapi.yml
+  - type: APIReference
+    url: https://docs.band.ai/api/introduction
+  - type: Documentation
+    url: https://docs.band.ai/
+- aid: band-ai:band-ai-agentapicontext-api
+  name: Band AI agentApiContext API
+  description: The agentApiContext API from Band AI — 1 operation(s) for agentapicontext.
+  humanURL: https://docs.band.ai/api/introduction
+  baseURL: https://app.band.ai
+  tags:
+  - agentApiContext
+  properties:
+  - type: OpenAPI
+    url: openapi/band-ai-agentapicontext-api-openapi.yml
+  - type: APIReference
+    url: https://docs.band.ai/api/introduction
+  - type: Documentation
+    url: https://docs.band.ai/
+- aid: band-ai:band-ai-agentapievents-api
+  name: Band AI agentApiEvents API
+  description: The agentApiEvents API from Band AI — 1 operation(s) for agentapievents.
+  humanURL: https://docs.band.ai/api/introduction
+  baseURL: https://app.band.ai
+  tags:
+  - agentApiEvents
+  properties:
+  - type: OpenAPI
+    url: openapi/band-ai-agentapievents-api-openapi.yml
+  - type: APIReference
+    url: https://docs.band.ai/api/introduction
+  - type: Documentation
+    url: https://docs.band.ai/
+- aid: band-ai:band-ai-agentapiidentity-api
+  name: Band AI agentApiIdentity API
+  description: The agentApiIdentity API from Band AI — 1 operation(s) for agentapiidentity.
+  humanURL: https://docs.band.ai/api/introduction
+  baseURL: https://app.band.ai
+  tags:
+  - agentApiIdentity
+  properties:
+  - type: OpenAPI
+    url: openapi/band-ai-agentapiidentity-api-openapi.yml
+  - type: APIReference
+    url: https://docs.band.ai/api/introduction
+  - type: Documentation
+    url: https://docs.band.ai/
+- aid: band-ai:band-ai-agentapimemories-api
+  name: Band AI agentApiMemories API
+  description: The agentApiMemories API from Band AI — 4 operation(s) for agentapimemories.
+  humanURL: https://docs.band.ai/api/introduction
+  baseURL: https://app.band.ai
+  tags:
+  - agentApiMemories
+  properties:
+  - type: OpenAPI
+    url: openapi/band-ai-agentapimemories-api-openapi.yml
+  - type: APIReference
+    url: https://docs.band.ai/api/introduction
+  - type: Documentation
+    url: https://docs.band.ai/
+- aid: band-ai:band-ai-agentapimessages-api
+  name: Band AI agentApiMessages API
+  description: The agentApiMessages API from Band AI — 5 operation(s) for agentapimessages.
+  humanURL: https://docs.band.ai/api/introduction
+  baseURL: https://app.band.ai
+  tags:
+  - agentApiMessages
+  properties:
+  - type: OpenAPI
+    url: openapi/band-ai-agentapimessages-api-openapi.yml
+  - type: APIReference
+    url: https://docs.band.ai/api/introduction
+  - type: Documentation
+    url: https://docs.band.ai/
+- aid: band-ai:band-ai-agentapiparticipants-api
+  name: Band AI agentApiParticipants API
+  description: The agentApiParticipants API from Band AI — 2 operation(s) for agentapiparticipants.
+  humanURL: https://docs.band.ai/api/introduction
+  baseURL: https://app.band.ai
+  tags:
+  - agentApiParticipants
+  properties:
+  - type: OpenAPI
+    url: openapi/band-ai-agentapiparticipants-api-openapi.yml
+  - type: APIReference
+    url: https://docs.band.ai/api/introduction
+  - type: Documentation
+    url: https://docs.band.ai/
+- aid: band-ai:band-ai-agentapipeers-api
+  name: Band AI agentApiPeers API
+  description: The agentApiPeers API from Band AI — 1 operation(s) for agentapipeers.
+  humanURL: https://docs.band.ai/api/introduction
+  baseURL: https://app.band.ai
+  tags:
+  - agentApiPeers
+  properties:
+  - type: OpenAPI
+    url: openapi/band-ai-agentapipeers-api-openapi.yml
+  - type: APIReference
+    url: https://docs.band.ai/api/introduction
+  - type: Documentation
+    url: https://docs.band.ai/
+- aid: band-ai:band-ai-humanapiagents-api
+  name: Band AI humanApiAgents API
+  description: The humanApiAgents API from Band AI — 3 operation(s) for humanapiagents.
+  humanURL: https://docs.band.ai/api/introduction
+  baseURL: https://app.band.ai
+  tags:
+  - humanApiAgents
+  properties:
+  - type: OpenAPI
+    url: openapi/band-ai-humanapiagents-api-openapi.yml
+  - type: APIReference
+    url: https://docs.band.ai/api/introduction
+  - type: Documentation
+    url: https://docs.band.ai/
+- aid: band-ai:band-ai-humanapichats-api
+  name: Band AI humanApiChats API
+  description: The humanApiChats API from Band AI — 2 operation(s) for humanapichats.
+  humanURL: https://docs.band.ai/api/introduction
+  baseURL: https://app.band.ai
+  tags:
+  - humanApiChats
+  properties:
+  - type: OpenAPI
+    url: openapi/band-ai-humanapichats-api-openapi.yml
+  - type: APIReference
+    url: https://docs.band.ai/api/introduction
+  - type: Documentation
+    url: https://docs.band.ai/
+- aid: band-ai:band-ai-humanapicontacts-api
+  name: Band AI humanApiContacts API
+  description: The humanApiContacts API from Band AI — 8 operation(s) for humanapicontacts.
+  humanURL: https://docs.band.ai/api/introduction
+  baseURL: https://app.band.ai
+  tags:
+  - humanApiContacts
+  properties:
+  - type: OpenAPI
+    url: openapi/band-ai-humanapicontacts-api-openapi.yml
+  - type: APIReference
+    url: https://docs.band.ai/api/introduction
+  - type: Documentation
+    url: https://docs.band.ai/
+- aid: band-ai:band-ai-humanapimemories-api
+  name: Band AI humanApiMemories API
+  description: The humanApiMemories API from Band AI — 5 operation(s) for humanapimemories.
+  humanURL: https://docs.band.ai/api/introduction
+  baseURL: https://app.band.ai
+  tags:
+  - humanApiMemories
+  properties:
+  - type: OpenAPI
+    url: openapi/band-ai-humanapimemories-api-openapi.yml
+  - type: APIReference
+    url: https://docs.band.ai/api/introduction
+  - type: Documentation
+    url: https://docs.band.ai/
+- aid: band-ai:band-ai-humanapimessages-api
+  name: Band AI humanApiMessages API
+  description: The humanApiMessages API from Band AI — 1 operation(s) for humanapimessages.
+  humanURL: https://docs.band.ai/api/introduction
+  baseURL: https://app.band.ai
+  tags:
+  - humanApiMessages
+  properties:
+  - type: OpenAPI
+    url: openapi/band-ai-humanapimessages-api-openapi.yml
+  - type: APIReference
+    url: https://docs.band.ai/api/introduction
+  - type: Documentation
+    url: https://docs.band.ai/
+- aid: band-ai:band-ai-humanapiparticipants-api
+  name: Band AI humanApiParticipants API
+  description: The humanApiParticipants API from Band AI — 2 operation(s) for humanapiparticipants.
+  humanURL: https://docs.band.ai/api/introduction
+  baseURL: https://app.band.ai
+  tags:
+  - humanApiParticipants
+  properties:
+  - type: OpenAPI
+    url: openapi/band-ai-humanapiparticipants-api-openapi.yml
+  - type: APIReference
+    url: https://docs.band.ai/api/introduction
+  - type: Documentation
+    url: https://docs.band.ai/
+- aid: band-ai:band-ai-humanapipeers-api
+  name: Band AI humanApiPeers API
+  description: The humanApiPeers API from Band AI — 1 operation(s) for humanapipeers.
+  humanURL: https://docs.band.ai/api/introduction
+  baseURL: https://app.band.ai
+  tags:
+  - humanApiPeers
+  properties:
+  - type: OpenAPI
+    url: openapi/band-ai-humanapipeers-api-openapi.yml
+  - type: APIReference
+    url: https://docs.band.ai/api/introduction
+  - type: Documentation
+    url: https://docs.band.ai/
+- aid: band-ai:band-ai-humanapiprofile-api
+  name: Band AI humanApiProfile API
+  description: The humanApiProfile API from Band AI — 1 operation(s) for humanapiprofile.
+  humanURL: https://docs.band.ai/api/introduction
+  baseURL: https://app.band.ai
+  tags:
+  - humanApiProfile
+  properties:
+  - type: OpenAPI
+    url: openapi/band-ai-humanapiprofile-api-openapi.yml
+  - type: APIReference
+    url: https://docs.band.ai/api/introduction
+  - type: Documentation
+    url: https://docs.band.ai/
 maintainers:
 - FN: Kin Lane
   email: kin@apievangelist.com
@@ -25,3 +319,66 @@ maintainers:
 common:
 - type: Website
   url: https://band.ai/
+- type: DeveloperPortal
+  url: https://docs.band.ai/
+- type: Documentation
+  url: https://docs.band.ai/
+- type: APIReference
+  url: https://docs.band.ai/api/introduction
+- type: GettingStarted
+  url: https://docs.band.ai/getting-started/setup
+- type: Blog
+  url: https://www.band.ai/blog
+- type: Pricing
+  url: https://www.band.ai/pricing
+- type: SignUp
+  url: https://app.band.ai
+- type: TermsOfService
+  url: https://www.band.ai/terms-of-service
+- type: PrivacyPolicy
+  url: https://www.band.ai/privacy-policy
+- type: GitHubOrganization
+  url: https://github.com/thenvoi
+- type: Support
+  url: https://discord.com/invite/5YkNXmYfjk
+- type: ChangeLog
+  url: https://docs.band.ai/changelog
+- type: StatusPage
+  url: https://status.band.ai/
+- type: LLMsTxt
+  url: llms/band-ai-llms.txt
+- type: MCPServer
+  url: mcp/band-ai-mcp.yml
+- type: Packages
+  url: packages/band-ai-packages.yml
+- type: SDKs
+  url: packages/band-ai-packages.yml
+- type: CLI
+  url: cli/band-ai-cli.yml
+- type: Authentication
+  url: authentication/band-ai-authentication.yml
+- type: ErrorCatalog
+  url: errors/band-ai-error-codes.yml
+- type: Conventions
+  url: conventions/band-ai-conventions.yml
+- type: DataModel
+  url: data-model/band-ai-data-model.yml
+- type: Conformance
+  url: conformance/band-ai-conformance.yml
+- type: Overlay
+  url: overlays/band-ai-openapi-overlay.yaml
+- type: Lifecycle
+  url: lifecycle/band-ai-lifecycle.yml
+- type: Webhooks
+  url: asyncapi/band-ai-websocket-events.yml
+- type: AgentSkill
+  url: skills/_index.yml
+- type: AgenticAccess
+  url: agentic-access/band-ai-agentic-access.yml
+- type: DomainSecurity
+  url: security/band-ai-domain-security.yml
+x-enrichment:
+  date: '2026-07-19'
+  status: backfilled
+  pass: local-v1
+  note: backfilled from .gitignore signal + verified work evidence

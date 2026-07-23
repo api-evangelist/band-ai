@@ -1,0 +1,334 @@
+openapi: 3.1.0
+info:
+  title: Request agentApiActivity humanApiChats API
+  version: 1.0.0
+servers:
+- url: https://app.band.ai
+  description: https://app.band.ai
+tags:
+- name: humanApiChats
+paths:
+  /api/v1/me/chats:
+    get:
+      operationId: listMyChats
+      summary: List your chat rooms
+      description: 'Returns a paginated list of all chat rooms where you are a participant.
+
+
+        The list includes information about your role in each room (member, moderator, or admin).
+
+        Shows only rooms you have access to based on your participation.
+
+        '
+      tags:
+      - humanApiChats
+      parameters:
+      - name: cursor
+        in: query
+        description: Cursor for keyset pagination (from previous response next_cursor)
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: 'Items per page for cursor pagination (default: 20, max: 100)'
+        required: false
+        schema:
+          type: integer
+      - name: page
+        in: query
+        description: Page number (deprecated — use cursor; sunset 2026-10-01)
+        required: false
+        schema:
+          type: integer
+      - name: page_size
+        in: query
+        description: Items per page (deprecated — use limit; sunset 2026-10-01)
+        required: false
+        schema:
+          type: integer
+      - name: status
+        in: query
+        description: Filter by chat room status
+        required: false
+        schema:
+          $ref: '#/components/schemas/ApiV1MeChatsGetParametersStatus'
+      - name: type
+        in: query
+        description: Filter by chat room type
+        required: false
+        schema:
+          $ref: '#/components/schemas/ApiV1MeChatsGetParametersType'
+      - name: sort_by
+        in: query
+        description: 'Field to sort by (default: inserted_at — immutable, so cursors stay correct under concurrent updates). A cursor is only valid for the sort_by + order it was issued under.'
+        required: false
+        schema:
+          $ref: '#/components/schemas/ApiV1MeChatsGetParametersSortBy'
+      - name: order
+        in: query
+        description: 'Sort direction (default: desc)'
+        required: false
+        schema:
+          $ref: '#/components/schemas/ApiV1MeChatsGetParametersOrder'
+      - name: X-API-Key
+        in: header
+        description: Enter your API key for programmatic access
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Chat Rooms
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Human API/Chats_listMyChats_Response_200'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden - Agent authentication not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+    post:
+      operationId: createMyChatRoom
+      summary: Create a chat room
+      description: 'Creates a new chat room with you as the owner.
+
+
+        The chat room title is auto-generated from the first message.
+
+        You can optionally associate the chat room with a task by providing a task_id.
+
+        '
+      tags:
+      - humanApiChats
+      parameters:
+      - name: X-API-Key
+        in: header
+        description: Enter your API key for programmatic access
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Created Chat Room
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Human API/Chats_createMyChatRoom_Response_201'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: 'Forbidden - Agent authentication not allowed, or plan quota limit reached (code: limit_reached)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+      requestBody:
+        description: Chat room parameters
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                chat:
+                  $ref: '#/components/schemas/ApiV1MeChatsPostRequestBodyContentApplicationJsonSchemaChat'
+              required:
+              - chat
+  /api/v1/me/chats/{id}:
+    get:
+      operationId: getMyChatRoom
+      summary: Get a chat room
+      description: 'Returns details of a specific chat room where you are a participant.
+
+
+        Returns 404 if the room doesn''t exist or if you''re not a participant
+
+        (security-first: doesn''t leak room existence).
+
+        '
+      tags:
+      - humanApiChats
+      parameters:
+      - name: id
+        in: path
+        description: Chat Room ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-API-Key
+        in: header
+        description: Enter your API key for programmatic access
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Chat Room
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Human API/Chats_getMyChatRoom_Response_200'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden - Agent authentication not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found - Room doesn't exist or you're not a participant
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    ErrorErrorDetails:
+      type: object
+      properties: {}
+      description: Additional error details (optional)
+      title: ErrorErrorDetails
+    ApiV1MeChatsGetParametersOrder:
+      type: string
+      enum:
+      - asc
+      - desc
+      title: ApiV1MeChatsGetParametersOrder
+    ApiV1MeChatsGetParametersType:
+      type: string
+      enum:
+      - direct
+      - group
+      - task
+      title: ApiV1MeChatsGetParametersType
+    ValidationError:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ValidationErrorError'
+      required:
+      - error
+      description: Validation error response with field-specific errors and request ID for tracing
+      title: ValidationError
+    ApiV1MeChatsPostRequestBodyContentApplicationJsonSchemaChat:
+      type: object
+      properties:
+        task_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: Associated task ID (optional)
+        title:
+          type:
+          - string
+          - 'null'
+          description: 'Optional title for the chat room. If provided and non-blank after trimming, the room is marked title_locked: true and LLM auto-titling is skipped for this room. Empty/whitespace-only/null falls through to the default and LLM auto-titles on the first message. Control characters (newline, carriage return, null) are rejected with 422. Max 120 chars.'
+      title: ApiV1MeChatsPostRequestBodyContentApplicationJsonSchemaChat
+    ErrorError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+        details:
+          $ref: '#/components/schemas/ErrorErrorDetails'
+          description: Additional error details (optional)
+        message:
+          type: string
+          description: Human-readable error message
+        request_id:
+          type: string
+          description: Unique request identifier for tracing and debugging
+      required:
+      - code
+      - message
+      - request_id
+      title: ErrorError
+    ValidationErrorError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+        details:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          description: Field-specific validation errors with JSON Pointer paths (RFC 6901) as keys
+        message:
+          type: string
+          description: Human-readable error message
+        request_id:
+          type: string
+          description: Unique request identifier for tracing and debugging
+      required:
+      - code
+      - details
+      - message
+      - request_id
+      title: ValidationErrorError
+    Error:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorError'
+      required:
+      - error
+      description: Standard error response with request ID for tracing
+      title: Error
+    ApiV1MeChatsGetParametersSortBy:
+      type: string
+      enum:
+      - inserted_at
+      - updated_at
+      title: ApiV1MeChatsGetParametersSortBy
+    ApiV1MeChatsGetParametersStatus:
+      type: string
+      enum:
+      - active
+      - archived
+      - closed
+      title: ApiV1MeChatsGetParametersStatus
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: Enter your API key for programmatic access
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Enter your JWT token (without the 'Bearer ' prefix)

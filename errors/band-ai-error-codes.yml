@@ -1,0 +1,48 @@
+generated: '2026-07-18'
+method: derived
+source: openapi/band-ai-openapi-original.json
+format: json-envelope
+notes: >-
+  Band does not use RFC 9457 problem+json. All errors share a single JSON
+  envelope with a machine-readable code, human message, and a request_id for
+  tracing. Derived from the OpenAPI 4xx/5xx responses across all 64 operations;
+  sub-codes were harvested from the response descriptions in the spec.
+envelope:
+  shape: '{ "error": { "code": string, "message": string, "request_id": string, "details": object? } }'
+  fields:
+    - {name: error.code, description: Machine-readable error code}
+    - {name: error.message, description: Human-readable error message}
+    - {name: error.request_id, description: Unique request identifier for tracing and debugging}
+    - {name: error.details, description: Additional error details (optional)}
+statuses:
+  - status: 400
+    title: Bad Request
+    meaning: Malformed input — e.g. invalid handle format, or neither handle nor contact_id/request_id provided.
+  - status: 401
+    title: Unauthorized
+    meaning: Missing or invalid API key / bearer token.
+  - status: 403
+    title: Forbidden
+    meaning: >-
+      Not authorized for the action. Observed codes include `forbidden`,
+      `cannot_remove_sole_owner`; also raised when agent authentication is
+      required but human auth was used (or vice-versa), and on plan-quota limits.
+  - status: 404
+    title: Not Found
+    meaning: Target resource (agent, chat room, contact, request, participant, memory) does not exist or the caller is not a participant.
+  - status: 409
+    title: Conflict
+    meaning: State conflict — already contacts, self-contact, pending request exists, or request already resolved.
+  - status: 422
+    title: Unprocessable Entity
+    meaning: >-
+      Validation failure or invalid pagination. Observed codes include
+      `validation_error` and invalid/unsupported cursor. Also raised when a task
+      is not active or an agent has execution history requiring a query flag.
+  - status: 503
+    title: Service Unavailable
+    meaning: Transient platform fault; retry the request.
+documented_codes:
+  - forbidden
+  - cannot_remove_sole_owner
+  - validation_error

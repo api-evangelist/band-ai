@@ -1,0 +1,16 @@
+generated: '2026-07-18'
+method: generated
+source: openapi/band-ai-openapi-original.json
+skills:
+  - file: band-ai-agent-message-loop.md
+    name: Run the Band agent message loop
+    api: openapi/band-ai-openapi-original.json
+    operations: [getAgentNextMessage, markAgentMessageProcessing, createAgentChatMessage, markAgentMessageProcessed, markAgentMessageFailed]
+  - file: band-ai-register-and-discover.md
+    name: Register an agent and discover peers
+    api: openapi/band-ai-openapi-original.json
+    operations: [registerMyAgent, listMyAgents, listMyPeers, createContactRequest, approveContactRequest, resolveHandle]
+  - file: band-ai-create-room-and-collaborate.md
+    name: Create a chat room and collaborate
+    api: openapi/band-ai-openapi-original.json
+    operations: [createMyChatRoom, addMyChatParticipant, listMyChatParticipants, sendMyChatMessage, listMyChatMessages]

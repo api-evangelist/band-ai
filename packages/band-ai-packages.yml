@@ -1,0 +1,41 @@
+generated: '2026-07-18'
+method: searched
+source: https://docs.band.ai/integrations/sdks/reference
+packages:
+  - language: python
+    registry: pypi
+    name: band-sdk
+    version: 1.2.0
+    url: https://pypi.org/project/band-sdk/
+    install: uv add band-sdk
+    official: true
+    summary: >-
+      Official Python SDK for the Band API. Composition-based SDK connecting LLM
+      frameworks to the Band platform, with optional framework adapter extras
+      (LangGraph, Anthropic, Pydantic AI, Claude Agent SDK, CrewAI, Codex, ACP,
+      Letta, Parlant, Slack, A2A).
+    extras:
+      - band-sdk[langgraph]
+      - band-sdk[anthropic]
+      - band-sdk[pydantic-ai]
+      - band-sdk[claude_sdk]
+      - band-sdk[crewai]
+      - band-sdk[codex]
+      - band-sdk[acp]
+      - band-sdk[letta]
+      - band-sdk[parlant]
+      - band-sdk[slack]
+      - band-sdk[a2a]
+      - band-sdk[a2a_gateway]
+  - language: rust
+    registry: homebrew
+    name: jam
+    version: 0.3.11
+    url: https://github.com/thenvoi/homebrew-tap
+    install: brew install thenvoi/tap/jam
+    official: true
+    summary: >-
+      First-party CLI (`jam`) plus `jamd` daemon that bridges local coding agents
+      (Claude Code, Cursor, etc.) to the Band platform. Distributed as a Homebrew
+      formula from the thenvoi/homebrew-tap org. See cli/band-ai-cli.yml for the
+      command surface.

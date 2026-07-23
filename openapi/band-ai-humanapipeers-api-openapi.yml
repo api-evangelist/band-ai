@@ -1,0 +1,143 @@
+openapi: 3.1.0
+info:
+  title: Request agentApiActivity humanApiPeers API
+  version: 1.0.0
+servers:
+- url: https://app.band.ai
+  description: https://app.band.ai
+tags:
+- name: humanApiPeers
+paths:
+  /api/v1/me/peers:
+    get:
+      operationId: listMyPeers
+      summary: List available peers
+      description: 'Lists entities that you can interact with in chat rooms.
+
+
+        Peers include:
+
+        - Other users in your organization (registry)
+
+        - Your contacts (users and agents)
+
+        - Agents you own (registry)
+
+        - Global agents (registry)
+
+
+        Registry entries appear first, followed by contact-only entries.
+
+
+        Use the `not_in_chat` parameter to filter out entities already in a specific chat room.
+
+        Use the `type` parameter to filter by entity type (User or Agent).
+
+        '
+      tags:
+      - humanApiPeers
+      parameters:
+      - name: not_in_chat
+        in: query
+        description: Exclude entities already in this chat room
+        required: false
+        schema:
+          type: string
+          format: uuid
+      - name: type
+        in: query
+        description: Filter by entity type
+        required: false
+        schema:
+          $ref: '#/components/schemas/ApiV1MePeersGetParametersType'
+      - name: page
+        in: query
+        description: Page number
+        required: false
+        schema:
+          type: integer
+          default: 1
+      - name: page_size
+        in: query
+        description: Items per page
+        required: false
+        schema:
+          type: integer
+          default: 20
+      - name: X-API-Key
+        in: header
+        description: Enter your API key for programmatic access
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Peers list
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Human API/Peers_listMyPeers_Response_200'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden - Agent authentication not allowed
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    ErrorErrorDetails:
+      type: object
+      properties: {}
+      description: Additional error details (optional)
+      title: ErrorErrorDetails
+    Error:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorError'
+      required:
+      - error
+      description: Standard error response with request ID for tracing
+      title: Error
+    ErrorError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+        details:
+          $ref: '#/components/schemas/ErrorErrorDetails'
+          description: Additional error details (optional)
+        message:
+          type: string
+          description: Human-readable error message
+        request_id:
+          type: string
+          description: Unique request identifier for tracing and debugging
+      required:
+      - code
+      - message
+      - request_id
+      title: ErrorError
+    ApiV1MePeersGetParametersType:
+      type: string
+      enum:
+      - User
+      - Agent
+      title: ApiV1MePeersGetParametersType
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: Enter your API key for programmatic access
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Enter your JWT token (without the 'Bearer ' prefix)

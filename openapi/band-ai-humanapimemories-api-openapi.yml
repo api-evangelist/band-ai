@@ -1,0 +1,434 @@
+openapi: 3.1.0
+info:
+  title: Request agentApiActivity humanApiMemories API
+  version: 1.0.0
+servers:
+- url: https://app.band.ai
+  description: https://app.band.ai
+tags:
+- name: humanApiMemories
+paths:
+  /api/v1/me/memories/{id}:
+    get:
+      operationId: getUserMemory
+      summary: Get a specific memory
+      description: Retrieves a specific memory by ID if accessible to the user.
+      tags:
+      - humanApiMemories
+      parameters:
+      - name: id
+        in: path
+        description: Memory ID
+        required: true
+        schema:
+          type: string
+      - name: X-API-Key
+        in: header
+        description: Enter your API key for programmatic access
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Memory
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Human API/Memories_getUserMemory_Response_200'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+    delete:
+      operationId: deleteUserMemory
+      summary: Delete a memory
+      description: 'Permanently deletes a memory. This is a hard delete - the memory cannot be recovered.
+
+
+        Users can only delete memories that are about them (subject_id = user).
+
+        '
+      tags:
+      - humanApiMemories
+      parameters:
+      - name: id
+        in: path
+        description: Memory ID
+        required: true
+        schema:
+          type: string
+      - name: X-API-Key
+        in: header
+        description: Enter your API key for programmatic access
+        required: true
+        schema:
+          type: string
+      responses:
+        '204':
+          description: No Content
+          content:
+            application/json:
+              schema:
+                type: object
+                properties: {}
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/v1/me/memories/{id}/supersede:
+    post:
+      operationId: supersedeUserMemory
+      summary: Supersede a memory
+      description: 'Marks a memory as superseded (soft delete). Use when info is outdated/incorrect.
+
+        The memory remains for audit trail but won''t appear in normal queries.
+
+
+        Users can only supersede memories that are about them (subject_id = user).
+
+        '
+      tags:
+      - humanApiMemories
+      parameters:
+      - name: id
+        in: path
+        description: Memory ID
+        required: true
+        schema:
+          type: string
+      - name: X-API-Key
+        in: header
+        description: Enter your API key for programmatic access
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Superseded Memory
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Human API/Memories_supersedeUserMemory_Response_200'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/v1/me/memories/{id}/archive:
+    post:
+      operationId: archiveUserMemory
+      summary: Archive a memory
+      description: 'Archives a memory (hides but preserves). Archived memories can be restored later.
+
+
+        Users can only archive memories that are about them (subject_id = user).
+
+        '
+      tags:
+      - humanApiMemories
+      parameters:
+      - name: id
+        in: path
+        description: Memory ID
+        required: true
+        schema:
+          type: string
+      - name: X-API-Key
+        in: header
+        description: Enter your API key for programmatic access
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Archived Memory
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Human API/Memories_archiveUserMemory_Response_200'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/v1/me/memories/{id}/restore:
+    post:
+      operationId: restoreUserMemory
+      summary: Restore a memory
+      description: 'Restores an archived memory back to active status.
+
+        Only works on memories with status ''archived''.
+
+
+        Users can only restore memories that are about them (subject_id = user).
+
+        '
+      tags:
+      - humanApiMemories
+      parameters:
+      - name: id
+        in: path
+        description: Memory ID
+        required: true
+        schema:
+          type: string
+      - name: X-API-Key
+        in: header
+        description: Enter your API key for programmatic access
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Restored Memory
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Human API/Memories_restoreUserMemory_Response_200'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+  /api/v1/me/memories:
+    get:
+      operationId: listUserMemories
+      summary: List memories for current user
+      description: 'Lists memories accessible to the authenticated user:
+
+        - Memories about the user (subject_id = user''s UUID)
+
+        - Organization-scoped memories in the user''s organization
+
+        - Optionally filter by chat room to see room-level memories
+
+
+        Unlike agents, users can see memories from ALL agents in their organization
+
+        that are about them or in rooms they participate in.
+
+
+        **Pagination:** Use `cursor` + `limit` (recommended) OR `page` + `page_size` (deprecated, sunset 2026-10-01).
+
+        Do NOT mix families.
+
+        '
+      tags:
+      - humanApiMemories
+      parameters:
+      - name: cursor
+        in: query
+        description: Opaque cursor for keyset pagination
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: Max results per request (1-100, default 20)
+        required: false
+        schema:
+          type: integer
+      - name: page
+        in: query
+        description: Page number (offset pagination) - DEPRECATED
+        required: false
+        schema:
+          type: integer
+      - name: chat_room_id
+        in: query
+        description: Filter by chat room ID
+        required: false
+        schema:
+          type: string
+      - name: scope
+        in: query
+        description: 'Filter scope: about_me, organization, room, all'
+        required: false
+        schema:
+          type: string
+      - name: system
+        in: query
+        description: Filter by memory system
+        required: false
+        schema:
+          type: string
+      - name: type
+        in: query
+        description: Filter by memory type
+        required: false
+        schema:
+          type: string
+      - name: segment
+        in: query
+        description: Filter by segment
+        required: false
+        schema:
+          type: string
+      - name: content_query
+        in: query
+        description: Full-text search query
+        required: false
+        schema:
+          type: string
+      - name: page_size
+        in: query
+        description: Number of results per page (max 50) - DEPRECATED
+        required: false
+        schema:
+          type: integer
+      - name: status
+        in: query
+        description: 'Filter by status: active, superseded, archived, or all'
+        required: false
+        schema:
+          type: string
+      - name: X-API-Key
+        in: header
+        description: Enter your API key for programmatic access
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: User Memories
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Human API/Memories_listUserMemories_Response_200'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Invalid pagination params (invalid/unsupported cursor, or mixed cursor + offset families)
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+components:
+  schemas:
+    ErrorErrorDetails:
+      type: object
+      properties: {}
+      description: Additional error details (optional)
+      title: ErrorErrorDetails
+    Error:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorError'
+      required:
+      - error
+      description: Standard error response with request ID for tracing
+      title: Error
+    ErrorError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+        details:
+          $ref: '#/components/schemas/ErrorErrorDetails'
+          description: Additional error details (optional)
+        message:
+          type: string
+          description: Human-readable error message
+        request_id:
+          type: string
+          description: Unique request identifier for tracing and debugging
+      required:
+      - code
+      - message
+      - request_id
+      title: ErrorError
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: Enter your API key for programmatic access
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Enter your JWT token (without the 'Bearer ' prefix)

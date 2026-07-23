@@ -1,0 +1,15 @@
+overlay: 1.0.0
+info:
+  title: API Evangelist enhancements for Band Request API
+  version: 1.0.0
+extends: openapi/band-ai-openapi-original.json
+actions:
+  - target: $.info
+    update:
+      x-apievangelist-provider: band-ai
+      x-apievangelist-surfaces: [human-api, agent-api, websocket-events]
+      x-apievangelist-auth: [api-key, http-bearer-jwt]
+      x-apievangelist-pagination: cursor
+      x-apievangelist-error-format: json-envelope
+      x-apievangelist-realtime: wss://app.band.ai/api/v1/socket/websocket
+      x-apievangelist-mcp: https://docs.band.ai/_mcp/server

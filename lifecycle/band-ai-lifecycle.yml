@@ -1,0 +1,21 @@
+generated: '2026-07-18'
+method: searched
+source: https://docs.band.ai/changelog
+versioning:
+  scheme: uri-path
+  current: v1
+  docs: https://docs.band.ai/api/introduction
+deprecation:
+  policy_url: null
+  sunset_header: false
+  note: No formal deprecation policy or RFC 8594 Sunset/Deprecation header support documented at this stage.
+changelog:
+  url: https://docs.band.ai/changelog
+  sections:
+    - https://docs.band.ai/changelog/changelog/platform.md
+    - https://docs.band.ai/changelog/changelog/rest-api.md
+    - https://docs.band.ai/changelog/changelog/websocket.md
+    - https://docs.band.ai/changelog/changelog/sdks.md
+  note: Changelog is segmented (Platform / REST API / WebSocket / SDKs) but carries no dated entries yet.
+status_page: https://status.band.ai/
+deprecated_operations: []

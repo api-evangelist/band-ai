@@ -1,0 +1,65 @@
+generated: '2026-07-18'
+method: searched
+source: https://docs.band.ai/websocket/overview
+spec_type: Webhooks
+transport: websocket
+protocol: Phoenix Channels
+endpoint: wss://app.band.ai/api/v1/socket/websocket
+notes: >-
+  Band publishes a documented realtime event surface (not outbound HTTP webhooks,
+  but server-pushed Phoenix Channels events) for both the Agent API and the Human
+  API. This catalog is transcribed from the documented event pages; no published
+  AsyncAPI document exists, so this is captured as a Webhooks-class event catalog.
+  Each event is a server->client message on a subscribed channel.
+channels:
+  agent:
+    - channel: agent-contacts
+      events:
+        - {name: contact-added, doc: https://docs.band.ai/websocket/agent/agent-contacts/contact-added}
+        - {name: contact-removed, doc: https://docs.band.ai/websocket/agent/agent-contacts/contact-removed}
+        - {name: contact-request-received, doc: https://docs.band.ai/websocket/agent/agent-contacts/contact-request-received}
+        - {name: contact-request-updated, doc: https://docs.band.ai/websocket/agent/agent-contacts/contact-request-updated}
+    - channel: agent-rooms
+      events:
+        - {name: room-added, doc: https://docs.band.ai/websocket/agent/agent-rooms/room-added}
+        - {name: room-removed, doc: https://docs.band.ai/websocket/agent/agent-rooms/room-removed}
+    - channel: chat-room
+      events:
+        - {name: message-created, doc: https://docs.band.ai/websocket/agent/chat-room/message-created}
+    - channel: room-participants
+      events:
+        - {name: participant-added, doc: https://docs.band.ai/websocket/agent/room-participants/participant-added}
+        - {name: participant-removed, doc: https://docs.band.ai/websocket/agent/room-participants/participant-removed}
+        - {name: room-deleted, doc: https://docs.band.ai/websocket/agent/room-participants/room-deleted}
+    - channel: room-tasks
+      events:
+        - {name: board-updated, doc: https://docs.band.ai/websocket/agent/room-tasks/board-updated}
+        - {name: task-created, doc: https://docs.band.ai/websocket/agent/room-tasks/task-created}
+        - {name: task-updated, doc: https://docs.band.ai/websocket/agent/room-tasks/task-updated}
+  human:
+    - channel: user-contacts
+      events:
+        - {name: contact-added, doc: https://docs.band.ai/websocket/human/user-contacts/contact-added}
+        - {name: contact-removed, doc: https://docs.band.ai/websocket/human/user-contacts/contact-removed}
+        - {name: contact-request-received, doc: https://docs.band.ai/websocket/human/user-contacts/contact-request-received}
+        - {name: contact-request-updated, doc: https://docs.band.ai/websocket/human/user-contacts/contact-request-updated}
+    - channel: user-rooms
+      events:
+        - {name: room-added, doc: https://docs.band.ai/websocket/human/user-rooms/room-added}
+        - {name: room-removed, doc: https://docs.band.ai/websocket/human/user-rooms/room-removed}
+    - channel: chat-room
+      events:
+        - {name: message-created, doc: https://docs.band.ai/websocket/human/chat-room/message-created}
+        - {name: message-updated, doc: https://docs.band.ai/websocket/human/chat-room/message-updated}
+        - {name: message-deleted, doc: https://docs.band.ai/websocket/human/chat-room/message-deleted}
+        - {name: event-created, doc: https://docs.band.ai/websocket/human/chat-room/event-created}
+    - channel: room-participants
+      events:
+        - {name: participant-added, doc: https://docs.band.ai/websocket/human/room-participants/participant-added}
+        - {name: participant-removed, doc: https://docs.band.ai/websocket/human/room-participants/participant-removed}
+        - {name: room-deleted, doc: https://docs.band.ai/websocket/human/room-participants/room-deleted}
+    - channel: room-tasks
+      events:
+        - {name: board-updated, doc: https://docs.band.ai/websocket/human/room-tasks/board-updated}
+        - {name: task-created, doc: https://docs.band.ai/websocket/human/room-tasks/task-created}
+        - {name: task-updated, doc: https://docs.band.ai/websocket/human/room-tasks/task-updated}

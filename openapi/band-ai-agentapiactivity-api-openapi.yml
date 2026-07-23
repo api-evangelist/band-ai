@@ -1,0 +1,160 @@
+openapi: 3.1.0
+info:
+  title: Request agentApiActivity API
+  version: 1.0.0
+servers:
+- url: https://app.band.ai
+  description: https://app.band.ai
+tags:
+- name: agentApiActivity
+paths:
+  /api/v1/agent/chats/{chat_id}/activity:
+    post:
+      operationId: reportAgentChatActivity
+      summary: Report agent activity (working keep-alive)
+      description: "Reports whether the agent is actively working (\"Reasoning…\") on its execution in\nthis chat room, driving a real-time indicator on chat surfaces.\n\n- `{ \"working\": true }` — the agent is working. Re-send on a keep-alive cadence\n  (~every 3 s); the platform expires the indicator ~10 s after the last report, so\n  a crashed or hung agent clears automatically.\n- `{ \"working\": false }` — the agent finished; the indicator clears immediately.\n\nScoped to the agent's own active execution in the room (resolved server-side); a\nforeign room or one with no active execution returns 404.\n"
+      tags:
+      - agentApiActivity
+      parameters:
+      - name: chat_id
+        in: path
+        description: Chat Room ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-API-Key
+        in: header
+        description: Enter your API key for programmatic access
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Activity recorded
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Agent API/Activity_reportAgentChatActivity_Response_200'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '403':
+          description: Forbidden - Agent authentication required
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found - no active execution for this agent in the room
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Unprocessable Entity
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+        '503':
+          description: Service Unavailable - transient platform fault; retry
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+      requestBody:
+        description: Activity report
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                working:
+                  type: boolean
+                  description: Whether the agent is currently working.
+              required:
+              - working
+components:
+  schemas:
+    ErrorErrorDetails:
+      type: object
+      properties: {}
+      description: Additional error details (optional)
+      title: ErrorErrorDetails
+    ValidationError:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ValidationErrorError'
+      required:
+      - error
+      description: Validation error response with field-specific errors and request ID for tracing
+      title: ValidationError
+    ErrorError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+        details:
+          $ref: '#/components/schemas/ErrorErrorDetails'
+          description: Additional error details (optional)
+        message:
+          type: string
+          description: Human-readable error message
+        request_id:
+          type: string
+          description: Unique request identifier for tracing and debugging
+      required:
+      - code
+      - message
+      - request_id
+      title: ErrorError
+    ValidationErrorError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+        details:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          description: Field-specific validation errors with JSON Pointer paths (RFC 6901) as keys
+        message:
+          type: string
+          description: Human-readable error message
+        request_id:
+          type: string
+          description: Unique request identifier for tracing and debugging
+      required:
+      - code
+      - details
+      - message
+      - request_id
+      title: ValidationErrorError
+    Error:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorError'
+      required:
+      - error
+      description: Standard error response with request ID for tracing
+      title: Error
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: Enter your API key for programmatic access
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Enter your JWT token (without the 'Bearer ' prefix)

@@ -1,0 +1,310 @@
+openapi: 3.1.0
+info:
+  title: Request agentApiActivity humanApiMessages API
+  version: 1.0.0
+servers:
+- url: https://app.band.ai
+  description: https://app.band.ai
+tags:
+- name: humanApiMessages
+paths:
+  /api/v1/me/chats/{chat_id}/messages:
+    get:
+      operationId: listMyChatMessages
+      summary: List messages in a chat room
+      description: 'Returns a paginated list of ALL messages in a chat room where you are a participant.
+
+
+        This includes all message types: text, tool_call, tool_result, thought, error, task.
+
+        Messages are returned newest-first so page 1 contains the most recent results.
+
+        Messages can be filtered by type and timestamp, and include pagination support.
+
+
+        Use the `message_type` parameter to filter by specific type(s).
+
+
+        ## Pagination
+
+
+        Use `cursor` + `limit` for cursor-based pagination (recommended). The response
+
+        `metadata` includes `next_cursor` and `has_more`.
+
+
+        Note: `since` and `cursor` cannot be combined. Use one or the other.
+
+
+        `page` and `page_size` are deprecated and will be removed in API 2.0.0 (2026-10-01).
+
+
+        Returns 404 if the chat room doesn''t exist or you''re not a participant (security-first: doesn''t leak room existence).
+
+        '
+      tags:
+      - humanApiMessages
+      parameters:
+      - name: chat_id
+        in: path
+        description: Chat Room ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: cursor
+        in: query
+        description: Cursor for keyset pagination (from previous response next_cursor)
+        required: false
+        schema:
+          type: string
+      - name: limit
+        in: query
+        description: 'Items per page for cursor pagination (default: 20, max: 100)'
+        required: false
+        schema:
+          type: integer
+      - name: page
+        in: query
+        description: Page number (deprecated — use cursor)
+        required: false
+        schema:
+          type: integer
+      - name: page_size
+        in: query
+        description: Items per page (deprecated — use limit)
+        required: false
+        schema:
+          type: integer
+      - name: message_type
+        in: query
+        description: Filter by message type (text, tool_call, tool_result, thought, error, task)
+        required: false
+        schema:
+          $ref: '#/components/schemas/ApiV1MeChatsChatIdMessagesGetParametersMessageType'
+      - name: since
+        in: query
+        description: Filter messages after this timestamp (cannot be combined with cursor)
+        required: false
+        schema:
+          type: string
+          format: date-time
+      - name: X-API-Key
+        in: header
+        description: Enter your API key for programmatic access
+        required: true
+        schema:
+          type: string
+      responses:
+        '200':
+          description: Chat Messages
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Human API/Messages_listMyChatMessages_Response_200'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found - Room doesn't exist or you're not a participant
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: Validation Error
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+    post:
+      operationId: sendMyChatMessage
+      summary: Send a text message as the user
+      description: "Creates a new text message in a chat room. The user must be a participant in the room.\n\nThis endpoint only supports the `text` message type. Event-type messages\nare emitted by agents and the system, not created on the `/me` surface. The\nexternally-visible ones (tool_call, tool_result, thought, error, task) are\nread via `GET /me/chats/{chat_id}/messages` (the `message_type` filter) or\nreceived live over the chat WebSocket (`event_created`); the remaining\ninternal types (system, action, guidelines) are not exposed on `/me`.\n\nMessages must include at least one @mention to ensure proper routing to recipients.\n\nExample request:\n```json\n{\n  \"message\": {\n    \"content\": \"@agent.assistant please help me with this task\",\n    \"mentions\": [\n      {\"id\": \"agent-uuid\", \"handle\": \"agent.assistant\", \"name\": \"Agent Assistant\"}\n    ]\n  }\n}\n```\n"
+      tags:
+      - humanApiMessages
+      parameters:
+      - name: chat_id
+        in: path
+        description: Chat Room ID
+        required: true
+        schema:
+          type: string
+          format: uuid
+      - name: X-API-Key
+        in: header
+        description: Enter your API key for programmatic access
+        required: true
+        schema:
+          type: string
+      responses:
+        '201':
+          description: Message Sent
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Human API/Messages_sendMyChatMessage_Response_201'
+        '401':
+          description: Unauthorized
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '404':
+          description: Not Found - Room doesn't exist or you're not a participant
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error'
+        '422':
+          description: 'Validation Error - Possible error codes: validation_error (message content is blank or contains only invisible characters), mentions_required (mentions array is missing, empty, or contains no mention-kind entry), cannot_mention_self (user attempted to mention themselves), duplicate_mentions (same participant mentioned multiple times), mentioned_participant_not_in_room (mentioned user is not a chat participant), invalid_mention_kind (kind must be "mention" or "reference"), handle_not_found (handle could not be resolved to a room participant), mention_missing_identifier (mention has neither id nor handle)'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/ValidationError'
+      requestBody:
+        description: Message parameters
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                message:
+                  $ref: '#/components/schemas/ChatMessageRequest'
+              required:
+              - message
+components:
+  schemas:
+    ErrorErrorDetails:
+      type: object
+      properties: {}
+      description: Additional error details (optional)
+      title: ErrorErrorDetails
+    ChatMessageRequestMentionsItems:
+      type: object
+      properties:
+        handle:
+          type: string
+          description: Handle for the mention (user handle or owner_handle/agent_slug for agents). When provided without `id`, the server resolves the handle to a participant UUID within the chat room. Returns 422 if the handle cannot be resolved.
+        id:
+          type: string
+          format: uuid
+          description: Mentioned user/agent ID. Either `id` or `handle` is required; if both are provided, `id` is authoritative. Returns 422 if both are missing.
+        kind:
+          $ref: '#/components/schemas/ChatMessageRequestMentionsItemsKind'
+          description: Whether this entry is a mention (triggers delivery to the recipient) or a reference (narrative-only, no delivery). Defaults to "mention" when omitted. Omit the field rather than sending null — an explicit null is rejected.
+        name:
+          type: string
+          description: Display name as it appears in the content (without @ prefix)
+      title: ChatMessageRequestMentionsItems
+    ChatMessageRequestMentionsItemsKind:
+      type: string
+      enum:
+      - mention
+      - reference
+      description: Whether this entry is a mention (triggers delivery to the recipient) or a reference (narrative-only, no delivery). Defaults to "mention" when omitted. Omit the field rather than sending null — an explicit null is rejected.
+      title: ChatMessageRequestMentionsItemsKind
+    ChatMessageRequest:
+      type: object
+      properties:
+        content:
+          type: string
+          description: Message content with @mentions for recipients (e.g. '@DataAnalyst please analyze this'). Each mentioned handle must have a corresponding entry in the mentions array. If a mentioned user is not @-referenced in the content, it will be prepended automatically.
+        mentions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatMessageRequestMentionsItems'
+          description: List of mentioned users (required). Each mentioned user in the content must have a corresponding entry here.
+      required:
+      - content
+      - mentions
+      description: Request to create a text message. For other message types (tool_call, tool_result, thought, etc.), use the /events endpoint.
+      title: ChatMessageRequest
+    ValidationError:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ValidationErrorError'
+      required:
+      - error
+      description: Validation error response with field-specific errors and request ID for tracing
+      title: ValidationError
+    ErrorError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+        details:
+          $ref: '#/components/schemas/ErrorErrorDetails'
+          description: Additional error details (optional)
+        message:
+          type: string
+          description: Human-readable error message
+        request_id:
+          type: string
+          description: Unique request identifier for tracing and debugging
+      required:
+      - code
+      - message
+      - request_id
+      title: ErrorError
+    ValidationErrorError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+        details:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          description: Field-specific validation errors with JSON Pointer paths (RFC 6901) as keys
+        message:
+          type: string
+          description: Human-readable error message
+        request_id:
+          type: string
+          description: Unique request identifier for tracing and debugging
+      required:
+      - code
+      - details
+      - message
+      - request_id
+      title: ValidationErrorError
+    Error:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorError'
+      required:
+      - error
+      description: Standard error response with request ID for tracing
+      title: Error
+    ApiV1MeChatsChatIdMessagesGetParametersMessageType:
+      type: string
+      enum:
+      - text
+      - tool_call
+      - tool_result
+      - thought
+      - error
+      - task
+      - attention
+      description: Filter by message type
+      title: ApiV1MeChatsChatIdMessagesGetParametersMessageType
+  securitySchemes:
+    ApiKeyAuth:
+      type: apiKey
+      in: header
+      name: X-API-Key
+      description: Enter your API key for programmatic access
+    bearerAuth:
+      type: http
+      scheme: bearer
+      description: Enter your JWT token (without the 'Bearer ' prefix)
