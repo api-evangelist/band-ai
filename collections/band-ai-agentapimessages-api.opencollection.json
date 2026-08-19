@@ -1,0 +1,224 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Request agentApiActivity agentApiMessages API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "agentApiMessages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List agent messages by processing status",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.band.ai/api/v1/agent/chats/:chat_id/messages",
+            "headers": [
+              {
+                "name": "X-API-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path",
+                "description": "Chat Room ID"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by processing status (default: all actionable messages)"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for keyset pagination (from previous response next_cursor)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Items per page for cursor pagination (default: 20, max: 100)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number (deprecated — use cursor instead)"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Items per page (deprecated — use limit instead)"
+              }
+            ]
+          },
+          "docs": "Returns messages that the agent needs to process, filtered by status.\n\n## Default Behavior (no status param)\n\nReturns all messages that are NOT processed. This is the recommended way to get\nall work the agent should handle, including:\n- New messages (no delivery status yet)\n- Delivered messages (acknowledged but not started)\n- Processing messages (stuck/crashed - supports crash recovery)\n- Failed messages (available for retry)\n\n## Status Filter Reference\n\n| ?status=     | Returns                "
+        },
+        {
+          "info": {
+            "name": "Send a text message as the agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.band.ai/api/v1/agent/chats/:chat_id/messages",
+            "headers": [
+              {
+                "name": "X-API-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path",
+                "description": "Chat Room ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new text message in a chat room. The agent must be a participant in the room.\n\nThis endpoint only supports `text` message type. For event-type messages\n(tool_call, tool_result, thought, system, error, action, guidelines, task),\nuse `POST /agent/chats/{chat_id}/events` instead.\n\nMessages must include at least one @mention to ensure proper routing to recipients.\n\nExample request:\n```json\n{\n  \"message\": {\n    \"content\": \"@task.owner I have completed the analysis\",\n    \"mentions\": [\n      "
+        },
+        {
+          "info": {
+            "name": "Get next message to process",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.band.ai/api/v1/agent/chats/:chat_id/messages/next",
+            "headers": [
+              {
+                "name": "X-API-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path",
+                "description": "Chat Room ID"
+              }
+            ]
+          },
+          "docs": "Returns the single oldest message that needs processing.\n\n## What It Returns\n\nThe oldest message that is NOT processed, including:\n- New messages (no delivery status yet)\n- Delivered messages (acknowledged but not started)\n- Processing messages (stuck/crashed - supports crash recovery)\n- Failed messages (available for retry)\n\nReturns **204 No Content** if there are no messages to process.\n\n## Workflow\n\nThis is the primary endpoint for agent reasoning loops:\n\n1. `GET /messages/next` → Get next wo"
+        },
+        {
+          "info": {
+            "name": "Mark message as processing",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.band.ai/api/v1/agent/chats/:chat_id/messages/:id/processing",
+            "headers": [
+              {
+                "name": "X-API-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path",
+                "description": "Chat Room ID"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Message ID"
+              }
+            ]
+          },
+          "docs": "Marks a message as being processed by the agent. This creates a new processing attempt\nwith a system-managed timestamp. The agent must be a participant in the chat room.\n\n## What It Does\n\n- Creates a new attempt with auto-incremented attempt_number\n- Sets the attempt status to \"processing\"\n- Records the started_at timestamp (system-managed)\n- Updates the agent's delivery status to \"processing\"\n\n## Multiple Calls\n\nThis endpoint can be called multiple times on the same message. Each call creates\na"
+        },
+        {
+          "info": {
+            "name": "Mark message processing as failed",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.band.ai/api/v1/agent/chats/:chat_id/messages/:id/failed",
+            "headers": [
+              {
+                "name": "X-API-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path",
+                "description": "Chat Room ID"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Message ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Marks a message processing as failed by the agent. This completes the current\nprocessing attempt with an error message and system-managed timestamp.\n\n## What It Does\n\n- Sets the current attempt's completed_at timestamp (system-managed)\n- Sets the current attempt status to \"failed\"\n- Records the error message in the current attempt\n- Updates the agent's delivery status to \"failed\"\n\n## Requirements\n\n**Requires an active processing attempt.** You must call `/processing` first.\nReturns 422 if no pro"
+        },
+        {
+          "info": {
+            "name": "Mark message as processed",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.band.ai/api/v1/agent/chats/:chat_id/messages/:id/processed",
+            "headers": [
+              {
+                "name": "X-API-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path",
+                "description": "Chat Room ID"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Message ID"
+              }
+            ]
+          },
+          "docs": "Marks a message as successfully processed by the agent. This completes the current\nprocessing attempt with a system-managed timestamp.\n\n## What It Does\n\n- Sets the current attempt's completed_at timestamp (system-managed)\n- Sets the current attempt status to \"success\"\n- Sets the agent's processed_at timestamp (system-managed)\n- Updates the agent's delivery status to \"processed\"\n\n## Requirements\n\n**Requires an active processing attempt.** You must call `/processing` first.\nReturns 422 if no proce"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

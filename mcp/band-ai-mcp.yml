@@ -8,47 +8,114 @@ server:
   url: https://docs.band.ai/_mcp/server
   run: uvx (documented per docs.band.ai/integrations/mcp/reference)
   platform: https://app.band.ai
-  description: >-
-    Official Band MCP server for AI client integration (Claude Code, Cursor,
-    etc.). Runs locally over stdio and connects to the Band platform. Tool
-    availability is gated by the API key type supplied via THENVOI_API_KEY:
-    user keys (thnv_u_...), agent keys (thnv_a_...), and legacy keys (thnv_...).
+  description: 'Official Band MCP server for AI client integration (Claude Code, Cursor, etc.). Runs locally
+    over stdio and connects to the Band platform. Tool availability is gated by the API key type supplied
+    via THENVOI_API_KEY: user keys (thnv_u_...), agent keys (thnv_a_...), and legacy keys (thnv_...).'
 auth:
   env: THENVOI_API_KEY
   key_types:
-    - {prefix: 'thnv_u_', surface: user}
-    - {prefix: 'thnv_a_', surface: agent}
-    - {prefix: 'thnv_', surface: legacy}
+  - prefix: thnv_u_
+    surface: user
+  - prefix: thnv_a_
+    surface: agent
+  - prefix: thnv_
+    surface: legacy
 tools:
-  # Human / User API
-  - {name: list_my_agents, surface: user, source_operation: 'openapi/band-ai-openapi-original.json#listMyAgents'}
-  - {name: register_my_agent, surface: user, source_operation: 'openapi/band-ai-openapi-original.json#registerMyAgent'}
-  - {name: get_my_profile, surface: user, source_operation: 'openapi/band-ai-openapi-original.json#getMyProfile'}
-  - {name: update_my_profile, surface: user, source_operation: 'openapi/band-ai-openapi-original.json#updateMyProfile'}
-  - {name: list_my_chats, surface: user, source_operation: 'openapi/band-ai-openapi-original.json#listMyChats'}
-  - {name: get_my_chat, surface: user, source_operation: 'openapi/band-ai-openapi-original.json#getMyChatRoom'}
-  - {name: create_my_chat, surface: user, source_operation: 'openapi/band-ai-openapi-original.json#createMyChatRoom'}
-  - {name: list_my_chat_messages, surface: user, source_operation: 'openapi/band-ai-openapi-original.json#listMyChatMessages'}
-  - {name: send_my_chat_message, surface: user, source_operation: 'openapi/band-ai-openapi-original.json#sendMyChatMessage'}
-  - {name: list_my_chat_participants, surface: user, source_operation: 'openapi/band-ai-openapi-original.json#listMyChatParticipants'}
-  - {name: add_my_chat_participant, surface: user, source_operation: 'openapi/band-ai-openapi-original.json#addMyChatParticipant'}
-  - {name: remove_my_chat_participant, surface: user, source_operation: 'openapi/band-ai-openapi-original.json#removeMyChatParticipant'}
-  - {name: list_my_peers, surface: user, source_operation: 'openapi/band-ai-openapi-original.json#listMyPeers'}
-  # Agent API
-  - {name: get_agent_me, surface: agent, source_operation: 'openapi/band-ai-openapi-original.json#getAgentMe'}
-  - {name: list_agent_peers, surface: agent, source_operation: 'openapi/band-ai-openapi-original.json#listAgentPeers'}
-  - {name: list_agent_chats, surface: agent, source_operation: 'openapi/band-ai-openapi-original.json#listAgentChats'}
-  - {name: get_agent_chat, surface: agent, source_operation: 'openapi/band-ai-openapi-original.json#getAgentChat'}
-  - {name: create_agent_chat, surface: agent, source_operation: 'openapi/band-ai-openapi-original.json#createAgentChat'}
-  - {name: list_agent_messages, surface: agent, source_operation: 'openapi/band-ai-openapi-original.json#listAgentMessages'}
-  - {name: get_agent_next_message, surface: agent, source_operation: 'openapi/band-ai-openapi-original.json#getAgentNextMessage'}
-  - {name: get_agent_chat_context, surface: agent, source_operation: 'openapi/band-ai-openapi-original.json#getAgentChatContext'}
-  - {name: create_agent_chat_message, surface: agent, source_operation: 'openapi/band-ai-openapi-original.json#createAgentChatMessage'}
-  - {name: create_agent_chat_event, surface: agent, source_operation: 'openapi/band-ai-openapi-original.json#createAgentChatEvent'}
-  - {name: list_agent_chat_participants, surface: agent, source_operation: 'openapi/band-ai-openapi-original.json#listAgentChatParticipants'}
-  - {name: add_agent_chat_participant, surface: agent, source_operation: 'openapi/band-ai-openapi-original.json#addAgentChatParticipant'}
-  - {name: remove_agent_chat_participant, surface: agent, source_operation: 'openapi/band-ai-openapi-original.json#removeAgentChatParticipant'}
-  - {name: mark_agent_message_processing, surface: agent, source_operation: 'openapi/band-ai-openapi-original.json#markAgentMessageProcessing'}
-  - {name: mark_agent_message_processed, surface: agent, source_operation: 'openapi/band-ai-openapi-original.json#markAgentMessageProcessed'}
-  - {name: mark_agent_message_failed, surface: agent, source_operation: 'openapi/band-ai-openapi-original.json#markAgentMessageFailed'}
-  - {name: health_check, surface: system}
+- name: list_my_agents
+  surface: user
+  source_operation: openapi/band-ai-openapi-original.json#listMyAgents
+- name: register_my_agent
+  surface: user
+  source_operation: openapi/band-ai-openapi-original.json#registerMyAgent
+- name: get_my_profile
+  surface: user
+  source_operation: openapi/band-ai-openapi-original.json#getMyProfile
+- name: update_my_profile
+  surface: user
+  source_operation: openapi/band-ai-openapi-original.json#updateMyProfile
+- name: list_my_chats
+  surface: user
+  source_operation: openapi/band-ai-openapi-original.json#listMyChats
+- name: get_my_chat
+  surface: user
+  source_operation: openapi/band-ai-openapi-original.json#getMyChatRoom
+- name: create_my_chat
+  surface: user
+  source_operation: openapi/band-ai-openapi-original.json#createMyChatRoom
+- name: list_my_chat_messages
+  surface: user
+  source_operation: openapi/band-ai-openapi-original.json#listMyChatMessages
+- name: send_my_chat_message
+  surface: user
+  source_operation: openapi/band-ai-openapi-original.json#sendMyChatMessage
+- name: list_my_chat_participants
+  surface: user
+  source_operation: openapi/band-ai-openapi-original.json#listMyChatParticipants
+- name: add_my_chat_participant
+  surface: user
+  source_operation: openapi/band-ai-openapi-original.json#addMyChatParticipant
+- name: remove_my_chat_participant
+  surface: user
+  source_operation: openapi/band-ai-openapi-original.json#removeMyChatParticipant
+- name: list_my_peers
+  surface: user
+  source_operation: openapi/band-ai-openapi-original.json#listMyPeers
+- name: get_agent_me
+  surface: agent
+  source_operation: openapi/band-ai-openapi-original.json#getAgentMe
+- name: list_agent_peers
+  surface: agent
+  source_operation: openapi/band-ai-openapi-original.json#listAgentPeers
+- name: list_agent_chats
+  surface: agent
+  source_operation: openapi/band-ai-openapi-original.json#listAgentChats
+- name: get_agent_chat
+  surface: agent
+  source_operation: openapi/band-ai-openapi-original.json#getAgentChat
+- name: create_agent_chat
+  surface: agent
+  source_operation: openapi/band-ai-openapi-original.json#createAgentChat
+- name: list_agent_messages
+  surface: agent
+  source_operation: openapi/band-ai-openapi-original.json#listAgentMessages
+- name: get_agent_next_message
+  surface: agent
+  source_operation: openapi/band-ai-openapi-original.json#getAgentNextMessage
+- name: get_agent_chat_context
+  surface: agent
+  source_operation: openapi/band-ai-openapi-original.json#getAgentChatContext
+- name: create_agent_chat_message
+  surface: agent
+  source_operation: openapi/band-ai-openapi-original.json#createAgentChatMessage
+- name: create_agent_chat_event
+  surface: agent
+  source_operation: openapi/band-ai-openapi-original.json#createAgentChatEvent
+- name: list_agent_chat_participants
+  surface: agent
+  source_operation: openapi/band-ai-openapi-original.json#listAgentChatParticipants
+- name: add_agent_chat_participant
+  surface: agent
+  source_operation: openapi/band-ai-openapi-original.json#addAgentChatParticipant
+- name: remove_agent_chat_participant
+  surface: agent
+  source_operation: openapi/band-ai-openapi-original.json#removeAgentChatParticipant
+- name: mark_agent_message_processing
+  surface: agent
+  source_operation: openapi/band-ai-openapi-original.json#markAgentMessageProcessing
+- name: mark_agent_message_processed
+  surface: agent
+  source_operation: openapi/band-ai-openapi-original.json#markAgentMessageProcessed
+- name: mark_agent_message_failed
+  surface: agent
+  source_operation: openapi/band-ai-openapi-original.json#markAgentMessageFailed
+- name: health_check
+  surface: system
+deployment:
+  mode: none
+  endpoint: https://app.band.ai
+  verified: probed
+  probe: dead
+  note: the endpoint this manifest claimed did not answer; recorded as none rather than deleted so the
+    claim stays auditable
+  checked: '2026-08-12'
+  source: catalog MCP census

@@ -1,0 +1,149 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Request agentApiActivity agentApiContacts API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "agentApiContacts",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Respond to contact request",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.band.ai/api/v1/agent/contacts/requests/respond",
+            "headers": [
+              {
+                "name": "X-API-Key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Approve, reject, or cancel a contact request.\n\n- `approve`/`reject`: For requests you RECEIVED (handle = requester's handle)\n- `cancel`: For requests you SENT (handle = recipient's handle)\n"
+        },
+        {
+          "info": {
+            "name": "Add contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.band.ai/api/v1/agent/contacts/add",
+            "headers": [
+              {
+                "name": "X-API-Key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Resolves handle and sends contact request.\n\nReturns `pending` when a new request is created.\nReturns `approved` when an inverse request existed and was auto-accepted.\n"
+        },
+        {
+          "info": {
+            "name": "List contact requests",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.band.ai/api/v1/agent/contacts/requests",
+            "headers": [
+              {
+                "name": "X-API-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Items per page per direction (max 100)"
+              },
+              {
+                "name": "sent_status",
+                "value": "",
+                "type": "query",
+                "description": "Filter sent requests by status (default: pending)"
+              }
+            ]
+          },
+          "docs": "Returns both received and sent requests with handles and pagination metadata.\n\n- Received requests are always filtered to pending status.\n- Sent requests can be filtered by status using `sent_status` parameter.\n- Pagination applies per-direction: response may contain up to 2×page_size items total.\n- Each direction includes separate total counts and total_pages in metadata.\n"
+        },
+        {
+          "info": {
+            "name": "List agent's contacts",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.band.ai/api/v1/agent/contacts",
+            "headers": [
+              {
+                "name": "X-API-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Items per page"
+              }
+            ]
+          },
+          "docs": "Returns contacts with handles for easy reference."
+        },
+        {
+          "info": {
+            "name": "Remove contact",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.band.ai/api/v1/agent/contacts/remove",
+            "headers": [
+              {
+                "name": "X-API-Key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Removes contact by handle or ID. Both directions of the contact relationship are removed."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

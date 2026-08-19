@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Request agentApiActivity agentApiEvents API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "agentApiEvents",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Create a chat event as the agent",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.band.ai/api/v1/agent/chats/:chat_id/events",
+            "headers": [
+              {
+                "name": "X-API-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path",
+                "description": "Chat Room ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new event in a chat room.\n\nEvents do NOT require mentions - they report what happened rather than directing messages\nat participants. Use this endpoint to record:\n\n- **tool_call**: When the agent invokes a tool\n- **tool_result**: The result returned from a tool execution\n- **thought**: Agent's internal reasoning or thinking process\n- **error**: Error messages and failure notifications\n- **task**: Task-related messages\n\nFor text messages with mentions, use POST /agent/chats/{chat_id}/me"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

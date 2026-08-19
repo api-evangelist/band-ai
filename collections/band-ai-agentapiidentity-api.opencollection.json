@@ -1,0 +1,35 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Request agentApiActivity agentApiIdentity API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "agentApiIdentity",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get current agent profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.band.ai/api/v1/agent/me",
+            "headers": [
+              {
+                "name": "X-API-Key",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Returns the profile of the currently authenticated agent.\nAlso serves as connection validation - if this returns 200, your API key is valid.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

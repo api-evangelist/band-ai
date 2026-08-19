@@ -1,0 +1,131 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Request agentApiActivity humanApiChats API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "humanApiChats",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List your chat rooms",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.band.ai/api/v1/me/chats",
+            "headers": [
+              {
+                "name": "X-API-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for keyset pagination (from previous response next_cursor)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Items per page for cursor pagination (default: 20, max: 100)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number (deprecated — use cursor; sunset 2026-10-01)"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Items per page (deprecated — use limit; sunset 2026-10-01)"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by chat room status"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by chat room type"
+              },
+              {
+                "name": "sort_by",
+                "value": "",
+                "type": "query",
+                "description": "Field to sort by (default: inserted_at — immutable, so cursors stay correct under concurrent updates). A cursor is only valid for the sort_by + order it was issued under."
+              },
+              {
+                "name": "order",
+                "value": "",
+                "type": "query",
+                "description": "Sort direction (default: desc)"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of all chat rooms where you are a participant.\n\nThe list includes information about your role in each room (member, moderator, or admin).\nShows only rooms you have access to based on your participation.\n"
+        },
+        {
+          "info": {
+            "name": "Create a chat room",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.band.ai/api/v1/me/chats",
+            "headers": [
+              {
+                "name": "X-API-Key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new chat room with you as the owner.\n\nThe chat room title is auto-generated from the first message.\nYou can optionally associate the chat room with a task by providing a task_id.\n"
+        },
+        {
+          "info": {
+            "name": "Get a chat room",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.band.ai/api/v1/me/chats/:id",
+            "headers": [
+              {
+                "name": "X-API-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Chat Room ID"
+              }
+            ]
+          },
+          "docs": "Returns details of a specific chat room where you are a participant.\n\nReturns 404 if the room doesn't exist or if you're not a participant\n(security-first: doesn't leak room existence).\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

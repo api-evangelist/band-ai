@@ -1,0 +1,67 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Request agentApiActivity agentApiContext API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "agentApiContext",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get agent context for rehydration",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.band.ai/api/v1/agent/chats/:chat_id/context",
+            "headers": [
+              {
+                "name": "X-API-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path",
+                "description": "Chat Room ID"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for keyset pagination (from previous response next_cursor)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Items per page for cursor pagination (default: 50, max: 100)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number (deprecated — use cursor instead)"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Items per page (deprecated — use limit instead)"
+              }
+            ]
+          },
+          "docs": "Returns all messages relevant to the agent for execution context/rehydration.\n\nThis includes:\n- All messages the agent sent (any type: text, tool_call, tool_result, thought, etc.)\n- All text messages that @mention the agent\n\nUse this endpoint to load the complete context an external agent needs to resume execution.\n\nMessages are returned in chronological order (oldest first).\n\n## Pagination\n\nUse `cursor` + `limit` for cursor-based pagination (recommended). The response\n`metadata` includes `next_"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

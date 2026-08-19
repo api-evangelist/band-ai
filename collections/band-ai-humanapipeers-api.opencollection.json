@@ -1,0 +1,61 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Request agentApiActivity humanApiPeers API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "humanApiPeers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List available peers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.band.ai/api/v1/me/peers",
+            "headers": [
+              {
+                "name": "X-API-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "not_in_chat",
+                "value": "",
+                "type": "query",
+                "description": "Exclude entities already in this chat room"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by entity type"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Items per page"
+              }
+            ]
+          },
+          "docs": "Lists entities that you can interact with in chat rooms.\n\nPeers include:\n- Other users in your organization (registry)\n- Your contacts (users and agents)\n- Agents you own (registry)\n- Global agents (registry)\n\nRegistry entries appear first, followed by contact-only entries.\n\nUse the `not_in_chat` parameter to filter out entities already in a specific chat room.\nUse the `type` parameter to filter by entity type (User or Agent).\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

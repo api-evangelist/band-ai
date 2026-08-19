@@ -1,0 +1,199 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Request agentApiActivity agentApiMemories API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "agentApiMemories",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Supersede a memory",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.band.ai/api/v1/agent/memories/:id/supersede",
+            "headers": [
+              {
+                "name": "X-API-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Memory ID"
+              }
+            ]
+          },
+          "docs": "Marks a memory as superseded (soft delete). Use when information is outdated or incorrect.\nThe memory remains for audit trail but won't appear in normal queries.\n\nOnly the source agent can supersede.\n"
+        },
+        {
+          "info": {
+            "name": "Archive a memory",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.band.ai/api/v1/agent/memories/:id/archive",
+            "headers": [
+              {
+                "name": "X-API-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Memory ID"
+              }
+            ]
+          },
+          "docs": "Archives a memory (hides but preserves). Use when memory is valid but not currently needed.\nArchived memories can be restored later by humans.\n\nOnly the source agent can archive.\n"
+        },
+        {
+          "info": {
+            "name": "Get a memory",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.band.ai/api/v1/agent/memories/:id",
+            "headers": [
+              {
+                "name": "X-API-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Memory ID"
+              }
+            ]
+          },
+          "docs": "Retrieves a specific memory by ID if accessible to the agent."
+        },
+        {
+          "info": {
+            "name": "List memories",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.band.ai/api/v1/agent/memories",
+            "headers": [
+              {
+                "name": "X-API-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Opaque cursor for keyset pagination"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Max results per request (1-100, default 20)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number (offset pagination) - DEPRECATED"
+              },
+              {
+                "name": "subject_id",
+                "value": "",
+                "type": "query",
+                "description": "Filter by subject UUID (required for subject-scoped queries)"
+              },
+              {
+                "name": "scope",
+                "value": "",
+                "type": "query",
+                "description": "Filter by scope: subject, organization, or all"
+              },
+              {
+                "name": "system",
+                "value": "",
+                "type": "query",
+                "description": "Filter by memory system"
+              },
+              {
+                "name": "type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by memory type"
+              },
+              {
+                "name": "segment",
+                "value": "",
+                "type": "query",
+                "description": "Filter by segment"
+              },
+              {
+                "name": "content_query",
+                "value": "",
+                "type": "query",
+                "description": "Full-text search query"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Number of results per page (max 50) - DEPRECATED"
+              },
+              {
+                "name": "status",
+                "value": "",
+                "type": "query",
+                "description": "Filter by status: active, superseded, archived, or all"
+              }
+            ]
+          },
+          "docs": "Lists memories accessible to the agent. By default returns:\n- Memories about the specified subject (cross-agent sharing)\n- Organization-wide shared memories\n\nUse `scope` parameter to filter by visibility.\nUse `content_query` for full-text search across memory content.\n\n**Pagination:** Use `cursor` + `limit` (recommended) OR `page` + `page_size` (deprecated, sunset 2026-10-01).\nDo NOT mix families.\n"
+        },
+        {
+          "info": {
+            "name": "Store a memory",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.band.ai/api/v1/agent/memories",
+            "headers": [
+              {
+                "name": "X-API-Key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Stores a new memory entry. The memory will be:\n- Associated with the authenticated agent as the source\n- Scoped to the subject (for cross-agent sharing) or organization (for shared knowledge)\n\nFor subject-scoped memories, provide a `subject_id` to associate the memory with a specific user or agent.\nFor organization-scoped memories, omit `subject_id` - the memory will be visible to all agents in the org.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

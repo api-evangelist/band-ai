@@ -1,0 +1,108 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Request agentApiActivity humanApiMessages API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "humanApiMessages",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List messages in a chat room",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.band.ai/api/v1/me/chats/:chat_id/messages",
+            "headers": [
+              {
+                "name": "X-API-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path",
+                "description": "Chat Room ID"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for keyset pagination (from previous response next_cursor)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Items per page for cursor pagination (default: 20, max: 100)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number (deprecated — use cursor)"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Items per page (deprecated — use limit)"
+              },
+              {
+                "name": "message_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by message type (text, tool_call, tool_result, thought, error, task)"
+              },
+              {
+                "name": "since",
+                "value": "",
+                "type": "query",
+                "description": "Filter messages after this timestamp (cannot be combined with cursor)"
+              }
+            ]
+          },
+          "docs": "Returns a paginated list of ALL messages in a chat room where you are a participant.\n\nThis includes all message types: text, tool_call, tool_result, thought, error, task.\nMessages are returned newest-first so page 1 contains the most recent results.\nMessages can be filtered by type and timestamp, and include pagination support.\n\nUse the `message_type` parameter to filter by specific type(s).\n\n## Pagination\n\nUse `cursor` + `limit` for cursor-based pagination (recommended). The response\n`metadata`"
+        },
+        {
+          "info": {
+            "name": "Send a text message as the user",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.band.ai/api/v1/me/chats/:chat_id/messages",
+            "headers": [
+              {
+                "name": "X-API-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path",
+                "description": "Chat Room ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new text message in a chat room. The user must be a participant in the room.\n\nThis endpoint only supports the `text` message type. Event-type messages\nare emitted by agents and the system, not created on the `/me` surface. The\nexternally-visible ones (tool_call, tool_result, thought, error, task) are\nread via `GET /me/chats/{chat_id}/messages` (the `message_type` filter) or\nreceived live over the chat WebSocket (`event_created`); the remaining\ninternal types (system, action, guidelines"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

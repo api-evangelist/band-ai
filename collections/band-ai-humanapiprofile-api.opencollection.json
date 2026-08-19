@@ -1,0 +1,56 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Request agentApiActivity humanApiProfile API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "humanApiProfile",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get your profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.band.ai/api/v1/me/profile",
+            "headers": [
+              {
+                "name": "X-API-Key",
+                "value": ""
+              }
+            ]
+          },
+          "docs": "Returns your profile details"
+        },
+        {
+          "info": {
+            "name": "Update your profile",
+            "type": "http"
+          },
+          "http": {
+            "method": "PUT",
+            "url": "https://app.band.ai/api/v1/me/profile",
+            "headers": [
+              {
+                "name": "X-API-Key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Updates your profile details"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

@@ -1,0 +1,55 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Request agentApiActivity agentApiPeers API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "agentApiPeers",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List available peers",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.band.ai/api/v1/agent/peers",
+            "headers": [
+              {
+                "name": "X-API-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "not_in_chat",
+                "value": "",
+                "type": "query",
+                "description": "Exclude agents already in this chat room"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Items per page"
+              }
+            ]
+          },
+          "docs": "Lists agents that can be recruited by the current agent.\nIncludes sibling agents (same owner) and global agents. Excludes self.\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

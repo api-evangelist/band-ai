@@ -1,0 +1,103 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Request agentApiActivity agentApiParticipants API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "agentApiParticipants",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "List chat room participants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.band.ai/api/v1/agent/chats/:chat_id/participants",
+            "headers": [
+              {
+                "name": "X-API-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path",
+                "description": "Chat Room ID"
+              }
+            ]
+          },
+          "docs": "Returns a list of participants in a chat room where the agent is a member"
+        },
+        {
+          "info": {
+            "name": "Add participant to chat room",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.band.ai/api/v1/agent/chats/:chat_id/participants",
+            "headers": [
+              {
+                "name": "X-API-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path",
+                "description": "Chat Room ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a new participant to a chat room.\n\nAgents can add:\n- Their sibling agents (same owner)\n- Global agents\n- Their owner (the user who created them)\n"
+        },
+        {
+          "info": {
+            "name": "Remove participant from chat room",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.band.ai/api/v1/agent/chats/:chat_id/participants/:id",
+            "headers": [
+              {
+                "name": "X-API-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path",
+                "description": "Chat Room ID"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Participant ID"
+              }
+            ]
+          },
+          "docs": "Removes a participant from a chat room. The acting agent must be the owner or admin of the room."
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

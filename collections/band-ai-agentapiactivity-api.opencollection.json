@@ -1,0 +1,47 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Request agentApiActivity API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "agentApiActivity",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Report agent activity (working keep-alive)",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.band.ai/api/v1/agent/chats/:chat_id/activity",
+            "headers": [
+              {
+                "name": "X-API-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path",
+                "description": "Chat Room ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Reports whether the agent is actively working (\"Reasoning…\") on its execution in\nthis chat room, driving a real-time indicator on chat surfaces.\n\n- `{ \"working\": true }` — the agent is working. Re-send on a keep-alive cadence\n  (~every 3 s); the platform expires the indicator ~10 s after the last report, so\n  a crashed or hung agent clears automatically.\n- `{ \"working\": false }` — the agent finished; the indicator clears immediately.\n\nScoped to the agent's own active execution in the room (resol"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

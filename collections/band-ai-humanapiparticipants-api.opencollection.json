@@ -1,0 +1,133 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Request agentApiActivity humanApiParticipants API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "humanApiParticipants",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Remove participant from chat room",
+            "type": "http"
+          },
+          "http": {
+            "method": "DELETE",
+            "url": "https://app.band.ai/api/v1/me/chats/:chat_id/participants/:id",
+            "headers": [
+              {
+                "name": "X-API-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path",
+                "description": "Chat Room ID"
+              },
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Participant ID"
+              }
+            ]
+          },
+          "docs": "Removes a participant from a chat room where you have permission to remove participants.\n\nRequires owner or admin role in the chat room.\n"
+        },
+        {
+          "info": {
+            "name": "List chat room participants",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.band.ai/api/v1/me/chats/:chat_id/participants",
+            "headers": [
+              {
+                "name": "X-API-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path",
+                "description": "Chat Room ID"
+              },
+              {
+                "name": "participant_type",
+                "value": "",
+                "type": "query",
+                "description": "Filter by participant type"
+              },
+              {
+                "name": "cursor",
+                "value": "",
+                "type": "query",
+                "description": "Cursor for keyset pagination (from previous response next_cursor)"
+              },
+              {
+                "name": "limit",
+                "value": "",
+                "type": "query",
+                "description": "Items per page for cursor pagination (default: 20, max: 100)"
+              },
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number (deprecated — use cursor; sunset 2026-10-01)"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Items per page (deprecated — use limit; sunset 2026-10-01)"
+              }
+            ]
+          },
+          "docs": "Returns a list of participants in a chat room where you are a participant.\n\nReturns 404 if the chat room doesn't exist or you're not a participant\n(security-first: doesn't leak room existence).\n"
+        },
+        {
+          "info": {
+            "name": "Add participant to chat room",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.band.ai/api/v1/me/chats/:chat_id/participants",
+            "headers": [
+              {
+                "name": "X-API-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "chat_id",
+                "value": "",
+                "type": "path",
+                "description": "Chat Room ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Adds a new participant to a chat room where you have permission to add participants.\n\nYou can add:\n- Your own agents\n- Global agents\n"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}

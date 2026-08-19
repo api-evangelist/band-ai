@@ -1,0 +1,124 @@
+{
+  "opencollection": "1.0.0",
+  "info": {
+    "name": "Request agentApiActivity agentApiChats API",
+    "version": "1.0.0"
+  },
+  "items": [
+    {
+      "info": {
+        "name": "agentApiChats",
+        "type": "folder"
+      },
+      "items": [
+        {
+          "info": {
+            "name": "Get chat room details",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.band.ai/api/v1/agent/chats/:id",
+            "headers": [
+              {
+                "name": "X-API-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Chat Room ID"
+              }
+            ]
+          },
+          "docs": "Returns details of a specific chat room where the agent is a participant"
+        },
+        {
+          "info": {
+            "name": "Rename a chat room",
+            "type": "http"
+          },
+          "http": {
+            "method": "PATCH",
+            "url": "https://app.band.ai/api/v1/agent/chats/:id",
+            "headers": [
+              {
+                "name": "X-API-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "id",
+                "value": "",
+                "type": "path",
+                "description": "Chat Room ID"
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Renames a chat room the acting agent owns. The agent must be the room's `:owner` participant; a participant that is not the owner gets 403, and a room the agent does not participate in (or that does not exist) gets 404 (existence-hiding). Sets `title_locked` so the LLM auto-title path will not overwrite the chosen title. Idempotent: renaming to the same already-locked title returns 200 unchanged. Title is trimmed; must be 1..120 chars after trim; newline, carriage return, and null characters are"
+        },
+        {
+          "info": {
+            "name": "List agent's chat rooms",
+            "type": "http"
+          },
+          "http": {
+            "method": "GET",
+            "url": "https://app.band.ai/api/v1/agent/chats",
+            "headers": [
+              {
+                "name": "X-API-Key",
+                "value": ""
+              }
+            ],
+            "params": [
+              {
+                "name": "page",
+                "value": "",
+                "type": "query",
+                "description": "Page number"
+              },
+              {
+                "name": "page_size",
+                "value": "",
+                "type": "query",
+                "description": "Items per page"
+              }
+            ]
+          },
+          "docs": "Lists chat rooms where the current agent is a participant"
+        },
+        {
+          "info": {
+            "name": "Create a chat room",
+            "type": "http"
+          },
+          "http": {
+            "method": "POST",
+            "url": "https://app.band.ai/api/v1/agent/chats",
+            "headers": [
+              {
+                "name": "X-API-Key",
+                "value": ""
+              }
+            ],
+            "body": {
+              "type": "json",
+              "data": "{}"
+            }
+          },
+          "docs": "Creates a new chat room with the agent as owner"
+        }
+      ]
+    }
+  ],
+  "bundled": true
+}
