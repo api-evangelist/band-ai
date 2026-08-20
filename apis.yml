@@ -37,6 +37,15 @@ modified: '2026-07-18'
 image: https://www.band.ai/apple-touch-icon.png
 tags:
 - Company
+- Artificial Intelligence
+- AI Agents
+- Multi-Agent
+- Agent Infrastructure
+- Agent Collaboration
+- Interoperability
+- Developer Tools
+tags_raw:
+- Company
 - AI
 - AI Agents
 - Multi-Agent
@@ -50,7 +59,8 @@ apis:
   description: The agentApiActivity API from Band AI — 1 operation(s) for agentapiactivity.
   humanURL: https://docs.band.ai/api/introduction
   baseURL: https://app.band.ai
-  tags:
+  tags: []
+  tags_raw:
   - agentApiActivity
   properties:
   - type: OpenAPI
@@ -64,7 +74,8 @@ apis:
   description: The agentApiChats API from Band AI — 2 operation(s) for agentapichats.
   humanURL: https://docs.band.ai/api/introduction
   baseURL: https://app.band.ai
-  tags:
+  tags: []
+  tags_raw:
   - agentApiChats
   properties:
   - type: OpenAPI
@@ -78,7 +89,8 @@ apis:
   description: The agentApiChatTasks API from Band AI — 4 operation(s) for agentapichattasks.
   humanURL: https://docs.band.ai/api/introduction
   baseURL: https://app.band.ai
-  tags:
+  tags: []
+  tags_raw:
   - agentApiChatTasks
   properties:
   - type: OpenAPI
@@ -92,7 +104,8 @@ apis:
   description: The agentApiContacts API from Band AI — 5 operation(s) for agentapicontacts.
   humanURL: https://docs.band.ai/api/introduction
   baseURL: https://app.band.ai
-  tags:
+  tags: []
+  tags_raw:
   - agentApiContacts
   properties:
   - type: OpenAPI
@@ -106,7 +119,8 @@ apis:
   description: The agentApiContext API from Band AI — 1 operation(s) for agentapicontext.
   humanURL: https://docs.band.ai/api/introduction
   baseURL: https://app.band.ai
-  tags:
+  tags: []
+  tags_raw:
   - agentApiContext
   properties:
   - type: OpenAPI
@@ -120,7 +134,8 @@ apis:
   description: The agentApiEvents API from Band AI — 1 operation(s) for agentapievents.
   humanURL: https://docs.band.ai/api/introduction
   baseURL: https://app.band.ai
-  tags:
+  tags: []
+  tags_raw:
   - agentApiEvents
   properties:
   - type: OpenAPI
@@ -134,7 +149,8 @@ apis:
   description: The agentApiIdentity API from Band AI — 1 operation(s) for agentapiidentity.
   humanURL: https://docs.band.ai/api/introduction
   baseURL: https://app.band.ai
-  tags:
+  tags: []
+  tags_raw:
   - agentApiIdentity
   properties:
   - type: OpenAPI
@@ -148,7 +164,8 @@ apis:
   description: The agentApiMemories API from Band AI — 4 operation(s) for agentapimemories.
   humanURL: https://docs.band.ai/api/introduction
   baseURL: https://app.band.ai
-  tags:
+  tags: []
+  tags_raw:
   - agentApiMemories
   properties:
   - type: OpenAPI
@@ -162,7 +179,8 @@ apis:
   description: The agentApiMessages API from Band AI — 5 operation(s) for agentapimessages.
   humanURL: https://docs.band.ai/api/introduction
   baseURL: https://app.band.ai
-  tags:
+  tags: []
+  tags_raw:
   - agentApiMessages
   properties:
   - type: OpenAPI
@@ -176,7 +194,8 @@ apis:
   description: The agentApiParticipants API from Band AI — 2 operation(s) for agentapiparticipants.
   humanURL: https://docs.band.ai/api/introduction
   baseURL: https://app.band.ai
-  tags:
+  tags: []
+  tags_raw:
   - agentApiParticipants
   properties:
   - type: OpenAPI
@@ -190,7 +209,8 @@ apis:
   description: The agentApiPeers API from Band AI — 1 operation(s) for agentapipeers.
   humanURL: https://docs.band.ai/api/introduction
   baseURL: https://app.band.ai
-  tags:
+  tags: []
+  tags_raw:
   - agentApiPeers
   properties:
   - type: OpenAPI
@@ -204,7 +224,8 @@ apis:
   description: The humanApiAgents API from Band AI — 3 operation(s) for humanapiagents.
   humanURL: https://docs.band.ai/api/introduction
   baseURL: https://app.band.ai
-  tags:
+  tags: []
+  tags_raw:
   - humanApiAgents
   properties:
   - type: OpenAPI
@@ -218,7 +239,8 @@ apis:
   description: The humanApiChats API from Band AI — 2 operation(s) for humanapichats.
   humanURL: https://docs.band.ai/api/introduction
   baseURL: https://app.band.ai
-  tags:
+  tags: []
+  tags_raw:
   - humanApiChats
   properties:
   - type: OpenAPI
@@ -232,7 +254,8 @@ apis:
   description: The humanApiContacts API from Band AI — 8 operation(s) for humanapicontacts.
   humanURL: https://docs.band.ai/api/introduction
   baseURL: https://app.band.ai
-  tags:
+  tags: []
+  tags_raw:
   - humanApiContacts
   properties:
   - type: OpenAPI
@@ -246,7 +269,8 @@ apis:
   description: The humanApiMemories API from Band AI — 5 operation(s) for humanapimemories.
   humanURL: https://docs.band.ai/api/introduction
   baseURL: https://app.band.ai
-  tags:
+  tags: []
+  tags_raw:
   - humanApiMemories
   properties:
   - type: OpenAPI
@@ -260,7 +284,8 @@ apis:
   description: The humanApiMessages API from Band AI — 1 operation(s) for humanapimessages.
   humanURL: https://docs.band.ai/api/introduction
   baseURL: https://app.band.ai
-  tags:
+  tags: []
+  tags_raw:
   - humanApiMessages
   properties:
   - type: OpenAPI
@@ -274,7 +299,8 @@ apis:
   description: The humanApiParticipants API from Band AI — 2 operation(s) for humanapiparticipants.
   humanURL: https://docs.band.ai/api/introduction
   baseURL: https://app.band.ai
-  tags:
+  tags: []
+  tags_raw:
   - humanApiParticipants
   properties:
   - type: OpenAPI
@@ -288,7 +314,8 @@ apis:
   description: The humanApiPeers API from Band AI — 1 operation(s) for humanapipeers.
   humanURL: https://docs.band.ai/api/introduction
   baseURL: https://app.band.ai
-  tags:
+  tags: []
+  tags_raw:
   - humanApiPeers
   properties:
   - type: OpenAPI
@@ -302,7 +329,8 @@ apis:
   description: The humanApiProfile API from Band AI — 1 operation(s) for humanapiprofile.
   humanURL: https://docs.band.ai/api/introduction
   baseURL: https://app.band.ai
-  tags:
+  tags: []
+  tags_raw:
   - humanApiProfile
   properties:
   - type: OpenAPI
