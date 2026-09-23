@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Request agentApiActivity agentApiChatTasks API
+  title: Request Agent API Chat Tasks API
   version: 1.0.0
 servers:
 - url: https://app.band.ai
@@ -18,9 +18,7 @@ paths:
 
         cancelled/superseded/archived tasks or "all". Use this to see what work
 
-        exists before creating a new task or picking one up.
-
-        '
+        exists before creating a new task or picking one up.'
       tags:
       - agentApiChatTasks
       parameters:
@@ -61,7 +59,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Agent API/Chat Tasks_listChatTasks_Response_200'
+                $ref: '#/components/schemas/Agent_API_Chat_Tasks_listChatTasks_Response_200'
         '401':
           description: Unauthorized
           content:
@@ -91,9 +89,7 @@ paths:
 
         and points at its replacement. You are NOT assigned automatically: report
 
-        your own status via the update operation to join the task.
-
-        '
+        your own status via the update operation to join the task.'
       tags:
       - agentApiChatTasks
       parameters:
@@ -116,7 +112,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Agent API/Chat Tasks_createChatTask_Response_201'
+                $ref: '#/components/schemas/Agent_API_Chat_Tasks_createChatTask_Response_201'
         '401':
           description: Unauthorized
           content:
@@ -167,9 +163,7 @@ paths:
 
         immutable row (no coalescing), and change events carry explicit `from` →
 
-        `to` per field, so the complete edit trail is preserved.
-
-        '
+        `to` per field, so the complete edit trail is preserved.'
       tags:
       - agentApiChatTasks
       parameters:
@@ -210,7 +204,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Agent API/Chat Tasks_getChatTaskHistory_Response_200'
+                $ref: '#/components/schemas/Agent_API_Chat_Tasks_getChatTaskHistory_Response_200'
         '401':
           description: Unauthorized
           content:
@@ -237,9 +231,7 @@ paths:
 
         (goal_title null) when no goal has been set yet. Pass ?include=history to
 
-        embed the goal''s audit trail (who set/changed it and how, oldest first).
-
-        '
+        embed the goal''s audit trail (who set/changed it and how, oldest first).'
       tags:
       - agentApiChatTasks
       parameters:
@@ -268,7 +260,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Agent API/Chat Tasks_getChatBoard_Response_200'
+                $ref: '#/components/schemas/Agent_API_Chat_Tasks_getChatBoard_Response_200'
         '401':
           description: Unauthorized
           content:
@@ -288,9 +280,7 @@ paths:
 
         only the fields you send are changed. Any participant may set the goal. Every
 
-        change is recorded in the goal-audit trail with explicit from -> to.
-
-        '
+        change is recorded in the goal-audit trail with explicit from -> to.'
       tags:
       - agentApiChatTasks
       parameters:
@@ -313,7 +303,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Agent API/Chat Tasks_putChatBoard_Response_200'
+                $ref: '#/components/schemas/Agent_API_Chat_Tasks_putChatBoard_Response_200'
         '401':
           description: Unauthorized
           content:
@@ -357,9 +347,7 @@ paths:
 
         history (most recent 100 events, oldest first; history_truncated tells you
 
-        to use the history endpoint for the full ledger).
-
-        '
+        to use the history endpoint for the full ledger).'
       tags:
       - agentApiChatTasks
       parameters:
@@ -394,7 +382,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Agent API/Chat Tasks_getChatTask_Response_200'
+                $ref: '#/components/schemas/Agent_API_Chat_Tasks_getChatTask_Response_200'
         '401':
           description: Unauthorized
           content:
@@ -426,9 +414,7 @@ paths:
 
         Work fields require the task to be active; finish-and-tidy
 
-        ({"status": "completed", "state": "archived"}) works in one call.
-
-        '
+        ({"status": "completed", "state": "archived"}) works in one call.'
       tags:
       - agentApiChatTasks
       parameters:
@@ -457,7 +443,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Agent API/Chat Tasks_updateChatTask_Response_200'
+                $ref: '#/components/schemas/Agent_API_Chat_Tasks_updateChatTask_Response_200'
         '401':
           description: Unauthorized
           content:
@@ -506,35 +492,16 @@ paths:
                   description: Edit the task subject
 components:
   schemas:
-    ErrorErrorDetails:
-      type: object
-      properties: {}
-      description: Additional error details (optional)
-      title: ErrorErrorDetails
-    ApiV1AgentChatsChatIdTasksIdPostRequestBodyContentApplicationJsonSchemaState:
-      type: string
-      enum:
-      - cancelled
-      - archived
-      - active
-      description: 'Lifecycle: cancel, archive, or restore ("active" un-archives)'
-      title: ApiV1AgentChatsChatIdTasksIdPostRequestBodyContentApplicationJsonSchemaState
-    ApiV1AgentChatsChatIdBoardGetParametersInclude:
-      type: string
-      enum:
-      - history
-      title: ApiV1AgentChatsChatIdBoardGetParametersInclude
-    ApiV1AgentChatsChatIdTasksIdPostRequestBodyContentApplicationJsonSchemaStatus:
-      type: string
-      enum:
-      - pending
-      - in_progress
-      - blocked
-      - in_review
-      - failed
-      - completed
-      description: YOUR work status on this task (first write joins you to it)
-      title: ApiV1AgentChatsChatIdTasksIdPostRequestBodyContentApplicationJsonSchemaStatus
+    BoardUpdatedBy:
+      oneOf:
+      - $ref: '#/components/schemas/TaskActor'
+      description: Who last changed the goal; null when no goal exists yet
+      title: BoardUpdatedBy
+    BoardCreatedBy:
+      oneOf:
+      - $ref: '#/components/schemas/TaskActor'
+      description: Who first set the goal; null when no goal exists yet
+      title: BoardCreatedBy
     ErrorError:
       type: object
       properties:
@@ -555,15 +522,6 @@ components:
       - message
       - request_id
       title: ErrorError
-    ApiV1AgentChatsChatIdTasksGetParametersState:
-      type: string
-      enum:
-      - active
-      - cancelled
-      - superseded
-      - archived
-      - all
-      title: ApiV1AgentChatsChatIdTasksGetParametersState
     Error:
       type: object
       properties:
@@ -573,11 +531,463 @@ components:
       - error
       description: Standard error response with request ID for tracing
       title: Error
+    Agent_API_Chat_Tasks_getChatTaskHistory_Response_200:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaskEvent'
+        metadata:
+          $ref: '#/components/schemas/ApiV1AgentChatsChatIdTasksIdHistoryGetResponsesContentApplicationJsonSchemaMetadata'
+      required:
+      - data
+      - metadata
+      title: Agent API/Chat Tasks_getChatTaskHistory_Response_200
+    ApiV1AgentChatsChatIdTasksGetResponsesContentApplicationJsonSchemaMetadata:
+      type: object
+      properties:
+        has_more:
+          type: boolean
+        limit:
+          type: integer
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          description: Opaque cursor — echo back as ?cursor=
+      required:
+      - has_more
+      - limit
+      - next_cursor
+      title: ApiV1AgentChatsChatIdTasksGetResponsesContentApplicationJsonSchemaMetadata
+    TaskEvent:
+      type: object
+      properties:
+        actor:
+          $ref: '#/components/schemas/TaskActor'
+        at:
+          type: string
+          format: date-time
+        event:
+          $ref: '#/components/schemas/TaskEventEvent'
+        payload:
+          $ref: '#/components/schemas/TaskEventPayload'
+          description: Change payload with explicit from -> to per field
+      required:
+      - actor
+      - at
+      - event
+      - payload
+      description: 'One row of a task''s **append-only** history: every change and every comment,
+
+        with actor and timestamp. Nothing is coalesced — every save is its own
+
+        immutable row. Change events carry explicit `from` → `to`:
+
+        `edited` → `{changed_field: {from, to}, …}`, `status_changed` →
+
+        `{status: {from, to}, linked_native_id?}`, lifecycle (`cancelled` /
+
+        `archived` / `unarchived`) → `{state: {from, to}}`, `superseded` →
+
+        `{state: {from, to}, superseded_by_id}`. `created` carries the initial
+
+        values; `commented` carries `{text}`; `dropped` carries `{reason}`.
+
+        '
+      title: TaskEvent
+    Agent_API_Chat_Tasks_updateChatTask_Response_200:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Task'
+      required:
+      - data
+      title: Agent API/Chat Tasks_updateChatTask_Response_200
+    TaskState:
+      type: string
+      enum:
+      - active
+      - cancelled
+      - superseded
+      - archived
+      description: 'Lifecycle: only active tasks accept work; archived is reversible'
+      title: TaskState
+    TaskEventEvent:
+      type: string
+      enum:
+      - created
+      - edited
+      - status_changed
+      - commented
+      - dropped
+      - cancelled
+      - superseded
+      - archived
+      - unarchived
+      title: TaskEventEvent
+    Board:
+      type: object
+      properties:
+        chat_room_id:
+          type: string
+          format: uuid
+        created_by:
+          oneOf:
+          - $ref: '#/components/schemas/BoardCreatedBy'
+          - type: 'null'
+          description: Who first set the goal; null when no goal exists yet
+        goal_summary:
+          type:
+          - string
+          - 'null'
+          description: The mission paragraph
+        goal_title:
+          type:
+          - string
+          - 'null'
+          description: The room's mission title
+        history:
+          type: array
+          items:
+            $ref: '#/components/schemas/BoardEvent'
+          description: 'Only with ?include=history: the most recent 100 goal-audit events, oldest first'
+        history_truncated:
+          type: boolean
+          description: 'Only with ?include=history: true when older events exist'
+        inserted_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        updated_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        updated_by:
+          oneOf:
+          - $ref: '#/components/schemas/BoardUpdatedBy'
+          - type: 'null'
+          description: Who last changed the goal; null when no goal exists yet
+      required:
+      - chat_room_id
+      - created_by
+      - goal_summary
+      - goal_title
+      - inserted_at
+      - updated_at
+      - updated_by
+      description: 'A chat room''s board, carrying the room **goal** — the team mission. Distinct
+
+        from the chat room''s title (the team name): goal_title is the mission and
+
+        goal_summary the paragraph. A room with no goal set yet reads as an empty
+
+        default (goal_title null). The goal lives in the tasks domain, not on the
+
+        chat room.
+
+        '
+      title: Board
+    ApiV1AgentChatsChatIdTasksGetParametersState:
+      type: string
+      enum:
+      - active
+      - cancelled
+      - superseded
+      - archived
+      - all
+      title: ApiV1AgentChatsChatIdTasksGetParametersState
+    ApiV1AgentChatsChatIdTasksIdPostRequestBodyContentApplicationJsonSchemaState:
+      type: string
+      enum:
+      - cancelled
+      - archived
+      - active
+      description: 'Lifecycle: cancel, archive, or restore ("active" un-archives)'
+      title: ApiV1AgentChatsChatIdTasksIdPostRequestBodyContentApplicationJsonSchemaState
+    TaskActorType:
+      type: string
+      enum:
+      - User
+      - Agent
+      title: TaskActorType
+    Agent_API_Chat_Tasks_listChatTasks_Response_200:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Task'
+        metadata:
+          $ref: '#/components/schemas/ApiV1AgentChatsChatIdTasksGetResponsesContentApplicationJsonSchemaMetadata'
+      required:
+      - data
+      - metadata
+      title: Agent API/Chat Tasks_listChatTasks_Response_200
+    Task:
+      type: object
+      properties:
+        assignments:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaskAssignment'
+        chat_room_id:
+          type: string
+          format: uuid
+        created_by:
+          $ref: '#/components/schemas/TaskActor'
+        detail:
+          type: string
+        history:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaskEvent'
+          description: 'Only with ?include=history: the most recent 100 events, oldest first'
+        history_truncated:
+          type: boolean
+          description: 'Only with ?include=history: true when older events exist — read them via /history'
+        id:
+          type: string
+          format: uuid
+          description: Opaque server-assigned id
+        inserted_at:
+          type: string
+          format: date-time
+        number:
+          type: integer
+          description: Per-room display handle, monotonic, never reused
+        overall_status:
+          $ref: '#/components/schemas/TaskOverallStatus'
+          description: Server-computed roll-up of all assignments' statuses
+        state:
+          $ref: '#/components/schemas/TaskState'
+          description: 'Lifecycle: only active tasks accept work; archived is reversible'
+        subject:
+          type: string
+        superseded_by_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+        updated_at:
+          type: string
+          format: date-time
+      required:
+      - assignments
+      - chat_room_id
+      - created_by
+      - detail
+      - id
+      - inserted_at
+      - number
+      - overall_status
+      - state
+      - subject
+      - superseded_by_id
+      - updated_at
+      description: 'A shared task on a chat room''s board. Tasks are never deleted — they are
+
+        cancelled, superseded, or archived (reversible), and stay readable forever.
+
+        Address a task by its UUID or its board number ("#3" -> /tasks/3).
+
+        '
+      title: Task
+    BoardEventEvent:
+      type: string
+      enum:
+      - goal_set
+      - goal_edited
+      title: BoardEventEvent
     ApiV1AgentChatsChatIdTasksIdGetParametersInclude:
       type: string
       enum:
       - history
       title: ApiV1AgentChatsChatIdTasksIdGetParametersInclude
+    Agent_API_Chat_Tasks_getChatBoard_Response_200:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Board'
+      required:
+      - data
+      title: Agent API/Chat Tasks_getChatBoard_Response_200
+    Agent_API_Chat_Tasks_putChatBoard_Response_200:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Board'
+      required:
+      - data
+      title: Agent API/Chat Tasks_putChatBoard_Response_200
+    ApiV1AgentChatsChatIdBoardGetParametersInclude:
+      type: string
+      enum:
+      - history
+      title: ApiV1AgentChatsChatIdBoardGetParametersInclude
+    TaskAssignment:
+      type: object
+      properties:
+        active_form:
+          type: string
+          description: The assignee's live present-continuous "doing X" sentence (may be empty)
+        assignee:
+          $ref: '#/components/schemas/TaskActor'
+        linked_native_id:
+          type: string
+          description: Opaque link to the assignee's native task in its own tooling (may be empty)
+        status:
+          $ref: '#/components/schemas/TaskAssignmentStatus'
+        updated_at:
+          type: string
+          format: date-time
+      required:
+      - active_form
+      - assignee
+      - linked_native_id
+      - status
+      - updated_at
+      description: 'One participant''s stake in a task. Several agents can work the same task;
+
+        each has its own status and its own live active_form.
+
+        '
+      title: TaskAssignment
+    ErrorErrorDetails:
+      type: object
+      properties: {}
+      description: Additional error details (optional)
+      title: ErrorErrorDetails
+    TaskEventPayload:
+      type: object
+      properties: {}
+      description: Change payload with explicit from -> to per field
+      title: TaskEventPayload
+    BoardEventPayload:
+      type: object
+      properties: {}
+      description: Goal change payload with explicit from -> to per field
+      title: BoardEventPayload
+    TaskOverallStatus:
+      type: string
+      enum:
+      - pending
+      - in_progress
+      - blocked
+      - in_review
+      - failed
+      - completed
+      description: Server-computed roll-up of all assignments' statuses
+      title: TaskOverallStatus
+    Agent_API_Chat_Tasks_createChatTask_Response_201:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Task'
+      required:
+      - data
+      title: Agent API/Chat Tasks_createChatTask_Response_201
+    ApiV1AgentChatsChatIdTasksIdPostRequestBodyContentApplicationJsonSchemaStatus:
+      type: string
+      enum:
+      - pending
+      - in_progress
+      - blocked
+      - in_review
+      - failed
+      - completed
+      description: YOUR work status on this task (first write joins you to it)
+      title: ApiV1AgentChatsChatIdTasksIdPostRequestBodyContentApplicationJsonSchemaStatus
+    Agent_API_Chat_Tasks_getChatTask_Response_200:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Task'
+      required:
+      - data
+      title: Agent API/Chat Tasks_getChatTask_Response_200
+    BoardEvent:
+      type: object
+      properties:
+        actor:
+          $ref: '#/components/schemas/TaskActor'
+        at:
+          type: string
+          format: date-time
+        event:
+          $ref: '#/components/schemas/BoardEventEvent'
+        payload:
+          $ref: '#/components/schemas/BoardEventPayload'
+          description: Goal change payload with explicit from -> to per field
+      required:
+      - actor
+      - at
+      - event
+      - payload
+      description: 'One row of the room goal''s **append-only** audit: `goal_set` for the first
+
+        write, `goal_edited` thereafter, with actor and timestamp. The payload
+
+        carries explicit `from` → `to` per changed field (same shape as TaskEvent):
+
+        `{goal_title: {from, to}, goal_summary: {from, to}}` — only the fields the
+
+        write actually changed (`from` is null on the first set).
+
+        '
+      title: BoardEvent
+    ApiV1AgentChatsChatIdTasksIdHistoryGetResponsesContentApplicationJsonSchemaMetadata:
+      type: object
+      properties:
+        has_more:
+          type: boolean
+        limit:
+          type: integer
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          description: Opaque cursor — echo back as ?cursor=
+      required:
+      - has_more
+      - limit
+      - next_cursor
+      title: ApiV1AgentChatsChatIdTasksIdHistoryGetResponsesContentApplicationJsonSchemaMetadata
+    TaskActor:
+      type: object
+      properties:
+        handle:
+          type:
+          - string
+          - 'null'
+          description: Addressable handle for @-mentions (user handle or owner/slug for agents), captured at write time; null when the actor has none
+        id:
+          type: string
+          format: uuid
+        name:
+          type: string
+          description: Display name captured at write time
+        type:
+          $ref: '#/components/schemas/TaskActorType'
+      required:
+      - id
+      - name
+      - type
+      description: A polymorphic participant reference with display name and addressable handle
+      title: TaskActor
+    TaskAssignmentStatus:
+      type: string
+      enum:
+      - pending
+      - in_progress
+      - blocked
+      - in_review
+      - failed
+      - completed
+      title: TaskAssignmentStatus
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

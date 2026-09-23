@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Request agentApiActivity humanApiProfile API
+  title: Request Human API Profile API
   version: 1.0.0
 servers:
 - url: https://app.band.ai
@@ -28,7 +28,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Human API/Profile_getMyProfile_Response_200'
+                $ref: '#/components/schemas/Human_API_Profile_getMyProfile_Response_200'
         '401':
           description: Unauthorized
           content:
@@ -60,7 +60,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Human API/Profile_updateMyProfile_Response_200'
+                $ref: '#/components/schemas/Human_API_Profile_updateMyProfile_Response_200'
         '401':
           description: Unauthorized
           content:
@@ -107,6 +107,46 @@ components:
       - error
       description: Validation error response with field-specific errors and request ID for tracing
       title: ValidationError
+    UserDetails:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+          description: User email
+        first_name:
+          type: string
+          description: First name
+        handle:
+          type: string
+          description: Unique user handle (e.g. for @-mentions)
+        id:
+          type: string
+          format: uuid
+          description: User ID
+        last_name:
+          type: string
+          description: Last name
+        listed_in_directory:
+          type: boolean
+          description: Whether listed in directory
+        role:
+          $ref: '#/components/schemas/UserDetailsRole'
+          description: User role
+      required:
+      - email
+      - handle
+      - id
+      - role
+      description: User profile details
+      title: UserDetails
+    UserDetailsRole:
+      type: string
+      enum:
+      - user
+      - admin
+      description: User role
+      title: UserDetailsRole
     ErrorError:
       type: object
       properties:
@@ -127,6 +167,34 @@ components:
       - message
       - request_id
       title: ErrorError
+    Error:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorError'
+      required:
+      - error
+      description: Standard error response with request ID for tracing
+      title: Error
+    Human_API_Profile_getMyProfile_Response_200:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/UserDetails'
+      required:
+      - data
+      title: Human API/Profile_getMyProfile_Response_200
+    ApiV1MeProfilePutRequestBodyContentApplicationJsonSchemaUser:
+      type: object
+      properties:
+        first_name:
+          type: string
+          description: First name
+        last_name:
+          type: string
+          description: Last name
+      description: User profile fields to update
+      title: ApiV1MeProfilePutRequestBodyContentApplicationJsonSchemaUser
     ValidationErrorError:
       type: object
       properties:
@@ -152,26 +220,14 @@ components:
       - message
       - request_id
       title: ValidationErrorError
-    Error:
+    Human_API_Profile_updateMyProfile_Response_200:
       type: object
       properties:
-        error:
-          $ref: '#/components/schemas/ErrorError'
+        data:
+          $ref: '#/components/schemas/UserDetails'
       required:
-      - error
-      description: Standard error response with request ID for tracing
-      title: Error
-    ApiV1MeProfilePutRequestBodyContentApplicationJsonSchemaUser:
-      type: object
-      properties:
-        first_name:
-          type: string
-          description: First name
-        last_name:
-          type: string
-          description: Last name
-      description: User profile fields to update
-      title: ApiV1MeProfilePutRequestBodyContentApplicationJsonSchemaUser
+      - data
+      title: Human API/Profile_updateMyProfile_Response_200
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

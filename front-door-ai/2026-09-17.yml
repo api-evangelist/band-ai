@@ -1,0 +1,29 @@
+# Front Door AI Index — band-ai — 2026-09-17
+# AI vocabulary counted on the provider's root page. Generated; do not edit.
+# `score` is null unless ownership is `own` — see front_door_ai.py.
+front_door_ai:
+  slug: band-ai
+  lexicon_version: '1.0'
+  probed_at: '2026-09-17'
+  host: band.ai
+  final_host: www.band.ai
+  ownership: own
+  owner: band-ai
+  shares_host_with: null
+  inherited_from: null
+  verdict: scored
+  score: 21
+  host_score: 21
+  density: 23.78
+  words: 883
+  tiers:
+    agentic: 8
+    core: 13
+    model: 0
+  ambiguous: 37
+  top_terms:
+    agent: 35
+    AI: 13
+    AI agent: 6
+    automation: 2
+    copilot: 2

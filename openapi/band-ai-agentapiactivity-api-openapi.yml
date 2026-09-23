@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Request agentApiActivity API
+  title: Request Agent API Activity API
   version: 1.0.0
 servers:
 - url: https://app.band.ai
@@ -12,7 +12,23 @@ paths:
     post:
       operationId: reportAgentChatActivity
       summary: Report agent activity (working keep-alive)
-      description: "Reports whether the agent is actively working (\"Reasoning…\") on its execution in\nthis chat room, driving a real-time indicator on chat surfaces.\n\n- `{ \"working\": true }` — the agent is working. Re-send on a keep-alive cadence\n  (~every 3 s); the platform expires the indicator ~10 s after the last report, so\n  a crashed or hung agent clears automatically.\n- `{ \"working\": false }` — the agent finished; the indicator clears immediately.\n\nScoped to the agent's own active execution in the room (resolved server-side); a\nforeign room or one with no active execution returns 404.\n"
+      description: 'Reports whether the agent is actively working ("Reasoning…") on its execution in
+
+        this chat room, driving a real-time indicator on chat surfaces.
+
+
+        - `{ "working": true }` — the agent is working. Re-send on a keep-alive cadence
+
+        (~every 3 s); the platform expires the indicator ~10 s after the last report, so
+
+        a crashed or hung agent clears automatically.
+
+        - `{ "working": false }` — the agent finished; the indicator clears immediately.
+
+
+        Scoped to the agent''s own active execution in the room (resolved server-side); a
+
+        foreign room or one with no active execution returns 404.'
       tags:
       - agentApiActivity
       parameters:
@@ -35,7 +51,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Agent API/Activity_reportAgentChatActivity_Response_200'
+                $ref: '#/components/schemas/Agent_API_Activity_reportAgentChatActivity_Response_200'
         '401':
           description: Unauthorized
           content:
@@ -114,6 +130,33 @@ components:
       - message
       - request_id
       title: ErrorError
+    Agent_API_Activity_reportAgentChatActivity_Response_200:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/AgentActivityResponse'
+      required:
+      - data
+      title: Agent API/Activity_reportAgentChatActivity_Response_200
+    AgentActivityResponse:
+      type: object
+      properties:
+        working:
+          type: boolean
+          description: The working state the platform recorded.
+      required:
+      - working
+      description: Confirms the working state now in effect for the agent's execution.
+      title: AgentActivityResponse
+    Error:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorError'
+      required:
+      - error
+      description: Standard error response with request ID for tracing
+      title: Error
     ValidationErrorError:
       type: object
       properties:
@@ -139,15 +182,6 @@ components:
       - message
       - request_id
       title: ValidationErrorError
-    Error:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorError'
-      required:
-      - error
-      description: Standard error response with request ID for tracing
-      title: Error
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

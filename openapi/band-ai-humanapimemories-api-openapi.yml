@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Request agentApiActivity humanApiMemories API
+  title: Request Human API Memories API
   version: 1.0.0
 servers:
 - url: https://app.band.ai
@@ -34,7 +34,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Human API/Memories_getUserMemory_Response_200'
+                $ref: '#/components/schemas/Human_API_Memories_getUserMemory_Response_200'
         '401':
           description: Unauthorized
           content:
@@ -59,9 +59,7 @@ paths:
       description: 'Permanently deletes a memory. This is a hard delete - the memory cannot be recovered.
 
 
-        Users can only delete memories that are about them (subject_id = user).
-
-        '
+        Users can only delete memories that are about them (subject_id = user).'
       tags:
       - humanApiMemories
       parameters:
@@ -112,9 +110,7 @@ paths:
         The memory remains for audit trail but won''t appear in normal queries.
 
 
-        Users can only supersede memories that are about them (subject_id = user).
-
-        '
+        Users can only supersede memories that are about them (subject_id = user).'
       tags:
       - humanApiMemories
       parameters:
@@ -136,7 +132,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Human API/Memories_supersedeUserMemory_Response_200'
+                $ref: '#/components/schemas/Human_API_Memories_supersedeUserMemory_Response_200'
         '401':
           description: Unauthorized
           content:
@@ -162,9 +158,7 @@ paths:
       description: 'Archives a memory (hides but preserves). Archived memories can be restored later.
 
 
-        Users can only archive memories that are about them (subject_id = user).
-
-        '
+        Users can only archive memories that are about them (subject_id = user).'
       tags:
       - humanApiMemories
       parameters:
@@ -186,7 +180,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Human API/Memories_archiveUserMemory_Response_200'
+                $ref: '#/components/schemas/Human_API_Memories_archiveUserMemory_Response_200'
         '401':
           description: Unauthorized
           content:
@@ -214,9 +208,7 @@ paths:
         Only works on memories with status ''archived''.
 
 
-        Users can only restore memories that are about them (subject_id = user).
-
-        '
+        Users can only restore memories that are about them (subject_id = user).'
       tags:
       - humanApiMemories
       parameters:
@@ -238,7 +230,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Human API/Memories_restoreUserMemory_Response_200'
+                $ref: '#/components/schemas/Human_API_Memories_restoreUserMemory_Response_200'
         '401':
           description: Unauthorized
           content:
@@ -283,9 +275,7 @@ paths:
 
         **Pagination:** Use `cursor` + `limit` (recommended) OR `page` + `page_size` (deprecated, sunset 2026-10-01).
 
-        Do NOT mix families.
-
-        '
+        Do NOT mix families.'
       tags:
       - humanApiMemories
       parameters:
@@ -367,7 +357,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Human API/Memories_listUserMemories_Response_200'
+                $ref: '#/components/schemas/Human_API_Memories_listUserMemories_Response_200'
         '401':
           description: Unauthorized
           content:
@@ -393,15 +383,32 @@ components:
       properties: {}
       description: Additional error details (optional)
       title: ErrorErrorDetails
-    Error:
+    Human_API_Memories_getUserMemory_Response_200:
       type: object
       properties:
-        error:
-          $ref: '#/components/schemas/ErrorError'
-      required:
-      - error
-      description: Standard error response with request ID for tracing
-      title: Error
+        data:
+          $ref: '#/components/schemas/UserMemory'
+      title: Human API/Memories_getUserMemory_Response_200
+    Human_API_Memories_supersedeUserMemory_Response_200:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/UserMemory'
+      title: Human API/Memories_supersedeUserMemory_Response_200
+    UserMemoryStatus:
+      type: string
+      enum:
+      - active
+      - superseded
+      - archived
+      description: Memory lifecycle status
+      title: UserMemoryStatus
+    Human_API_Memories_restoreUserMemory_Response_200:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/UserMemory'
+      title: Human API/Memories_restoreUserMemory_Response_200
     ErrorError:
       type: object
       properties:
@@ -422,6 +429,200 @@ components:
       - message
       - request_id
       title: ErrorError
+    UserMemorySystem:
+      type: string
+      enum:
+      - sensory
+      - working
+      - long_term
+      description: Memory system tier
+      title: UserMemorySystem
+    ApiV1MeMemoriesGetResponsesContentApplicationJsonSchemaMeta:
+      type: object
+      properties:
+        has_more:
+          type: boolean
+          description: Whether more results exist beyond this page (cursor pagination)
+        limit:
+          type: integer
+          description: Max results requested (cursor pagination)
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          description: Opaque cursor for the next page; null when there are no more results (cursor pagination)
+        page:
+          type: integer
+          description: Current page number (offset pagination)
+        page_size:
+          type: integer
+          description: Number of results per page (offset pagination)
+        total_count:
+          type: integer
+          description: Total number of matching memories (offset pagination)
+        total_pages:
+          type: integer
+          description: Total number of pages (offset pagination)
+      description: Pagination metadata (cursor fields on the keyset path, offset fields on the deprecated path)
+      title: ApiV1MeMemoriesGetResponsesContentApplicationJsonSchemaMeta
+    Error:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorError'
+      required:
+      - error
+      description: Standard error response with request ID for tracing
+      title: Error
+    Human_API_Memories_listUserMemories_Response_200:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserMemory'
+        meta:
+          $ref: '#/components/schemas/ApiV1MeMemoriesGetResponsesContentApplicationJsonSchemaMeta'
+          description: Pagination metadata (cursor fields on the keyset path, offset fields on the deprecated path)
+        metadata:
+          $ref: '#/components/schemas/ApiV1MeMemoriesGetResponsesContentApplicationJsonSchemaMetadata'
+          description: Pagination metadata (cursor fields on the keyset path, offset fields on the deprecated path)
+      title: Human API/Memories_listUserMemories_Response_200
+    UserMemoryMetadata:
+      type: object
+      properties: {}
+      description: Additional metadata
+      title: UserMemoryMetadata
+    ApiV1MeMemoriesGetResponsesContentApplicationJsonSchemaMetadata:
+      type: object
+      properties:
+        has_more:
+          type: boolean
+          description: Whether more results exist beyond this page (cursor pagination)
+        limit:
+          type: integer
+          description: Max results requested (cursor pagination)
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          description: Opaque cursor for the next page; null when there are no more results (cursor pagination)
+        page:
+          type: integer
+          description: Current page number (offset pagination)
+        page_size:
+          type: integer
+          description: Number of results per page (offset pagination)
+        total_count:
+          type: integer
+          description: Total number of matching memories (offset pagination)
+        total_pages:
+          type: integer
+          description: Total number of pages (offset pagination)
+      description: Pagination metadata (cursor fields on the keyset path, offset fields on the deprecated path)
+      title: ApiV1MeMemoriesGetResponsesContentApplicationJsonSchemaMetadata
+    UserMemoryType:
+      type: string
+      enum:
+      - iconic
+      - echoic
+      - haptic
+      - episodic
+      - semantic
+      - procedural
+      description: Memory type within the system
+      title: UserMemoryType
+    UserMemorySegment:
+      type: string
+      enum:
+      - user
+      - agent
+      - tool
+      - guideline
+      description: Logical segment of the memory
+      title: UserMemorySegment
+    UserMemory:
+      type: object
+      properties:
+        chat_room_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: Chat room where memory was created (if applicable)
+        content:
+          type: string
+          description: The memory content
+        id:
+          type: string
+          format: uuid
+          description: Memory ID
+        inserted_at:
+          type: string
+          format: date-time
+          description: When the memory was created
+        metadata:
+          oneOf:
+          - $ref: '#/components/schemas/UserMemoryMetadata'
+          - type: 'null'
+          description: Additional metadata
+        organization_id:
+          type: string
+          format: uuid
+          description: Organization this memory belongs to
+        scope:
+          $ref: '#/components/schemas/UserMemoryScope'
+          description: Visibility scope of the memory
+        segment:
+          $ref: '#/components/schemas/UserMemorySegment'
+          description: Logical segment of the memory
+        source_agent_id:
+          type: string
+          format: uuid
+          description: UUID of the agent that stored this memory
+        status:
+          $ref: '#/components/schemas/UserMemoryStatus'
+          description: Memory lifecycle status
+        subject_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: UUID of the subject this memory is about
+        system:
+          $ref: '#/components/schemas/UserMemorySystem'
+          description: Memory system tier
+        thought:
+          type:
+          - string
+          - 'null'
+          description: Agent's reasoning for storing this memory
+        type:
+          $ref: '#/components/schemas/UserMemoryType'
+          description: Memory type within the system
+      required:
+      - content
+      - id
+      - inserted_at
+      - scope
+      - segment
+      - system
+      - type
+      description: A memory entry visible to the user
+      title: UserMemory
+    Human_API_Memories_archiveUserMemory_Response_200:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/UserMemory'
+      title: Human API/Memories_archiveUserMemory_Response_200
+    UserMemoryScope:
+      type: string
+      enum:
+      - subject
+      - organization
+      description: Visibility scope of the memory
+      title: UserMemoryScope
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

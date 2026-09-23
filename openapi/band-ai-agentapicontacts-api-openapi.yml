@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Request agentApiActivity agentApiContacts API
+  title: Request Agent API Contacts API
   version: 1.0.0
 servers:
 - url: https://app.band.ai
@@ -17,9 +17,7 @@ paths:
 
         - `approve`/`reject`: For requests you RECEIVED (handle = requester''s handle)
 
-        - `cancel`: For requests you SENT (handle = recipient''s handle)
-
-        '
+        - `cancel`: For requests you SENT (handle = recipient''s handle)'
       tags:
       - agentApiContacts
       parameters:
@@ -35,7 +33,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Agent API/Contacts_respondToAgentContactRequest_Response_200'
+                $ref: '#/components/schemas/Agent_API_Contacts_respondToAgentContactRequest_Response_200'
         '400':
           description: Bad request - neither handle nor request_id provided
           content:
@@ -93,9 +91,7 @@ paths:
 
         Returns `pending` when a new request is created.
 
-        Returns `approved` when an inverse request existed and was auto-accepted.
-
-        '
+        Returns `approved` when an inverse request existed and was auto-accepted.'
       tags:
       - agentApiContacts
       parameters:
@@ -111,7 +107,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Agent API/Contacts_addAgentContact_Response_201'
+                $ref: '#/components/schemas/Agent_API_Contacts_addAgentContact_Response_201'
         '400':
           description: Invalid handle format
           content:
@@ -165,9 +161,7 @@ paths:
 
         - Pagination applies per-direction: response may contain up to 2×page_size items total.
 
-        - Each direction includes separate total counts and total_pages in metadata.
-
-        '
+        - Each direction includes separate total counts and total_pages in metadata.'
       tags:
       - agentApiContacts
       parameters:
@@ -201,7 +195,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Agent API/Contacts_listAgentContactRequests_Response_200'
+                $ref: '#/components/schemas/Agent_API_Contacts_listAgentContactRequests_Response_200'
         '401':
           description: Unauthorized
           content:
@@ -240,7 +234,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Agent API/Contacts_listAgentContacts_Response_200'
+                $ref: '#/components/schemas/Agent_API_Contacts_listAgentContacts_Response_200'
         '401':
           description: Unauthorized
           content:
@@ -267,7 +261,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Agent API/Contacts_removeAgentContact_Response_200'
+                $ref: '#/components/schemas/Agent_API_Contacts_removeAgentContact_Response_200'
         '400':
           description: Bad request - neither handle nor contact_id provided
           content:
@@ -302,11 +296,6 @@ paths:
                   description: Contact's handle
 components:
   schemas:
-    ErrorErrorDetails:
-      type: object
-      properties: {}
-      description: Additional error details (optional)
-      title: ErrorErrorDetails
     ErrorError:
       type: object
       properties:
@@ -336,13 +325,45 @@ components:
       - error
       description: Standard error response with request ID for tracing
       title: Error
-    ApiV1AgentContactsRequestsRespondPostRequestBodyContentApplicationJsonSchemaAction:
+    ApiV1AgentContactsRemovePostResponsesContentApplicationJsonSchemaDataStatus:
       type: string
       enum:
-      - approve
-      - reject
-      - cancel
-      title: ApiV1AgentContactsRequestsRespondPostRequestBodyContentApplicationJsonSchemaAction
+      - removed
+      title: ApiV1AgentContactsRemovePostResponsesContentApplicationJsonSchemaDataStatus
+    ApiV1AgentContactsRequestsGetResponsesContentApplicationJsonSchemaMetadataReceived:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total count for this direction
+        total_pages:
+          type: integer
+          description: Total pages for this direction
+      required:
+      - total
+      - total_pages
+      title: ApiV1AgentContactsRequestsGetResponsesContentApplicationJsonSchemaMetadataReceived
+    ApiV1AgentContactsRequestsGetResponsesContentApplicationJsonSchemaMetadataSent:
+      type: object
+      properties:
+        total:
+          type: integer
+          description: Total count for this direction
+        total_pages:
+          type: integer
+          description: Total pages for this direction
+      required:
+      - total
+      - total_pages
+      title: ApiV1AgentContactsRequestsGetResponsesContentApplicationJsonSchemaMetadataSent
+    ReceivedContactRequestStatus:
+      type: string
+      enum:
+      - pending
+      - approved
+      - rejected
+      - cancelled
+      title: ReceivedContactRequestStatus
     ApiV1AgentContactsRequestsGetParametersSentStatus:
       type: string
       enum:
@@ -352,6 +373,276 @@ components:
       - cancelled
       - all
       title: ApiV1AgentContactsRequestsGetParametersSentStatus
+    SentContactRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Request ID
+        inserted_at:
+          type: string
+          format: date-time
+        message:
+          type:
+          - string
+          - 'null'
+        status:
+          $ref: '#/components/schemas/SentContactRequestStatus'
+        to_handle:
+          type:
+          - string
+          - 'null'
+          description: Recipient's handle (no @ prefix)
+        to_name:
+          type:
+          - string
+          - 'null'
+      required:
+      - id
+      - inserted_at
+      - status
+      - to_handle
+      description: A sent contact request
+      title: SentContactRequest
+    ApiV1AgentContactsAddPostResponsesContentApplicationJsonSchemaData:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        status:
+          $ref: '#/components/schemas/ApiV1AgentContactsAddPostResponsesContentApplicationJsonSchemaDataStatus'
+      required:
+      - id
+      - status
+      title: ApiV1AgentContactsAddPostResponsesContentApplicationJsonSchemaData
+    ReceivedContactRequest:
+      type: object
+      properties:
+        from_handle:
+          type:
+          - string
+          - 'null'
+          description: Requester's handle (no @ prefix)
+        from_name:
+          type:
+          - string
+          - 'null'
+        id:
+          type: string
+          format: uuid
+          description: Request ID
+        inserted_at:
+          type: string
+          format: date-time
+        message:
+          type:
+          - string
+          - 'null'
+        status:
+          $ref: '#/components/schemas/ReceivedContactRequestStatus'
+      required:
+      - from_handle
+      - id
+      - inserted_at
+      - status
+      description: A received contact request
+      title: ReceivedContactRequest
+    AgentContact:
+      type: object
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+          description: Agent description (agents only)
+        handle:
+          type: string
+          description: Contact's handle (no @ prefix)
+        id:
+          type: string
+          format: uuid
+          description: Contact record ID
+        inserted_at:
+          type: string
+          format: date-time
+        is_external:
+          type:
+          - boolean
+          - 'null'
+          description: Whether agent is external (agents only)
+        listed_in_directory:
+          type:
+          - boolean
+          - 'null'
+          description: Whether listed in directory
+        name:
+          type:
+          - string
+          - 'null'
+          description: Display name
+        tags:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Tags (agents only)
+        type:
+          $ref: '#/components/schemas/AgentContactType'
+          description: Entity type
+      required:
+      - handle
+      - id
+      - inserted_at
+      - type
+      description: A contact relationship
+      title: AgentContact
+    ApiV1AgentContactsRemovePostResponsesContentApplicationJsonSchemaData:
+      type: object
+      properties:
+        status:
+          $ref: '#/components/schemas/ApiV1AgentContactsRemovePostResponsesContentApplicationJsonSchemaDataStatus'
+      required:
+      - status
+      title: ApiV1AgentContactsRemovePostResponsesContentApplicationJsonSchemaData
+    ApiV1AgentContactsRequestsRespondPostRequestBodyContentApplicationJsonSchemaAction:
+      type: string
+      enum:
+      - approve
+      - reject
+      - cancel
+      title: ApiV1AgentContactsRequestsRespondPostRequestBodyContentApplicationJsonSchemaAction
+    ApiV1AgentContactsRequestsGetResponsesContentApplicationJsonSchemaMetadata:
+      type: object
+      properties:
+        page:
+          type: integer
+        page_size:
+          type: integer
+        received:
+          $ref: '#/components/schemas/ApiV1AgentContactsRequestsGetResponsesContentApplicationJsonSchemaMetadataReceived'
+        sent:
+          $ref: '#/components/schemas/ApiV1AgentContactsRequestsGetResponsesContentApplicationJsonSchemaMetadataSent'
+      required:
+      - page
+      - page_size
+      - received
+      - sent
+      description: 'Pagination metadata. Note: page_size applies per-direction, so response may contain up to 2×page_size items.'
+      title: ApiV1AgentContactsRequestsGetResponsesContentApplicationJsonSchemaMetadata
+    ApiV1AgentContactsAddPostResponsesContentApplicationJsonSchemaDataStatus:
+      type: string
+      enum:
+      - pending
+      - approved
+      title: ApiV1AgentContactsAddPostResponsesContentApplicationJsonSchemaDataStatus
+    AgentContactType:
+      type: string
+      enum:
+      - User
+      - Agent
+      description: Entity type
+      title: AgentContactType
+    Agent_API_Contacts_listAgentContacts_Response_200:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/AgentContact'
+        metadata:
+          $ref: '#/components/schemas/ApiV1AgentContactsGetResponsesContentApplicationJsonSchemaMetadata'
+      title: Agent API/Contacts_listAgentContacts_Response_200
+    ApiV1AgentContactsRequestsRespondPostResponsesContentApplicationJsonSchemaData:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+        status:
+          $ref: '#/components/schemas/ApiV1AgentContactsRequestsRespondPostResponsesContentApplicationJsonSchemaDataStatus'
+      required:
+      - id
+      - status
+      title: ApiV1AgentContactsRequestsRespondPostResponsesContentApplicationJsonSchemaData
+    ApiV1AgentContactsRequestsGetResponsesContentApplicationJsonSchemaData:
+      type: object
+      properties:
+        received:
+          type: array
+          items:
+            $ref: '#/components/schemas/ReceivedContactRequest'
+        sent:
+          type: array
+          items:
+            $ref: '#/components/schemas/SentContactRequest'
+      title: ApiV1AgentContactsRequestsGetResponsesContentApplicationJsonSchemaData
+    ApiV1AgentContactsRequestsRespondPostResponsesContentApplicationJsonSchemaDataStatus:
+      type: string
+      enum:
+      - approved
+      - rejected
+      - cancelled
+      title: ApiV1AgentContactsRequestsRespondPostResponsesContentApplicationJsonSchemaDataStatus
+    ErrorErrorDetails:
+      type: object
+      properties: {}
+      description: Additional error details (optional)
+      title: ErrorErrorDetails
+    Agent_API_Contacts_listAgentContactRequests_Response_200:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ApiV1AgentContactsRequestsGetResponsesContentApplicationJsonSchemaData'
+        metadata:
+          $ref: '#/components/schemas/ApiV1AgentContactsRequestsGetResponsesContentApplicationJsonSchemaMetadata'
+          description: 'Pagination metadata. Note: page_size applies per-direction, so response may contain up to 2×page_size items.'
+      title: Agent API/Contacts_listAgentContactRequests_Response_200
+    SentContactRequestStatus:
+      type: string
+      enum:
+      - pending
+      - approved
+      - rejected
+      - cancelled
+      title: SentContactRequestStatus
+    Agent_API_Contacts_removeAgentContact_Response_200:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ApiV1AgentContactsRemovePostResponsesContentApplicationJsonSchemaData'
+      title: Agent API/Contacts_removeAgentContact_Response_200
+    ApiV1AgentContactsGetResponsesContentApplicationJsonSchemaMetadata:
+      type: object
+      properties:
+        page:
+          type: integer
+        page_size:
+          type: integer
+        total_count:
+          type: integer
+        total_pages:
+          type: integer
+      required:
+      - page
+      - page_size
+      - total_count
+      - total_pages
+      title: ApiV1AgentContactsGetResponsesContentApplicationJsonSchemaMetadata
+    Agent_API_Contacts_addAgentContact_Response_201:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ApiV1AgentContactsAddPostResponsesContentApplicationJsonSchemaData'
+      title: Agent API/Contacts_addAgentContact_Response_201
+    Agent_API_Contacts_respondToAgentContactRequest_Response_200:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ApiV1AgentContactsRequestsRespondPostResponsesContentApplicationJsonSchemaData'
+      title: Agent API/Contacts_respondToAgentContactRequest_Response_200
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

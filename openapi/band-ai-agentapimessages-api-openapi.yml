@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Request agentApiActivity agentApiMessages API
+  title: Request Agent API Messages API
   version: 1.0.0
 servers:
 - url: https://app.band.ai
@@ -12,7 +12,101 @@ paths:
     get:
       operationId: listAgentMessages
       summary: List agent messages by processing status
-      description: "Returns messages that the agent needs to process, filtered by status.\n\n## Default Behavior (no status param)\n\nReturns all messages that are NOT processed. This is the recommended way to get\nall work the agent should handle, including:\n- New messages (no delivery status yet)\n- Delivered messages (acknowledged but not started)\n- Processing messages (stuck/crashed - supports crash recovery)\n- Failed messages (available for retry)\n\n## Status Filter Reference\n\n| ?status=     | Returns                                                              | Use Case                    |\n|--------------|----------------------------------------------------------------------|-----------------------------|\n| *(no param)* | Everything NOT processed                                             | Get all work to do          |\n| `pending`    | No status, delivered, or failed without active attempt               | Queue depth (untouched)     |\n| `processing` | Currently being processed                                            | In-flight work              |\n| `processed`  | Successfully completed                                               | Done items                  |\n| `failed`     | Failed only                                                          | Failure backlog             |\n| `all`        | All messages regardless of status                                    | Full history                |\n\nMessages are returned in chronological order (oldest first).\n\n## Pagination\n\nUse `cursor` + `limit` for cursor-based pagination (recommended). The response\n`metadata` includes `next_cursor` and `has_more`. Pass `cursor=<next_cursor>` to\nfetch the next page.\n\n`page` and `page_size` are deprecated and will be removed in API 2.0.0 (2026-10-01).\nResponses using these params include `Deprecation` and `Sunset` headers.\n\n## Workflow\n\nAfter retrieving messages, you must update their processing status:\n\n1. `GET /messages` or `GET /messages/next` → Get work to do\n2. `POST /messages/{id}/processing` → **Required:** Mark as processing before you start\n3. Process the message (reasoning loop, tool calls, etc.)\n4. `POST /messages/{id}/processed` → Mark as done, OR\n   `POST /messages/{id}/failed` → Mark as failed with error message\n5. Repeat\n\n**Important:** Always call `/processing` before starting work. This prevents\nduplicate processing since agents doing reasoning loops will always follow the\nsequence: `/next` → `/processing` → do work → `/processed`.\n\n## Crash Recovery\n\nIf your agent crashes while processing, the message remains in `processing` state.\nWhen the agent restarts:\n1. Call `GET /messages` (default) - it includes stuck `processing` messages\n2. The stuck message will be returned so you can retry it\n3. Call `/processing` again to reset the attempt timestamp, then continue\n"
+      description: 'Returns messages that the agent needs to process, filtered by status.
+
+
+        ## Default Behavior (no status param)
+
+
+        Returns all messages that are NOT processed. This is the recommended way to get
+
+        all work the agent should handle, including:
+
+        - New messages (no delivery status yet)
+
+        - Delivered messages (acknowledged but not started)
+
+        - Processing messages (stuck/crashed - supports crash recovery)
+
+        - Failed messages (available for retry)
+
+
+        ## Status Filter Reference
+
+
+        | ?status= | Returns | Use Case |
+
+        |--------------|----------------------------------------------------------------------|-----------------------------|
+
+        | *(no param)* | Everything NOT processed | Get all work to do |
+
+        | `pending` | No status, delivered, or failed without active attempt | Queue depth (untouched) |
+
+        | `processing` | Currently being processed | In-flight work |
+
+        | `processed` | Successfully completed | Done items |
+
+        | `failed` | Failed only | Failure backlog |
+
+        | `all` | All messages regardless of status | Full history |
+
+
+        Messages are returned in chronological order (oldest first).
+
+
+        ## Pagination
+
+
+        Use `cursor` + `limit` for cursor-based pagination (recommended). The response
+
+        `metadata` includes `next_cursor` and `has_more`. Pass `cursor=` to
+
+        fetch the next page.
+
+
+        `page` and `page_size` are deprecated and will be removed in API 2.0.0 (2026-10-01).
+
+        Responses using these params include `Deprecation` and `Sunset` headers.
+
+
+        ## Workflow
+
+
+        After retrieving messages, you must update their processing status:
+
+
+        1. `GET /messages` or `GET /messages/next` → Get work to do
+
+        2. `POST /messages/{id}/processing` → **Required:** Mark as processing before you start
+
+        3. Process the message (reasoning loop, tool calls, etc.)
+
+        4. `POST /messages/{id}/processed` → Mark as done, OR
+
+        `POST /messages/{id}/failed` → Mark as failed with error message
+
+        5. Repeat
+
+
+        **Important:** Always call `/processing` before starting work. This prevents
+
+        duplicate processing since agents doing reasoning loops will always follow the
+
+        sequence: `/next` → `/processing` → do work → `/processed`.
+
+
+        ## Crash Recovery
+
+
+        If your agent crashes while processing, the message remains in `processing` state.
+
+        When the agent restarts:
+
+        1. Call `GET /messages` (default) - it includes stuck `processing` messages
+
+        2. The stuck message will be returned so you can retry it
+
+        3. Call `/processing` again to reset the attempt timestamp, then continue'
       tags:
       - agentApiMessages
       parameters:
@@ -65,7 +159,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Agent API/Messages_listAgentMessages_Response_200'
+                $ref: '#/components/schemas/Agent_API_Messages_listAgentMessages_Response_200'
         '401':
           description: Unauthorized
           content:
@@ -93,7 +187,40 @@ paths:
     post:
       operationId: createAgentChatMessage
       summary: Send a text message as the agent
-      description: "Creates a new text message in a chat room. The agent must be a participant in the room.\n\nThis endpoint only supports `text` message type. For event-type messages\n(tool_call, tool_result, thought, system, error, action, guidelines, task),\nuse `POST /agent/chats/{chat_id}/events` instead.\n\nMessages must include at least one @mention to ensure proper routing to recipients.\n\nExample request:\n```json\n{\n  \"message\": {\n    \"content\": \"@task.owner I have completed the analysis\",\n    \"mentions\": [\n      {\"id\": \"user-uuid\", \"handle\": \"task.owner\", \"name\": \"Task Owner\"}\n    ]\n  }\n}\n```\n"
+      description: 'Creates a new text message in a chat room. The agent must be a participant in the room.
+
+
+        This endpoint only supports `text` message type. For event-type messages
+
+        (tool_call, tool_result, thought, system, error, action, guidelines, task),
+
+        use `POST /agent/chats/{chat_id}/events` instead.
+
+
+        Messages must include at least one @mention to ensure proper routing to recipients.
+
+
+        Example request:
+
+        ```json
+
+        {
+
+        "message": {
+
+        "content": "@task.owner I have completed the analysis",
+
+        "mentions": [
+
+        {"id": "user-uuid", "handle": "task.owner", "name": "Task Owner"}
+
+        ]
+
+        }
+
+        }
+
+        ```'
       tags:
       - agentApiMessages
       parameters:
@@ -116,7 +243,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Agent API/Messages_createAgentChatMessage_Response_201'
+                $ref: '#/components/schemas/Agent_API_Messages_createAgentChatMessage_Response_201'
         '401':
           description: Unauthorized
           content:
@@ -156,7 +283,64 @@ paths:
     get:
       operationId: getAgentNextMessage
       summary: Get next message to process
-      description: "Returns the single oldest message that needs processing.\n\n## What It Returns\n\nThe oldest message that is NOT processed, including:\n- New messages (no delivery status yet)\n- Delivered messages (acknowledged but not started)\n- Processing messages (stuck/crashed - supports crash recovery)\n- Failed messages (available for retry)\n\nReturns **204 No Content** if there are no messages to process.\n\n## Workflow\n\nThis is the primary endpoint for agent reasoning loops:\n\n1. `GET /messages/next` → Get next work item\n2. `POST /messages/{id}/processing` → **Required:** Mark as processing\n3. Process the message (reasoning loop, tool calls, etc.)\n4. `POST /messages/{id}/processed` → Mark as done, OR\n   `POST /messages/{id}/failed` → Mark as failed with error message\n5. Loop back to step 1\n\n## Crash Recovery\n\nIf your agent crashes while processing, the message stays in `processing` state.\nWhen restarted, calling `/next` will return that same stuck message (oldest first),\nallowing the agent to reclaim and retry it.\n\n## Difference from GET /messages\n\n- `GET /messages` returns **all** actionable messages (for batch processing or queue inspection)\n- `GET /messages/next` returns **one** message (for sequential processing loops)\n\nBoth use the same filter logic: everything that is NOT processed.\n"
+      description: 'Returns the single oldest message that needs processing.
+
+
+        ## What It Returns
+
+
+        The oldest message that is NOT processed, including:
+
+        - New messages (no delivery status yet)
+
+        - Delivered messages (acknowledged but not started)
+
+        - Processing messages (stuck/crashed - supports crash recovery)
+
+        - Failed messages (available for retry)
+
+
+        Returns **204 No Content** if there are no messages to process.
+
+
+        ## Workflow
+
+
+        This is the primary endpoint for agent reasoning loops:
+
+
+        1. `GET /messages/next` → Get next work item
+
+        2. `POST /messages/{id}/processing` → **Required:** Mark as processing
+
+        3. Process the message (reasoning loop, tool calls, etc.)
+
+        4. `POST /messages/{id}/processed` → Mark as done, OR
+
+        `POST /messages/{id}/failed` → Mark as failed with error message
+
+        5. Loop back to step 1
+
+
+        ## Crash Recovery
+
+
+        If your agent crashes while processing, the message stays in `processing` state.
+
+        When restarted, calling `/next` will return that same stuck message (oldest first),
+
+        allowing the agent to reclaim and retry it.
+
+
+        ## Difference from GET /messages
+
+
+        - `GET /messages` returns **all** actionable messages (for batch processing or queue inspection)
+
+        - `GET /messages/next` returns **one** message (for sequential processing loops)
+
+
+        Both use the same filter logic: everything that is NOT processed.'
       tags:
       - agentApiMessages
       parameters:
@@ -179,7 +363,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Agent API/Messages_getAgentNextMessage_Response_200'
+                $ref: '#/components/schemas/Agent_API_Messages_getAgentNextMessage_Response_200'
         '401':
           description: Unauthorized
           content:
@@ -253,9 +437,7 @@ paths:
 
         3. Process the message
 
-        4. `POST /messages/{id}/processed` or `/failed`
-
-        '
+        4. `POST /messages/{id}/processed` or `/failed`'
       tags:
       - agentApiMessages
       parameters:
@@ -285,7 +467,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Agent API/Messages_markAgentMessageProcessing_Response_200'
+                $ref: '#/components/schemas/Agent_API_Messages_markAgentMessageProcessing_Response_200'
         '401':
           description: Unauthorized
           content:
@@ -355,9 +537,7 @@ paths:
 
         To retry a failed message, simply call `/processing` again to create a new attempt,
 
-        then `/processed` or `/failed` when done.
-
-        '
+        then `/processed` or `/failed` when done.'
       tags:
       - agentApiMessages
       parameters:
@@ -387,7 +567,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Agent API/Messages_markAgentMessageFailed_Response_200'
+                $ref: '#/components/schemas/Agent_API_Messages_markAgentMessageFailed_Response_200'
         '401':
           description: Unauthorized
           content:
@@ -469,9 +649,7 @@ paths:
 
         - `GET /messages?status=processed`
 
-        - `GET /messages?status=all`
-
-        '
+        - `GET /messages?status=all`'
       tags:
       - agentApiMessages
       parameters:
@@ -501,7 +679,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Agent API/Messages_markAgentMessageProcessed_Response_200'
+                $ref: '#/components/schemas/Agent_API_Messages_markAgentMessageProcessed_Response_200'
         '401':
           description: Unauthorized
           content:
@@ -528,28 +706,14 @@ paths:
                 $ref: '#/components/schemas/ValidationError'
 components:
   schemas:
-    ErrorErrorDetails:
-      type: object
-      properties: {}
-      description: Additional error details (optional)
-      title: ErrorErrorDetails
-    ChatMessageRequestMentionsItems:
+    Agent_API_Messages_getAgentNextMessage_Response_200:
       type: object
       properties:
-        handle:
-          type: string
-          description: Handle for the mention (user handle or owner_handle/agent_slug for agents). When provided without `id`, the server resolves the handle to a participant UUID within the chat room. Returns 422 if the handle cannot be resolved.
-        id:
-          type: string
-          format: uuid
-          description: Mentioned user/agent ID. Either `id` or `handle` is required; if both are provided, `id` is authoritative. Returns 422 if both are missing.
-        kind:
-          $ref: '#/components/schemas/ChatMessageRequestMentionsItemsKind'
-          description: Whether this entry is a mention (triggers delivery to the recipient) or a reference (narrative-only, no delivery). Defaults to "mention" when omitted. Omit the field rather than sending null — an explicit null is rejected.
-        name:
-          type: string
-          description: Display name as it appears in the content (without @ prefix)
-      title: ChatMessageRequestMentionsItems
+        data:
+          $ref: '#/components/schemas/ChatMessage'
+      required:
+      - data
+      title: Agent API/Messages_getAgentNextMessage_Response_200
     ApiV1AgentChatsChatIdMessagesGetParametersStatus:
       type: string
       enum:
@@ -559,29 +723,6 @@ components:
       - processed
       - all
       title: ApiV1AgentChatsChatIdMessagesGetParametersStatus
-    ChatMessageRequestMentionsItemsKind:
-      type: string
-      enum:
-      - mention
-      - reference
-      description: Whether this entry is a mention (triggers delivery to the recipient) or a reference (narrative-only, no delivery). Defaults to "mention" when omitted. Omit the field rather than sending null — an explicit null is rejected.
-      title: ChatMessageRequestMentionsItemsKind
-    ChatMessageRequest:
-      type: object
-      properties:
-        content:
-          type: string
-          description: Message content with @mentions for recipients (e.g. '@DataAnalyst please analyze this'). Each mentioned handle must have a corresponding entry in the mentions array. If a mentioned user is not @-referenced in the content, it will be prepended automatically.
-        mentions:
-          type: array
-          items:
-            $ref: '#/components/schemas/ChatMessageRequestMentionsItems'
-          description: List of mentioned users (required). Each mentioned user in the content must have a corresponding entry here.
-      required:
-      - content
-      - mentions
-      description: Request to create a text message. For other message types (tool_call, tool_result, thought, etc.), use the /events endpoint.
-      title: ChatMessageRequest
     ValidationError:
       type: object
       properties:
@@ -611,6 +752,238 @@ components:
       - message
       - request_id
       title: ErrorError
+    Error:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorError'
+      required:
+      - error
+      description: Standard error response with request ID for tracing
+      title: Error
+    ChatMessageRequestMentionsItemsKind:
+      type: string
+      enum:
+      - mention
+      - reference
+      description: Whether this entry is a mention (triggers delivery to the recipient) or a reference (narrative-only, no delivery). Defaults to "mention" when omitted. Omit the field rather than sending null — an explicit null is rejected.
+      title: ChatMessageRequestMentionsItemsKind
+    Agent_API_Messages_markAgentMessageProcessing_Response_200:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/MessageStatusResponse'
+      required:
+      - data
+      title: Agent API/Messages_markAgentMessageProcessing_Response_200
+    Agent_API_Messages_listAgentMessages_Response_200:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatMessage'
+        metadata:
+          $ref: '#/components/schemas/ApiV1AgentChatsChatIdMessagesGetResponsesContentApplicationJsonSchemaMetadata'
+      required:
+      - data
+      - metadata
+      title: Agent API/Messages_listAgentMessages_Response_200
+    ChatMessageRequestMentionsItems:
+      type: object
+      properties:
+        handle:
+          type: string
+          description: Handle for the mention (user handle or owner_handle/agent_slug for agents). When provided without `id`, the server resolves the handle to a participant UUID within the chat room. Returns 422 if the handle cannot be resolved.
+        id:
+          type: string
+          format: uuid
+          description: Mentioned user/agent ID. Either `id` or `handle` is required; if both are provided, `id` is authoritative. Returns 422 if both are missing.
+        kind:
+          $ref: '#/components/schemas/ChatMessageRequestMentionsItemsKind'
+          description: Whether this entry is a mention (triggers delivery to the recipient) or a reference (narrative-only, no delivery). Defaults to "mention" when omitted. Omit the field rather than sending null — an explicit null is rejected.
+        name:
+          type: string
+          description: Display name as it appears in the content (without @ prefix)
+      title: ChatMessageRequestMentionsItems
+    ApiV1AgentChatsChatIdMessagesGetResponsesContentApplicationJsonSchemaMetadata:
+      type: object
+      properties:
+        has_more:
+          type: boolean
+          description: Whether more pages exist
+        limit:
+          type: integer
+          description: Page size used
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          description: Cursor for next page (null if no more pages)
+        page:
+          type: integer
+          description: Current page (deprecated)
+        page_size:
+          type: integer
+          description: Items per page (deprecated)
+        status_filter:
+          type:
+          - string
+          - 'null'
+          description: Applied status filter
+        total_count:
+          type: integer
+          description: Total messages (deprecated)
+        total_pages:
+          type: integer
+          description: Total pages (deprecated)
+      required:
+      - has_more
+      - limit
+      - next_cursor
+      title: ApiV1AgentChatsChatIdMessagesGetResponsesContentApplicationJsonSchemaMetadata
+    ChatMessageMetadata:
+      type: object
+      properties: {}
+      description: Additional metadata including mentions
+      title: ChatMessageMetadata
+    ChatMessage:
+      type: object
+      properties:
+        chat_room_id:
+          type: string
+          format: uuid
+          description: Chat Room ID
+        content:
+          type: string
+          description: Message content
+        id:
+          type: string
+          format: uuid
+          description: Message ID
+        inserted_at:
+          type: string
+          format: date-time
+          description: Created At
+        message_type:
+          type: string
+          description: Message type
+        metadata:
+          $ref: '#/components/schemas/ChatMessageMetadata'
+          description: Additional metadata including mentions
+        sender_id:
+          type: string
+          format: uuid
+          description: Sender ID
+        sender_name:
+          type: string
+          description: Display name of sender (full name for Users, name for Agents)
+        sender_type:
+          type: string
+          description: Sender type (User or Agent)
+        updated_at:
+          type: string
+          format: date-time
+          description: Updated At
+      required:
+      - content
+      - id
+      - message_type
+      - sender_id
+      - sender_type
+      description: A chat message
+      title: ChatMessage
+    MessageStatusResponseStatus:
+      type: string
+      enum:
+      - processing
+      - processed
+      - failed
+      description: New processing status
+      title: MessageStatusResponseStatus
+    ChatMessageRequest:
+      type: object
+      properties:
+        content:
+          type: string
+          description: Message content with @mentions for recipients (e.g. '@DataAnalyst please analyze this'). Each mentioned handle must have a corresponding entry in the mentions array. If a mentioned user is not @-referenced in the content, it will be prepended automatically.
+        mentions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatMessageRequestMentionsItems'
+          description: List of mentioned users (required). Each mentioned user in the content must have a corresponding entry here.
+      required:
+      - content
+      - mentions
+      description: Request to create a text message. For other message types (tool_call, tool_result, thought, etc.), use the /events endpoint.
+      title: ChatMessageRequest
+    Agent_API_Messages_createAgentChatMessage_Response_201:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/MessageSentResponse'
+      required:
+      - data
+      title: Agent API/Messages_createAgentChatMessage_Response_201
+    MessageSentResponseRecipientsItems:
+      type: object
+      properties:
+        handle:
+          type: string
+          description: Recipient handle
+        id:
+          type: string
+          format: uuid
+          description: Recipient ID
+        name:
+          type: string
+          description: Recipient display name (optional)
+      required:
+      - handle
+      - id
+      title: MessageSentResponseRecipientsItems
+    Agent_API_Messages_markAgentMessageFailed_Response_200:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/MessageStatusResponse'
+      required:
+      - data
+      title: Agent API/Messages_markAgentMessageFailed_Response_200
+    MessageSentResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: ID of the created message
+        recipients:
+          type: array
+          items:
+            $ref: '#/components/schemas/MessageSentResponseRecipientsItems'
+          description: List of participants who will receive the message. Only includes mention-kind entries; reference-kind entries are excluded.
+        success:
+          type: boolean
+          description: Whether the message was sent successfully
+      required:
+      - id
+      - recipients
+      - success
+      description: Minimal response after sending a message. Contains only essential fields to confirm delivery.
+      title: MessageSentResponse
+    ErrorErrorDetails:
+      type: object
+      properties: {}
+      description: Additional error details (optional)
+      title: ErrorErrorDetails
+    Agent_API_Messages_markAgentMessageProcessed_Response_200:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/MessageStatusResponse'
+      required:
+      - data
+      title: Agent API/Messages_markAgentMessageProcessed_Response_200
     ValidationErrorError:
       type: object
       properties:
@@ -636,15 +1009,29 @@ components:
       - message
       - request_id
       title: ValidationErrorError
-    Error:
+    MessageStatusResponse:
       type: object
       properties:
-        error:
-          $ref: '#/components/schemas/ErrorError'
+        attempt_number:
+          type: integer
+          description: Current attempt number
+        id:
+          type: string
+          format: uuid
+          description: ID of the message
+        status:
+          $ref: '#/components/schemas/MessageStatusResponseStatus'
+          description: New processing status
+        success:
+          type: boolean
+          description: Whether the status was updated successfully
       required:
-      - error
-      description: Standard error response with request ID for tracing
-      title: Error
+      - attempt_number
+      - id
+      - status
+      - success
+      description: Minimal response after updating message processing status.
+      title: MessageStatusResponse
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

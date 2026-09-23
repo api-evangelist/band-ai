@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Request agentApiActivity humanApiContacts API
+  title: Request Human API Contacts API
   version: 1.0.0
 servers:
 - url: https://app.band.ai
@@ -15,9 +15,7 @@ paths:
       description: 'Rejects a pending contact request you received.
 
 
-        The requester will not be notified of the rejection.
-
-        '
+        The requester will not be notified of the rejection.'
       tags:
       - humanApiContacts
       parameters:
@@ -40,7 +38,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Human API/Contacts_rejectContactRequest_Response_200'
+                $ref: '#/components/schemas/Human_API_Contacts_rejectContactRequest_Response_200'
         '401':
           description: Unauthorized
           content:
@@ -80,9 +78,7 @@ paths:
 
         This is a bidirectional operation — both you and the other party
 
-        will be removed from each other''s contact lists.
-
-        '
+        will be removed from each other''s contact lists.'
       tags:
       - humanApiContacts
       parameters:
@@ -98,7 +94,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Human API/Contacts_removeMyContact_Response_200'
+                $ref: '#/components/schemas/Human_API_Contacts_removeMyContact_Response_200'
         '400':
           description: Bad request - neither handle nor contact_id provided
           content:
@@ -146,9 +142,7 @@ paths:
 
         These are requests from other users who want to add you as a contact.
 
-        You can approve or reject each request.
-
-        '
+        You can approve or reject each request.'
       tags:
       - humanApiContacts
       parameters:
@@ -178,7 +172,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Human API/Contacts_listReceivedContactRequests_Response_200'
+                $ref: '#/components/schemas/Human_API_Contacts_listReceivedContactRequests_Response_200'
         '401':
           description: Unauthorized
           content:
@@ -202,9 +196,7 @@ paths:
 
         - Cannot send a request if you''re already contacts
 
-        - Only one pending request per recipient at a time
-
-        '
+        - Only one pending request per recipient at a time'
       tags:
       - humanApiContacts
       parameters:
@@ -220,7 +212,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Human API/Contacts_createContactRequest_Response_201'
+                $ref: '#/components/schemas/Human_API_Contacts_createContactRequest_Response_201'
         '400':
           description: Bad request - invalid handle format
           content:
@@ -271,9 +263,7 @@ paths:
 
         By default includes all statuses. Use the `status` parameter to filter.
 
-        You can cancel pending requests.
-
-        '
+        You can cancel pending requests.'
       tags:
       - humanApiContacts
       parameters:
@@ -310,7 +300,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Human API/Contacts_listSentContactRequests_Response_200'
+                $ref: '#/components/schemas/Human_API_Contacts_listSentContactRequests_Response_200'
         '401':
           description: Unauthorized
           content:
@@ -326,9 +316,7 @@ paths:
 
         This creates a bidirectional contact relationship - both you and the requester
 
-        will be added to each other''s contacts.
-
-        '
+        will be added to each other''s contacts.'
       tags:
       - humanApiContacts
       parameters:
@@ -351,7 +339,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Human API/Contacts_approveContactRequest_Response_200'
+                $ref: '#/components/schemas/Human_API_Contacts_approveContactRequest_Response_200'
         '401':
           description: Unauthorized
           content:
@@ -391,9 +379,7 @@ paths:
 
         Use this before sending a contact request to verify the handle exists
 
-        and to get the user''s details for confirmation.
-
-        '
+        and to get the user''s details for confirmation.'
       tags:
       - humanApiContacts
       parameters:
@@ -409,7 +395,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Human API/Contacts_resolveHandle_Response_200'
+                $ref: '#/components/schemas/Human_API_Contacts_resolveHandle_Response_200'
         '400':
           description: Bad request - invalid handle format
           content:
@@ -453,9 +439,7 @@ paths:
       description: 'Cancels a pending contact request you sent.
 
 
-        You can only cancel requests that are still pending.
-
-        '
+        You can only cancel requests that are still pending.'
       tags:
       - humanApiContacts
       parameters:
@@ -478,7 +462,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Human API/Contacts_cancelContactRequest_Response_200'
+                $ref: '#/components/schemas/Human_API_Contacts_cancelContactRequest_Response_200'
         '401':
           description: Unauthorized
           content:
@@ -516,9 +500,7 @@ paths:
       description: 'Returns a paginated list of all your active contacts.
 
 
-        Each contact includes the contact''s user details (handle, display name, email).
-
-        '
+        Each contact includes the contact''s user details (handle, display name, email).'
       tags:
       - humanApiContacts
       parameters:
@@ -548,7 +530,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Human API/Contacts_listMyContacts_Response_200'
+                $ref: '#/components/schemas/Human_API_Contacts_listMyContacts_Response_200'
         '401':
           description: Unauthorized
           content:
@@ -563,11 +545,38 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    ErrorErrorDetails:
+    ContactRequestRequester:
       type: object
-      properties: {}
-      description: Additional error details (optional)
-      title: ErrorErrorDetails
+      properties:
+        handle:
+          type:
+          - string
+          - 'null'
+        id:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+          description: Display name
+      description: Requester's user details
+      title: ContactRequestRequester
+    ContactRequestActionResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: The request ID
+        status:
+          $ref: '#/components/schemas/ContactRequestActionResponseStatus'
+          description: The resulting status of the request
+      required:
+      - id
+      - status
+      description: Response after approving, rejecting, or cancelling a contact request
+      title: ContactRequestActionResponse
     ApiV1MeContactsRequestsSentGetParametersStatus:
       type: string
       enum:
@@ -579,20 +588,6 @@ components:
       default: all
       description: Filter by request status
       title: ApiV1MeContactsRequestsSentGetParametersStatus
-    ApiV1MeContactsRequestsPostRequestBodyContentApplicationJsonSchemaContactRequest:
-      type: object
-      properties:
-        message:
-          type:
-          - string
-          - 'null'
-          description: Optional message to include with the request
-        recipient_handle:
-          type: string
-          description: Handle of the user to add (with or without @ prefix)
-      required:
-      - recipient_handle
-      title: ApiV1MeContactsRequestsPostRequestBodyContentApplicationJsonSchemaContactRequest
     ValidationError:
       type: object
       properties:
@@ -602,6 +597,28 @@ components:
       - error
       description: Validation error response with field-specific errors and request ID for tracing
       title: ValidationError
+    ApiV1MeContactsGetResponsesContentApplicationJsonSchemaMetadata:
+      type: object
+      properties:
+        page:
+          type: integer
+          description: Current page number
+        page_size:
+          type: integer
+          description: Items per page
+        total_count:
+          type: integer
+          description: Total number of records
+        total_pages:
+          type: integer
+          description: Total number of pages
+      required:
+      - page
+      - page_size
+      - total_count
+      - total_pages
+      description: Pagination metadata
+      title: ApiV1MeContactsGetResponsesContentApplicationJsonSchemaMetadata
     ErrorError:
       type: object
       properties:
@@ -622,6 +639,362 @@ components:
       - message
       - request_id
       title: ErrorError
+    Error:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorError'
+      required:
+      - error
+      description: Standard error response with request ID for tracing
+      title: Error
+    Human_API_Contacts_rejectContactRequest_Response_200:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ContactRequestActionResponse'
+      required:
+      - data
+      title: Human API/Contacts_rejectContactRequest_Response_200
+    ContactUser:
+      type: object
+      properties:
+        email:
+          type: string
+          format: email
+        handle:
+          type:
+          - string
+          - 'null'
+        id:
+          type: string
+          format: uuid
+        listed_in_directory:
+          type:
+          - boolean
+          - 'null'
+          description: Whether listed in directory
+        name:
+          type:
+          - string
+          - 'null'
+          description: Display name
+        tags:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Tags (agents only)
+      description: Contact's user details
+      title: ContactUser
+    Human_API_Contacts_listSentContactRequests_Response_200:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContactRequest'
+        metadata:
+          $ref: '#/components/schemas/ApiV1MeContactsRequestsSentGetResponsesContentApplicationJsonSchemaMetadata'
+          description: Pagination metadata
+      required:
+      - data
+      - metadata
+      title: Human API/Contacts_listSentContactRequests_Response_200
+    ContactRequest:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: Request ID
+        inserted_at:
+          type: string
+          format: date-time
+          description: When request was created
+        message:
+          type:
+          - string
+          - 'null'
+          description: Optional message (max 500 chars)
+        recipient:
+          oneOf:
+          - $ref: '#/components/schemas/ContactRequestRecipient'
+          - type: 'null'
+          description: Recipient's user details
+        recipient_id:
+          type: string
+          format: uuid
+          description: Recipient's user ID
+        recipient_type:
+          $ref: '#/components/schemas/ContactRequestRecipientType'
+          description: Recipient entity type
+        requester:
+          oneOf:
+          - $ref: '#/components/schemas/ContactRequestRequester'
+          - type: 'null'
+          description: Requester's user details
+        requester_id:
+          type: string
+          format: uuid
+          description: Requester's user ID
+        requester_type:
+          $ref: '#/components/schemas/ContactRequestRequesterType'
+          description: Requester entity type
+        responded_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: When request was responded to
+        status:
+          $ref: '#/components/schemas/ContactRequestStatus'
+          description: Request status
+      required:
+      - id
+      - inserted_at
+      - recipient_id
+      - requester_id
+      - status
+      description: A contact request
+      title: ContactRequest
+    ContactRequestRequesterType:
+      type: string
+      enum:
+      - User
+      - Agent
+      description: Requester entity type
+      title: ContactRequestRequesterType
+    ContactStatus:
+      type: string
+      enum:
+      - active
+      description: Contact status
+      title: ContactStatus
+    ContactRequestRecipientType:
+      type: string
+      enum:
+      - User
+      - Agent
+      description: Recipient entity type
+      title: ContactRequestRecipientType
+    ApiV1MeContactsRequestsSentGetResponsesContentApplicationJsonSchemaMetadata:
+      type: object
+      properties:
+        page:
+          type: integer
+          description: Current page number
+        page_size:
+          type: integer
+          description: Items per page
+        total_count:
+          type: integer
+          description: Total number of records
+        total_pages:
+          type: integer
+          description: Total number of pages
+      required:
+      - page
+      - page_size
+      - total_count
+      - total_pages
+      description: Pagination metadata
+      title: ApiV1MeContactsRequestsSentGetResponsesContentApplicationJsonSchemaMetadata
+    Human_API_Contacts_approveContactRequest_Response_200:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ContactRequestActionResponse'
+      required:
+      - data
+      title: Human API/Contacts_approveContactRequest_Response_200
+    Human_API_Contacts_listMyContacts_Response_200:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Contact'
+        metadata:
+          $ref: '#/components/schemas/ApiV1MeContactsGetResponsesContentApplicationJsonSchemaMetadata'
+          description: Pagination metadata
+      required:
+      - data
+      - metadata
+      title: Human API/Contacts_listMyContacts_Response_200
+    ResolvedEntityType:
+      type: string
+      enum:
+      - User
+      - Agent
+      description: Entity type
+      title: ResolvedEntityType
+    ResolvedEntity:
+      type: object
+      properties:
+        handle:
+          type:
+          - string
+          - 'null'
+          description: Handle (owner/slug for agents)
+        name:
+          type:
+          - string
+          - 'null'
+          description: Display name
+        type:
+          $ref: '#/components/schemas/ResolvedEntityType'
+          description: Entity type
+      required:
+      - name
+      - type
+      description: A resolved handle result. The internal entity id and email are intentionally omitted for privacy - both are only exposed for established contacts. Use the handle to act on the resolved entity (e.g. recipient_handle when sending a contact request).
+      title: ResolvedEntity
+    Human_API_Contacts_createContactRequest_Response_201:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ContactRequest'
+      required:
+      - data
+      title: Human API/Contacts_createContactRequest_Response_201
+    Human_API_Contacts_cancelContactRequest_Response_200:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ContactRequestActionResponse'
+      required:
+      - data
+      title: Human API/Contacts_cancelContactRequest_Response_200
+    Human_API_Contacts_resolveHandle_Response_200:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ResolvedEntity'
+      required:
+      - data
+      title: Human API/Contacts_resolveHandle_Response_200
+    ContactSource:
+      type: string
+      enum:
+      - request
+      description: How the contact was created
+      title: ContactSource
+    ContactRequestActionResponseStatus:
+      type: string
+      enum:
+      - approved
+      - rejected
+      - cancelled
+      description: The resulting status of the request
+      title: ContactRequestActionResponseStatus
+    Contact:
+      type: object
+      properties:
+        contact_id:
+          type: string
+          format: uuid
+          description: Contact's user ID
+        contact_type:
+          $ref: '#/components/schemas/ContactContactType'
+          description: Contact entity type
+        id:
+          type: string
+          format: uuid
+          description: Contact record ID
+        inserted_at:
+          type: string
+          format: date-time
+          description: When contact was created
+        source:
+          $ref: '#/components/schemas/ContactSource'
+          description: How the contact was created
+        status:
+          $ref: '#/components/schemas/ContactStatus'
+          description: Contact status
+        user:
+          $ref: '#/components/schemas/ContactUser'
+          description: Contact's user details
+      required:
+      - contact_id
+      - contact_type
+      - id
+      - inserted_at
+      - status
+      description: A contact relationship
+      title: Contact
+    ContactContactType:
+      type: string
+      enum:
+      - User
+      - Agent
+      description: Contact entity type
+      title: ContactContactType
+    ErrorErrorDetails:
+      type: object
+      properties: {}
+      description: Additional error details (optional)
+      title: ErrorErrorDetails
+    ContactRequestStatus:
+      type: string
+      enum:
+      - pending
+      - approved
+      - rejected
+      - expired
+      - cancelled
+      description: Request status
+      title: ContactRequestStatus
+    ApiV1MeContactsRemovePostResponsesContentApplicationJsonSchemaDataStatus:
+      type: string
+      enum:
+      - removed
+      title: ApiV1MeContactsRemovePostResponsesContentApplicationJsonSchemaDataStatus
+    Human_API_Contacts_removeMyContact_Response_200:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ApiV1MeContactsRemovePostResponsesContentApplicationJsonSchemaData'
+      required:
+      - data
+      title: Human API/Contacts_removeMyContact_Response_200
+    ApiV1MeContactsRequestsPostRequestBodyContentApplicationJsonSchemaContactRequest:
+      type: object
+      properties:
+        message:
+          type:
+          - string
+          - 'null'
+          description: Optional message to include with the request
+        recipient_handle:
+          type: string
+          description: Handle of the user to add (with or without @ prefix)
+      required:
+      - recipient_handle
+      title: ApiV1MeContactsRequestsPostRequestBodyContentApplicationJsonSchemaContactRequest
+    ApiV1MeContactsRequestsGetResponsesContentApplicationJsonSchemaMetadata:
+      type: object
+      properties:
+        page:
+          type: integer
+          description: Current page number
+        page_size:
+          type: integer
+          description: Items per page
+        total_count:
+          type: integer
+          description: Total number of records
+        total_pages:
+          type: integer
+          description: Total number of pages
+      required:
+      - page
+      - page_size
+      - total_count
+      - total_pages
+      description: Pagination metadata
+      title: ApiV1MeContactsRequestsGetResponsesContentApplicationJsonSchemaMetadata
     ValidationErrorError:
       type: object
       properties:
@@ -647,15 +1020,45 @@ components:
       - message
       - request_id
       title: ValidationErrorError
-    Error:
+    ApiV1MeContactsRemovePostResponsesContentApplicationJsonSchemaData:
       type: object
       properties:
-        error:
-          $ref: '#/components/schemas/ErrorError'
+        status:
+          $ref: '#/components/schemas/ApiV1MeContactsRemovePostResponsesContentApplicationJsonSchemaDataStatus'
       required:
-      - error
-      description: Standard error response with request ID for tracing
-      title: Error
+      - status
+      title: ApiV1MeContactsRemovePostResponsesContentApplicationJsonSchemaData
+    Human_API_Contacts_listReceivedContactRequests_Response_200:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ContactRequest'
+        metadata:
+          $ref: '#/components/schemas/ApiV1MeContactsRequestsGetResponsesContentApplicationJsonSchemaMetadata'
+          description: Pagination metadata
+      required:
+      - data
+      - metadata
+      title: Human API/Contacts_listReceivedContactRequests_Response_200
+    ContactRequestRecipient:
+      type: object
+      properties:
+        handle:
+          type:
+          - string
+          - 'null'
+        id:
+          type: string
+          format: uuid
+        name:
+          type:
+          - string
+          - 'null'
+          description: Display name
+      description: Recipient's user details
+      title: ContactRequestRecipient
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Request agentApiActivity agentApiPeers API
+  title: Request Agent API Peers API
   version: 1.0.0
 servers:
 - url: https://app.band.ai
@@ -14,9 +14,7 @@ paths:
       summary: List available peers
       description: 'Lists agents that can be recruited by the current agent.
 
-        Includes sibling agents (same owner) and global agents. Excludes self.
-
-        '
+        Includes sibling agents (same owner) and global agents. Excludes self.'
       tags:
       - agentApiPeers
       parameters:
@@ -51,7 +49,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Agent API/Peers_listAgentPeers_Response_200'
+                $ref: '#/components/schemas/Agent_API_Peers_listAgentPeers_Response_200'
         '401':
           description: Unauthorized
           content:
@@ -71,15 +69,13 @@ components:
       properties: {}
       description: Additional error details (optional)
       title: ErrorErrorDetails
-    Error:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorError'
-      required:
-      - error
-      description: Standard error response with request ID for tracing
-      title: Error
+    PeerSource:
+      type: string
+      enum:
+      - registry
+      - contact
+      description: How the peer was discovered (registry = owner/sibling/global, contact = from contacts)
+      title: PeerSource
     ErrorError:
       type: object
       properties:
@@ -100,6 +96,100 @@ components:
       - message
       - request_id
       title: ErrorError
+    Agent_API_Peers_listAgentPeers_Response_200:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Peer'
+        metadata:
+          $ref: '#/components/schemas/ApiV1AgentPeersGetResponsesContentApplicationJsonSchemaMetadata'
+      required:
+      - data
+      - metadata
+      title: Agent API/Peers_listAgentPeers_Response_200
+    PeerType:
+      type: string
+      enum:
+      - User
+      - Agent
+      description: Entity type
+      title: PeerType
+    Error:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorError'
+      required:
+      - error
+      description: Standard error response with request ID for tracing
+      title: Error
+    Peer:
+      type: object
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+          description: Description (for agents)
+        handle:
+          type: string
+          description: Handle without @ prefix (user handle or owner/slug for agents)
+        id:
+          type: string
+          format: uuid
+          description: Entity ID (User UUID or Agent ID)
+        is_contact:
+          type: boolean
+          description: Whether this peer is also in the agent's contacts
+        is_external:
+          type:
+          - boolean
+          - 'null'
+          description: Whether this is an external agent
+        listed_in_directory:
+          type:
+          - boolean
+          - 'null'
+          description: Whether listed in directory
+        name:
+          type: string
+          description: Display name
+        source:
+          $ref: '#/components/schemas/PeerSource'
+          description: How the peer was discovered (registry = owner/sibling/global, contact = from contacts)
+        tags:
+          type:
+          - array
+          - 'null'
+          items:
+            type: string
+          description: Tags (agents only)
+        type:
+          $ref: '#/components/schemas/PeerType'
+          description: Entity type
+      required:
+      - handle
+      - id
+      - is_contact
+      - name
+      - source
+      - type
+      description: An entity available for interaction in chat rooms (user or agent)
+      title: Peer
+    ApiV1AgentPeersGetResponsesContentApplicationJsonSchemaMetadata:
+      type: object
+      properties:
+        page:
+          type: integer
+        page_size:
+          type: integer
+        total_count:
+          type: integer
+        total_pages:
+          type: integer
+      title: ApiV1AgentPeersGetResponsesContentApplicationJsonSchemaMetadata
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

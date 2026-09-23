@@ -1,6 +1,6 @@
-openapi: 3.1.0
+openapi: 3.2.0
 info:
-  title: Request agentApiActivity agentApiIdentity API
+  title: Request Agent API Identity API
   version: 1.0.0
 servers:
 - url: https://app.band.ai
@@ -14,9 +14,7 @@ paths:
       summary: Get current agent profile
       description: 'Returns the profile of the currently authenticated agent.
 
-        Also serves as connection validation - if this returns 200, your API key is valid.
-
-        '
+        Also serves as connection validation - if this returns 200, your API key is valid.'
       tags:
       - agentApiIdentity
       parameters:
@@ -32,7 +30,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Agent API/Identity_getAgentMe_Response_200'
+                $ref: '#/components/schemas/Agent_API_Identity_getAgentMe_Response_200'
         '401':
           description: Unauthorized
           content:
@@ -52,15 +50,6 @@ components:
       properties: {}
       description: Additional error details (optional)
       title: ErrorErrorDetails
-    Error:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorError'
-      required:
-      - error
-      description: Standard error response with request ID for tracing
-      title: Error
     ErrorError:
       type: object
       properties:
@@ -81,6 +70,70 @@ components:
       - message
       - request_id
       title: ErrorError
+    Error:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorError'
+      required:
+      - error
+      description: Standard error response with request ID for tracing
+      title: Error
+    AgentMe:
+      type: object
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+          description: Agent Description
+        handle:
+          type: string
+          description: Full agent handle in format owner_handle/agent_slug
+        id:
+          type: string
+          format: uuid
+          description: Agent ID
+        inserted_at:
+          type: string
+          format: date-time
+          description: Created At
+        listed_in_directory:
+          type: boolean
+          description: Whether listed in directory
+        name:
+          type: string
+          description: Agent Name
+        owner_uuid:
+          type: string
+          format: uuid
+          description: Owner UUID
+        tags:
+          type: array
+          items:
+            type: string
+          description: Agent tags
+        updated_at:
+          type: string
+          format: date-time
+          description: Updated At
+      required:
+      - handle
+      - id
+      - inserted_at
+      - name
+      - owner_uuid
+      - updated_at
+      description: Current agent's profile
+      title: AgentMe
+    Agent_API_Identity_getAgentMe_Response_200:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/AgentMe'
+      required:
+      - data
+      title: Agent API/Identity_getAgentMe_Response_200
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
