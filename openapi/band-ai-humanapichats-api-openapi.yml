@@ -207,115 +207,6 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    ErrorErrorDetails:
-      type: object
-      properties: {}
-      description: Additional error details (optional)
-      title: ErrorErrorDetails
-    ApiV1MeChatsPostRequestBodyContentApplicationJsonSchemaChat:
-      type: object
-      properties:
-        task_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: Associated task ID (optional)
-        title:
-          type:
-          - string
-          - 'null'
-          description: 'Optional title for the chat room. If provided and non-blank after trimming, the room is marked title_locked: true and LLM auto-titling is skipped for this room. Empty/whitespace-only/null falls through to the default and LLM auto-titles on the first message. Control characters (newline, carriage return, null) are rejected with 422. Max 120 chars.'
-      title: ApiV1MeChatsPostRequestBodyContentApplicationJsonSchemaChat
-    MeChatRoomType:
-      type: string
-      enum:
-      - direct
-      - group
-      - task
-      description: Chat room type
-      title: MeChatRoomType
-    Human_API_Chats_getMyChatRoom_Response_200:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/MeChatRoom'
-      required:
-      - data
-      title: Human API/Chats_getMyChatRoom_Response_200
-    ValidationError:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/ValidationErrorError'
-      required:
-      - error
-      description: Validation error response with field-specific errors and request ID for tracing
-      title: ValidationError
-    MeChatRoomStatus:
-      type: string
-      enum:
-      - active
-      - archived
-      - closed
-      description: Chat room status — `archived`/`active` round-trip via the archive/unarchive endpoints
-      title: MeChatRoomStatus
-    ErrorError:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Machine-readable error code
-        details:
-          $ref: '#/components/schemas/ErrorErrorDetails'
-          description: Additional error details (optional)
-        message:
-          type: string
-          description: Human-readable error message
-        request_id:
-          type: string
-          description: Unique request identifier for tracing and debugging
-      required:
-      - code
-      - message
-      - request_id
-      title: ErrorError
-    Error:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorError'
-      required:
-      - error
-      description: Standard error response with request ID for tracing
-      title: Error
-    Human_API_Chats_createMyChatRoom_Response_201:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/MeChatRoom'
-      required:
-      - data
-      title: Human API/Chats_createMyChatRoom_Response_201
-    ApiV1MeChatsGetParametersSortBy:
-      type: string
-      enum:
-      - inserted_at
-      - updated_at
-      title: ApiV1MeChatsGetParametersSortBy
-    Human_API_Chats_listMyChats_Response_200:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/MeChatRoom'
-        metadata:
-          $ref: '#/components/schemas/ApiV1MeChatsGetResponsesContentApplicationJsonSchemaMetadata'
-      required:
-      - data
-      - metadata
-      title: Human API/Chats_listMyChats_Response_200
     ApiV1MeChatsGetResponsesContentApplicationJsonSchemaMetadata:
       type: object
       properties:
@@ -351,6 +242,31 @@ components:
           - 'null'
           description: Total number of pages (offset mode only; omitted in cursor mode)
       title: ApiV1MeChatsGetResponsesContentApplicationJsonSchemaMetadata
+    ValidationError:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ValidationErrorError'
+      required:
+      - error
+      description: Validation error response with field-specific errors and request ID for tracing
+      title: ValidationError
+    Human_API_Chats_createMyChatRoom_Response_201:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/MeChatRoom'
+      required:
+      - data
+      title: Human API/Chats_createMyChatRoom_Response_201
+    Human_API_Chats_getMyChatRoom_Response_200:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/MeChatRoom'
+      required:
+      - data
+      title: Human API/Chats_getMyChatRoom_Response_200
     MeChatRoom:
       type: object
       properties:
@@ -396,6 +312,27 @@ components:
       - updated_at
       description: Human-API chat room — verbose shape. Includes `:type` and `:status` so the caller can render archive/active state and room kind without a follow-up fetch. Agent callers see the terse `ChatRoom` shape instead.
       title: MeChatRoom
+    ErrorErrorDetails:
+      type: object
+      properties: {}
+      description: Additional error details (optional)
+      title: ErrorErrorDetails
+    MeChatRoomStatus:
+      type: string
+      enum:
+      - active
+      - archived
+      - closed
+      description: Chat room status — `archived`/`active` round-trip via the archive/unarchive endpoints
+      title: MeChatRoomStatus
+    MeChatRoomType:
+      type: string
+      enum:
+      - direct
+      - group
+      - task
+      description: Chat room type
+      title: MeChatRoomType
     ValidationErrorError:
       type: object
       properties:
@@ -421,6 +358,49 @@ components:
       - message
       - request_id
       title: ValidationErrorError
+    ApiV1MeChatsGetParametersOrder:
+      type: string
+      enum:
+      - asc
+      - desc
+      title: ApiV1MeChatsGetParametersOrder
+    Human_API_Chats_listMyChats_Response_200:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/MeChatRoom'
+        metadata:
+          $ref: '#/components/schemas/ApiV1MeChatsGetResponsesContentApplicationJsonSchemaMetadata'
+      required:
+      - data
+      - metadata
+      title: Human API/Chats_listMyChats_Response_200
+    ApiV1MeChatsPostRequestBodyContentApplicationJsonSchemaChat:
+      type: object
+      properties:
+        task_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: Associated task ID (optional)
+        title:
+          type:
+          - string
+          - 'null'
+          description: 'Optional title for the chat room. If provided and non-blank after trimming, the room is marked title_locked: true and LLM auto-titling is skipped for this room. Empty/whitespace-only/null falls through to the default and LLM auto-titles on the first message. Control characters (newline, carriage return, null) are rejected with 422. Max 120 chars.'
+      title: ApiV1MeChatsPostRequestBodyContentApplicationJsonSchemaChat
+    Error:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorError'
+      required:
+      - error
+      description: Standard error response with request ID for tracing
+      title: Error
     ApiV1MeChatsGetParametersType:
       type: string
       enum:
@@ -428,12 +408,32 @@ components:
       - group
       - task
       title: ApiV1MeChatsGetParametersType
-    ApiV1MeChatsGetParametersOrder:
+    ApiV1MeChatsGetParametersSortBy:
       type: string
       enum:
-      - asc
-      - desc
-      title: ApiV1MeChatsGetParametersOrder
+      - inserted_at
+      - updated_at
+      title: ApiV1MeChatsGetParametersSortBy
+    ErrorError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+        details:
+          $ref: '#/components/schemas/ErrorErrorDetails'
+          description: Additional error details (optional)
+        message:
+          type: string
+          description: Human-readable error message
+        request_id:
+          type: string
+          description: Unique request identifier for tracing and debugging
+      required:
+      - code
+      - message
+      - request_id
+      title: ErrorError
     ApiV1MeChatsGetParametersStatus:
       type: string
       enum:

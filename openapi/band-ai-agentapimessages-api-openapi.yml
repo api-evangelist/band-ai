@@ -706,89 +706,6 @@ paths:
                 $ref: '#/components/schemas/ValidationError'
 components:
   schemas:
-    Agent_API_Messages_getAgentNextMessage_Response_200:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/ChatMessage'
-      required:
-      - data
-      title: Agent API/Messages_getAgentNextMessage_Response_200
-    ApiV1AgentChatsChatIdMessagesGetParametersStatus:
-      type: string
-      enum:
-      - pending
-      - failed
-      - processing
-      - processed
-      - all
-      title: ApiV1AgentChatsChatIdMessagesGetParametersStatus
-    ValidationError:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/ValidationErrorError'
-      required:
-      - error
-      description: Validation error response with field-specific errors and request ID for tracing
-      title: ValidationError
-    ErrorError:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Machine-readable error code
-        details:
-          $ref: '#/components/schemas/ErrorErrorDetails'
-          description: Additional error details (optional)
-        message:
-          type: string
-          description: Human-readable error message
-        request_id:
-          type: string
-          description: Unique request identifier for tracing and debugging
-      required:
-      - code
-      - message
-      - request_id
-      title: ErrorError
-    Error:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorError'
-      required:
-      - error
-      description: Standard error response with request ID for tracing
-      title: Error
-    ChatMessageRequestMentionsItemsKind:
-      type: string
-      enum:
-      - mention
-      - reference
-      description: Whether this entry is a mention (triggers delivery to the recipient) or a reference (narrative-only, no delivery). Defaults to "mention" when omitted. Omit the field rather than sending null — an explicit null is rejected.
-      title: ChatMessageRequestMentionsItemsKind
-    Agent_API_Messages_markAgentMessageProcessing_Response_200:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/MessageStatusResponse'
-      required:
-      - data
-      title: Agent API/Messages_markAgentMessageProcessing_Response_200
-    Agent_API_Messages_listAgentMessages_Response_200:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ChatMessage'
-        metadata:
-          $ref: '#/components/schemas/ApiV1AgentChatsChatIdMessagesGetResponsesContentApplicationJsonSchemaMetadata'
-      required:
-      - data
-      - metadata
-      title: Agent API/Messages_listAgentMessages_Response_200
     ChatMessageRequestMentionsItems:
       type: object
       properties:
@@ -806,47 +723,127 @@ components:
           type: string
           description: Display name as it appears in the content (without @ prefix)
       title: ChatMessageRequestMentionsItems
-    ApiV1AgentChatsChatIdMessagesGetResponsesContentApplicationJsonSchemaMetadata:
+    Error:
       type: object
       properties:
-        has_more:
-          type: boolean
-          description: Whether more pages exist
-        limit:
-          type: integer
-          description: Page size used
-        next_cursor:
-          type:
-          - string
-          - 'null'
-          description: Cursor for next page (null if no more pages)
-        page:
-          type: integer
-          description: Current page (deprecated)
-        page_size:
-          type: integer
-          description: Items per page (deprecated)
-        status_filter:
-          type:
-          - string
-          - 'null'
-          description: Applied status filter
-        total_count:
-          type: integer
-          description: Total messages (deprecated)
-        total_pages:
-          type: integer
-          description: Total pages (deprecated)
+        error:
+          $ref: '#/components/schemas/ErrorError'
       required:
-      - has_more
-      - limit
-      - next_cursor
-      title: ApiV1AgentChatsChatIdMessagesGetResponsesContentApplicationJsonSchemaMetadata
-    ChatMessageMetadata:
+      - error
+      description: Standard error response with request ID for tracing
+      title: Error
+    MessageSentResponseRecipientsItems:
+      type: object
+      properties:
+        handle:
+          type: string
+          description: Recipient handle
+        id:
+          type: string
+          format: uuid
+          description: Recipient ID
+        name:
+          type: string
+          description: Recipient display name (optional)
+      required:
+      - handle
+      - id
+      title: MessageSentResponseRecipientsItems
+    Agent_API_Messages_markAgentMessageProcessing_Response_200:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/MessageStatusResponse'
+      required:
+      - data
+      title: Agent API/Messages_markAgentMessageProcessing_Response_200
+    ApiV1AgentChatsChatIdMessagesGetParametersStatus:
+      type: string
+      enum:
+      - pending
+      - failed
+      - processing
+      - processed
+      - all
+      title: ApiV1AgentChatsChatIdMessagesGetParametersStatus
+    MessageSentResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: ID of the created message
+        recipients:
+          type: array
+          items:
+            $ref: '#/components/schemas/MessageSentResponseRecipientsItems'
+          description: List of participants who will receive the message. Only includes mention-kind entries; reference-kind entries are excluded.
+        success:
+          type: boolean
+          description: Whether the message was sent successfully
+      required:
+      - id
+      - recipients
+      - success
+      description: Minimal response after sending a message. Contains only essential fields to confirm delivery.
+      title: MessageSentResponse
+    Agent_API_Messages_listAgentMessages_Response_200:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatMessage'
+        metadata:
+          $ref: '#/components/schemas/ApiV1AgentChatsChatIdMessagesGetResponsesContentApplicationJsonSchemaMetadata'
+      required:
+      - data
+      - metadata
+      title: Agent API/Messages_listAgentMessages_Response_200
+    MessageStatusResponseStatus:
+      type: string
+      enum:
+      - processing
+      - processed
+      - failed
+      description: New processing status
+      title: MessageStatusResponseStatus
+    ErrorErrorDetails:
       type: object
       properties: {}
-      description: Additional metadata including mentions
-      title: ChatMessageMetadata
+      description: Additional error details (optional)
+      title: ErrorErrorDetails
+    MessageStatusResponse:
+      type: object
+      properties:
+        attempt_number:
+          type: integer
+          description: Current attempt number
+        id:
+          type: string
+          format: uuid
+          description: ID of the message
+        status:
+          $ref: '#/components/schemas/MessageStatusResponseStatus'
+          description: New processing status
+        success:
+          type: boolean
+          description: Whether the status was updated successfully
+      required:
+      - attempt_number
+      - id
+      - status
+      - success
+      description: Minimal response after updating message processing status.
+      title: MessageStatusResponse
+    Agent_API_Messages_markAgentMessageFailed_Response_200:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/MessageStatusResponse'
+      required:
+      - data
+      title: Agent API/Messages_markAgentMessageFailed_Response_200
     ChatMessage:
       type: object
       properties:
@@ -893,30 +890,19 @@ components:
       - sender_type
       description: A chat message
       title: ChatMessage
-    MessageStatusResponseStatus:
-      type: string
-      enum:
-      - processing
-      - processed
-      - failed
-      description: New processing status
-      title: MessageStatusResponseStatus
-    ChatMessageRequest:
+    Agent_API_Messages_getAgentNextMessage_Response_200:
       type: object
       properties:
-        content:
-          type: string
-          description: Message content with @mentions for recipients (e.g. '@DataAnalyst please analyze this'). Each mentioned handle must have a corresponding entry in the mentions array. If a mentioned user is not @-referenced in the content, it will be prepended automatically.
-        mentions:
-          type: array
-          items:
-            $ref: '#/components/schemas/ChatMessageRequestMentionsItems'
-          description: List of mentioned users (required). Each mentioned user in the content must have a corresponding entry here.
+        data:
+          $ref: '#/components/schemas/ChatMessage'
       required:
-      - content
-      - mentions
-      description: Request to create a text message. For other message types (tool_call, tool_result, thought, etc.), use the /events endpoint.
-      title: ChatMessageRequest
+      - data
+      title: Agent API/Messages_getAgentNextMessage_Response_200
+    ChatMessageMetadata:
+      type: object
+      properties: {}
+      description: Additional metadata including mentions
+      title: ChatMessageMetadata
     Agent_API_Messages_createAgentChatMessage_Response_201:
       type: object
       properties:
@@ -925,65 +911,22 @@ components:
       required:
       - data
       title: Agent API/Messages_createAgentChatMessage_Response_201
-    MessageSentResponseRecipientsItems:
+    ValidationError:
       type: object
       properties:
-        handle:
-          type: string
-          description: Recipient handle
-        id:
-          type: string
-          format: uuid
-          description: Recipient ID
-        name:
-          type: string
-          description: Recipient display name (optional)
+        error:
+          $ref: '#/components/schemas/ValidationErrorError'
       required:
-      - handle
-      - id
-      title: MessageSentResponseRecipientsItems
-    Agent_API_Messages_markAgentMessageFailed_Response_200:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/MessageStatusResponse'
-      required:
-      - data
-      title: Agent API/Messages_markAgentMessageFailed_Response_200
-    MessageSentResponse:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: ID of the created message
-        recipients:
-          type: array
-          items:
-            $ref: '#/components/schemas/MessageSentResponseRecipientsItems'
-          description: List of participants who will receive the message. Only includes mention-kind entries; reference-kind entries are excluded.
-        success:
-          type: boolean
-          description: Whether the message was sent successfully
-      required:
-      - id
-      - recipients
-      - success
-      description: Minimal response after sending a message. Contains only essential fields to confirm delivery.
-      title: MessageSentResponse
-    ErrorErrorDetails:
-      type: object
-      properties: {}
-      description: Additional error details (optional)
-      title: ErrorErrorDetails
-    Agent_API_Messages_markAgentMessageProcessed_Response_200:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/MessageStatusResponse'
-      required:
-      - data
-      title: Agent API/Messages_markAgentMessageProcessed_Response_200
+      - error
+      description: Validation error response with field-specific errors and request ID for tracing
+      title: ValidationError
+    ChatMessageRequestMentionsItemsKind:
+      type: string
+      enum:
+      - mention
+      - reference
+      description: Whether this entry is a mention (triggers delivery to the recipient) or a reference (narrative-only, no delivery). Defaults to "mention" when omitted. Omit the field rather than sending null — an explicit null is rejected.
+      title: ChatMessageRequestMentionsItemsKind
     ValidationErrorError:
       type: object
       properties:
@@ -1009,29 +952,86 @@ components:
       - message
       - request_id
       title: ValidationErrorError
-    MessageStatusResponse:
+    ChatMessageRequest:
       type: object
       properties:
-        attempt_number:
-          type: integer
-          description: Current attempt number
-        id:
+        content:
           type: string
-          format: uuid
-          description: ID of the message
-        status:
-          $ref: '#/components/schemas/MessageStatusResponseStatus'
-          description: New processing status
-        success:
-          type: boolean
-          description: Whether the status was updated successfully
+          description: Message content with @mentions for recipients (e.g. '@DataAnalyst please analyze this'). Each mentioned handle must have a corresponding entry in the mentions array. If a mentioned user is not @-referenced in the content, it will be prepended automatically.
+        mentions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatMessageRequestMentionsItems'
+          description: List of mentioned users (required). Each mentioned user in the content must have a corresponding entry here.
       required:
-      - attempt_number
-      - id
-      - status
-      - success
-      description: Minimal response after updating message processing status.
-      title: MessageStatusResponse
+      - content
+      - mentions
+      description: Request to create a text message. For other message types (tool_call, tool_result, thought, etc.), use the /events endpoint.
+      title: ChatMessageRequest
+    Agent_API_Messages_markAgentMessageProcessed_Response_200:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/MessageStatusResponse'
+      required:
+      - data
+      title: Agent API/Messages_markAgentMessageProcessed_Response_200
+    ErrorError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+        details:
+          $ref: '#/components/schemas/ErrorErrorDetails'
+          description: Additional error details (optional)
+        message:
+          type: string
+          description: Human-readable error message
+        request_id:
+          type: string
+          description: Unique request identifier for tracing and debugging
+      required:
+      - code
+      - message
+      - request_id
+      title: ErrorError
+    ApiV1AgentChatsChatIdMessagesGetResponsesContentApplicationJsonSchemaMetadata:
+      type: object
+      properties:
+        has_more:
+          type: boolean
+          description: Whether more pages exist
+        limit:
+          type: integer
+          description: Page size used
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          description: Cursor for next page (null if no more pages)
+        page:
+          type: integer
+          description: Current page (deprecated)
+        page_size:
+          type: integer
+          description: Items per page (deprecated)
+        status_filter:
+          type:
+          - string
+          - 'null'
+          description: Applied status filter
+        total_count:
+          type: integer
+          description: Total messages (deprecated)
+        total_pages:
+          type: integer
+          description: Total pages (deprecated)
+      required:
+      - has_more
+      - limit
+      - next_cursor
+      title: ApiV1AgentChatsChatIdMessagesGetResponsesContentApplicationJsonSchemaMetadata
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

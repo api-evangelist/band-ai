@@ -92,11 +92,23 @@ paths:
               - event
 components:
   schemas:
-    ErrorErrorDetails:
+    ValidationError:
       type: object
-      properties: {}
-      description: Additional error details (optional)
-      title: ErrorErrorDetails
+      properties:
+        error:
+          $ref: '#/components/schemas/ValidationErrorError'
+      required:
+      - error
+      description: Validation error response with field-specific errors and request ID for tracing
+      title: ValidationError
+    Agent_API_Events_createAgentChatEvent_Response_201:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/EventCreatedResponse'
+      required:
+      - data
+      title: Agent API/Events_createAgentChatEvent_Response_201
     ChatEventMessageType:
       type: string
       enum:
@@ -108,15 +120,79 @@ components:
       - attention
       description: Type of chat event. Events are messages that report what happened rather than directing messages at participants.
       title: ChatEventMessageType
-    ValidationError:
+    ValidationErrorError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+        details:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          description: Field-specific validation errors with JSON Pointer paths (RFC 6901) as keys
+        message:
+          type: string
+          description: Human-readable error message
+        request_id:
+          type: string
+          description: Unique request identifier for tracing and debugging
+      required:
+      - code
+      - details
+      - message
+      - request_id
+      title: ValidationErrorError
+    ErrorErrorDetails:
+      type: object
+      properties: {}
+      description: Additional error details (optional)
+      title: ErrorErrorDetails
+    ChatEventRequestMetadata:
+      type: object
+      properties: {}
+      description: 'Structured data for the event. Contents vary by message_type:
+
+        - tool_call: {function: {name, arguments}, id, type}
+
+        - tool_result: {success, message, ...result data}
+
+        - error: {error_code, details}
+
+        - attention: {kind, blocking, task_id?, resolves?, resolution?, ...}
+
+        '
+      title: ChatEventRequestMetadata
+    EventCreatedResponse:
+      type: object
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: ID of the created event
+        message_type:
+          type: string
+          description: Type of event recorded
+        success:
+          type: boolean
+          description: Whether the event was created successfully
+      required:
+      - id
+      - message_type
+      - success
+      description: Response after creating an event.
+      title: EventCreatedResponse
+    Error:
       type: object
       properties:
         error:
-          $ref: '#/components/schemas/ValidationErrorError'
+          $ref: '#/components/schemas/ErrorError'
       required:
       - error
-      description: Validation error response with field-specific errors and request ID for tracing
-      title: ValidationError
+      description: Standard error response with request ID for tracing
+      title: Error
     ErrorError:
       type: object
       properties:
@@ -197,82 +273,6 @@ components:
 
         '
       title: ChatEventRequest
-    Error:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorError'
-      required:
-      - error
-      description: Standard error response with request ID for tracing
-      title: Error
-    EventCreatedResponse:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: ID of the created event
-        message_type:
-          type: string
-          description: Type of event recorded
-        success:
-          type: boolean
-          description: Whether the event was created successfully
-      required:
-      - id
-      - message_type
-      - success
-      description: Response after creating an event.
-      title: EventCreatedResponse
-    ValidationErrorError:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Machine-readable error code
-        details:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-          description: Field-specific validation errors with JSON Pointer paths (RFC 6901) as keys
-        message:
-          type: string
-          description: Human-readable error message
-        request_id:
-          type: string
-          description: Unique request identifier for tracing and debugging
-      required:
-      - code
-      - details
-      - message
-      - request_id
-      title: ValidationErrorError
-    ChatEventRequestMetadata:
-      type: object
-      properties: {}
-      description: 'Structured data for the event. Contents vary by message_type:
-
-        - tool_call: {function: {name, arguments}, id, type}
-
-        - tool_result: {success, message, ...result data}
-
-        - error: {error_code, details}
-
-        - attention: {kind, blocking, task_id?, resolves?, resolution?, ...}
-
-        '
-      title: ChatEventRequestMetadata
-    Agent_API_Events_createAgentChatEvent_Response_201:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/EventCreatedResponse'
-      required:
-      - data
-      title: Agent API/Events_createAgentChatEvent_Response_201
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

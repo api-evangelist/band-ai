@@ -96,11 +96,6 @@ paths:
               - working
 components:
   schemas:
-    ErrorErrorDetails:
-      type: object
-      properties: {}
-      description: Additional error details (optional)
-      title: ErrorErrorDetails
     ValidationError:
       type: object
       properties:
@@ -110,53 +105,11 @@ components:
       - error
       description: Validation error response with field-specific errors and request ID for tracing
       title: ValidationError
-    ErrorError:
+    ErrorErrorDetails:
       type: object
-      properties:
-        code:
-          type: string
-          description: Machine-readable error code
-        details:
-          $ref: '#/components/schemas/ErrorErrorDetails'
-          description: Additional error details (optional)
-        message:
-          type: string
-          description: Human-readable error message
-        request_id:
-          type: string
-          description: Unique request identifier for tracing and debugging
-      required:
-      - code
-      - message
-      - request_id
-      title: ErrorError
-    Agent_API_Activity_reportAgentChatActivity_Response_200:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/AgentActivityResponse'
-      required:
-      - data
-      title: Agent API/Activity_reportAgentChatActivity_Response_200
-    AgentActivityResponse:
-      type: object
-      properties:
-        working:
-          type: boolean
-          description: The working state the platform recorded.
-      required:
-      - working
-      description: Confirms the working state now in effect for the agent's execution.
-      title: AgentActivityResponse
-    Error:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorError'
-      required:
-      - error
-      description: Standard error response with request ID for tracing
-      title: Error
+      properties: {}
+      description: Additional error details (optional)
+      title: ErrorErrorDetails
     ValidationErrorError:
       type: object
       properties:
@@ -182,6 +135,53 @@ components:
       - message
       - request_id
       title: ValidationErrorError
+    AgentActivityResponse:
+      type: object
+      properties:
+        working:
+          type: boolean
+          description: The working state the platform recorded.
+      required:
+      - working
+      description: Confirms the working state now in effect for the agent's execution.
+      title: AgentActivityResponse
+    Error:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorError'
+      required:
+      - error
+      description: Standard error response with request ID for tracing
+      title: Error
+    Agent_API_Activity_reportAgentChatActivity_Response_200:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/AgentActivityResponse'
+      required:
+      - data
+      title: Agent API/Activity_reportAgentChatActivity_Response_200
+    ErrorError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+        details:
+          $ref: '#/components/schemas/ErrorErrorDetails'
+          description: Additional error details (optional)
+        message:
+          type: string
+          description: Human-readable error message
+        request_id:
+          type: string
+          description: Unique request identifier for tracing and debugging
+      required:
+      - code
+      - message
+      - request_id
+      title: ErrorError
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

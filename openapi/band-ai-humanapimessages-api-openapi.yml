@@ -215,11 +215,27 @@ paths:
               - message
 components:
   schemas:
-    ErrorErrorDetails:
+    MessageSentResponse:
       type: object
-      properties: {}
-      description: Additional error details (optional)
-      title: ErrorErrorDetails
+      properties:
+        id:
+          type: string
+          format: uuid
+          description: ID of the created message
+        recipients:
+          type: array
+          items:
+            $ref: '#/components/schemas/MessageSentResponseRecipientsItems'
+          description: List of participants who will receive the message. Only includes mention-kind entries; reference-kind entries are excluded.
+        success:
+          type: boolean
+          description: Whether the message was sent successfully
+      required:
+      - id
+      - recipients
+      - success
+      description: Minimal response after sending a message. Contains only essential fields to confirm delivery.
+      title: MessageSentResponse
     ChatMessageRequestMentionsItems:
       type: object
       properties:
@@ -237,22 +253,6 @@ components:
           type: string
           description: Display name as it appears in the content (without @ prefix)
       title: ChatMessageRequestMentionsItems
-    ChatMessageRequest:
-      type: object
-      properties:
-        content:
-          type: string
-          description: Message content with @mentions for recipients (e.g. '@DataAnalyst please analyze this'). Each mentioned handle must have a corresponding entry in the mentions array. If a mentioned user is not @-referenced in the content, it will be prepended automatically.
-        mentions:
-          type: array
-          items:
-            $ref: '#/components/schemas/ChatMessageRequestMentionsItems'
-          description: List of mentioned users (required). Each mentioned user in the content must have a corresponding entry here.
-      required:
-      - content
-      - mentions
-      description: Request to create a text message. For other message types (tool_call, tool_result, thought, etc.), use the /events endpoint.
-      title: ChatMessageRequest
     ValidationError:
       type: object
       properties:
@@ -262,47 +262,6 @@ components:
       - error
       description: Validation error response with field-specific errors and request ID for tracing
       title: ValidationError
-    ChatMessageMetadata:
-      type: object
-      properties: {}
-      description: Additional metadata including mentions
-      title: ChatMessageMetadata
-    ErrorError:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Machine-readable error code
-        details:
-          $ref: '#/components/schemas/ErrorErrorDetails'
-          description: Additional error details (optional)
-        message:
-          type: string
-          description: Human-readable error message
-        request_id:
-          type: string
-          description: Unique request identifier for tracing and debugging
-      required:
-      - code
-      - message
-      - request_id
-      title: ErrorError
-    Error:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorError'
-      required:
-      - error
-      description: Standard error response with request ID for tracing
-      title: Error
-    ChatMessageRequestMentionsItemsKind:
-      type: string
-      enum:
-      - mention
-      - reference
-      description: Whether this entry is a mention (triggers delivery to the recipient) or a reference (narrative-only, no delivery). Defaults to "mention" when omitted. Omit the field rather than sending null — an explicit null is rejected.
-      title: ChatMessageRequestMentionsItemsKind
     Human_API_Messages_listMyChatMessages_Response_200:
       type: object
       properties:
@@ -316,18 +275,23 @@ components:
       - data
       - metadata
       title: Human API/Messages_listMyChatMessages_Response_200
-    ApiV1MeChatsChatIdMessagesGetParametersMessageType:
+    ChatMessageMetadata:
+      type: object
+      properties: {}
+      description: Additional metadata including mentions
+      title: ChatMessageMetadata
+    ErrorErrorDetails:
+      type: object
+      properties: {}
+      description: Additional error details (optional)
+      title: ErrorErrorDetails
+    ChatMessageRequestMentionsItemsKind:
       type: string
       enum:
-      - text
-      - tool_call
-      - tool_result
-      - thought
-      - error
-      - task
-      - attention
-      description: Filter by message type
-      title: ApiV1MeChatsChatIdMessagesGetParametersMessageType
+      - mention
+      - reference
+      description: Whether this entry is a mention (triggers delivery to the recipient) or a reference (narrative-only, no delivery). Defaults to "mention" when omitted. Omit the field rather than sending null — an explicit null is rejected.
+      title: ChatMessageRequestMentionsItemsKind
     ValidationErrorError:
       type: object
       properties:
@@ -353,6 +317,91 @@ components:
       - message
       - request_id
       title: ValidationErrorError
+    ChatMessageRequest:
+      type: object
+      properties:
+        content:
+          type: string
+          description: Message content with @mentions for recipients (e.g. '@DataAnalyst please analyze this'). Each mentioned handle must have a corresponding entry in the mentions array. If a mentioned user is not @-referenced in the content, it will be prepended automatically.
+        mentions:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatMessageRequestMentionsItems'
+          description: List of mentioned users (required). Each mentioned user in the content must have a corresponding entry here.
+      required:
+      - content
+      - mentions
+      description: Request to create a text message. For other message types (tool_call, tool_result, thought, etc.), use the /events endpoint.
+      title: ChatMessageRequest
+    ApiV1MeChatsChatIdMessagesGetResponsesContentApplicationJsonSchemaMetadata:
+      type: object
+      properties:
+        has_more:
+          type: boolean
+          description: Whether more pages exist
+        limit:
+          type: integer
+          description: Page size used
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          description: Cursor for next page
+        page:
+          type: integer
+          description: Current page (deprecated)
+        page_size:
+          type: integer
+          description: Items per page (deprecated)
+        total_count:
+          type: integer
+          description: Total messages (deprecated)
+        total_pages:
+          type: integer
+          description: Total pages (deprecated)
+      required:
+      - has_more
+      - limit
+      - next_cursor
+      title: ApiV1MeChatsChatIdMessagesGetResponsesContentApplicationJsonSchemaMetadata
+    Error:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorError'
+      required:
+      - error
+      description: Standard error response with request ID for tracing
+      title: Error
+    ApiV1MeChatsChatIdMessagesGetParametersMessageType:
+      type: string
+      enum:
+      - text
+      - tool_call
+      - tool_result
+      - thought
+      - error
+      - task
+      - attention
+      description: Filter by message type
+      title: ApiV1MeChatsChatIdMessagesGetParametersMessageType
+    MessageSentResponseRecipientsItems:
+      type: object
+      properties:
+        handle:
+          type: string
+          description: Recipient handle
+        id:
+          type: string
+          format: uuid
+          description: Recipient ID
+        name:
+          type: string
+          description: Recipient display name (optional)
+      required:
+      - handle
+      - id
+      title: MessageSentResponseRecipientsItems
     ChatMessage:
       type: object
       properties:
@@ -399,23 +448,26 @@ components:
       - sender_type
       description: A chat message
       title: ChatMessage
-    MessageSentResponseRecipientsItems:
+    ErrorError:
       type: object
       properties:
-        handle:
+        code:
           type: string
-          description: Recipient handle
-        id:
+          description: Machine-readable error code
+        details:
+          $ref: '#/components/schemas/ErrorErrorDetails'
+          description: Additional error details (optional)
+        message:
           type: string
-          format: uuid
-          description: Recipient ID
-        name:
+          description: Human-readable error message
+        request_id:
           type: string
-          description: Recipient display name (optional)
+          description: Unique request identifier for tracing and debugging
       required:
-      - handle
-      - id
-      title: MessageSentResponseRecipientsItems
+      - code
+      - message
+      - request_id
+      title: ErrorError
     Human_API_Messages_sendMyChatMessage_Response_201:
       type: object
       properties:
@@ -424,58 +476,6 @@ components:
       required:
       - data
       title: Human API/Messages_sendMyChatMessage_Response_201
-    MessageSentResponse:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: ID of the created message
-        recipients:
-          type: array
-          items:
-            $ref: '#/components/schemas/MessageSentResponseRecipientsItems'
-          description: List of participants who will receive the message. Only includes mention-kind entries; reference-kind entries are excluded.
-        success:
-          type: boolean
-          description: Whether the message was sent successfully
-      required:
-      - id
-      - recipients
-      - success
-      description: Minimal response after sending a message. Contains only essential fields to confirm delivery.
-      title: MessageSentResponse
-    ApiV1MeChatsChatIdMessagesGetResponsesContentApplicationJsonSchemaMetadata:
-      type: object
-      properties:
-        has_more:
-          type: boolean
-          description: Whether more pages exist
-        limit:
-          type: integer
-          description: Page size used
-        next_cursor:
-          type:
-          - string
-          - 'null'
-          description: Cursor for next page
-        page:
-          type: integer
-          description: Current page (deprecated)
-        page_size:
-          type: integer
-          description: Items per page (deprecated)
-        total_count:
-          type: integer
-          description: Total messages (deprecated)
-        total_pages:
-          type: integer
-          description: Total pages (deprecated)
-      required:
-      - has_more
-      - limit
-      - next_cursor
-      title: ApiV1MeChatsChatIdMessagesGetResponsesContentApplicationJsonSchemaMetadata
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

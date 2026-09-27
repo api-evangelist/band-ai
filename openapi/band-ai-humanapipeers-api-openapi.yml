@@ -89,72 +89,24 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
+    Human_API_Peers_listMyPeers_Response_200:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Peer'
+        metadata:
+          $ref: '#/components/schemas/ApiV1MePeersGetResponsesContentApplicationJsonSchemaMetadata'
+      required:
+      - data
+      - metadata
+      title: Human API/Peers_listMyPeers_Response_200
     ErrorErrorDetails:
       type: object
       properties: {}
       description: Additional error details (optional)
       title: ErrorErrorDetails
-    PeerSource:
-      type: string
-      enum:
-      - registry
-      - contact
-      description: How the peer was discovered (registry = owner/sibling/global, contact = from contacts)
-      title: PeerSource
-    ApiV1MePeersGetResponsesContentApplicationJsonSchemaMetadata:
-      type: object
-      properties:
-        page:
-          type: integer
-        page_size:
-          type: integer
-        total_count:
-          type: integer
-        total_pages:
-          type: integer
-      title: ApiV1MePeersGetResponsesContentApplicationJsonSchemaMetadata
-    ErrorError:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Machine-readable error code
-        details:
-          $ref: '#/components/schemas/ErrorErrorDetails'
-          description: Additional error details (optional)
-        message:
-          type: string
-          description: Human-readable error message
-        request_id:
-          type: string
-          description: Unique request identifier for tracing and debugging
-      required:
-      - code
-      - message
-      - request_id
-      title: ErrorError
-    ApiV1MePeersGetParametersType:
-      type: string
-      enum:
-      - User
-      - Agent
-      title: ApiV1MePeersGetParametersType
-    Error:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorError'
-      required:
-      - error
-      description: Standard error response with request ID for tracing
-      title: Error
-    PeerType:
-      type: string
-      enum:
-      - User
-      - Agent
-      description: Entity type
-      title: PeerType
     Peer:
       type: object
       properties:
@@ -208,19 +160,67 @@ components:
       - type
       description: An entity available for interaction in chat rooms (user or agent)
       title: Peer
-    Human_API_Peers_listMyPeers_Response_200:
+    PeerType:
+      type: string
+      enum:
+      - User
+      - Agent
+      description: Entity type
+      title: PeerType
+    Error:
       type: object
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Peer'
-        metadata:
-          $ref: '#/components/schemas/ApiV1MePeersGetResponsesContentApplicationJsonSchemaMetadata'
+        error:
+          $ref: '#/components/schemas/ErrorError'
       required:
-      - data
-      - metadata
-      title: Human API/Peers_listMyPeers_Response_200
+      - error
+      description: Standard error response with request ID for tracing
+      title: Error
+    PeerSource:
+      type: string
+      enum:
+      - registry
+      - contact
+      description: How the peer was discovered (registry = owner/sibling/global, contact = from contacts)
+      title: PeerSource
+    ErrorError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+        details:
+          $ref: '#/components/schemas/ErrorErrorDetails'
+          description: Additional error details (optional)
+        message:
+          type: string
+          description: Human-readable error message
+        request_id:
+          type: string
+          description: Unique request identifier for tracing and debugging
+      required:
+      - code
+      - message
+      - request_id
+      title: ErrorError
+    ApiV1MePeersGetParametersType:
+      type: string
+      enum:
+      - User
+      - Agent
+      title: ApiV1MePeersGetParametersType
+    ApiV1MePeersGetResponsesContentApplicationJsonSchemaMetadata:
+      type: object
+      properties:
+        page:
+          type: integer
+        page_size:
+          type: integer
+        total_count:
+          type: integer
+        total_pages:
+          type: integer
+      title: ApiV1MePeersGetResponsesContentApplicationJsonSchemaMetadata
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

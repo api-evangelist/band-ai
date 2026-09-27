@@ -378,65 +378,44 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    ErrorErrorDetails:
-      type: object
-      properties: {}
-      description: Additional error details (optional)
-      title: ErrorErrorDetails
-    Human_API_Memories_getUserMemory_Response_200:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/UserMemory'
-      title: Human API/Memories_getUserMemory_Response_200
     Human_API_Memories_supersedeUserMemory_Response_200:
       type: object
       properties:
         data:
           $ref: '#/components/schemas/UserMemory'
       title: Human API/Memories_supersedeUserMemory_Response_200
-    UserMemoryStatus:
+    UserMemoryType:
       type: string
       enum:
-      - active
-      - superseded
-      - archived
-      description: Memory lifecycle status
-      title: UserMemoryStatus
+      - iconic
+      - echoic
+      - haptic
+      - episodic
+      - semantic
+      - procedural
+      description: Memory type within the system
+      title: UserMemoryType
+    UserMemorySegment:
+      type: string
+      enum:
+      - user
+      - agent
+      - tool
+      - guideline
+      description: Logical segment of the memory
+      title: UserMemorySegment
+    Human_API_Memories_getUserMemory_Response_200:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/UserMemory'
+      title: Human API/Memories_getUserMemory_Response_200
     Human_API_Memories_restoreUserMemory_Response_200:
       type: object
       properties:
         data:
           $ref: '#/components/schemas/UserMemory'
       title: Human API/Memories_restoreUserMemory_Response_200
-    ErrorError:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Machine-readable error code
-        details:
-          $ref: '#/components/schemas/ErrorErrorDetails'
-          description: Additional error details (optional)
-        message:
-          type: string
-          description: Human-readable error message
-        request_id:
-          type: string
-          description: Unique request identifier for tracing and debugging
-      required:
-      - code
-      - message
-      - request_id
-      title: ErrorError
-    UserMemorySystem:
-      type: string
-      enum:
-      - sensory
-      - working
-      - long_term
-      description: Memory system tier
-      title: UserMemorySystem
     ApiV1MeMemoriesGetResponsesContentApplicationJsonSchemaMeta:
       type: object
       properties:
@@ -465,34 +444,46 @@ components:
           description: Total number of pages (offset pagination)
       description: Pagination metadata (cursor fields on the keyset path, offset fields on the deprecated path)
       title: ApiV1MeMemoriesGetResponsesContentApplicationJsonSchemaMeta
-    Error:
+    ErrorError:
       type: object
       properties:
-        error:
-          $ref: '#/components/schemas/ErrorError'
+        code:
+          type: string
+          description: Machine-readable error code
+        details:
+          $ref: '#/components/schemas/ErrorErrorDetails'
+          description: Additional error details (optional)
+        message:
+          type: string
+          description: Human-readable error message
+        request_id:
+          type: string
+          description: Unique request identifier for tracing and debugging
       required:
-      - error
-      description: Standard error response with request ID for tracing
-      title: Error
-    Human_API_Memories_listUserMemories_Response_200:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/UserMemory'
-        meta:
-          $ref: '#/components/schemas/ApiV1MeMemoriesGetResponsesContentApplicationJsonSchemaMeta'
-          description: Pagination metadata (cursor fields on the keyset path, offset fields on the deprecated path)
-        metadata:
-          $ref: '#/components/schemas/ApiV1MeMemoriesGetResponsesContentApplicationJsonSchemaMetadata'
-          description: Pagination metadata (cursor fields on the keyset path, offset fields on the deprecated path)
-      title: Human API/Memories_listUserMemories_Response_200
-    UserMemoryMetadata:
+      - code
+      - message
+      - request_id
+      title: ErrorError
+    ErrorErrorDetails:
       type: object
       properties: {}
-      description: Additional metadata
-      title: UserMemoryMetadata
+      description: Additional error details (optional)
+      title: ErrorErrorDetails
+    UserMemoryScope:
+      type: string
+      enum:
+      - subject
+      - organization
+      description: Visibility scope of the memory
+      title: UserMemoryScope
+    UserMemoryStatus:
+      type: string
+      enum:
+      - active
+      - superseded
+      - archived
+      description: Memory lifecycle status
+      title: UserMemoryStatus
     ApiV1MeMemoriesGetResponsesContentApplicationJsonSchemaMetadata:
       type: object
       properties:
@@ -521,26 +512,37 @@ components:
           description: Total number of pages (offset pagination)
       description: Pagination metadata (cursor fields on the keyset path, offset fields on the deprecated path)
       title: ApiV1MeMemoriesGetResponsesContentApplicationJsonSchemaMetadata
-    UserMemoryType:
+    Human_API_Memories_listUserMemories_Response_200:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/UserMemory'
+        meta:
+          $ref: '#/components/schemas/ApiV1MeMemoriesGetResponsesContentApplicationJsonSchemaMeta'
+          description: Pagination metadata (cursor fields on the keyset path, offset fields on the deprecated path)
+        metadata:
+          $ref: '#/components/schemas/ApiV1MeMemoriesGetResponsesContentApplicationJsonSchemaMetadata'
+          description: Pagination metadata (cursor fields on the keyset path, offset fields on the deprecated path)
+      title: Human API/Memories_listUserMemories_Response_200
+    Error:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorError'
+      required:
+      - error
+      description: Standard error response with request ID for tracing
+      title: Error
+    UserMemorySystem:
       type: string
       enum:
-      - iconic
-      - echoic
-      - haptic
-      - episodic
-      - semantic
-      - procedural
-      description: Memory type within the system
-      title: UserMemoryType
-    UserMemorySegment:
-      type: string
-      enum:
-      - user
-      - agent
-      - tool
-      - guideline
-      description: Logical segment of the memory
-      title: UserMemorySegment
+      - sensory
+      - working
+      - long_term
+      description: Memory system tier
+      title: UserMemorySystem
     UserMemory:
       type: object
       properties:
@@ -610,19 +612,17 @@ components:
       - type
       description: A memory entry visible to the user
       title: UserMemory
+    UserMemoryMetadata:
+      type: object
+      properties: {}
+      description: Additional metadata
+      title: UserMemoryMetadata
     Human_API_Memories_archiveUserMemory_Response_200:
       type: object
       properties:
         data:
           $ref: '#/components/schemas/UserMemory'
       title: Human API/Memories_archiveUserMemory_Response_200
-    UserMemoryScope:
-      type: string
-      enum:
-      - subject
-      - organization
-      description: Visibility scope of the memory
-      title: UserMemoryScope
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

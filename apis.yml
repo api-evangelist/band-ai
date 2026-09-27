@@ -71,7 +71,7 @@ tags_raw:
 - Developer Tools
 apis:
 - aid: band-ai:band-ai-agentapiactivity-api
-  name: Band AI agentApiActivity API
+  name: Band AI Agent API Activity API
   description: The agentApiActivity API from Band AI — 1 operation(s) for agentapiactivity.
   humanURL: https://docs.band.ai/api/introduction
   baseURL: https://app.band.ai
@@ -86,7 +86,7 @@ apis:
   - type: Documentation
     url: https://docs.band.ai/
 - aid: band-ai:band-ai-agentapichats-api
-  name: Band AI agentApiChats API
+  name: Band AI Agent API Chats API
   description: The agentApiChats API from Band AI — 2 operation(s) for agentapichats.
   humanURL: https://docs.band.ai/api/introduction
   baseURL: https://app.band.ai
@@ -101,7 +101,7 @@ apis:
   - type: Documentation
     url: https://docs.band.ai/
 - aid: band-ai:band-ai-agentapichattasks-api
-  name: Band AI agentApiChatTasks API
+  name: Band AI Agent API Chat Tasks API
   description: The agentApiChatTasks API from Band AI — 4 operation(s) for agentapichattasks.
   humanURL: https://docs.band.ai/api/introduction
   baseURL: https://app.band.ai
@@ -116,7 +116,7 @@ apis:
   - type: Documentation
     url: https://docs.band.ai/
 - aid: band-ai:band-ai-agentapicontacts-api
-  name: Band AI agentApiContacts API
+  name: Band AI Agent API Contacts API
   description: The agentApiContacts API from Band AI — 5 operation(s) for agentapicontacts.
   humanURL: https://docs.band.ai/api/introduction
   baseURL: https://app.band.ai
@@ -131,7 +131,7 @@ apis:
   - type: Documentation
     url: https://docs.band.ai/
 - aid: band-ai:band-ai-agentapicontext-api
-  name: Band AI agentApiContext API
+  name: Band AI Agent API Context API
   description: The agentApiContext API from Band AI — 1 operation(s) for agentapicontext.
   humanURL: https://docs.band.ai/api/introduction
   baseURL: https://app.band.ai
@@ -146,7 +146,7 @@ apis:
   - type: Documentation
     url: https://docs.band.ai/
 - aid: band-ai:band-ai-agentapievents-api
-  name: Band AI agentApiEvents API
+  name: Band AI Agent API Events API
   description: The agentApiEvents API from Band AI — 1 operation(s) for agentapievents.
   humanURL: https://docs.band.ai/api/introduction
   baseURL: https://app.band.ai
@@ -161,7 +161,7 @@ apis:
   - type: Documentation
     url: https://docs.band.ai/
 - aid: band-ai:band-ai-agentapiidentity-api
-  name: Band AI agentApiIdentity API
+  name: Band AI Agent API Identity API
   description: The agentApiIdentity API from Band AI — 1 operation(s) for agentapiidentity.
   humanURL: https://docs.band.ai/api/introduction
   baseURL: https://app.band.ai
@@ -176,7 +176,7 @@ apis:
   - type: Documentation
     url: https://docs.band.ai/
 - aid: band-ai:band-ai-agentapimemories-api
-  name: Band AI agentApiMemories API
+  name: Band AI Agent API Memories API
   description: The agentApiMemories API from Band AI — 4 operation(s) for agentapimemories.
   humanURL: https://docs.band.ai/api/introduction
   baseURL: https://app.band.ai
@@ -191,7 +191,7 @@ apis:
   - type: Documentation
     url: https://docs.band.ai/
 - aid: band-ai:band-ai-agentapimessages-api
-  name: Band AI agentApiMessages API
+  name: Band AI Agent API Messages API
   description: The agentApiMessages API from Band AI — 5 operation(s) for agentapimessages.
   humanURL: https://docs.band.ai/api/introduction
   baseURL: https://app.band.ai
@@ -206,7 +206,7 @@ apis:
   - type: Documentation
     url: https://docs.band.ai/
 - aid: band-ai:band-ai-agentapiparticipants-api
-  name: Band AI agentApiParticipants API
+  name: Band AI Agent API Participants API
   description: The agentApiParticipants API from Band AI — 2 operation(s) for agentapiparticipants.
   humanURL: https://docs.band.ai/api/introduction
   baseURL: https://app.band.ai
@@ -221,7 +221,7 @@ apis:
   - type: Documentation
     url: https://docs.band.ai/
 - aid: band-ai:band-ai-agentapipeers-api
-  name: Band AI agentApiPeers API
+  name: Band AI Agent API Peers API
   description: The agentApiPeers API from Band AI — 1 operation(s) for agentapipeers.
   humanURL: https://docs.band.ai/api/introduction
   baseURL: https://app.band.ai
@@ -236,7 +236,7 @@ apis:
   - type: Documentation
     url: https://docs.band.ai/
 - aid: band-ai:band-ai-humanapiagents-api
-  name: Band AI humanApiAgents API
+  name: Band AI Human API Agents API
   description: The humanApiAgents API from Band AI — 3 operation(s) for humanapiagents.
   humanURL: https://docs.band.ai/api/introduction
   baseURL: https://app.band.ai
@@ -251,7 +251,7 @@ apis:
   - type: Documentation
     url: https://docs.band.ai/
 - aid: band-ai:band-ai-humanapichats-api
-  name: Band AI humanApiChats API
+  name: Band AI Human API Chats API
   description: The humanApiChats API from Band AI — 2 operation(s) for humanapichats.
   humanURL: https://docs.band.ai/api/introduction
   baseURL: https://app.band.ai
@@ -266,7 +266,7 @@ apis:
   - type: Documentation
     url: https://docs.band.ai/
 - aid: band-ai:band-ai-humanapicontacts-api
-  name: Band AI humanApiContacts API
+  name: Band AI Human API Contacts API
   description: The humanApiContacts API from Band AI — 8 operation(s) for humanapicontacts.
   humanURL: https://docs.band.ai/api/introduction
   baseURL: https://app.band.ai
@@ -281,7 +281,7 @@ apis:
   - type: Documentation
     url: https://docs.band.ai/
 - aid: band-ai:band-ai-humanapimemories-api
-  name: Band AI humanApiMemories API
+  name: Band AI Human API Memories API
   description: The humanApiMemories API from Band AI — 5 operation(s) for humanapimemories.
   humanURL: https://docs.band.ai/api/introduction
   baseURL: https://app.band.ai
@@ -296,7 +296,7 @@ apis:
   - type: Documentation
     url: https://docs.band.ai/
 - aid: band-ai:band-ai-humanapimessages-api
-  name: Band AI humanApiMessages API
+  name: Band AI Human API Messages API
   description: The humanApiMessages API from Band AI — 1 operation(s) for humanapimessages.
   humanURL: https://docs.band.ai/api/introduction
   baseURL: https://app.band.ai
@@ -311,7 +311,7 @@ apis:
   - type: Documentation
     url: https://docs.band.ai/
 - aid: band-ai:band-ai-humanapiparticipants-api
-  name: Band AI humanApiParticipants API
+  name: Band AI Human API Participants API
   description: The humanApiParticipants API from Band AI — 2 operation(s) for humanapiparticipants.
   humanURL: https://docs.band.ai/api/introduction
   baseURL: https://app.band.ai
@@ -326,7 +326,7 @@ apis:
   - type: Documentation
     url: https://docs.band.ai/
 - aid: band-ai:band-ai-humanapipeers-api
-  name: Band AI humanApiPeers API
+  name: Band AI Human API Peers API
   description: The humanApiPeers API from Band AI — 1 operation(s) for humanapipeers.
   humanURL: https://docs.band.ai/api/introduction
   baseURL: https://app.band.ai
@@ -341,7 +341,7 @@ apis:
   - type: Documentation
     url: https://docs.band.ai/
 - aid: band-ai:band-ai-humanapiprofile-api
-  name: Band AI humanApiProfile API
+  name: Band AI Human API Profile API
   description: The humanApiProfile API from Band AI — 1 operation(s) for humanapiprofile.
   humanURL: https://docs.band.ai/api/introduction
   baseURL: https://app.band.ai
