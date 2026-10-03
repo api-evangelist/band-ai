@@ -129,22 +129,6 @@ components:
       - Agent
       description: Entity type
       title: PeerType
-    PeerSource:
-      type: string
-      enum:
-      - registry
-      - contact
-      description: How the peer was discovered (registry = owner/sibling/global, contact = from contacts)
-      title: PeerSource
-    Error:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorError'
-      required:
-      - error
-      description: Standard error response with request ID for tracing
-      title: Error
     Agent_API_Peers_listAgentPeers_Response_200:
       type: object
       properties:
@@ -158,6 +142,18 @@ components:
       - data
       - metadata
       title: Agent API/Peers_listAgentPeers_Response_200
+    ApiV1AgentPeersGetResponsesContentApplicationJsonSchemaMetadata:
+      type: object
+      properties:
+        page:
+          type: integer
+        page_size:
+          type: integer
+        total_count:
+          type: integer
+        total_pages:
+          type: integer
+      title: ApiV1AgentPeersGetResponsesContentApplicationJsonSchemaMetadata
     ErrorError:
       type: object
       properties:
@@ -178,18 +174,22 @@ components:
       - message
       - request_id
       title: ErrorError
-    ApiV1AgentPeersGetResponsesContentApplicationJsonSchemaMetadata:
+    PeerSource:
+      type: string
+      enum:
+      - registry
+      - contact
+      description: How the peer was discovered (registry = owner/sibling/global, contact = from contacts)
+      title: PeerSource
+    Error:
       type: object
       properties:
-        page:
-          type: integer
-        page_size:
-          type: integer
-        total_count:
-          type: integer
-        total_pages:
-          type: integer
-      title: ApiV1AgentPeersGetResponsesContentApplicationJsonSchemaMetadata
+        error:
+          $ref: '#/components/schemas/ErrorError'
+      required:
+      - error
+      description: Standard error response with request ID for tracing
+      title: Error
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

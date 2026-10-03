@@ -492,200 +492,11 @@ paths:
                   description: Edit the task subject
 components:
   schemas:
-    Agent_API_Chat_Tasks_updateChatTask_Response_200:
+    BoardEventPayload:
       type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/Task'
-      required:
-      - data
-      title: Agent API/Chat Tasks_updateChatTask_Response_200
-    TaskOverallStatus:
-      type: string
-      enum:
-      - pending
-      - in_progress
-      - blocked
-      - in_review
-      - failed
-      - completed
-      description: Server-computed roll-up of all assignments' statuses
-      title: TaskOverallStatus
-    BoardEventEvent:
-      type: string
-      enum:
-      - goal_set
-      - goal_edited
-      title: BoardEventEvent
-    Agent_API_Chat_Tasks_getChatTask_Response_200:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/Task'
-      required:
-      - data
-      title: Agent API/Chat Tasks_getChatTask_Response_200
-    ApiV1AgentChatsChatIdTasksIdHistoryGetResponsesContentApplicationJsonSchemaMetadata:
-      type: object
-      properties:
-        has_more:
-          type: boolean
-        limit:
-          type: integer
-        next_cursor:
-          type:
-          - string
-          - 'null'
-          description: Opaque cursor — echo back as ?cursor=
-      required:
-      - has_more
-      - limit
-      - next_cursor
-      title: ApiV1AgentChatsChatIdTasksIdHistoryGetResponsesContentApplicationJsonSchemaMetadata
-    Agent_API_Chat_Tasks_putChatBoard_Response_200:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/Board'
-      required:
-      - data
-      title: Agent API/Chat Tasks_putChatBoard_Response_200
-    ApiV1AgentChatsChatIdTasksIdPostRequestBodyContentApplicationJsonSchemaStatus:
-      type: string
-      enum:
-      - pending
-      - in_progress
-      - blocked
-      - in_review
-      - failed
-      - completed
-      description: YOUR work status on this task (first write joins you to it)
-      title: ApiV1AgentChatsChatIdTasksIdPostRequestBodyContentApplicationJsonSchemaStatus
-    TaskAssignment:
-      type: object
-      properties:
-        active_form:
-          type: string
-          description: The assignee's live present-continuous "doing X" sentence (may be empty)
-        assignee:
-          $ref: '#/components/schemas/TaskActor'
-        linked_native_id:
-          type: string
-          description: Opaque link to the assignee's native task in its own tooling (may be empty)
-        status:
-          $ref: '#/components/schemas/TaskAssignmentStatus'
-        updated_at:
-          type: string
-          format: date-time
-      required:
-      - active_form
-      - assignee
-      - linked_native_id
-      - status
-      - updated_at
-      description: 'One participant''s stake in a task. Several agents can work the same task;
-
-        each has its own status and its own live active_form.
-
-        '
-      title: TaskAssignment
-    TaskActorType:
-      type: string
-      enum:
-      - User
-      - Agent
-      title: TaskActorType
-    Board:
-      type: object
-      properties:
-        chat_room_id:
-          type: string
-          format: uuid
-        created_by:
-          oneOf:
-          - $ref: '#/components/schemas/BoardCreatedBy'
-          - type: 'null'
-          description: Who first set the goal; null when no goal exists yet
-        goal_summary:
-          type:
-          - string
-          - 'null'
-          description: The mission paragraph
-        goal_title:
-          type:
-          - string
-          - 'null'
-          description: The room's mission title
-        history:
-          type: array
-          items:
-            $ref: '#/components/schemas/BoardEvent'
-          description: 'Only with ?include=history: the most recent 100 goal-audit events, oldest first'
-        history_truncated:
-          type: boolean
-          description: 'Only with ?include=history: true when older events exist'
-        inserted_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        updated_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-        updated_by:
-          oneOf:
-          - $ref: '#/components/schemas/BoardUpdatedBy'
-          - type: 'null'
-          description: Who last changed the goal; null when no goal exists yet
-      required:
-      - chat_room_id
-      - created_by
-      - goal_summary
-      - goal_title
-      - inserted_at
-      - updated_at
-      - updated_by
-      description: 'A chat room''s board, carrying the room **goal** — the team mission. Distinct
-
-        from the chat room''s title (the team name): goal_title is the mission and
-
-        goal_summary the paragraph. A room with no goal set yet reads as an empty
-
-        default (goal_title null). The goal lives in the tasks domain, not on the
-
-        chat room.
-
-        '
-      title: Board
-    Error:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorError'
-      required:
-      - error
-      description: Standard error response with request ID for tracing
-      title: Error
-    ApiV1AgentChatsChatIdBoardGetParametersInclude:
-      type: string
-      enum:
-      - history
-      title: ApiV1AgentChatsChatIdBoardGetParametersInclude
-    BoardUpdatedBy:
-      oneOf:
-      - $ref: '#/components/schemas/TaskActor'
-      description: Who last changed the goal; null when no goal exists yet
-      title: BoardUpdatedBy
-    Agent_API_Chat_Tasks_getChatBoard_Response_200:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/Board'
-      required:
-      - data
-      title: Agent API/Chat Tasks_getChatBoard_Response_200
+      properties: {}
+      description: Goal change payload with explicit from -> to per field
+      title: BoardEventPayload
     TaskActor:
       type: object
       properties:
@@ -708,6 +519,185 @@ components:
       - type
       description: A polymorphic participant reference with display name and addressable handle
       title: TaskActor
+    ErrorErrorDetails:
+      type: object
+      properties: {}
+      description: Additional error details (optional)
+      title: ErrorErrorDetails
+    ApiV1AgentChatsChatIdTasksIdPostRequestBodyContentApplicationJsonSchemaStatus:
+      type: string
+      enum:
+      - pending
+      - in_progress
+      - blocked
+      - in_review
+      - failed
+      - completed
+      description: YOUR work status on this task (first write joins you to it)
+      title: ApiV1AgentChatsChatIdTasksIdPostRequestBodyContentApplicationJsonSchemaStatus
+    ApiV1AgentChatsChatIdTasksIdHistoryGetResponsesContentApplicationJsonSchemaMetadata:
+      type: object
+      properties:
+        has_more:
+          type: boolean
+        limit:
+          type: integer
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          description: Opaque cursor — echo back as ?cursor=
+      required:
+      - has_more
+      - limit
+      - next_cursor
+      title: ApiV1AgentChatsChatIdTasksIdHistoryGetResponsesContentApplicationJsonSchemaMetadata
+    TaskEvent:
+      type: object
+      properties:
+        actor:
+          $ref: '#/components/schemas/TaskActor'
+        at:
+          type: string
+          format: date-time
+        event:
+          $ref: '#/components/schemas/TaskEventEvent'
+        payload:
+          $ref: '#/components/schemas/TaskEventPayload'
+          description: Change payload with explicit from -> to per field
+      required:
+      - actor
+      - at
+      - event
+      - payload
+      description: 'One row of a task''s **append-only** history: every change and every comment,
+
+        with actor and timestamp. Nothing is coalesced — every save is its own
+
+        immutable row. Change events carry explicit `from` → `to`:
+
+        `edited` → `{changed_field: {from, to}, …}`, `status_changed` →
+
+        `{status: {from, to}, linked_native_id?}`, lifecycle (`cancelled` /
+
+        `archived` / `unarchived`) → `{state: {from, to}}`, `superseded` →
+
+        `{state: {from, to}, superseded_by_id}`. `created` carries the initial
+
+        values; `commented` carries `{text}`; `dropped` carries `{reason}`.
+
+        '
+      title: TaskEvent
+    ApiV1AgentChatsChatIdBoardGetParametersInclude:
+      type: string
+      enum:
+      - history
+      title: ApiV1AgentChatsChatIdBoardGetParametersInclude
+    BoardCreatedBy:
+      oneOf:
+      - $ref: '#/components/schemas/TaskActor'
+      description: Who first set the goal; null when no goal exists yet
+      title: BoardCreatedBy
+    TaskAssignmentStatus:
+      type: string
+      enum:
+      - pending
+      - in_progress
+      - blocked
+      - in_review
+      - failed
+      - completed
+      title: TaskAssignmentStatus
+    ApiV1AgentChatsChatIdTasksGetResponsesContentApplicationJsonSchemaMetadata:
+      type: object
+      properties:
+        has_more:
+          type: boolean
+        limit:
+          type: integer
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          description: Opaque cursor — echo back as ?cursor=
+      required:
+      - has_more
+      - limit
+      - next_cursor
+      title: ApiV1AgentChatsChatIdTasksGetResponsesContentApplicationJsonSchemaMetadata
+    BoardEvent:
+      type: object
+      properties:
+        actor:
+          $ref: '#/components/schemas/TaskActor'
+        at:
+          type: string
+          format: date-time
+        event:
+          $ref: '#/components/schemas/BoardEventEvent'
+        payload:
+          $ref: '#/components/schemas/BoardEventPayload'
+          description: Goal change payload with explicit from -> to per field
+      required:
+      - actor
+      - at
+      - event
+      - payload
+      description: 'One row of the room goal''s **append-only** audit: `goal_set` for the first
+
+        write, `goal_edited` thereafter, with actor and timestamp. The payload
+
+        carries explicit `from` → `to` per changed field (same shape as TaskEvent):
+
+        `{goal_title: {from, to}, goal_summary: {from, to}}` — only the fields the
+
+        write actually changed (`from` is null on the first set).
+
+        '
+      title: BoardEvent
+    Agent_API_Chat_Tasks_createChatTask_Response_201:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Task'
+      required:
+      - data
+      title: Agent API/Chat Tasks_createChatTask_Response_201
+    Agent_API_Chat_Tasks_updateChatTask_Response_200:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Task'
+      required:
+      - data
+      title: Agent API/Chat Tasks_updateChatTask_Response_200
+    Error:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorError'
+      required:
+      - error
+      description: Standard error response with request ID for tracing
+      title: Error
+    ApiV1AgentChatsChatIdTasksIdGetParametersInclude:
+      type: string
+      enum:
+      - history
+      title: ApiV1AgentChatsChatIdTasksIdGetParametersInclude
+    Agent_API_Chat_Tasks_getChatTaskHistory_Response_200:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/TaskEvent'
+        metadata:
+          $ref: '#/components/schemas/ApiV1AgentChatsChatIdTasksIdHistoryGetResponsesContentApplicationJsonSchemaMetadata'
+      required:
+      - data
+      - metadata
+      title: Agent API/Chat Tasks_getChatTaskHistory_Response_200
     TaskState:
       type: string
       enum:
@@ -717,11 +707,17 @@ components:
       - archived
       description: 'Lifecycle: only active tasks accept work; archived is reversible'
       title: TaskState
-    ErrorErrorDetails:
+    TaskActorType:
+      type: string
+      enum:
+      - User
+      - Agent
+      title: TaskActorType
+    TaskEventPayload:
       type: object
       properties: {}
-      description: Additional error details (optional)
-      title: ErrorErrorDetails
+      description: Change payload with explicit from -> to per field
+      title: TaskEventPayload
     Task:
       type: object
       properties:
@@ -791,44 +787,6 @@ components:
 
         '
       title: Task
-    BoardEvent:
-      type: object
-      properties:
-        actor:
-          $ref: '#/components/schemas/TaskActor'
-        at:
-          type: string
-          format: date-time
-        event:
-          $ref: '#/components/schemas/BoardEventEvent'
-        payload:
-          $ref: '#/components/schemas/BoardEventPayload'
-          description: Goal change payload with explicit from -> to per field
-      required:
-      - actor
-      - at
-      - event
-      - payload
-      description: 'One row of the room goal''s **append-only** audit: `goal_set` for the first
-
-        write, `goal_edited` thereafter, with actor and timestamp. The payload
-
-        carries explicit `from` → `to` per changed field (same shape as TaskEvent):
-
-        `{goal_title: {from, to}, goal_summary: {from, to}}` — only the fields the
-
-        write actually changed (`from` is null on the first set).
-
-        '
-      title: BoardEvent
-    Agent_API_Chat_Tasks_createChatTask_Response_201:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/Task'
-      required:
-      - data
-      title: Agent API/Chat Tasks_createChatTask_Response_201
     ApiV1AgentChatsChatIdTasksGetParametersState:
       type: string
       enum:
@@ -838,6 +796,105 @@ components:
       - archived
       - all
       title: ApiV1AgentChatsChatIdTasksGetParametersState
+    Agent_API_Chat_Tasks_getChatBoard_Response_200:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Board'
+      required:
+      - data
+      title: Agent API/Chat Tasks_getChatBoard_Response_200
+    Agent_API_Chat_Tasks_putChatBoard_Response_200:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Board'
+      required:
+      - data
+      title: Agent API/Chat Tasks_putChatBoard_Response_200
+    Agent_API_Chat_Tasks_getChatTask_Response_200:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/Task'
+      required:
+      - data
+      title: Agent API/Chat Tasks_getChatTask_Response_200
+    TaskOverallStatus:
+      type: string
+      enum:
+      - pending
+      - in_progress
+      - blocked
+      - in_review
+      - failed
+      - completed
+      description: Server-computed roll-up of all assignments' statuses
+      title: TaskOverallStatus
+    Board:
+      type: object
+      properties:
+        chat_room_id:
+          type: string
+          format: uuid
+        created_by:
+          oneOf:
+          - $ref: '#/components/schemas/BoardCreatedBy'
+          - type: 'null'
+          description: Who first set the goal; null when no goal exists yet
+        goal_summary:
+          type:
+          - string
+          - 'null'
+          description: The mission paragraph
+        goal_title:
+          type:
+          - string
+          - 'null'
+          description: The room's mission title
+        history:
+          type: array
+          items:
+            $ref: '#/components/schemas/BoardEvent'
+          description: 'Only with ?include=history: the most recent 100 goal-audit events, oldest first'
+        history_truncated:
+          type: boolean
+          description: 'Only with ?include=history: true when older events exist'
+        inserted_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        updated_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+        updated_by:
+          oneOf:
+          - $ref: '#/components/schemas/BoardUpdatedBy'
+          - type: 'null'
+          description: Who last changed the goal; null when no goal exists yet
+      required:
+      - chat_room_id
+      - created_by
+      - goal_summary
+      - goal_title
+      - inserted_at
+      - updated_at
+      - updated_by
+      description: 'A chat room''s board, carrying the room **goal** — the team mission. Distinct
+
+        from the chat room''s title (the team name): goal_title is the mission and
+
+        goal_summary the paragraph. A room with no goal set yet reads as an empty
+
+        default (goal_title null). The goal lives in the tasks domain, not on the
+
+        chat room.
+
+        '
+      title: Board
     TaskEventEvent:
       type: string
       enum:
@@ -851,16 +908,19 @@ components:
       - archived
       - unarchived
       title: TaskEventEvent
-    TaskEventPayload:
+    Agent_API_Chat_Tasks_listChatTasks_Response_200:
       type: object
-      properties: {}
-      description: Change payload with explicit from -> to per field
-      title: TaskEventPayload
-    BoardCreatedBy:
-      oneOf:
-      - $ref: '#/components/schemas/TaskActor'
-      description: Who first set the goal; null when no goal exists yet
-      title: BoardCreatedBy
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Task'
+        metadata:
+          $ref: '#/components/schemas/ApiV1AgentChatsChatIdTasksGetResponsesContentApplicationJsonSchemaMetadata'
+      required:
+      - data
+      - metadata
+      title: Agent API/Chat Tasks_listChatTasks_Response_200
     ApiV1AgentChatsChatIdTasksIdPostRequestBodyContentApplicationJsonSchemaState:
       type: string
       enum:
@@ -869,87 +929,17 @@ components:
       - active
       description: 'Lifecycle: cancel, archive, or restore ("active" un-archives)'
       title: ApiV1AgentChatsChatIdTasksIdPostRequestBodyContentApplicationJsonSchemaState
-    TaskEvent:
-      type: object
-      properties:
-        actor:
-          $ref: '#/components/schemas/TaskActor'
-        at:
-          type: string
-          format: date-time
-        event:
-          $ref: '#/components/schemas/TaskEventEvent'
-        payload:
-          $ref: '#/components/schemas/TaskEventPayload'
-          description: Change payload with explicit from -> to per field
-      required:
-      - actor
-      - at
-      - event
-      - payload
-      description: 'One row of a task''s **append-only** history: every change and every comment,
-
-        with actor and timestamp. Nothing is coalesced — every save is its own
-
-        immutable row. Change events carry explicit `from` → `to`:
-
-        `edited` → `{changed_field: {from, to}, …}`, `status_changed` →
-
-        `{status: {from, to}, linked_native_id?}`, lifecycle (`cancelled` /
-
-        `archived` / `unarchived`) → `{state: {from, to}}`, `superseded` →
-
-        `{state: {from, to}, superseded_by_id}`. `created` carries the initial
-
-        values; `commented` carries `{text}`; `dropped` carries `{reason}`.
-
-        '
-      title: TaskEvent
-    ApiV1AgentChatsChatIdTasksGetResponsesContentApplicationJsonSchemaMetadata:
-      type: object
-      properties:
-        has_more:
-          type: boolean
-        limit:
-          type: integer
-        next_cursor:
-          type:
-          - string
-          - 'null'
-          description: Opaque cursor — echo back as ?cursor=
-      required:
-      - has_more
-      - limit
-      - next_cursor
-      title: ApiV1AgentChatsChatIdTasksGetResponsesContentApplicationJsonSchemaMetadata
-    TaskAssignmentStatus:
+    BoardEventEvent:
       type: string
       enum:
-      - pending
-      - in_progress
-      - blocked
-      - in_review
-      - failed
-      - completed
-      title: TaskAssignmentStatus
-    Agent_API_Chat_Tasks_getChatTaskHistory_Response_200:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/TaskEvent'
-        metadata:
-          $ref: '#/components/schemas/ApiV1AgentChatsChatIdTasksIdHistoryGetResponsesContentApplicationJsonSchemaMetadata'
-      required:
-      - data
-      - metadata
-      title: Agent API/Chat Tasks_getChatTaskHistory_Response_200
-    ApiV1AgentChatsChatIdTasksIdGetParametersInclude:
-      type: string
-      enum:
-      - history
-      title: ApiV1AgentChatsChatIdTasksIdGetParametersInclude
+      - goal_set
+      - goal_edited
+      title: BoardEventEvent
+    BoardUpdatedBy:
+      oneOf:
+      - $ref: '#/components/schemas/TaskActor'
+      description: Who last changed the goal; null when no goal exists yet
+      title: BoardUpdatedBy
     ErrorError:
       type: object
       properties:
@@ -970,24 +960,34 @@ components:
       - message
       - request_id
       title: ErrorError
-    Agent_API_Chat_Tasks_listChatTasks_Response_200:
+    TaskAssignment:
       type: object
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Task'
-        metadata:
-          $ref: '#/components/schemas/ApiV1AgentChatsChatIdTasksGetResponsesContentApplicationJsonSchemaMetadata'
+        active_form:
+          type: string
+          description: The assignee's live present-continuous "doing X" sentence (may be empty)
+        assignee:
+          $ref: '#/components/schemas/TaskActor'
+        linked_native_id:
+          type: string
+          description: Opaque link to the assignee's native task in its own tooling (may be empty)
+        status:
+          $ref: '#/components/schemas/TaskAssignmentStatus'
+        updated_at:
+          type: string
+          format: date-time
       required:
-      - data
-      - metadata
-      title: Agent API/Chat Tasks_listChatTasks_Response_200
-    BoardEventPayload:
-      type: object
-      properties: {}
-      description: Goal change payload with explicit from -> to per field
-      title: BoardEventPayload
+      - active_form
+      - assignee
+      - linked_native_id
+      - status
+      - updated_at
+      description: 'One participant''s stake in a task. Several agents can work the same task;
+
+        each has its own status and its own live active_form.
+
+        '
+      title: TaskAssignment
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

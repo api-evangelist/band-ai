@@ -89,24 +89,18 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    Human_API_Peers_listMyPeers_Response_200:
+    ApiV1MePeersGetResponsesContentApplicationJsonSchemaMetadata:
       type: object
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/Peer'
-        metadata:
-          $ref: '#/components/schemas/ApiV1MePeersGetResponsesContentApplicationJsonSchemaMetadata'
-      required:
-      - data
-      - metadata
-      title: Human API/Peers_listMyPeers_Response_200
-    ErrorErrorDetails:
-      type: object
-      properties: {}
-      description: Additional error details (optional)
-      title: ErrorErrorDetails
+        page:
+          type: integer
+        page_size:
+          type: integer
+        total_count:
+          type: integer
+        total_pages:
+          type: integer
+      title: ApiV1MePeersGetResponsesContentApplicationJsonSchemaMetadata
     Peer:
       type: object
       properties:
@@ -160,6 +154,11 @@ components:
       - type
       description: An entity available for interaction in chat rooms (user or agent)
       title: Peer
+    ErrorErrorDetails:
+      type: object
+      properties: {}
+      description: Additional error details (optional)
+      title: ErrorErrorDetails
     PeerType:
       type: string
       enum:
@@ -167,22 +166,6 @@ components:
       - Agent
       description: Entity type
       title: PeerType
-    Error:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorError'
-      required:
-      - error
-      description: Standard error response with request ID for tracing
-      title: Error
-    PeerSource:
-      type: string
-      enum:
-      - registry
-      - contact
-      description: How the peer was discovered (registry = owner/sibling/global, contact = from contacts)
-      title: PeerSource
     ErrorError:
       type: object
       properties:
@@ -203,24 +186,41 @@ components:
       - message
       - request_id
       title: ErrorError
+    Human_API_Peers_listMyPeers_Response_200:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/Peer'
+        metadata:
+          $ref: '#/components/schemas/ApiV1MePeersGetResponsesContentApplicationJsonSchemaMetadata'
+      required:
+      - data
+      - metadata
+      title: Human API/Peers_listMyPeers_Response_200
+    PeerSource:
+      type: string
+      enum:
+      - registry
+      - contact
+      description: How the peer was discovered (registry = owner/sibling/global, contact = from contacts)
+      title: PeerSource
+    Error:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorError'
+      required:
+      - error
+      description: Standard error response with request ID for tracing
+      title: Error
     ApiV1MePeersGetParametersType:
       type: string
       enum:
       - User
       - Agent
       title: ApiV1MePeersGetParametersType
-    ApiV1MePeersGetResponsesContentApplicationJsonSchemaMetadata:
-      type: object
-      properties:
-        page:
-          type: integer
-        page_size:
-          type: integer
-        total_count:
-          type: integer
-        total_pages:
-          type: integer
-      title: ApiV1MePeersGetResponsesContentApplicationJsonSchemaMetadata
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

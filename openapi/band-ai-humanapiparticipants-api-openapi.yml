@@ -216,21 +216,44 @@ paths:
               - participant
 components:
   schemas:
+    ChatParticipantType:
+      type: string
+      enum:
+      - User
+      - Agent
+      description: Participant type
+      title: ChatParticipantType
     ApiV1MeChatsChatIdParticipantsGetParametersParticipantType:
       type: string
       enum:
       - User
       - Agent
       title: ApiV1MeChatsChatIdParticipantsGetParametersParticipantType
-    ValidationError:
+    ValidationErrorError:
       type: object
       properties:
-        error:
-          $ref: '#/components/schemas/ValidationErrorError'
+        code:
+          type: string
+          description: Machine-readable error code
+        details:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          description: Field-specific validation errors with JSON Pointer paths (RFC 6901) as keys
+        message:
+          type: string
+          description: Human-readable error message
+        request_id:
+          type: string
+          description: Unique request identifier for tracing and debugging
       required:
-      - error
-      description: Validation error response with field-specific errors and request ID for tracing
-      title: ValidationError
+      - code
+      - details
+      - message
+      - request_id
+      title: ValidationErrorError
     Human_API_Participants_listMyChatParticipants_Response_200:
       type: object
       properties:
@@ -244,6 +267,88 @@ components:
       - data
       - metadata
       title: Human API/Participants_listMyChatParticipants_Response_200
+    ErrorErrorDetails:
+      type: object
+      properties: {}
+      description: Additional error details (optional)
+      title: ErrorErrorDetails
+    Human_API_Participants_addMyChatParticipant_Response_201:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ChatParticipant'
+      required:
+      - data
+      title: Human API/Participants_addMyChatParticipant_Response_201
+    ParticipantRole:
+      type: string
+      enum:
+      - owner
+      - admin
+      - member
+      description: Role of a participant in a chat room. Determines permissions and capabilities.
+      title: ParticipantRole
+    ParticipantRequest:
+      type: object
+      properties:
+        participant_id:
+          type: string
+          format: uuid
+          description: Participant ID (User UUID or Agent ID)
+        role:
+          $ref: '#/components/schemas/ParticipantRequestRole'
+          default: member
+          description: Participant role
+      required:
+      - participant_id
+      description: Request to add a participant to a chat room
+      title: ParticipantRequest
+    ErrorError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+        details:
+          $ref: '#/components/schemas/ErrorErrorDetails'
+          description: Additional error details (optional)
+        message:
+          type: string
+          description: Human-readable error message
+        request_id:
+          type: string
+          description: Unique request identifier for tracing and debugging
+      required:
+      - code
+      - message
+      - request_id
+      title: ErrorError
+    ParticipantRequestRole:
+      type: string
+      enum:
+      - owner
+      - admin
+      - member
+      default: member
+      description: Participant role
+      title: ParticipantRequestRole
+    ValidationError:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ValidationErrorError'
+      required:
+      - error
+      description: Validation error response with field-specific errors and request ID for tracing
+      title: ValidationError
+    Human_API_Participants_removeMyChatParticipant_Response_200:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ChatParticipant'
+      required:
+      - data
+      title: Human API/Participants_removeMyChatParticipant_Response_200
     ChatParticipant:
       type: object
       properties:
@@ -274,147 +379,6 @@ components:
       - type
       description: A chat room participant
       title: ChatParticipant
-    ParticipantRequest:
-      type: object
-      properties:
-        participant_id:
-          type: string
-          format: uuid
-          description: Participant ID (User UUID or Agent ID)
-        role:
-          $ref: '#/components/schemas/ParticipantRequestRole'
-          default: member
-          description: Participant role
-      required:
-      - participant_id
-      description: Request to add a participant to a chat room
-      title: ParticipantRequest
-    ErrorErrorDetails:
-      type: object
-      properties: {}
-      description: Additional error details (optional)
-      title: ErrorErrorDetails
-    ChatParticipantDetailsType:
-      type: string
-      enum:
-      - User
-      - Agent
-      description: Participant type
-      title: ChatParticipantDetailsType
-    ValidationErrorError:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Machine-readable error code
-        details:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-          description: Field-specific validation errors with JSON Pointer paths (RFC 6901) as keys
-        message:
-          type: string
-          description: Human-readable error message
-        request_id:
-          type: string
-          description: Unique request identifier for tracing and debugging
-      required:
-      - code
-      - details
-      - message
-      - request_id
-      title: ValidationErrorError
-    ParticipantRole:
-      type: string
-      enum:
-      - owner
-      - admin
-      - member
-      description: Role of a participant in a chat room. Determines permissions and capabilities.
-      title: ParticipantRole
-    ParticipantRequestRole:
-      type: string
-      enum:
-      - owner
-      - admin
-      - member
-      default: member
-      description: Participant role
-      title: ParticipantRequestRole
-    Error:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorError'
-      required:
-      - error
-      description: Standard error response with request ID for tracing
-      title: Error
-    ApiV1MeChatsChatIdParticipantsGetResponsesContentApplicationJsonSchemaMetadata:
-      type: object
-      properties:
-        has_more:
-          type: boolean
-          description: Whether more pages exist
-        limit:
-          type: integer
-          description: Page size used
-        next_cursor:
-          type:
-          - string
-          - 'null'
-          description: Opaque cursor for the next page; null when has_more=false
-        page:
-          type:
-          - integer
-          - 'null'
-          description: Current page number (offset mode only; omitted in cursor mode)
-        page_size:
-          type:
-          - integer
-          - 'null'
-          description: Items per page (offset mode only; omitted in cursor mode)
-        total_count:
-          type:
-          - integer
-          - 'null'
-          description: Total number of participants (offset mode only; omitted in cursor mode)
-        total_pages:
-          type:
-          - integer
-          - 'null'
-          description: Total number of pages (offset mode only; omitted in cursor mode)
-      title: ApiV1MeChatsChatIdParticipantsGetResponsesContentApplicationJsonSchemaMetadata
-    ErrorError:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Machine-readable error code
-        details:
-          $ref: '#/components/schemas/ErrorErrorDetails'
-          description: Additional error details (optional)
-        message:
-          type: string
-          description: Human-readable error message
-        request_id:
-          type: string
-          description: Unique request identifier for tracing and debugging
-      required:
-      - code
-      - message
-      - request_id
-      title: ErrorError
-    Human_API_Participants_addMyChatParticipant_Response_201:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/ChatParticipant'
-      required:
-      - data
-      title: Human API/Participants_addMyChatParticipant_Response_201
     ChatParticipantDetails:
       type: object
       properties:
@@ -456,21 +420,57 @@ components:
       - type
       description: A chat room participant with user/agent details (returned by list endpoint)
       title: ChatParticipantDetails
-    ChatParticipantType:
+    ChatParticipantDetailsType:
       type: string
       enum:
       - User
       - Agent
       description: Participant type
-      title: ChatParticipantType
-    Human_API_Participants_removeMyChatParticipant_Response_200:
+      title: ChatParticipantDetailsType
+    ApiV1MeChatsChatIdParticipantsGetResponsesContentApplicationJsonSchemaMetadata:
       type: object
       properties:
-        data:
-          $ref: '#/components/schemas/ChatParticipant'
+        has_more:
+          type: boolean
+          description: Whether more pages exist
+        limit:
+          type: integer
+          description: Page size used
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          description: Opaque cursor for the next page; null when has_more=false
+        page:
+          type:
+          - integer
+          - 'null'
+          description: Current page number (offset mode only; omitted in cursor mode)
+        page_size:
+          type:
+          - integer
+          - 'null'
+          description: Items per page (offset mode only; omitted in cursor mode)
+        total_count:
+          type:
+          - integer
+          - 'null'
+          description: Total number of participants (offset mode only; omitted in cursor mode)
+        total_pages:
+          type:
+          - integer
+          - 'null'
+          description: Total number of pages (offset mode only; omitted in cursor mode)
+      title: ApiV1MeChatsChatIdParticipantsGetResponsesContentApplicationJsonSchemaMetadata
+    Error:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorError'
       required:
-      - data
-      title: Human API/Participants_removeMyChatParticipant_Response_200
+      - error
+      description: Standard error response with request ID for tracing
+      title: Error
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

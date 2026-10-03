@@ -96,20 +96,6 @@ paths:
               - working
 components:
   schemas:
-    ValidationError:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/ValidationErrorError'
-      required:
-      - error
-      description: Validation error response with field-specific errors and request ID for tracing
-      title: ValidationError
-    ErrorErrorDetails:
-      type: object
-      properties: {}
-      description: Additional error details (optional)
-      title: ErrorErrorDetails
     ValidationErrorError:
       type: object
       properties:
@@ -145,23 +131,11 @@ components:
       - working
       description: Confirms the working state now in effect for the agent's execution.
       title: AgentActivityResponse
-    Error:
+    ErrorErrorDetails:
       type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorError'
-      required:
-      - error
-      description: Standard error response with request ID for tracing
-      title: Error
-    Agent_API_Activity_reportAgentChatActivity_Response_200:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/AgentActivityResponse'
-      required:
-      - data
-      title: Agent API/Activity_reportAgentChatActivity_Response_200
+      properties: {}
+      description: Additional error details (optional)
+      title: ErrorErrorDetails
     ErrorError:
       type: object
       properties:
@@ -182,6 +156,32 @@ components:
       - message
       - request_id
       title: ErrorError
+    ValidationError:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ValidationErrorError'
+      required:
+      - error
+      description: Validation error response with field-specific errors and request ID for tracing
+      title: ValidationError
+    Agent_API_Activity_reportAgentChatActivity_Response_200:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/AgentActivityResponse'
+      required:
+      - data
+      title: Agent API/Activity_reportAgentChatActivity_Response_200
+    Error:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorError'
+      required:
+      - error
+      description: Standard error response with request ID for tracing
+      title: Error
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

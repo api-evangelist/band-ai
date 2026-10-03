@@ -110,41 +110,6 @@ paths:
                 $ref: '#/components/schemas/ValidationError'
 components:
   schemas:
-    ValidationError:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/ValidationErrorError'
-      required:
-      - error
-      description: Validation error response with field-specific errors and request ID for tracing
-      title: ValidationError
-    ChatMessageMetadata:
-      type: object
-      properties: {}
-      description: Additional metadata including mentions
-      title: ChatMessageMetadata
-    Agent_API_Context_getAgentChatContext_Response_200:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ChatMessage'
-        meta:
-          $ref: '#/components/schemas/ApiV1AgentChatsChatIdContextGetResponsesContentApplicationJsonSchemaMeta'
-          description: Deprecated — use metadata instead
-        metadata:
-          $ref: '#/components/schemas/ApiV1AgentChatsChatIdContextGetResponsesContentApplicationJsonSchemaMetadata'
-      required:
-      - data
-      - metadata
-      title: Agent API/Context_getAgentChatContext_Response_200
-    ErrorErrorDetails:
-      type: object
-      properties: {}
-      description: Additional error details (optional)
-      title: ErrorErrorDetails
     ValidationErrorError:
       type: object
       properties:
@@ -170,6 +135,22 @@ components:
       - message
       - request_id
       title: ValidationErrorError
+    Agent_API_Context_getAgentChatContext_Response_200:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatMessage'
+        meta:
+          $ref: '#/components/schemas/ApiV1AgentChatsChatIdContextGetResponsesContentApplicationJsonSchemaMeta'
+          description: Deprecated — use metadata instead
+        metadata:
+          $ref: '#/components/schemas/ApiV1AgentChatsChatIdContextGetResponsesContentApplicationJsonSchemaMetadata'
+      required:
+      - data
+      - metadata
+      title: Agent API/Context_getAgentChatContext_Response_200
     ApiV1AgentChatsChatIdContextGetResponsesContentApplicationJsonSchemaMetadata:
       type: object
       properties:
@@ -201,6 +182,11 @@ components:
       - limit
       - next_cursor
       title: ApiV1AgentChatsChatIdContextGetResponsesContentApplicationJsonSchemaMetadata
+    ErrorErrorDetails:
+      type: object
+      properties: {}
+      description: Additional error details (optional)
+      title: ErrorErrorDetails
     ApiV1AgentChatsChatIdContextGetResponsesContentApplicationJsonSchemaMeta:
       type: object
       properties:
@@ -222,6 +208,40 @@ components:
           type: integer
       description: Deprecated — use metadata instead
       title: ApiV1AgentChatsChatIdContextGetResponsesContentApplicationJsonSchemaMeta
+    ChatMessageMetadata:
+      type: object
+      properties: {}
+      description: Additional metadata including mentions
+      title: ChatMessageMetadata
+    ErrorError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+        details:
+          $ref: '#/components/schemas/ErrorErrorDetails'
+          description: Additional error details (optional)
+        message:
+          type: string
+          description: Human-readable error message
+        request_id:
+          type: string
+          description: Unique request identifier for tracing and debugging
+      required:
+      - code
+      - message
+      - request_id
+      title: ErrorError
+    ValidationError:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ValidationErrorError'
+      required:
+      - error
+      description: Validation error response with field-specific errors and request ID for tracing
+      title: ValidationError
     ChatMessage:
       type: object
       properties:
@@ -277,26 +297,6 @@ components:
       - error
       description: Standard error response with request ID for tracing
       title: Error
-    ErrorError:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Machine-readable error code
-        details:
-          $ref: '#/components/schemas/ErrorErrorDetails'
-          description: Additional error details (optional)
-        message:
-          type: string
-          description: Human-readable error message
-        request_id:
-          type: string
-          description: Unique request identifier for tracing and debugging
-      required:
-      - code
-      - message
-      - request_id
-      title: ErrorError
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
