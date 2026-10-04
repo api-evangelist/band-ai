@@ -93,43 +93,6 @@ paths:
               - user
 components:
   schemas:
-    ValidationErrorError:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Machine-readable error code
-        details:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-          description: Field-specific validation errors with JSON Pointer paths (RFC 6901) as keys
-        message:
-          type: string
-          description: Human-readable error message
-        request_id:
-          type: string
-          description: Unique request identifier for tracing and debugging
-      required:
-      - code
-      - details
-      - message
-      - request_id
-      title: ValidationErrorError
-    UserDetailsRole:
-      type: string
-      enum:
-      - user
-      - admin
-      description: User role
-      title: UserDetailsRole
-    ErrorErrorDetails:
-      type: object
-      properties: {}
-      description: Additional error details (optional)
-      title: ErrorErrorDetails
     Human_API_Profile_updateMyProfile_Response_200:
       type: object
       properties:
@@ -138,35 +101,6 @@ components:
       required:
       - data
       title: Human API/Profile_updateMyProfile_Response_200
-    ErrorError:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Machine-readable error code
-        details:
-          $ref: '#/components/schemas/ErrorErrorDetails'
-          description: Additional error details (optional)
-        message:
-          type: string
-          description: Human-readable error message
-        request_id:
-          type: string
-          description: Unique request identifier for tracing and debugging
-      required:
-      - code
-      - message
-      - request_id
-      title: ErrorError
-    ValidationError:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/ValidationErrorError'
-      required:
-      - error
-      description: Validation error response with field-specific errors and request ID for tracing
-      title: ValidationError
     UserDetails:
       type: object
       properties:
@@ -200,6 +134,14 @@ components:
       - role
       description: User profile details
       title: UserDetails
+    Human_API_Profile_getMyProfile_Response_200:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/UserDetails'
+      required:
+      - data
+      title: Human API/Profile_getMyProfile_Response_200
     Error:
       type: object
       properties:
@@ -220,14 +162,72 @@ components:
           description: Last name
       description: User profile fields to update
       title: ApiV1MeProfilePutRequestBodyContentApplicationJsonSchemaUser
-    Human_API_Profile_getMyProfile_Response_200:
+    ErrorError:
       type: object
       properties:
-        data:
-          $ref: '#/components/schemas/UserDetails'
+        code:
+          type: string
+          description: Machine-readable error code
+        details:
+          $ref: '#/components/schemas/ErrorErrorDetails'
+          description: Additional error details (optional)
+        message:
+          type: string
+          description: Human-readable error message
+        request_id:
+          type: string
+          description: Unique request identifier for tracing and debugging
       required:
-      - data
-      title: Human API/Profile_getMyProfile_Response_200
+      - code
+      - message
+      - request_id
+      title: ErrorError
+    UserDetailsRole:
+      type: string
+      enum:
+      - user
+      - admin
+      description: User role
+      title: UserDetailsRole
+    ValidationErrorError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+        details:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          description: Field-specific validation errors with JSON Pointer paths (RFC 6901) as keys
+        message:
+          type: string
+          description: Human-readable error message
+        request_id:
+          type: string
+          description: Unique request identifier for tracing and debugging
+      required:
+      - code
+      - details
+      - message
+      - request_id
+      title: ValidationErrorError
+    ValidationError:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ValidationErrorError'
+      required:
+      - error
+      description: Validation error response with field-specific errors and request ID for tracing
+      title: ValidationError
+    ErrorErrorDetails:
+      type: object
+      properties: {}
+      description: Additional error details (optional)
+      title: ErrorErrorDetails
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

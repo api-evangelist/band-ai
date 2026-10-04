@@ -207,89 +207,14 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    MeChatRoomStatus:
-      type: string
-      enum:
-      - active
-      - archived
-      - closed
-      description: Chat room status — `archived`/`active` round-trip via the archive/unarchive endpoints
-      title: MeChatRoomStatus
-    ValidationErrorError:
+    Human_API_Chats_createMyChatRoom_Response_201:
       type: object
       properties:
-        code:
-          type: string
-          description: Machine-readable error code
-        details:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-          description: Field-specific validation errors with JSON Pointer paths (RFC 6901) as keys
-        message:
-          type: string
-          description: Human-readable error message
-        request_id:
-          type: string
-          description: Unique request identifier for tracing and debugging
+        data:
+          $ref: '#/components/schemas/MeChatRoom'
       required:
-      - code
-      - details
-      - message
-      - request_id
-      title: ValidationErrorError
-    ErrorErrorDetails:
-      type: object
-      properties: {}
-      description: Additional error details (optional)
-      title: ErrorErrorDetails
-    MeChatRoom:
-      type: object
-      properties:
-        id:
-          type: string
-          format: uuid
-          description: Chat Room ID
-        inserted_at:
-          type: string
-          format: date-time
-          description: Created At
-        last_message_at:
-          type:
-          - string
-          - 'null'
-          format: date-time
-          description: Time of the newest chat-content message in the room (text + the ChatEventMessageType event types; internal message types and soft-deleted messages never move it; thread replies count); null when there is none. Unlike `updated_at` it does not move on metadata writes such as rename, so display chat recency from this field. Not accepted by `sort_by` — order fetched pages client-side.
-        status:
-          $ref: '#/components/schemas/MeChatRoomStatus'
-          description: Chat room status — `archived`/`active` round-trip via the archive/unarchive endpoints
-        task_id:
-          type:
-          - string
-          - 'null'
-          format: uuid
-          description: Associated Task ID
-        title:
-          type:
-          - string
-          - 'null'
-          description: Chat room title
-        type:
-          $ref: '#/components/schemas/MeChatRoomType'
-          description: Chat room type
-        updated_at:
-          type: string
-          format: date-time
-          description: Updated At
-      required:
-      - id
-      - inserted_at
-      - last_message_at
-      - updated_at
-      description: Human-API chat room — verbose shape. Includes `:type` and `:status` so the caller can render archive/active state and room kind without a follow-up fetch. Agent callers see the terse `ChatRoom` shape instead.
-      title: MeChatRoom
+      - data
+      title: Human API/Chats_createMyChatRoom_Response_201
     MeChatRoomType:
       type: string
       enum:
@@ -298,12 +223,13 @@ components:
       - task
       description: Chat room type
       title: MeChatRoomType
-    ApiV1MeChatsGetParametersOrder:
+    ApiV1MeChatsGetParametersType:
       type: string
       enum:
-      - asc
-      - desc
-      title: ApiV1MeChatsGetParametersOrder
+      - direct
+      - group
+      - task
+      title: ApiV1MeChatsGetParametersType
     ApiV1MeChatsPostRequestBodyContentApplicationJsonSchemaChat:
       type: object
       properties:
@@ -319,14 +245,21 @@ components:
           - 'null'
           description: 'Optional title for the chat room. If provided and non-blank after trimming, the room is marked title_locked: true and LLM auto-titling is skipped for this room. Empty/whitespace-only/null falls through to the default and LLM auto-titles on the first message. Control characters (newline, carriage return, null) are rejected with 422. Max 120 chars.'
       title: ApiV1MeChatsPostRequestBodyContentApplicationJsonSchemaChat
-    Human_API_Chats_createMyChatRoom_Response_201:
+    Error:
       type: object
       properties:
-        data:
-          $ref: '#/components/schemas/MeChatRoom'
+        error:
+          $ref: '#/components/schemas/ErrorError'
       required:
-      - data
-      title: Human API/Chats_createMyChatRoom_Response_201
+      - error
+      description: Standard error response with request ID for tracing
+      title: Error
+    ApiV1MeChatsGetParametersSortBy:
+      type: string
+      enum:
+      - inserted_at
+      - updated_at
+      title: ApiV1MeChatsGetParametersSortBy
     ApiV1MeChatsGetResponsesContentApplicationJsonSchemaMetadata:
       type: object
       properties:
@@ -382,28 +315,97 @@ components:
       - message
       - request_id
       title: ErrorError
-    ApiV1MeChatsGetParametersType:
+    ApiV1MeChatsGetParametersOrder:
       type: string
       enum:
-      - direct
-      - group
-      - task
-      title: ApiV1MeChatsGetParametersType
-    ValidationError:
+      - asc
+      - desc
+      title: ApiV1MeChatsGetParametersOrder
+    MeChatRoomStatus:
+      type: string
+      enum:
+      - active
+      - archived
+      - closed
+      description: Chat room status — `archived`/`active` round-trip via the archive/unarchive endpoints
+      title: MeChatRoomStatus
+    ApiV1MeChatsGetParametersStatus:
+      type: string
+      enum:
+      - active
+      - archived
+      - closed
+      title: ApiV1MeChatsGetParametersStatus
+    MeChatRoom:
       type: object
       properties:
-        error:
-          $ref: '#/components/schemas/ValidationErrorError'
+        id:
+          type: string
+          format: uuid
+          description: Chat Room ID
+        inserted_at:
+          type: string
+          format: date-time
+          description: Created At
+        last_message_at:
+          type:
+          - string
+          - 'null'
+          format: date-time
+          description: Time of the newest chat-content message in the room (text + the ChatEventMessageType event types; internal message types and soft-deleted messages never move it; thread replies count); null when there is none. Unlike `updated_at` it does not move on metadata writes such as rename, so display chat recency from this field. Not accepted by `sort_by` — order fetched pages client-side.
+        status:
+          $ref: '#/components/schemas/MeChatRoomStatus'
+          description: Chat room status — `archived`/`active` round-trip via the archive/unarchive endpoints
+        task_id:
+          type:
+          - string
+          - 'null'
+          format: uuid
+          description: Associated Task ID
+        title:
+          type:
+          - string
+          - 'null'
+          description: Chat room title
+        type:
+          $ref: '#/components/schemas/MeChatRoomType'
+          description: Chat room type
+        updated_at:
+          type: string
+          format: date-time
+          description: Updated At
       required:
-      - error
-      description: Validation error response with field-specific errors and request ID for tracing
-      title: ValidationError
-    ApiV1MeChatsGetParametersSortBy:
-      type: string
-      enum:
+      - id
       - inserted_at
+      - last_message_at
       - updated_at
-      title: ApiV1MeChatsGetParametersSortBy
+      description: Human-API chat room — verbose shape. Includes `:type` and `:status` so the caller can render archive/active state and room kind without a follow-up fetch. Agent callers see the terse `ChatRoom` shape instead.
+      title: MeChatRoom
+    ValidationErrorError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+        details:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          description: Field-specific validation errors with JSON Pointer paths (RFC 6901) as keys
+        message:
+          type: string
+          description: Human-readable error message
+        request_id:
+          type: string
+          description: Unique request identifier for tracing and debugging
+      required:
+      - code
+      - details
+      - message
+      - request_id
+      title: ValidationErrorError
     Human_API_Chats_listMyChats_Response_200:
       type: object
       properties:
@@ -417,6 +419,15 @@ components:
       - data
       - metadata
       title: Human API/Chats_listMyChats_Response_200
+    ValidationError:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ValidationErrorError'
+      required:
+      - error
+      description: Validation error response with field-specific errors and request ID for tracing
+      title: ValidationError
     Human_API_Chats_getMyChatRoom_Response_200:
       type: object
       properties:
@@ -425,22 +436,11 @@ components:
       required:
       - data
       title: Human API/Chats_getMyChatRoom_Response_200
-    ApiV1MeChatsGetParametersStatus:
-      type: string
-      enum:
-      - active
-      - archived
-      - closed
-      title: ApiV1MeChatsGetParametersStatus
-    Error:
+    ErrorErrorDetails:
       type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorError'
-      required:
-      - error
-      description: Standard error response with request ID for tracing
-      title: Error
+      properties: {}
+      description: Additional error details (optional)
+      title: ErrorErrorDetails
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

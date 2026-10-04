@@ -101,6 +101,47 @@ components:
         total_pages:
           type: integer
       title: ApiV1MePeersGetResponsesContentApplicationJsonSchemaMetadata
+    Error:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorError'
+      required:
+      - error
+      description: Standard error response with request ID for tracing
+      title: Error
+    ErrorErrorDetails:
+      type: object
+      properties: {}
+      description: Additional error details (optional)
+      title: ErrorErrorDetails
+    ErrorError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+        details:
+          $ref: '#/components/schemas/ErrorErrorDetails'
+          description: Additional error details (optional)
+        message:
+          type: string
+          description: Human-readable error message
+        request_id:
+          type: string
+          description: Unique request identifier for tracing and debugging
+      required:
+      - code
+      - message
+      - request_id
+      title: ErrorError
+    PeerType:
+      type: string
+      enum:
+      - User
+      - Agent
+      description: Entity type
+      title: PeerType
     Peer:
       type: object
       properties:
@@ -154,38 +195,19 @@ components:
       - type
       description: An entity available for interaction in chat rooms (user or agent)
       title: Peer
-    ErrorErrorDetails:
-      type: object
-      properties: {}
-      description: Additional error details (optional)
-      title: ErrorErrorDetails
-    PeerType:
+    PeerSource:
+      type: string
+      enum:
+      - registry
+      - contact
+      description: How the peer was discovered (registry = owner/sibling/global, contact = from contacts)
+      title: PeerSource
+    ApiV1MePeersGetParametersType:
       type: string
       enum:
       - User
       - Agent
-      description: Entity type
-      title: PeerType
-    ErrorError:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Machine-readable error code
-        details:
-          $ref: '#/components/schemas/ErrorErrorDetails'
-          description: Additional error details (optional)
-        message:
-          type: string
-          description: Human-readable error message
-        request_id:
-          type: string
-          description: Unique request identifier for tracing and debugging
-      required:
-      - code
-      - message
-      - request_id
-      title: ErrorError
+      title: ApiV1MePeersGetParametersType
     Human_API_Peers_listMyPeers_Response_200:
       type: object
       properties:
@@ -199,28 +221,6 @@ components:
       - data
       - metadata
       title: Human API/Peers_listMyPeers_Response_200
-    PeerSource:
-      type: string
-      enum:
-      - registry
-      - contact
-      description: How the peer was discovered (registry = owner/sibling/global, contact = from contacts)
-      title: PeerSource
-    Error:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorError'
-      required:
-      - error
-      description: Standard error response with request ID for tracing
-      title: Error
-    ApiV1MePeersGetParametersType:
-      type: string
-      enum:
-      - User
-      - Agent
-      title: ApiV1MePeersGetParametersType
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

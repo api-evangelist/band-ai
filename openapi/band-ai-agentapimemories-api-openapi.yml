@@ -314,6 +314,23 @@ paths:
               - memory
 components:
   schemas:
+    Agent_API_Memories_archiveAgentMemory_Response_200:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/AgentMemory'
+      title: Agent API/Memories_archiveAgentMemory_Response_200
+    AgentMemoryType:
+      type: string
+      enum:
+      - iconic
+      - echoic
+      - haptic
+      - episodic
+      - semantic
+      - procedural
+      description: Memory type within the system
+      title: AgentMemoryType
     AgentMemoryCreateRequestMetadata:
       type: object
       properties:
@@ -329,62 +346,57 @@ components:
           description: Tags for categorization
       description: Additional metadata (tags, references, etc.)
       title: AgentMemoryCreateRequestMetadata
-    ValidationErrorError:
+    ApiV1AgentMemoriesGetResponsesContentApplicationJsonSchemaMeta:
       type: object
       properties:
-        code:
-          type: string
-          description: Machine-readable error code
-        details:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-          description: Field-specific validation errors with JSON Pointer paths (RFC 6901) as keys
-        message:
-          type: string
-          description: Human-readable error message
-        request_id:
-          type: string
-          description: Unique request identifier for tracing and debugging
-      required:
-      - code
-      - details
-      - message
-      - request_id
-      title: ValidationErrorError
-    ErrorErrorDetails:
-      type: object
-      properties: {}
-      description: Additional error details (optional)
-      title: ErrorErrorDetails
+        has_more:
+          type: boolean
+          description: Whether more results exist beyond this page (cursor pagination)
+        limit:
+          type: integer
+          description: Max results requested (cursor pagination)
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          description: Opaque cursor for the next page; null when there are no more results (cursor pagination)
+        page:
+          type: integer
+          description: Current page number (offset pagination)
+        page_size:
+          type: integer
+          description: Number of results per page (offset pagination)
+        total_count:
+          type: integer
+          description: Total number of matching memories (offset pagination)
+        total_pages:
+          type: integer
+          description: Total number of pages (offset pagination)
+      description: Pagination metadata (cursor fields on the keyset path, offset fields on the deprecated path)
+      title: ApiV1AgentMemoriesGetResponsesContentApplicationJsonSchemaMeta
+    AgentMemoryCreateRequestSegment:
+      type: string
+      enum:
+      - user
+      - agent
+      - tool
+      - guideline
+      description: Logical segment
+      title: AgentMemoryCreateRequestSegment
+    AgentMemoryCreateRequestSystem:
+      type: string
+      enum:
+      - sensory
+      - working
+      - long_term
+      description: Memory system tier
+      title: AgentMemoryCreateRequestSystem
     Agent_API_Memories_createAgentMemory_Response_201:
       type: object
       properties:
         data:
           $ref: '#/components/schemas/AgentMemory'
       title: Agent API/Memories_createAgentMemory_Response_201
-    ValidationError:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/ValidationErrorError'
-      required:
-      - error
-      description: Validation error response with field-specific errors and request ID for tracing
-      title: ValidationError
-    AgentMemoryType:
-      type: string
-      enum:
-      - iconic
-      - echoic
-      - haptic
-      - episodic
-      - semantic
-      - procedural
-      description: Memory type within the system
-      title: AgentMemoryType
     AgentMemoryCreateRequest:
       type: object
       properties:
@@ -422,6 +434,12 @@ components:
       - type
       description: Request to create a new memory
       title: AgentMemoryCreateRequest
+    Agent_API_Memories_supersedeAgentMemory_Response_200:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/AgentMemory'
+      title: Agent API/Memories_supersedeAgentMemory_Response_200
     Error:
       type: object
       properties:
@@ -431,6 +449,59 @@ components:
       - error
       description: Standard error response with request ID for tracing
       title: Error
+    ApiV1AgentMemoriesGetResponsesContentApplicationJsonSchemaMetadata:
+      type: object
+      properties:
+        has_more:
+          type: boolean
+          description: Whether more results exist beyond this page (cursor pagination)
+        limit:
+          type: integer
+          description: Max results requested (cursor pagination)
+        next_cursor:
+          type:
+          - string
+          - 'null'
+          description: Opaque cursor for the next page; null when there are no more results (cursor pagination)
+        page:
+          type: integer
+          description: Current page number (offset pagination)
+        page_size:
+          type: integer
+          description: Number of results per page (offset pagination)
+        total_count:
+          type: integer
+          description: Total number of matching memories (offset pagination)
+        total_pages:
+          type: integer
+          description: Total number of pages (offset pagination)
+      description: Pagination metadata (cursor fields on the keyset path, offset fields on the deprecated path)
+      title: ApiV1AgentMemoriesGetResponsesContentApplicationJsonSchemaMetadata
+    ErrorError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+        details:
+          $ref: '#/components/schemas/ErrorErrorDetails'
+          description: Additional error details (optional)
+        message:
+          type: string
+          description: Human-readable error message
+        request_id:
+          type: string
+          description: Unique request identifier for tracing and debugging
+      required:
+      - code
+      - message
+      - request_id
+      title: ErrorError
+    ErrorErrorDetails:
+      type: object
+      properties: {}
+      description: Additional error details (optional)
+      title: ErrorErrorDetails
     AgentMemorySystem:
       type: string
       enum:
@@ -439,6 +510,46 @@ components:
       - long_term
       description: Memory system tier
       title: AgentMemorySystem
+    Agent_API_Memories_getAgentMemory_Response_200:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/AgentMemory'
+      title: Agent API/Memories_getAgentMemory_Response_200
+    ValidationErrorError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+        details:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          description: Field-specific validation errors with JSON Pointer paths (RFC 6901) as keys
+        message:
+          type: string
+          description: Human-readable error message
+        request_id:
+          type: string
+          description: Unique request identifier for tracing and debugging
+      required:
+      - code
+      - details
+      - message
+      - request_id
+      title: ValidationErrorError
+    ValidationError:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ValidationErrorError'
+      required:
+      - error
+      description: Validation error response with field-specific errors and request ID for tracing
+      title: ValidationError
     AgentMemory:
       type: object
       properties:
@@ -502,126 +613,22 @@ components:
       - type
       description: A memory entry stored by an agent
       title: AgentMemory
-    AgentMemoryCreateRequestSegment:
-      type: string
-      enum:
-      - user
-      - agent
-      - tool
-      - guideline
-      description: Logical segment
-      title: AgentMemoryCreateRequestSegment
-    ApiV1AgentMemoriesGetResponsesContentApplicationJsonSchemaMetadata:
-      type: object
-      properties:
-        has_more:
-          type: boolean
-          description: Whether more results exist beyond this page (cursor pagination)
-        limit:
-          type: integer
-          description: Max results requested (cursor pagination)
-        next_cursor:
-          type:
-          - string
-          - 'null'
-          description: Opaque cursor for the next page; null when there are no more results (cursor pagination)
-        page:
-          type: integer
-          description: Current page number (offset pagination)
-        page_size:
-          type: integer
-          description: Number of results per page (offset pagination)
-        total_count:
-          type: integer
-          description: Total number of matching memories (offset pagination)
-        total_pages:
-          type: integer
-          description: Total number of pages (offset pagination)
-      description: Pagination metadata (cursor fields on the keyset path, offset fields on the deprecated path)
-      title: ApiV1AgentMemoriesGetResponsesContentApplicationJsonSchemaMetadata
-    AgentMemoryCreateRequestScope:
-      type: string
-      enum:
-      - subject
-      - organization
-      default: subject
-      description: 'Visibility: subject (cross-agent, about this subject) or organization (all agents)'
-      title: AgentMemoryCreateRequestScope
-    AgentMemoryScope:
-      type: string
-      enum:
-      - subject
-      - organization
-      description: Visibility scope of the memory
-      title: AgentMemoryScope
     AgentMemoryMetadata:
       type: object
       properties: {}
       description: Additional metadata
       title: AgentMemoryMetadata
-    Agent_API_Memories_getAgentMemory_Response_200:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/AgentMemory'
-      title: Agent API/Memories_getAgentMemory_Response_200
-    AgentMemoryStatus:
+    AgentMemoryCreateRequestType:
       type: string
       enum:
-      - active
-      - superseded
-      - archived
-      description: Memory lifecycle status
-      title: AgentMemoryStatus
-    AgentMemoryCreateRequestSystem:
-      type: string
-      enum:
-      - sensory
-      - working
-      - long_term
-      description: Memory system tier
-      title: AgentMemoryCreateRequestSystem
-    ErrorError:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Machine-readable error code
-        details:
-          $ref: '#/components/schemas/ErrorErrorDetails'
-          description: Additional error details (optional)
-        message:
-          type: string
-          description: Human-readable error message
-        request_id:
-          type: string
-          description: Unique request identifier for tracing and debugging
-      required:
-      - code
-      - message
-      - request_id
-      title: ErrorError
-    Agent_API_Memories_archiveAgentMemory_Response_200:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/AgentMemory'
-      title: Agent API/Memories_archiveAgentMemory_Response_200
-    AgentMemorySegment:
-      type: string
-      enum:
-      - user
-      - agent
-      - tool
-      - guideline
-      description: Logical segment of the memory
-      title: AgentMemorySegment
-    Agent_API_Memories_supersedeAgentMemory_Response_200:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/AgentMemory'
-      title: Agent API/Memories_supersedeAgentMemory_Response_200
+      - iconic
+      - echoic
+      - haptic
+      - episodic
+      - semantic
+      - procedural
+      description: Memory type (must be valid for selected system)
+      title: AgentMemoryCreateRequestType
     Agent_API_Memories_listAgentMemories_Response_200:
       type: object
       properties:
@@ -636,45 +643,38 @@ components:
           $ref: '#/components/schemas/ApiV1AgentMemoriesGetResponsesContentApplicationJsonSchemaMetadata'
           description: Pagination metadata (cursor fields on the keyset path, offset fields on the deprecated path)
       title: Agent API/Memories_listAgentMemories_Response_200
-    ApiV1AgentMemoriesGetResponsesContentApplicationJsonSchemaMeta:
-      type: object
-      properties:
-        has_more:
-          type: boolean
-          description: Whether more results exist beyond this page (cursor pagination)
-        limit:
-          type: integer
-          description: Max results requested (cursor pagination)
-        next_cursor:
-          type:
-          - string
-          - 'null'
-          description: Opaque cursor for the next page; null when there are no more results (cursor pagination)
-        page:
-          type: integer
-          description: Current page number (offset pagination)
-        page_size:
-          type: integer
-          description: Number of results per page (offset pagination)
-        total_count:
-          type: integer
-          description: Total number of matching memories (offset pagination)
-        total_pages:
-          type: integer
-          description: Total number of pages (offset pagination)
-      description: Pagination metadata (cursor fields on the keyset path, offset fields on the deprecated path)
-      title: ApiV1AgentMemoriesGetResponsesContentApplicationJsonSchemaMeta
-    AgentMemoryCreateRequestType:
+    AgentMemoryScope:
       type: string
       enum:
-      - iconic
-      - echoic
-      - haptic
-      - episodic
-      - semantic
-      - procedural
-      description: Memory type (must be valid for selected system)
-      title: AgentMemoryCreateRequestType
+      - subject
+      - organization
+      description: Visibility scope of the memory
+      title: AgentMemoryScope
+    AgentMemorySegment:
+      type: string
+      enum:
+      - user
+      - agent
+      - tool
+      - guideline
+      description: Logical segment of the memory
+      title: AgentMemorySegment
+    AgentMemoryStatus:
+      type: string
+      enum:
+      - active
+      - superseded
+      - archived
+      description: Memory lifecycle status
+      title: AgentMemoryStatus
+    AgentMemoryCreateRequestScope:
+      type: string
+      enum:
+      - subject
+      - organization
+      default: subject
+      description: 'Visibility: subject (cross-agent, about this subject) or organization (all agents)'
+      title: AgentMemoryCreateRequestScope
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

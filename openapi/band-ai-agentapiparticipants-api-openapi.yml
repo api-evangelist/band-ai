@@ -187,39 +187,6 @@ components:
       - Agent
       description: Participant type
       title: ChatParticipantType
-    Agent_API_Participants_addAgentChatParticipant_Response_201:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/ChatParticipant'
-      required:
-      - data
-      title: Agent API/Participants_addAgentChatParticipant_Response_201
-    ValidationErrorError:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Machine-readable error code
-        details:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-          description: Field-specific validation errors with JSON Pointer paths (RFC 6901) as keys
-        message:
-          type: string
-          description: Human-readable error message
-        request_id:
-          type: string
-          description: Unique request identifier for tracing and debugging
-      required:
-      - code
-      - details
-      - message
-      - request_id
-      title: ValidationErrorError
     Agent_API_Participants_listAgentChatParticipants_Response_200:
       type: object
       properties:
@@ -230,11 +197,83 @@ components:
       required:
       - data
       title: Agent API/Participants_listAgentChatParticipants_Response_200
-    ErrorErrorDetails:
+    ParticipantRequest:
       type: object
-      properties: {}
-      description: Additional error details (optional)
-      title: ErrorErrorDetails
+      properties:
+        participant_id:
+          type: string
+          format: uuid
+          description: Participant ID (User UUID or Agent ID)
+        role:
+          $ref: '#/components/schemas/ParticipantRequestRole'
+          default: member
+          description: Participant role
+      required:
+      - participant_id
+      description: Request to add a participant to a chat room
+      title: ParticipantRequest
+    Agent_API_Participants_removeAgentChatParticipant_Response_200:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ChatParticipant'
+      required:
+      - data
+      title: Agent API/Participants_removeAgentChatParticipant_Response_200
+    Error:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorError'
+      required:
+      - error
+      description: Standard error response with request ID for tracing
+      title: Error
+    ParticipantRequestRole:
+      type: string
+      enum:
+      - owner
+      - admin
+      - member
+      default: member
+      description: Participant role
+      title: ParticipantRequestRole
+    ErrorError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+        details:
+          $ref: '#/components/schemas/ErrorErrorDetails'
+          description: Additional error details (optional)
+        message:
+          type: string
+          description: Human-readable error message
+        request_id:
+          type: string
+          description: Unique request identifier for tracing and debugging
+      required:
+      - code
+      - message
+      - request_id
+      title: ErrorError
+    ParticipantRole:
+      type: string
+      enum:
+      - owner
+      - admin
+      - member
+      description: Role of a participant in a chat room. Determines permissions and capabilities.
+      title: ParticipantRole
+    Agent_API_Participants_addAgentChatParticipant_Response_201:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ChatParticipant'
+      required:
+      - data
+      title: Agent API/Participants_addAgentChatParticipant_Response_201
     ChatParticipant:
       type: object
       properties:
@@ -265,15 +304,19 @@ components:
       - type
       description: A chat room participant
       title: ChatParticipant
-    ErrorError:
+    ValidationErrorError:
       type: object
       properties:
         code:
           type: string
           description: Machine-readable error code
         details:
-          $ref: '#/components/schemas/ErrorErrorDetails'
-          description: Additional error details (optional)
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          description: Field-specific validation errors with JSON Pointer paths (RFC 6901) as keys
         message:
           type: string
           description: Human-readable error message
@@ -282,24 +325,10 @@ components:
           description: Unique request identifier for tracing and debugging
       required:
       - code
+      - details
       - message
       - request_id
-      title: ErrorError
-    ParticipantRequest:
-      type: object
-      properties:
-        participant_id:
-          type: string
-          format: uuid
-          description: Participant ID (User UUID or Agent ID)
-        role:
-          $ref: '#/components/schemas/ParticipantRequestRole'
-          default: member
-          description: Participant role
-      required:
-      - participant_id
-      description: Request to add a participant to a chat room
-      title: ParticipantRequest
+      title: ValidationErrorError
     ValidationError:
       type: object
       properties:
@@ -309,40 +338,11 @@ components:
       - error
       description: Validation error response with field-specific errors and request ID for tracing
       title: ValidationError
-    Error:
+    ErrorErrorDetails:
       type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorError'
-      required:
-      - error
-      description: Standard error response with request ID for tracing
-      title: Error
-    ParticipantRequestRole:
-      type: string
-      enum:
-      - owner
-      - admin
-      - member
-      default: member
-      description: Participant role
-      title: ParticipantRequestRole
-    ParticipantRole:
-      type: string
-      enum:
-      - owner
-      - admin
-      - member
-      description: Role of a participant in a chat room. Determines permissions and capabilities.
-      title: ParticipantRole
-    Agent_API_Participants_removeAgentChatParticipant_Response_200:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/ChatParticipant'
-      required:
-      - data
-      title: Agent API/Participants_removeAgentChatParticipant_Response_200
+      properties: {}
+      description: Additional error details (optional)
+      title: ErrorErrorDetails
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
