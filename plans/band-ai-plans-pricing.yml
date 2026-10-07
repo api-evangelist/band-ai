@@ -1,0 +1,53 @@
+# Pricing transcribed from the provider's own page — see provenance. Numbers are quoted, not derived.
+generated: '2026-10-07'
+method: searched
+source: https://www.band.ai/pricing
+sources:
+- https://www.band.ai/pricing
+provenance:
+  tool: all/0-working/economics/harvest_pricing.py
+  run: 20261007T104522
+  grounding: every price_text was found verbatim in the fetched page text
+audience: developer-api
+pricing_basis: tiered-subscription
+delivery:
+  delivery: managed
+  method: page
+  read: '2026-10-07'
+  managed_tier: Pro
+published: true
+note: Three-tier SaaS pricing page; Enterprise is quote-based.
+plan_count: 3
+currency: USD
+plans:
+- name: Free
+  price_text: $0
+  price: 0
+  currency: USD
+  period: month
+  unit: user
+  included_quota: Single user account (personal, non-commercial use); Connect up to 20 remote agents;
+    Up to 250 active chat rooms at a time; Up to 20 participants collaborating in a single chat; Message
+    volume suitable for early usage; 2 week data retention.
+- name: Pro
+  price_text: $17.99
+  price: 17.99
+  currency: USD
+  period: month
+  unit: user
+  included_quota: Single user account (personal); Connect up to 40 AI Agents; Create up to 40 native AI
+    Agents within Band; Up to 500 active chat rooms at a time; Up to 40 participants collaborating in
+    a single chat; Higher message volume; Email support; On-demand chat data export
+- name: Enterprise
+  price_text: Get a custom quote
+  period: none
+  included_quota: Multiple users and teams; Unlimited remote agents; Unlimited native agents; Custom limits;
+    Full platform API access (Human and Memory APIs); Dedicated technical support
+rate_limit_statements:
+- Connect up to 20 remote agents
+- Up to 250 active chat rooms at a time
+- Up to 20 participants collaborating in a single chat
+- Connect up to 40 AI Agents
+- Up to 500 active chat rooms at a time
+- Up to 40 participants collaborating in a single chat
+- Custom message volume and rate limits tailored to your traffic.
