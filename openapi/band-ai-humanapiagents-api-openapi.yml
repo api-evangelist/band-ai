@@ -261,13 +261,6 @@ paths:
                 $ref: '#/components/schemas/ValidationError'
 components:
   schemas:
-    ApiV1MeAgentsGetParametersOrder:
-      type: string
-      enum:
-      - asc
-      - desc
-      default: desc
-      title: ApiV1MeAgentsGetParametersOrder
     Human_API_Agents_registerMyAgent_Response_201:
       type: object
       properties:
@@ -276,6 +269,18 @@ components:
       required:
       - data
       title: Human API/Agents_registerMyAgent_Response_201
+    ApiV1MeAgentsGetParametersOrder:
+      type: string
+      enum:
+      - asc
+      - desc
+      default: desc
+      title: ApiV1MeAgentsGetParametersOrder
+    ErrorErrorDetails:
+      type: object
+      properties: {}
+      description: Additional error details (optional)
+      title: ErrorErrorDetails
     Human_API_Agents_deleteMyAgent_Response_200:
       type: object
       properties:
@@ -297,35 +302,56 @@ components:
       - data
       - metadata
       title: Human API/Agents_listMyAgents_Response_200
-    Error:
+    MyAgentCredentialsAgent:
+      type: object
+      properties:
+        description:
+          type:
+          - string
+          - 'null'
+          description: Agent Description
+        id:
+          type: string
+          format: uuid
+          description: Agent ID
+        inserted_at:
+          type: string
+          format: date-time
+          description: Created At
+        name:
+          type: string
+          description: Agent Name
+        owner_id:
+          type: string
+          format: uuid
+          description: Owner ID
+      required:
+      - id
+      - inserted_at
+      - name
+      - owner_id
+      title: MyAgentCredentialsAgent
+    ValidationError:
       type: object
       properties:
         error:
-          $ref: '#/components/schemas/ErrorError'
+          $ref: '#/components/schemas/ValidationErrorError'
       required:
       - error
-      description: Standard error response with request ID for tracing
-      title: Error
-    ErrorError:
+      description: Validation error response with field-specific errors and request ID for tracing
+      title: ValidationError
+    MyAgentCredentials:
       type: object
       properties:
-        code:
-          type: string
-          description: Machine-readable error code
-        details:
-          $ref: '#/components/schemas/ErrorErrorDetails'
-          description: Additional error details (optional)
-        message:
-          type: string
-          description: Human-readable error message
-        request_id:
-          type: string
-          description: Unique request identifier for tracing and debugging
+        agent:
+          $ref: '#/components/schemas/MyAgentCredentialsAgent'
+        credentials:
+          $ref: '#/components/schemas/MyAgentCredentialsCredentials'
       required:
-      - code
-      - message
-      - request_id
-      title: ErrorError
+      - agent
+      - credentials
+      description: An agent together with a freshly-minted API key, shown exactly once.
+      title: MyAgentCredentials
     ApiV1MeAgentsGetResponsesContentApplicationJsonSchemaMetadata:
       type: object
       properties:
@@ -361,11 +387,29 @@ components:
       - next_cursor
       - sortable_fields
       title: ApiV1MeAgentsGetResponsesContentApplicationJsonSchemaMetadata
-    ErrorErrorDetails:
+    Error:
       type: object
-      properties: {}
-      description: Additional error details (optional)
-      title: ErrorErrorDetails
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorError'
+      required:
+      - error
+      description: Standard error response with request ID for tracing
+      title: Error
+    AgentRegisterRequest:
+      type: object
+      properties:
+        description:
+          type: string
+          description: Agent Description
+        name:
+          type: string
+          description: Agent Name
+      required:
+      - description
+      - name
+      description: Request to register an external agent
+      title: AgentRegisterRequest
     ApiV1MeAgentsGetParametersSort:
       type: string
       enum:
@@ -374,117 +418,6 @@ components:
       - updated_at
       default: inserted_at
       title: ApiV1MeAgentsGetParametersSort
-    ApiV1MeAgentsGetResponsesContentApplicationJsonSchemaMetadataSortableFieldsItems:
-      type: object
-      properties:
-        label:
-          type: string
-        param:
-          type: string
-      required:
-      - label
-      - param
-      title: ApiV1MeAgentsGetResponsesContentApplicationJsonSchemaMetadataSortableFieldsItems
-    ApiV1MeAgentsGetResponsesContentApplicationJsonSchemaMetadataAvailableFiltersItems:
-      type: object
-      properties:
-        label:
-          type: string
-        param:
-          type: string
-        type:
-          type: string
-      required:
-      - label
-      - param
-      - type
-      title: ApiV1MeAgentsGetResponsesContentApplicationJsonSchemaMetadataAvailableFiltersItems
-    ApiV1MeAgentsIdDeleteResponsesContentApplicationJsonSchemaData:
-      type: object
-      properties:
-        description:
-          type:
-          - string
-          - 'null'
-          description: Deleted agent description
-        executions_deleted:
-          type: integer
-          description: Number of executions deleted (0 if force=false)
-        id:
-          type: string
-          format: uuid
-          description: Deleted agent ID
-        name:
-          type: string
-          description: Deleted agent name
-      required:
-      - executions_deleted
-      - id
-      - name
-      title: ApiV1MeAgentsIdDeleteResponsesContentApplicationJsonSchemaData
-    MyAgentCredentialsAgent:
-      type: object
-      properties:
-        description:
-          type:
-          - string
-          - 'null'
-          description: Agent Description
-        id:
-          type: string
-          format: uuid
-          description: Agent ID
-        inserted_at:
-          type: string
-          format: date-time
-          description: Created At
-        name:
-          type: string
-          description: Agent Name
-        owner_id:
-          type: string
-          format: uuid
-          description: Owner ID
-      required:
-      - id
-      - inserted_at
-      - name
-      - owner_id
-      title: MyAgentCredentialsAgent
-    ValidationErrorError:
-      type: object
-      properties:
-        code:
-          type: string
-          description: Machine-readable error code
-        details:
-          type: object
-          additionalProperties:
-            type: array
-            items:
-              type: string
-          description: Field-specific validation errors with JSON Pointer paths (RFC 6901) as keys
-        message:
-          type: string
-          description: Human-readable error message
-        request_id:
-          type: string
-          description: Unique request identifier for tracing and debugging
-      required:
-      - code
-      - details
-      - message
-      - request_id
-      title: ValidationErrorError
-    ValidationError:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/ValidationErrorError'
-      required:
-      - error
-      description: Validation error response with field-specific errors and request ID for tracing
-      title: ValidationError
     MyAgent:
       type: object
       properties:
@@ -549,18 +482,29 @@ components:
       - updated_at
       description: An agent owned by the authenticated user
       title: MyAgent
-    MyAgentCredentials:
+    ApiV1MeAgentsIdDeleteResponsesContentApplicationJsonSchemaData:
       type: object
       properties:
-        agent:
-          $ref: '#/components/schemas/MyAgentCredentialsAgent'
-        credentials:
-          $ref: '#/components/schemas/MyAgentCredentialsCredentials'
+        description:
+          type:
+          - string
+          - 'null'
+          description: Deleted agent description
+        executions_deleted:
+          type: integer
+          description: Number of executions deleted (0 if force=false)
+        id:
+          type: string
+          format: uuid
+          description: Deleted agent ID
+        name:
+          type: string
+          description: Deleted agent name
       required:
-      - agent
-      - credentials
-      description: An agent together with a freshly-minted API key, shown exactly once.
-      title: MyAgentCredentials
+      - executions_deleted
+      - id
+      - name
+      title: ApiV1MeAgentsIdDeleteResponsesContentApplicationJsonSchemaData
     MyAgentCredentialsCredentials:
       type: object
       properties:
@@ -570,20 +514,76 @@ components:
       required:
       - api_key
       title: MyAgentCredentialsCredentials
-    AgentRegisterRequest:
+    ErrorError:
       type: object
       properties:
-        description:
+        code:
           type: string
-          description: Agent Description
-        name:
+          description: Machine-readable error code
+        details:
+          $ref: '#/components/schemas/ErrorErrorDetails'
+          description: Additional error details (optional)
+        message:
           type: string
-          description: Agent Name
+          description: Human-readable error message
+        request_id:
+          type: string
+          description: Unique request identifier for tracing and debugging
       required:
-      - description
-      - name
-      description: Request to register an external agent
-      title: AgentRegisterRequest
+      - code
+      - message
+      - request_id
+      title: ErrorError
+    ApiV1MeAgentsGetResponsesContentApplicationJsonSchemaMetadataSortableFieldsItems:
+      type: object
+      properties:
+        label:
+          type: string
+        param:
+          type: string
+      required:
+      - label
+      - param
+      title: ApiV1MeAgentsGetResponsesContentApplicationJsonSchemaMetadataSortableFieldsItems
+    ApiV1MeAgentsGetResponsesContentApplicationJsonSchemaMetadataAvailableFiltersItems:
+      type: object
+      properties:
+        label:
+          type: string
+        param:
+          type: string
+        type:
+          type: string
+      required:
+      - label
+      - param
+      - type
+      title: ApiV1MeAgentsGetResponsesContentApplicationJsonSchemaMetadataAvailableFiltersItems
+    ValidationErrorError:
+      type: object
+      properties:
+        code:
+          type: string
+          description: Machine-readable error code
+        details:
+          type: object
+          additionalProperties:
+            type: array
+            items:
+              type: string
+          description: Field-specific validation errors with JSON Pointer paths (RFC 6901) as keys
+        message:
+          type: string
+          description: Human-readable error message
+        request_id:
+          type: string
+          description: Unique request identifier for tracing and debugging
+      required:
+      - code
+      - details
+      - message
+      - request_id
+      title: ValidationErrorError
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

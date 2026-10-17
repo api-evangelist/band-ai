@@ -212,14 +212,6 @@ paths:
               - chat
 components:
   schemas:
-    Agent_API_Chats_getAgentChat_Response_200:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/ChatRoom'
-      required:
-      - data
-      title: Agent API/Chats_getAgentChat_Response_200
     ChatRoom:
       type: object
       properties:
@@ -252,24 +244,6 @@ components:
       - updated_at
       description: A chat room
       title: ChatRoom
-    ApiV1AgentChatsIdPatchRequestBodyContentApplicationJsonSchemaChat:
-      type: object
-      properties:
-        title:
-          type: string
-          description: New chat room title. Trimmed; must be 1..120 chars after trim; control chars rejected.
-      required:
-      - title
-      title: ApiV1AgentChatsIdPatchRequestBodyContentApplicationJsonSchemaChat
-    Error:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorError'
-      required:
-      - error
-      description: Standard error response with request ID for tracing
-      title: Error
     Agent_API_Chats_renameAgentChat_Response_200:
       type: object
       properties:
@@ -278,6 +252,33 @@ components:
       required:
       - data
       title: Agent API/Chats_renameAgentChat_Response_200
+    Agent_API_Chats_listAgentChats_Response_200:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatRoom'
+        metadata:
+          $ref: '#/components/schemas/ApiV1AgentChatsGetResponsesContentApplicationJsonSchemaMetadata'
+      required:
+      - data
+      - metadata
+      title: Agent API/Chats_listAgentChats_Response_200
+    ValidationError:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ValidationErrorError'
+      required:
+      - error
+      description: Validation error response with field-specific errors and request ID for tracing
+      title: ValidationError
+    ErrorErrorDetails:
+      type: object
+      properties: {}
+      description: Additional error details (optional)
+      title: ErrorErrorDetails
     ErrorError:
       type: object
       properties:
@@ -298,6 +299,24 @@ components:
       - message
       - request_id
       title: ErrorError
+    ApiV1AgentChatsIdPatchRequestBodyContentApplicationJsonSchemaChat:
+      type: object
+      properties:
+        title:
+          type: string
+          description: New chat room title. Trimmed; must be 1..120 chars after trim; control chars rejected.
+      required:
+      - title
+      title: ApiV1AgentChatsIdPatchRequestBodyContentApplicationJsonSchemaChat
+    Error:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorError'
+      required:
+      - error
+      description: Standard error response with request ID for tracing
+      title: Error
     ChatRoomRequest:
       type: object
       properties:
@@ -314,39 +333,6 @@ components:
           description: 'Optional title for the chat room. If provided and non-blank after trimming, the room is marked title_locked: true and LLM auto-titling is skipped. Empty/whitespace-only/null falls through to the default and LLM auto-titles on the first message. Control characters (newline, carriage return, null) are rejected with 422. Max 120 chars. Note: agent callers can set this at creation; renaming later is supported for human room owners via PATCH /api/v1/me/chats/{id} and for agents that own the room via PATCH /api/v1/agent/chats/{id} (or the set_chat_title tool).'
       description: Request to create a chat room. Status defaults to 'active'. Type defaults to 'direct'. The owner is automatically set to the authenticated user or agent.
       title: ChatRoomRequest
-    ApiV1AgentChatsGetResponsesContentApplicationJsonSchemaMetadata:
-      type: object
-      properties:
-        page:
-          type: integer
-        page_size:
-          type: integer
-        total_count:
-          type: integer
-        total_pages:
-          type: integer
-      title: ApiV1AgentChatsGetResponsesContentApplicationJsonSchemaMetadata
-    Agent_API_Chats_listAgentChats_Response_200:
-      type: object
-      properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ChatRoom'
-        metadata:
-          $ref: '#/components/schemas/ApiV1AgentChatsGetResponsesContentApplicationJsonSchemaMetadata'
-      required:
-      - data
-      - metadata
-      title: Agent API/Chats_listAgentChats_Response_200
-    Agent_API_Chats_createAgentChat_Response_201:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/ChatRoom'
-      required:
-      - data
-      title: Agent API/Chats_createAgentChat_Response_201
     ValidationErrorError:
       type: object
       properties:
@@ -372,20 +358,34 @@ components:
       - message
       - request_id
       title: ValidationErrorError
-    ValidationError:
+    ApiV1AgentChatsGetResponsesContentApplicationJsonSchemaMetadata:
       type: object
       properties:
-        error:
-          $ref: '#/components/schemas/ValidationErrorError'
-      required:
-      - error
-      description: Validation error response with field-specific errors and request ID for tracing
-      title: ValidationError
-    ErrorErrorDetails:
+        page:
+          type: integer
+        page_size:
+          type: integer
+        total_count:
+          type: integer
+        total_pages:
+          type: integer
+      title: ApiV1AgentChatsGetResponsesContentApplicationJsonSchemaMetadata
+    Agent_API_Chats_createAgentChat_Response_201:
       type: object
-      properties: {}
-      description: Additional error details (optional)
-      title: ErrorErrorDetails
+      properties:
+        data:
+          $ref: '#/components/schemas/ChatRoom'
+      required:
+      - data
+      title: Agent API/Chats_createAgentChat_Response_201
+    Agent_API_Chats_getAgentChat_Response_200:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/ChatRoom'
+      required:
+      - data
+      title: Agent API/Chats_getAgentChat_Response_200
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

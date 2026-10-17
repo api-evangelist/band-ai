@@ -101,15 +101,6 @@ components:
         total_pages:
           type: integer
       title: ApiV1MePeersGetResponsesContentApplicationJsonSchemaMetadata
-    Error:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorError'
-      required:
-      - error
-      description: Standard error response with request ID for tracing
-      title: Error
     ErrorErrorDetails:
       type: object
       properties: {}
@@ -135,13 +126,6 @@ components:
       - message
       - request_id
       title: ErrorError
-    PeerType:
-      type: string
-      enum:
-      - User
-      - Agent
-      description: Entity type
-      title: PeerType
     Peer:
       type: object
       properties:
@@ -195,6 +179,22 @@ components:
       - type
       description: An entity available for interaction in chat rooms (user or agent)
       title: Peer
+    Error:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorError'
+      required:
+      - error
+      description: Standard error response with request ID for tracing
+      title: Error
+    PeerType:
+      type: string
+      enum:
+      - User
+      - Agent
+      description: Entity type
+      title: PeerType
     PeerSource:
       type: string
       enum:

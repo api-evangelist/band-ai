@@ -93,14 +93,6 @@ paths:
               - user
 components:
   schemas:
-    Human_API_Profile_updateMyProfile_Response_200:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/UserDetails'
-      required:
-      - data
-      title: Human API/Profile_updateMyProfile_Response_200
     UserDetails:
       type: object
       properties:
@@ -134,34 +126,20 @@ components:
       - role
       description: User profile details
       title: UserDetails
-    Human_API_Profile_getMyProfile_Response_200:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/UserDetails'
-      required:
-      - data
-      title: Human API/Profile_getMyProfile_Response_200
-    Error:
+    ValidationError:
       type: object
       properties:
         error:
-          $ref: '#/components/schemas/ErrorError'
+          $ref: '#/components/schemas/ValidationErrorError'
       required:
       - error
-      description: Standard error response with request ID for tracing
-      title: Error
-    ApiV1MeProfilePutRequestBodyContentApplicationJsonSchemaUser:
+      description: Validation error response with field-specific errors and request ID for tracing
+      title: ValidationError
+    ErrorErrorDetails:
       type: object
-      properties:
-        first_name:
-          type: string
-          description: First name
-        last_name:
-          type: string
-          description: Last name
-      description: User profile fields to update
-      title: ApiV1MeProfilePutRequestBodyContentApplicationJsonSchemaUser
+      properties: {}
+      description: Additional error details (optional)
+      title: ErrorErrorDetails
     ErrorError:
       type: object
       properties:
@@ -182,6 +160,31 @@ components:
       - message
       - request_id
       title: ErrorError
+    Error:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorError'
+      required:
+      - error
+      description: Standard error response with request ID for tracing
+      title: Error
+    Human_API_Profile_getMyProfile_Response_200:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/UserDetails'
+      required:
+      - data
+      title: Human API/Profile_getMyProfile_Response_200
+    Human_API_Profile_updateMyProfile_Response_200:
+      type: object
+      properties:
+        data:
+          $ref: '#/components/schemas/UserDetails'
+      required:
+      - data
+      title: Human API/Profile_updateMyProfile_Response_200
     UserDetailsRole:
       type: string
       enum:
@@ -189,6 +192,17 @@ components:
       - admin
       description: User role
       title: UserDetailsRole
+    ApiV1MeProfilePutRequestBodyContentApplicationJsonSchemaUser:
+      type: object
+      properties:
+        first_name:
+          type: string
+          description: First name
+        last_name:
+          type: string
+          description: Last name
+      description: User profile fields to update
+      title: ApiV1MeProfilePutRequestBodyContentApplicationJsonSchemaUser
     ValidationErrorError:
       type: object
       properties:
@@ -214,20 +228,6 @@ components:
       - message
       - request_id
       title: ValidationErrorError
-    ValidationError:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/ValidationErrorError'
-      required:
-      - error
-      description: Validation error response with field-specific errors and request ID for tracing
-      title: ValidationError
-    ErrorErrorDetails:
-      type: object
-      properties: {}
-      description: Additional error details (optional)
-      title: ErrorErrorDetails
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

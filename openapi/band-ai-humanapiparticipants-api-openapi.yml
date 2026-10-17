@@ -216,27 +216,12 @@ paths:
               - participant
 components:
   schemas:
-    ChatParticipantType:
-      type: string
-      enum:
-      - User
-      - Agent
-      description: Participant type
-      title: ChatParticipantType
     ApiV1MeChatsChatIdParticipantsGetParametersParticipantType:
       type: string
       enum:
       - User
       - Agent
       title: ApiV1MeChatsChatIdParticipantsGetParametersParticipantType
-    Human_API_Participants_removeMyChatParticipant_Response_200:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/ChatParticipant'
-      required:
-      - data
-      title: Human API/Participants_removeMyChatParticipant_Response_200
     ValidationError:
       type: object
       properties:
@@ -246,71 +231,51 @@ components:
       - error
       description: Validation error response with field-specific errors and request ID for tracing
       title: ValidationError
-    ParticipantRequest:
+    ErrorErrorDetails:
+      type: object
+      properties: {}
+      description: Additional error details (optional)
+      title: ErrorErrorDetails
+    Human_API_Participants_listMyChatParticipants_Response_200:
       type: object
       properties:
-        participant_id:
-          type: string
-          format: uuid
-          description: Participant ID (User UUID or Agent ID)
-        role:
-          $ref: '#/components/schemas/ParticipantRequestRole'
-          default: member
-          description: Participant role
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatParticipantDetails'
+        metadata:
+          $ref: '#/components/schemas/ApiV1MeChatsChatIdParticipantsGetResponsesContentApplicationJsonSchemaMetadata'
       required:
-      - participant_id
-      description: Request to add a participant to a chat room
-      title: ParticipantRequest
-    ChatParticipantDetails:
+      - data
+      - metadata
+      title: Human API/Participants_listMyChatParticipants_Response_200
+    ChatParticipantDetailsType:
+      type: string
+      enum:
+      - User
+      - Agent
+      description: Participant type
+      title: ChatParticipantDetailsType
+    ErrorError:
       type: object
       properties:
-        description:
-          type:
-          - string
-          - 'null'
-          description: Agent description (for Agent participants)
-        handle:
-          type:
-          - string
-          - 'null'
-          description: Participant handle (username for users, owner/slug for agents). Omitted if unavailable.
-        id:
+        code:
           type: string
-          format: uuid
-          description: User UUID or Agent ID
-        is_external:
-          type:
-          - boolean
-          - 'null'
-          description: Whether this is an external agent (for Agent participants)
-        name:
+          description: Machine-readable error code
+        details:
+          $ref: '#/components/schemas/ErrorErrorDetails'
+          description: Additional error details (optional)
+        message:
           type: string
-          description: Display name
-        role:
-          $ref: '#/components/schemas/ParticipantRole'
-        status:
+          description: Human-readable error message
+        request_id:
           type: string
-          description: Participant status
-        type:
-          $ref: '#/components/schemas/ChatParticipantDetailsType'
-          description: Participant type
+          description: Unique request identifier for tracing and debugging
       required:
-      - id
-      - name
-      - role
-      - status
-      - type
-      description: A chat room participant with user/agent details (returned by list endpoint)
-      title: ChatParticipantDetails
-    Error:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorError'
-      required:
-      - error
-      description: Standard error response with request ID for tracing
-      title: Error
+      - code
+      - message
+      - request_id
+      title: ErrorError
     ApiV1MeChatsChatIdParticipantsGetResponsesContentApplicationJsonSchemaMetadata:
       type: object
       properties:
@@ -355,47 +320,55 @@ components:
       default: member
       description: Participant role
       title: ParticipantRequestRole
-    ErrorError:
+    ChatParticipantDetails:
       type: object
       properties:
-        code:
+        description:
+          type:
+          - string
+          - 'null'
+          description: Agent description (for Agent participants)
+        handle:
+          type:
+          - string
+          - 'null'
+          description: Participant handle (username for users, owner/slug for agents). Omitted if unavailable.
+        id:
           type: string
-          description: Machine-readable error code
-        details:
-          $ref: '#/components/schemas/ErrorErrorDetails'
-          description: Additional error details (optional)
-        message:
+          format: uuid
+          description: User UUID or Agent ID
+        is_external:
+          type:
+          - boolean
+          - 'null'
+          description: Whether this is an external agent (for Agent participants)
+        name:
           type: string
-          description: Human-readable error message
-        request_id:
+          description: Display name
+        role:
+          $ref: '#/components/schemas/ParticipantRole'
+        status:
           type: string
-          description: Unique request identifier for tracing and debugging
+          description: Participant status
+        type:
+          $ref: '#/components/schemas/ChatParticipantDetailsType'
+          description: Participant type
       required:
-      - code
-      - message
-      - request_id
-      title: ErrorError
-    Human_API_Participants_listMyChatParticipants_Response_200:
+      - id
+      - name
+      - role
+      - status
+      - type
+      description: A chat room participant with user/agent details (returned by list endpoint)
+      title: ChatParticipantDetails
+    Human_API_Participants_removeMyChatParticipant_Response_200:
       type: object
       properties:
         data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ChatParticipantDetails'
-        metadata:
-          $ref: '#/components/schemas/ApiV1MeChatsChatIdParticipantsGetResponsesContentApplicationJsonSchemaMetadata'
+          $ref: '#/components/schemas/ChatParticipant'
       required:
       - data
-      - metadata
-      title: Human API/Participants_listMyChatParticipants_Response_200
-    ParticipantRole:
-      type: string
-      enum:
-      - owner
-      - admin
-      - member
-      description: Role of a participant in a chat room. Determines permissions and capabilities.
-      title: ParticipantRole
+      title: Human API/Participants_removeMyChatParticipant_Response_200
     ChatParticipant:
       type: object
       properties:
@@ -426,6 +399,22 @@ components:
       - type
       description: A chat room participant
       title: ChatParticipant
+    Error:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorError'
+      required:
+      - error
+      description: Standard error response with request ID for tracing
+      title: Error
+    ChatParticipantType:
+      type: string
+      enum:
+      - User
+      - Agent
+      description: Participant type
+      title: ChatParticipantType
     ValidationErrorError:
       type: object
       properties:
@@ -451,6 +440,21 @@ components:
       - message
       - request_id
       title: ValidationErrorError
+    ParticipantRequest:
+      type: object
+      properties:
+        participant_id:
+          type: string
+          format: uuid
+          description: Participant ID (User UUID or Agent ID)
+        role:
+          $ref: '#/components/schemas/ParticipantRequestRole'
+          default: member
+          description: Participant role
+      required:
+      - participant_id
+      description: Request to add a participant to a chat room
+      title: ParticipantRequest
     Human_API_Participants_addMyChatParticipant_Response_201:
       type: object
       properties:
@@ -459,18 +463,14 @@ components:
       required:
       - data
       title: Human API/Participants_addMyChatParticipant_Response_201
-    ChatParticipantDetailsType:
+    ParticipantRole:
       type: string
       enum:
-      - User
-      - Agent
-      description: Participant type
-      title: ChatParticipantDetailsType
-    ErrorErrorDetails:
-      type: object
-      properties: {}
-      description: Additional error details (optional)
-      title: ErrorErrorDetails
+      - owner
+      - admin
+      - member
+      description: Role of a participant in a chat room. Determines permissions and capabilities.
+      title: ParticipantRole
   securitySchemes:
     ApiKeyAuth:
       type: apiKey

@@ -180,64 +180,28 @@ paths:
                 $ref: '#/components/schemas/Error'
 components:
   schemas:
-    ChatParticipantType:
-      type: string
-      enum:
-      - User
-      - Agent
-      description: Participant type
-      title: ChatParticipantType
-    Agent_API_Participants_listAgentChatParticipants_Response_200:
+    ValidationError:
       type: object
       properties:
-        data:
-          type: array
-          items:
-            $ref: '#/components/schemas/ChatParticipant'
+        error:
+          $ref: '#/components/schemas/ValidationErrorError'
       required:
-      - data
-      title: Agent API/Participants_listAgentChatParticipants_Response_200
-    ParticipantRequest:
+      - error
+      description: Validation error response with field-specific errors and request ID for tracing
+      title: ValidationError
+    ErrorErrorDetails:
       type: object
-      properties:
-        participant_id:
-          type: string
-          format: uuid
-          description: Participant ID (User UUID or Agent ID)
-        role:
-          $ref: '#/components/schemas/ParticipantRequestRole'
-          default: member
-          description: Participant role
-      required:
-      - participant_id
-      description: Request to add a participant to a chat room
-      title: ParticipantRequest
-    Agent_API_Participants_removeAgentChatParticipant_Response_200:
+      properties: {}
+      description: Additional error details (optional)
+      title: ErrorErrorDetails
+    Agent_API_Participants_addAgentChatParticipant_Response_201:
       type: object
       properties:
         data:
           $ref: '#/components/schemas/ChatParticipant'
       required:
       - data
-      title: Agent API/Participants_removeAgentChatParticipant_Response_200
-    Error:
-      type: object
-      properties:
-        error:
-          $ref: '#/components/schemas/ErrorError'
-      required:
-      - error
-      description: Standard error response with request ID for tracing
-      title: Error
-    ParticipantRequestRole:
-      type: string
-      enum:
-      - owner
-      - admin
-      - member
-      default: member
-      description: Participant role
-      title: ParticipantRequestRole
+      title: Agent API/Participants_addAgentChatParticipant_Response_201
     ErrorError:
       type: object
       properties:
@@ -258,22 +222,15 @@ components:
       - message
       - request_id
       title: ErrorError
-    ParticipantRole:
+    ParticipantRequestRole:
       type: string
       enum:
       - owner
       - admin
       - member
-      description: Role of a participant in a chat room. Determines permissions and capabilities.
-      title: ParticipantRole
-    Agent_API_Participants_addAgentChatParticipant_Response_201:
-      type: object
-      properties:
-        data:
-          $ref: '#/components/schemas/ChatParticipant'
-      required:
-      - data
-      title: Agent API/Participants_addAgentChatParticipant_Response_201
+      default: member
+      description: Participant role
+      title: ParticipantRequestRole
     ChatParticipant:
       type: object
       properties:
@@ -304,6 +261,32 @@ components:
       - type
       description: A chat room participant
       title: ChatParticipant
+    Error:
+      type: object
+      properties:
+        error:
+          $ref: '#/components/schemas/ErrorError'
+      required:
+      - error
+      description: Standard error response with request ID for tracing
+      title: Error
+    ChatParticipantType:
+      type: string
+      enum:
+      - User
+      - Agent
+      description: Participant type
+      title: ChatParticipantType
+    Agent_API_Participants_listAgentChatParticipants_Response_200:
+      type: object
+      properties:
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/ChatParticipant'
+      required:
+      - data
+      title: Agent API/Participants_listAgentChatParticipants_Response_200
     ValidationErrorError:
       type: object
       properties:
@@ -329,20 +312,37 @@ components:
       - message
       - request_id
       title: ValidationErrorError
-    ValidationError:
+    Agent_API_Participants_removeAgentChatParticipant_Response_200:
       type: object
       properties:
-        error:
-          $ref: '#/components/schemas/ValidationErrorError'
+        data:
+          $ref: '#/components/schemas/ChatParticipant'
       required:
-      - error
-      description: Validation error response with field-specific errors and request ID for tracing
-      title: ValidationError
-    ErrorErrorDetails:
+      - data
+      title: Agent API/Participants_removeAgentChatParticipant_Response_200
+    ParticipantRequest:
       type: object
-      properties: {}
-      description: Additional error details (optional)
-      title: ErrorErrorDetails
+      properties:
+        participant_id:
+          type: string
+          format: uuid
+          description: Participant ID (User UUID or Agent ID)
+        role:
+          $ref: '#/components/schemas/ParticipantRequestRole'
+          default: member
+          description: Participant role
+      required:
+      - participant_id
+      description: Request to add a participant to a chat room
+      title: ParticipantRequest
+    ParticipantRole:
+      type: string
+      enum:
+      - owner
+      - admin
+      - member
+      description: Role of a participant in a chat room. Determines permissions and capabilities.
+      title: ParticipantRole
   securitySchemes:
     ApiKeyAuth:
       type: apiKey
