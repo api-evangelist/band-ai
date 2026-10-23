@@ -1042,3 +1042,9 @@ components:
       type: http
       scheme: bearer
       description: Enter your JWT token (without the 'Bearer ' prefix)
+x-provenance:
+  method: harvested
+  publisher: Band AI
+  source: https://docs.band.ai/openapi.json
+  note: split by refine-openapis from the provider's own published document, verified by fetch (openapi/_original/*.fetch.json);
+    stamped by stamp-openapi-provenance.py (roadmap#793)
