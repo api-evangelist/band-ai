@@ -1,409 +1,466 @@
 {
+  "info": {
+    "_postman_id": "273d5ca1-8e88-4e4b-ab78-ce85512167df",
+    "name": "Request Agent API Events API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T03:10:57.000Z",
+    "updatedAt": "2026-10-22T03:10:57.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-273d5ca1-8e88-4e4b-ab78-ce85512167df"
+  },
   "item": [
     {
-      "id": "82d3aed9-e712-4ca0-ae4d-da605c9b6317",
-      "name": "agentApiEvents",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
+      "name": "api",
       "item": [
         {
-          "id": "84bcc23a-f61b-481d-9229-de3924ec72eb",
-          "name": "Create a chat event as the agent",
-          "request": {
-            "name": "Create a chat event as the agent",
-            "description": {
-              "content": "Creates a new event in a chat room.\n\nEvents do NOT require mentions - they report what happened rather than directing messages\nat participants. Use this endpoint to record:\n\n- **tool_call**: When the agent invokes a tool\n- **tool_result**: The result returned from a tool execution\n- **thought**: Agent's internal reasoning or thinking process\n- **error**: Error messages and failure notifications\n- **task**: Task-related messages\n\nFor text messages with mentions, use POST /agent/chats/{chat_id}/messages instead.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "agent",
-                "chats",
-                ":chat_id",
-                "events"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<uuid>",
-                  "key": "chat_id",
-                  "description": "(Required) Chat Room ID"
-                }
-              ]
-            },
-            "header": [
-              {
-                "disabled": false,
-                "description": "(Required) Enter your API key for programmatic access",
-                "key": "X-API-Key",
-                "value": "<string>"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"event\": {\n    \"content\": \"<string>\",\n    \"message_type\": \"<string>\",\n    \"metadata\": {}\n  }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
+          "name": "v1",
+          "item": [
             {
-              "id": "be48b681-2bdc-4d89-bf36-980a79879f05",
-              "name": "Event created",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "agent",
-                    "chats",
-                    ":chat_id",
-                    "events"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "chat_id",
-                      "description": "(Required) Chat Room ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"event\": {\n    \"content\": \"string\",\n    \"message_type\": \"tool_result\",\n    \"metadata\": {}\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Created",
-              "code": 201,
-              "header": [
+              "name": "agent",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "chats",
+                  "item": [
+                    {
+                      "name": "{chat_id}",
+                      "item": [
+                        {
+                          "name": "events",
+                          "item": [
+                            {
+                              "name": "Create a chat event as the agent",
+                              "id": "8ba48e16-aa11-486e-ad8f-a03d4f354699",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "(Required) Enter your API key for programmatic access",
+                                    "key": "X-API-Key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"event\": {\n    \"content\": \"<string>\",\n    \"message_type\": \"tool_result\",\n    \"metadata\": {}\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/agent/chats/:chat_id/events",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "agent",
+                                    "chats",
+                                    ":chat_id",
+                                    "events"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "0d132866-6370-448a-bdaa-76c308fee5b3",
+                                      "key": "chat_id",
+                                      "value": "<uuid>",
+                                      "description": "(Required) Chat Room ID"
+                                    }
+                                  ]
+                                },
+                                "description": "Creates a new event in a chat room.\n\nEvents do NOT require mentions - they report what happened rather than directing messages\nat participants. Use this endpoint to record:\n\n- **tool_call**: When the agent invokes a tool\n- **tool_result**: The result returned from a tool execution\n- **thought**: Agent's internal reasoning or thinking process\n- **error**: Error messages and failure notifications\n- **task**: Task-related messages\n\nFor text messages with mentions, use POST /agent/chats/{chat_id}/messages instead."
+                              },
+                              "response": [
+                                {
+                                  "id": "dd1eb310-5b31-40a3-801f-ba236d1d01c3",
+                                  "name": "Event created",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "description": "(Required) Enter your API key for programmatic access",
+                                        "key": "X-API-Key",
+                                        "value": "<string>"
+                                      },
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"event\": {\n    \"content\": \"<string>\",\n    \"message_type\": \"tool_result\",\n    \"metadata\": {}\n  }\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/agent/chats/:chat_id/events",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "agent",
+                                        "chats",
+                                        ":chat_id",
+                                        "events"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "chat_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Created",
+                                  "code": 201,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"data\": {\n    \"id\": \"<uuid>\",\n    \"message_type\": \"<string>\",\n    \"success\": \"<boolean>\"\n  }\n}",
+                                  "createdAt": "2026-10-22T03:10:57.000Z",
+                                  "updatedAt": "2026-10-22T03:10:57.000Z",
+                                  "uid": "35240-dd1eb310-5b31-40a3-801f-ba236d1d01c3"
+                                },
+                                {
+                                  "id": "bfe31bb5-484b-4369-95bf-13554deb878d",
+                                  "name": "Unauthorized",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "description": "(Required) Enter your API key for programmatic access",
+                                        "key": "X-API-Key",
+                                        "value": "<string>"
+                                      },
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"event\": {\n    \"content\": \"<string>\",\n    \"message_type\": \"tool_result\",\n    \"metadata\": {}\n  }\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/agent/chats/:chat_id/events",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "agent",
+                                        "chats",
+                                        ":chat_id",
+                                        "events"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "chat_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                                  "createdAt": "2026-10-22T03:10:57.000Z",
+                                  "updatedAt": "2026-10-22T03:10:57.000Z",
+                                  "uid": "35240-bfe31bb5-484b-4369-95bf-13554deb878d"
+                                },
+                                {
+                                  "id": "26d3de1e-73ba-42c5-8396-f7f7d232cc8a",
+                                  "name": "Forbidden - Agent authentication required, plan quota limit reached (code: limit_reached), or the agent's execution in this room is stopped (PLT-944: stopped agents cannot post events)",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "description": "(Required) Enter your API key for programmatic access",
+                                        "key": "X-API-Key",
+                                        "value": "<string>"
+                                      },
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"event\": {\n    \"content\": \"<string>\",\n    \"message_type\": \"tool_result\",\n    \"metadata\": {}\n  }\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/agent/chats/:chat_id/events",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "agent",
+                                        "chats",
+                                        ":chat_id",
+                                        "events"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "chat_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Forbidden",
+                                  "code": 403,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                                  "createdAt": "2026-10-22T03:10:57.000Z",
+                                  "updatedAt": "2026-10-22T03:10:57.000Z",
+                                  "uid": "35240-26d3de1e-73ba-42c5-8396-f7f7d232cc8a"
+                                },
+                                {
+                                  "id": "a3a6a75e-2cde-41c9-a754-68142604a173",
+                                  "name": "Not Found - Chat room doesn't exist or agent is not a participant",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "description": "(Required) Enter your API key for programmatic access",
+                                        "key": "X-API-Key",
+                                        "value": "<string>"
+                                      },
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"event\": {\n    \"content\": \"<string>\",\n    \"message_type\": \"tool_result\",\n    \"metadata\": {}\n  }\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/agent/chats/:chat_id/events",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "agent",
+                                        "chats",
+                                        ":chat_id",
+                                        "events"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "chat_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                                  "createdAt": "2026-10-22T03:10:57.000Z",
+                                  "updatedAt": "2026-10-22T03:10:57.000Z",
+                                  "uid": "35240-a3a6a75e-2cde-41c9-a754-68142604a173"
+                                },
+                                {
+                                  "id": "2d7d83c1-d5ad-41cf-8337-38a99eb51fac",
+                                  "name": "Validation Error",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "description": "(Required) Enter your API key for programmatic access",
+                                        "key": "X-API-Key",
+                                        "value": "<string>"
+                                      },
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"event\": {\n    \"content\": \"<string>\",\n    \"message_type\": \"tool_result\",\n    \"metadata\": {}\n  }\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/agent/chats/:chat_id/events",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "agent",
+                                        "chats",
+                                        ":chat_id",
+                                        "events"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "chat_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                                  "code": 422,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"details\": {\n      \"dolore_c\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"incididunt9\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\"\n  }\n}",
+                                  "createdAt": "2026-10-22T03:10:57.000Z",
+                                  "updatedAt": "2026-10-22T03:10:57.000Z",
+                                  "uid": "35240-2d7d83c1-d5ad-41cf-8337-38a99eb51fac"
+                                }
+                              ],
+                              "createdAt": "2026-10-22T03:10:57.000Z",
+                              "updatedAt": "2026-10-22T03:10:57.000Z",
+                              "uid": "35240-8ba48e16-aa11-486e-ad8f-a03d4f354699"
+                            }
+                          ],
+                          "id": "52b3fe77-a447-4b3c-889e-2ee302df52b6",
+                          "createdAt": "2026-10-22T03:10:57.000Z",
+                          "updatedAt": "2026-10-22T03:10:57.000Z",
+                          "uid": "35240-52b3fe77-a447-4b3c-889e-2ee302df52b6"
+                        }
+                      ],
+                      "id": "7c3a0d4a-30d1-43af-866e-9e28fa3f4f4b",
+                      "createdAt": "2026-10-22T03:10:57.000Z",
+                      "updatedAt": "2026-10-22T03:10:57.000Z",
+                      "uid": "35240-7c3a0d4a-30d1-43af-866e-9e28fa3f4f4b"
+                    }
+                  ],
+                  "id": "158d5b1f-b5ef-4ebf-86c8-c0217f6d2a0c",
+                  "createdAt": "2026-10-22T03:10:57.000Z",
+                  "updatedAt": "2026-10-22T03:10:57.000Z",
+                  "uid": "35240-158d5b1f-b5ef-4ebf-86c8-c0217f6d2a0c"
                 }
               ],
-              "body": "{}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "21067f95-b79d-4b6e-a5ee-4c41216fc303",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "agent",
-                    "chats",
-                    ":chat_id",
-                    "events"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "chat_id",
-                      "description": "(Required) Chat Room ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"event\": {\n    \"content\": \"string\",\n    \"message_type\": \"tool_result\",\n    \"metadata\": {}\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"request_id\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "13c4e766-b9c9-4bc7-887a-c1a52f72e130",
-              "name": "Forbidden - Agent authentication required, plan quota limit reached (code: limit_reached), or the agent's execution in this room is stopped (PLT-944: stopped agents cannot post events)",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "agent",
-                    "chats",
-                    ":chat_id",
-                    "events"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "chat_id",
-                      "description": "(Required) Chat Room ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"event\": {\n    \"content\": \"string\",\n    \"message_type\": \"tool_result\",\n    \"metadata\": {}\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"request_id\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "5bde4839-7e39-4a9f-8f7a-6a4c46cc8ed9",
-              "name": "Not Found - Chat room doesn't exist or agent is not a participant",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "agent",
-                    "chats",
-                    ":chat_id",
-                    "events"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "chat_id",
-                      "description": "(Required) Chat Room ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"event\": {\n    \"content\": \"string\",\n    \"message_type\": \"tool_result\",\n    \"metadata\": {}\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"request_id\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "9370751c-df91-481e-acb0-0b04a7d37034",
-              "name": "Validation Error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "agent",
-                    "chats",
-                    ":chat_id",
-                    "events"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "chat_id",
-                      "description": "(Required) Chat Room ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"event\": {\n    \"content\": \"string\",\n    \"message_type\": \"tool_result\",\n    \"metadata\": {}\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
-              "code": 422,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"details\": {\n      \"key_0\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_1\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_2\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_3\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"message\": \"string\",\n    \"request_id\": \"string\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "cc0d50b0-779b-4bca-b63b-bed72ae5bdaf",
+              "createdAt": "2026-10-22T03:10:57.000Z",
+              "updatedAt": "2026-10-22T03:10:57.000Z",
+              "uid": "35240-cc0d50b0-779b-4bca-b63b-bed72ae5bdaf"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "d1796b53-dedb-46d5-a983-9234d4dadee8",
+          "createdAt": "2026-10-22T03:10:57.000Z",
+          "updatedAt": "2026-10-22T03:10:57.000Z",
+          "uid": "35240-d1796b53-dedb-46d5-a983-9234d4dadee8"
         }
       ],
-      "event": []
+      "id": "d55c1a94-dc2f-47ef-aade-871cd1c0433d",
+      "createdAt": "2026-10-22T03:10:57.000Z",
+      "updatedAt": "2026-10-22T03:10:57.000Z",
+      "uid": "35240-d55c1a94-dc2f-47ef-aade-871cd1c0433d"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "https://app.band.ai",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "https://app.band.ai"
     }
-  ],
-  "info": {
-    "_postman_id": "7190c603-c5e5-4903-b69b-84bb94e5b0b2",
-    "name": "Request agentApiActivity agentApiEvents API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

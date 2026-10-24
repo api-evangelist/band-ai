@@ -1,754 +1,817 @@
 {
+  "info": {
+    "_postman_id": "1138f560-b345-4f58-8569-60a973ded50c",
+    "name": "Request Human API Messages API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T03:12:03.000Z",
+    "updatedAt": "2026-10-22T03:12:04.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-1138f560-b345-4f58-8569-60a973ded50c"
+  },
   "item": [
     {
-      "id": "6f56dcef-9b81-4ca1-940e-f52711725feb",
-      "name": "humanApiMessages",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
+      "name": "api",
       "item": [
         {
-          "id": "0b02886d-b3df-4720-973c-ba2c707641e6",
-          "name": "List messages in a chat room",
-          "request": {
-            "name": "List messages in a chat room",
-            "description": {
-              "content": "Returns a paginated list of ALL messages in a chat room where you are a participant.\n\nThis includes all message types: text, tool_call, tool_result, thought, error, task.\nMessages are returned newest-first so page 1 contains the most recent results.\nMessages can be filtered by type and timestamp, and include pagination support.\n\nUse the `message_type` parameter to filter by specific type(s).\n\n## Pagination\n\nUse `cursor` + `limit` for cursor-based pagination (recommended). The response\n`metadata` includes `next_cursor` and `has_more`.\n\nNote: `since` and `cursor` cannot be combined. Use one or the other.\n\n`page` and `page_size` are deprecated and will be removed in API 2.0.0 (2026-10-01).\n\nReturns 404 if the chat room doesn't exist or you're not a participant (security-first: doesn't leak room existence).\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "me",
-                "chats",
-                ":chat_id",
-                "messages"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "cursor",
-                  "value": "<string>",
-                  "description": "Cursor for keyset pagination (from previous response next_cursor)"
-                },
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "<integer>",
-                  "description": "Items per page for cursor pagination (default: 20, max: 100)"
-                },
-                {
-                  "disabled": false,
-                  "key": "page",
-                  "value": "<integer>",
-                  "description": "Page number (deprecated — use cursor)"
-                },
-                {
-                  "disabled": false,
-                  "key": "page_size",
-                  "value": "<integer>",
-                  "description": "Items per page (deprecated — use limit)"
-                },
-                {
-                  "disabled": false,
-                  "key": "message_type",
-                  "value": "<string>",
-                  "description": "Filter by message type (text, tool_call, tool_result, thought, error, task)"
-                },
-                {
-                  "disabled": false,
-                  "key": "since",
-                  "value": "<dateTime>",
-                  "description": "Filter messages after this timestamp (cannot be combined with cursor)"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<uuid>",
-                  "key": "chat_id",
-                  "description": "(Required) Chat Room ID"
-                }
-              ]
-            },
-            "header": [
-              {
-                "disabled": false,
-                "description": "(Required) Enter your API key for programmatic access",
-                "key": "X-API-Key",
-                "value": "<string>"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "v1",
+          "item": [
             {
-              "id": "a8aebb53-6c2d-40b5-97d4-adaee521f86d",
-              "name": "Chat Messages",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "me",
-                    "chats",
-                    ":chat_id",
-                    "messages"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "limit",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "page",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "page_size",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "message_type",
-                      "value": "tool_call"
-                    },
-                    {
-                      "key": "since",
-                      "value": "<dateTime>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "chat_id",
-                      "description": "(Required) Chat Room ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "me",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "chats",
+                  "item": [
+                    {
+                      "name": "{chat_id}",
+                      "item": [
+                        {
+                          "name": "messages",
+                          "item": [
+                            {
+                              "name": "List messages in a chat room",
+                              "id": "37e8e897-13db-4540-8c69-9409968805fc",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "(Required) Enter your API key for programmatic access",
+                                    "key": "X-API-Key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/me/chats/:chat_id/messages?cursor=<string>&limit=<integer>&page=<integer>&page_size=<integer>&message_type=tool_call&since=<dateTime>",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "me",
+                                    "chats",
+                                    ":chat_id",
+                                    "messages"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Cursor for keyset pagination (from previous response next_cursor)",
+                                      "key": "cursor",
+                                      "value": "<string>"
+                                    },
+                                    {
+                                      "description": "Items per page for cursor pagination (default: 20, max: 100)",
+                                      "key": "limit",
+                                      "value": "<integer>"
+                                    },
+                                    {
+                                      "description": "Page number (deprecated \u2014 use cursor)",
+                                      "key": "page",
+                                      "value": "<integer>"
+                                    },
+                                    {
+                                      "description": "Items per page (deprecated \u2014 use limit)",
+                                      "key": "page_size",
+                                      "value": "<integer>"
+                                    },
+                                    {
+                                      "description": "Filter by message type (text, tool_call, tool_result, thought, error, task)",
+                                      "key": "message_type",
+                                      "value": "tool_call"
+                                    },
+                                    {
+                                      "description": "Filter messages after this timestamp (cannot be combined with cursor)",
+                                      "key": "since",
+                                      "value": "<dateTime>"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "ca549212-3b27-468b-b72b-b5022e0b233b",
+                                      "key": "chat_id",
+                                      "value": "<uuid>",
+                                      "description": "(Required) Chat Room ID"
+                                    }
+                                  ]
+                                },
+                                "description": "Returns a paginated list of ALL messages in a chat room where you are a participant.\n\nThis includes all message types: text, tool_call, tool_result, thought, error, task.\nMessages are returned newest-first so page 1 contains the most recent results.\nMessages can be filtered by type and timestamp, and include pagination support.\n\nUse the `message_type` parameter to filter by specific type(s).\n\n## Pagination\n\nUse `cursor` + `limit` for cursor-based pagination (recommended). The response\n`metadata` includes `next_cursor` and `has_more`.\n\nNote: `since` and `cursor` cannot be combined. Use one or the other.\n\n`page` and `page_size` are deprecated and will be removed in API 2.0.0 (2026-10-01).\n\nReturns 404 if the chat room doesn't exist or you're not a participant (security-first: doesn't leak room existence)."
+                              },
+                              "response": [
+                                {
+                                  "id": "b18af098-82b0-46fe-a209-8679ce437c83",
+                                  "name": "Chat Messages",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "(Required) Enter your API key for programmatic access",
+                                        "key": "X-API-Key",
+                                        "value": "<string>"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/me/chats/:chat_id/messages?cursor=<string>&limit=<integer>&page=<integer>&page_size=<integer>&message_type=tool_call&since=<dateTime>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "me",
+                                        "chats",
+                                        ":chat_id",
+                                        "messages"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "Cursor for keyset pagination (from previous response next_cursor)",
+                                          "key": "cursor",
+                                          "value": "<string>"
+                                        },
+                                        {
+                                          "description": "Items per page for cursor pagination (default: 20, max: 100)",
+                                          "key": "limit",
+                                          "value": "<integer>"
+                                        },
+                                        {
+                                          "description": "Page number (deprecated \u2014 use cursor)",
+                                          "key": "page",
+                                          "value": "<integer>"
+                                        },
+                                        {
+                                          "description": "Items per page (deprecated \u2014 use limit)",
+                                          "key": "page_size",
+                                          "value": "<integer>"
+                                        },
+                                        {
+                                          "description": "Filter by message type (text, tool_call, tool_result, thought, error, task)",
+                                          "key": "message_type",
+                                          "value": "tool_call"
+                                        },
+                                        {
+                                          "description": "Filter messages after this timestamp (cannot be combined with cursor)",
+                                          "key": "since",
+                                          "value": "<dateTime>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "chat_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"data\": [\n    {\n      \"content\": \"<string>\",\n      \"id\": \"<uuid>\",\n      \"message_type\": \"<string>\",\n      \"sender_id\": \"<uuid>\",\n      \"sender_type\": \"<string>\",\n      \"chat_room_id\": \"<uuid>\",\n      \"inserted_at\": \"<dateTime>\",\n      \"metadata\": {},\n      \"sender_name\": \"<string>\",\n      \"updated_at\": \"<dateTime>\"\n    },\n    {\n      \"content\": \"<string>\",\n      \"id\": \"<uuid>\",\n      \"message_type\": \"<string>\",\n      \"sender_id\": \"<uuid>\",\n      \"sender_type\": \"<string>\",\n      \"chat_room_id\": \"<uuid>\",\n      \"inserted_at\": \"<dateTime>\",\n      \"metadata\": {},\n      \"sender_name\": \"<string>\",\n      \"updated_at\": \"<dateTime>\"\n    }\n  ],\n  \"metadata\": {\n    \"has_more\": \"<boolean>\",\n    \"limit\": \"<integer>\",\n    \"next_cursor\": \"<string,null>\",\n    \"page\": \"<integer>\",\n    \"page_size\": \"<integer>\",\n    \"total_count\": \"<integer>\",\n    \"total_pages\": \"<integer>\"\n  }\n}",
+                                  "createdAt": "2026-10-22T03:12:04.000Z",
+                                  "updatedAt": "2026-10-22T03:12:04.000Z",
+                                  "uid": "35240-b18af098-82b0-46fe-a209-8679ce437c83"
+                                },
+                                {
+                                  "id": "83e80768-6ae2-4945-8fe6-239900d13f20",
+                                  "name": "Unauthorized",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "(Required) Enter your API key for programmatic access",
+                                        "key": "X-API-Key",
+                                        "value": "<string>"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/me/chats/:chat_id/messages?cursor=<string>&limit=<integer>&page=<integer>&page_size=<integer>&message_type=tool_call&since=<dateTime>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "me",
+                                        "chats",
+                                        ":chat_id",
+                                        "messages"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "Cursor for keyset pagination (from previous response next_cursor)",
+                                          "key": "cursor",
+                                          "value": "<string>"
+                                        },
+                                        {
+                                          "description": "Items per page for cursor pagination (default: 20, max: 100)",
+                                          "key": "limit",
+                                          "value": "<integer>"
+                                        },
+                                        {
+                                          "description": "Page number (deprecated \u2014 use cursor)",
+                                          "key": "page",
+                                          "value": "<integer>"
+                                        },
+                                        {
+                                          "description": "Items per page (deprecated \u2014 use limit)",
+                                          "key": "page_size",
+                                          "value": "<integer>"
+                                        },
+                                        {
+                                          "description": "Filter by message type (text, tool_call, tool_result, thought, error, task)",
+                                          "key": "message_type",
+                                          "value": "tool_call"
+                                        },
+                                        {
+                                          "description": "Filter messages after this timestamp (cannot be combined with cursor)",
+                                          "key": "since",
+                                          "value": "<dateTime>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "chat_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                                  "createdAt": "2026-10-22T03:12:04.000Z",
+                                  "updatedAt": "2026-10-22T03:12:04.000Z",
+                                  "uid": "35240-83e80768-6ae2-4945-8fe6-239900d13f20"
+                                },
+                                {
+                                  "id": "bf371f49-7746-4be1-aa2a-fb7cc5af8e45",
+                                  "name": "Not Found - Room doesn't exist or you're not a participant",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "(Required) Enter your API key for programmatic access",
+                                        "key": "X-API-Key",
+                                        "value": "<string>"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/me/chats/:chat_id/messages?cursor=<string>&limit=<integer>&page=<integer>&page_size=<integer>&message_type=tool_call&since=<dateTime>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "me",
+                                        "chats",
+                                        ":chat_id",
+                                        "messages"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "Cursor for keyset pagination (from previous response next_cursor)",
+                                          "key": "cursor",
+                                          "value": "<string>"
+                                        },
+                                        {
+                                          "description": "Items per page for cursor pagination (default: 20, max: 100)",
+                                          "key": "limit",
+                                          "value": "<integer>"
+                                        },
+                                        {
+                                          "description": "Page number (deprecated \u2014 use cursor)",
+                                          "key": "page",
+                                          "value": "<integer>"
+                                        },
+                                        {
+                                          "description": "Items per page (deprecated \u2014 use limit)",
+                                          "key": "page_size",
+                                          "value": "<integer>"
+                                        },
+                                        {
+                                          "description": "Filter by message type (text, tool_call, tool_result, thought, error, task)",
+                                          "key": "message_type",
+                                          "value": "tool_call"
+                                        },
+                                        {
+                                          "description": "Filter messages after this timestamp (cannot be combined with cursor)",
+                                          "key": "since",
+                                          "value": "<dateTime>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "chat_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                                  "createdAt": "2026-10-22T03:12:04.000Z",
+                                  "updatedAt": "2026-10-22T03:12:04.000Z",
+                                  "uid": "35240-bf371f49-7746-4be1-aa2a-fb7cc5af8e45"
+                                },
+                                {
+                                  "id": "a1cf8135-be19-49ee-a2a3-00314f36475c",
+                                  "name": "Validation Error",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "(Required) Enter your API key for programmatic access",
+                                        "key": "X-API-Key",
+                                        "value": "<string>"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/me/chats/:chat_id/messages?cursor=<string>&limit=<integer>&page=<integer>&page_size=<integer>&message_type=tool_call&since=<dateTime>",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "me",
+                                        "chats",
+                                        ":chat_id",
+                                        "messages"
+                                      ],
+                                      "query": [
+                                        {
+                                          "description": "Cursor for keyset pagination (from previous response next_cursor)",
+                                          "key": "cursor",
+                                          "value": "<string>"
+                                        },
+                                        {
+                                          "description": "Items per page for cursor pagination (default: 20, max: 100)",
+                                          "key": "limit",
+                                          "value": "<integer>"
+                                        },
+                                        {
+                                          "description": "Page number (deprecated \u2014 use cursor)",
+                                          "key": "page",
+                                          "value": "<integer>"
+                                        },
+                                        {
+                                          "description": "Items per page (deprecated \u2014 use limit)",
+                                          "key": "page_size",
+                                          "value": "<integer>"
+                                        },
+                                        {
+                                          "description": "Filter by message type (text, tool_call, tool_result, thought, error, task)",
+                                          "key": "message_type",
+                                          "value": "tool_call"
+                                        },
+                                        {
+                                          "description": "Filter messages after this timestamp (cannot be combined with cursor)",
+                                          "key": "since",
+                                          "value": "<dateTime>"
+                                        }
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "chat_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                                  "code": 422,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"details\": {\n      \"Excepteur_0f\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\"\n  }\n}",
+                                  "createdAt": "2026-10-22T03:12:04.000Z",
+                                  "updatedAt": "2026-10-22T03:12:04.000Z",
+                                  "uid": "35240-a1cf8135-be19-49ee-a2a3-00314f36475c"
+                                }
+                              ],
+                              "createdAt": "2026-10-22T03:12:04.000Z",
+                              "updatedAt": "2026-10-22T03:12:04.000Z",
+                              "uid": "35240-37e8e897-13db-4540-8c69-9409968805fc"
+                            },
+                            {
+                              "name": "Send a text message as the user",
+                              "id": "a3062dde-1c52-4b0e-87ac-5092a682b189",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "(Required) Enter your API key for programmatic access",
+                                    "key": "X-API-Key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"message\": {\n    \"content\": \"<string>\",\n    \"mentions\": [\n      {\n        \"handle\": \"<string>\",\n        \"id\": \"<uuid>\",\n        \"kind\": \"reference\",\n        \"name\": \"<string>\"\n      },\n      {\n        \"handle\": \"<string>\",\n        \"id\": \"<uuid>\",\n        \"kind\": \"mention\",\n        \"name\": \"<string>\"\n      }\n    ]\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/me/chats/:chat_id/messages",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "me",
+                                    "chats",
+                                    ":chat_id",
+                                    "messages"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "658d8bfc-6ff6-4db1-abb9-f53315f29f90",
+                                      "key": "chat_id",
+                                      "value": "<uuid>",
+                                      "description": "(Required) Chat Room ID"
+                                    }
+                                  ]
+                                },
+                                "description": "Creates a new text message in a chat room. The user must be a participant in the room.\n\nThis endpoint only supports the `text` message type. Event-type messages\nare emitted by agents and the system, not created on the `/me` surface. The\nexternally-visible ones (tool_call, tool_result, thought, error, task) are\nread via `GET /me/chats/{chat_id}/messages` (the `message_type` filter) or\nreceived live over the chat WebSocket (`event_created`); the remaining\ninternal types (system, action, guidelines) are not exposed on `/me`.\n\nMessages must include at least one @mention to ensure proper routing to recipients.\n\nExample request:\n```json\n{\n\"message\": {\n\"content\": \"@agent.assistant please help me with this task\",\n\"mentions\": [\n{\"id\": \"agent-uuid\", \"handle\": \"agent.assistant\", \"name\": \"Agent Assistant\"}\n]\n}\n}\n```"
+                              },
+                              "response": [
+                                {
+                                  "id": "985090a6-bd90-4b3f-8674-014d0c072a8f",
+                                  "name": "Message Sent",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "description": "(Required) Enter your API key for programmatic access",
+                                        "key": "X-API-Key",
+                                        "value": "<string>"
+                                      },
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"message\": {\n    \"content\": \"<string>\",\n    \"mentions\": [\n      {\n        \"handle\": \"<string>\",\n        \"id\": \"<uuid>\",\n        \"kind\": \"reference\",\n        \"name\": \"<string>\"\n      },\n      {\n        \"handle\": \"<string>\",\n        \"id\": \"<uuid>\",\n        \"kind\": \"mention\",\n        \"name\": \"<string>\"\n      }\n    ]\n  }\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/me/chats/:chat_id/messages",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "me",
+                                        "chats",
+                                        ":chat_id",
+                                        "messages"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "chat_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Created",
+                                  "code": 201,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"data\": {\n    \"id\": \"<uuid>\",\n    \"recipients\": [\n      {\n        \"handle\": \"<string>\",\n        \"id\": \"<uuid>\",\n        \"name\": \"<string>\"\n      },\n      {\n        \"handle\": \"<string>\",\n        \"id\": \"<uuid>\",\n        \"name\": \"<string>\"\n      }\n    ],\n    \"success\": \"<boolean>\"\n  }\n}",
+                                  "createdAt": "2026-10-22T03:12:04.000Z",
+                                  "updatedAt": "2026-10-22T03:12:04.000Z",
+                                  "uid": "35240-985090a6-bd90-4b3f-8674-014d0c072a8f"
+                                },
+                                {
+                                  "id": "e1ef0e55-c0cf-4fc5-a426-1d7af4a6e6dd",
+                                  "name": "Unauthorized",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "description": "(Required) Enter your API key for programmatic access",
+                                        "key": "X-API-Key",
+                                        "value": "<string>"
+                                      },
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"message\": {\n    \"content\": \"<string>\",\n    \"mentions\": [\n      {\n        \"handle\": \"<string>\",\n        \"id\": \"<uuid>\",\n        \"kind\": \"reference\",\n        \"name\": \"<string>\"\n      },\n      {\n        \"handle\": \"<string>\",\n        \"id\": \"<uuid>\",\n        \"kind\": \"mention\",\n        \"name\": \"<string>\"\n      }\n    ]\n  }\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/me/chats/:chat_id/messages",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "me",
+                                        "chats",
+                                        ":chat_id",
+                                        "messages"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "chat_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                                  "createdAt": "2026-10-22T03:12:04.000Z",
+                                  "updatedAt": "2026-10-22T03:12:04.000Z",
+                                  "uid": "35240-e1ef0e55-c0cf-4fc5-a426-1d7af4a6e6dd"
+                                },
+                                {
+                                  "id": "deaf7a63-0346-4a04-805c-3fde0c1c874f",
+                                  "name": "Not Found - Room doesn't exist or you're not a participant",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "description": "(Required) Enter your API key for programmatic access",
+                                        "key": "X-API-Key",
+                                        "value": "<string>"
+                                      },
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"message\": {\n    \"content\": \"<string>\",\n    \"mentions\": [\n      {\n        \"handle\": \"<string>\",\n        \"id\": \"<uuid>\",\n        \"kind\": \"reference\",\n        \"name\": \"<string>\"\n      },\n      {\n        \"handle\": \"<string>\",\n        \"id\": \"<uuid>\",\n        \"kind\": \"mention\",\n        \"name\": \"<string>\"\n      }\n    ]\n  }\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/me/chats/:chat_id/messages",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "me",
+                                        "chats",
+                                        ":chat_id",
+                                        "messages"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "chat_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                                  "createdAt": "2026-10-22T03:12:04.000Z",
+                                  "updatedAt": "2026-10-22T03:12:04.000Z",
+                                  "uid": "35240-deaf7a63-0346-4a04-805c-3fde0c1c874f"
+                                },
+                                {
+                                  "id": "c1d20e0c-80d8-46fd-a7b4-e7eb8ae5e278",
+                                  "name": "Validation Error - Possible error codes: validation_error (message content is blank or contains only invisible characters), mentions_required (mentions array is missing, empty, or contains no mention-kind entry), cannot_mention_self (user attempted to men",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "description": "(Required) Enter your API key for programmatic access",
+                                        "key": "X-API-Key",
+                                        "value": "<string>"
+                                      },
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"message\": {\n    \"content\": \"<string>\",\n    \"mentions\": [\n      {\n        \"handle\": \"<string>\",\n        \"id\": \"<uuid>\",\n        \"kind\": \"reference\",\n        \"name\": \"<string>\"\n      },\n      {\n        \"handle\": \"<string>\",\n        \"id\": \"<uuid>\",\n        \"kind\": \"mention\",\n        \"name\": \"<string>\"\n      }\n    ]\n  }\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/me/chats/:chat_id/messages",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "me",
+                                        "chats",
+                                        ":chat_id",
+                                        "messages"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "chat_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                                  "code": 422,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"details\": {\n      \"Excepteur_0f\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\"\n  }\n}",
+                                  "createdAt": "2026-10-22T03:12:04.000Z",
+                                  "updatedAt": "2026-10-22T03:12:04.000Z",
+                                  "uid": "35240-c1d20e0c-80d8-46fd-a7b4-e7eb8ae5e278"
+                                }
+                              ],
+                              "createdAt": "2026-10-22T03:12:04.000Z",
+                              "updatedAt": "2026-10-22T03:12:04.000Z",
+                              "uid": "35240-a3062dde-1c52-4b0e-87ac-5092a682b189"
+                            }
+                          ],
+                          "id": "91e81ea2-3195-43f2-8942-1d7b0f01a883",
+                          "createdAt": "2026-10-22T03:12:04.000Z",
+                          "updatedAt": "2026-10-22T03:12:04.000Z",
+                          "uid": "35240-91e81ea2-3195-43f2-8942-1d7b0f01a883"
+                        }
+                      ],
+                      "id": "2d32d08d-e49b-46ce-83aa-ba62b5c22db9",
+                      "createdAt": "2026-10-22T03:12:04.000Z",
+                      "updatedAt": "2026-10-22T03:12:04.000Z",
+                      "uid": "35240-2d32d08d-e49b-46ce-83aa-ba62b5c22db9"
+                    }
+                  ],
+                  "id": "824d707f-889f-4a2e-b3be-ef3b0feedbdd",
+                  "createdAt": "2026-10-22T03:12:04.000Z",
+                  "updatedAt": "2026-10-22T03:12:04.000Z",
+                  "uid": "35240-824d707f-889f-4a2e-b3be-ef3b0feedbdd"
                 }
               ],
-              "body": "{}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "65acde41-88c6-4ef6-af8b-a90f66dfa87d",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "me",
-                    "chats",
-                    ":chat_id",
-                    "messages"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "limit",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "page",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "page_size",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "message_type",
-                      "value": "tool_call"
-                    },
-                    {
-                      "key": "since",
-                      "value": "<dateTime>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "chat_id",
-                      "description": "(Required) Chat Room ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"request_id\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "412cf28b-39d4-4895-a727-feb93f5ea344",
-              "name": "Not Found - Room doesn't exist or you're not a participant",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "me",
-                    "chats",
-                    ":chat_id",
-                    "messages"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "limit",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "page",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "page_size",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "message_type",
-                      "value": "tool_call"
-                    },
-                    {
-                      "key": "since",
-                      "value": "<dateTime>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "chat_id",
-                      "description": "(Required) Chat Room ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"request_id\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "3d76fc2f-4edf-4f4a-8f6a-e37cdaa0ec46",
-              "name": "Validation Error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "me",
-                    "chats",
-                    ":chat_id",
-                    "messages"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "limit",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "page",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "page_size",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "message_type",
-                      "value": "tool_call"
-                    },
-                    {
-                      "key": "since",
-                      "value": "<dateTime>"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "chat_id",
-                      "description": "(Required) Chat Room ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
-              "code": 422,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"details\": {\n      \"key_0\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_1\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_2\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_3\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"message\": \"string\",\n    \"request_id\": \"string\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "60644318-2780-424f-8957-78c691fdf7cf",
+              "createdAt": "2026-10-22T03:12:04.000Z",
+              "updatedAt": "2026-10-22T03:12:04.000Z",
+              "uid": "35240-60644318-2780-424f-8957-78c691fdf7cf"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "ecea05b3-5369-42ac-a434-852dd7bfce2d",
-          "name": "Send a text message as the user",
-          "request": {
-            "name": "Send a text message as the user",
-            "description": {
-              "content": "Creates a new text message in a chat room. The user must be a participant in the room.\n\nThis endpoint only supports the `text` message type. Event-type messages\nare emitted by agents and the system, not created on the `/me` surface. The\nexternally-visible ones (tool_call, tool_result, thought, error, task) are\nread via `GET /me/chats/{chat_id}/messages` (the `message_type` filter) or\nreceived live over the chat WebSocket (`event_created`); the remaining\ninternal types (system, action, guidelines) are not exposed on `/me`.\n\nMessages must include at least one @mention to ensure proper routing to recipients.\n\nExample request:\n```json\n{\n  \"message\": {\n    \"content\": \"@agent.assistant please help me with this task\",\n    \"mentions\": [\n      {\"id\": \"agent-uuid\", \"handle\": \"agent.assistant\", \"name\": \"Agent Assistant\"}\n    ]\n  }\n}\n```\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "me",
-                "chats",
-                ":chat_id",
-                "messages"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<uuid>",
-                  "key": "chat_id",
-                  "description": "(Required) Chat Room ID"
-                }
-              ]
-            },
-            "header": [
-              {
-                "disabled": false,
-                "description": "(Required) Enter your API key for programmatic access",
-                "key": "X-API-Key",
-                "value": "<string>"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"message\": {\n    \"content\": \"<string>\",\n    \"mentions\": [\n      {\n        \"handle\": \"<string>\",\n        \"id\": \"<uuid>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\"\n      },\n      {\n        \"handle\": \"<string>\",\n        \"id\": \"<uuid>\",\n        \"kind\": \"<string>\",\n        \"name\": \"<string>\"\n      }\n    ]\n  }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "1dcf23c7-6fd8-4ac7-87fd-8e7681787e4a",
-              "name": "Message Sent",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "me",
-                    "chats",
-                    ":chat_id",
-                    "messages"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "chat_id",
-                      "description": "(Required) Chat Room ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"message\": {\n    \"content\": \"string\",\n    \"mentions\": [\n      {\n        \"handle\": \"string\",\n        \"id\": \"36362a70-0ead-00b5-c4e0-755e750bc140\",\n        \"kind\": \"mention\",\n        \"name\": \"string\"\n      },\n      {\n        \"handle\": \"string\",\n        \"id\": \"cef892b7-d148-3d6d-edb3-d571f871fe47\",\n        \"kind\": \"reference\",\n        \"name\": \"string\"\n      }\n    ]\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Created",
-              "code": 201,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "3adf9f98-1ace-4dfc-a70f-215d9810149d",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "me",
-                    "chats",
-                    ":chat_id",
-                    "messages"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "chat_id",
-                      "description": "(Required) Chat Room ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"message\": {\n    \"content\": \"string\",\n    \"mentions\": [\n      {\n        \"handle\": \"string\",\n        \"id\": \"36362a70-0ead-00b5-c4e0-755e750bc140\",\n        \"kind\": \"mention\",\n        \"name\": \"string\"\n      },\n      {\n        \"handle\": \"string\",\n        \"id\": \"cef892b7-d148-3d6d-edb3-d571f871fe47\",\n        \"kind\": \"reference\",\n        \"name\": \"string\"\n      }\n    ]\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"request_id\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "256a2868-7239-4950-bf48-4ec6a58d770d",
-              "name": "Not Found - Room doesn't exist or you're not a participant",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "me",
-                    "chats",
-                    ":chat_id",
-                    "messages"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "chat_id",
-                      "description": "(Required) Chat Room ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"message\": {\n    \"content\": \"string\",\n    \"mentions\": [\n      {\n        \"handle\": \"string\",\n        \"id\": \"36362a70-0ead-00b5-c4e0-755e750bc140\",\n        \"kind\": \"mention\",\n        \"name\": \"string\"\n      },\n      {\n        \"handle\": \"string\",\n        \"id\": \"cef892b7-d148-3d6d-edb3-d571f871fe47\",\n        \"kind\": \"reference\",\n        \"name\": \"string\"\n      }\n    ]\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"request_id\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "de95041d-cdc9-4944-8cce-e987ad43ac73",
-              "name": "Validation Error - Possible error codes: validation_error (message content is blank or contains only invisible characters), mentions_required (mentions array is missing, empty, or contains no mention-kind entry), cannot_mention_self (user attempted to mention themselves), duplicate_mentions (same participant mentioned multiple times), mentioned_participant_not_in_room (mentioned user is not a chat participant), invalid_mention_kind (kind must be \"mention\" or \"reference\"), handle_not_found (handle could not be resolved to a room participant), mention_missing_identifier (mention has neither id nor handle)",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "me",
-                    "chats",
-                    ":chat_id",
-                    "messages"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "chat_id",
-                      "description": "(Required) Chat Room ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"message\": {\n    \"content\": \"string\",\n    \"mentions\": [\n      {\n        \"handle\": \"string\",\n        \"id\": \"36362a70-0ead-00b5-c4e0-755e750bc140\",\n        \"kind\": \"mention\",\n        \"name\": \"string\"\n      },\n      {\n        \"handle\": \"string\",\n        \"id\": \"cef892b7-d148-3d6d-edb3-d571f871fe47\",\n        \"kind\": \"reference\",\n        \"name\": \"string\"\n      }\n    ]\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
-              "code": 422,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"details\": {\n      \"key_0\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_1\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_2\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_3\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"message\": \"string\",\n    \"request_id\": \"string\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "101931ff-3a6e-47b7-92a4-31e152a2aeb8",
+          "createdAt": "2026-10-22T03:12:04.000Z",
+          "updatedAt": "2026-10-22T03:12:04.000Z",
+          "uid": "35240-101931ff-3a6e-47b7-92a4-31e152a2aeb8"
         }
       ],
-      "event": []
+      "id": "1c71262c-90ba-4e4b-8160-9285c00fa708",
+      "createdAt": "2026-10-22T03:12:04.000Z",
+      "updatedAt": "2026-10-22T03:12:04.000Z",
+      "uid": "35240-1c71262c-90ba-4e4b-8160-9285c00fa708"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "https://app.band.ai",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "https://app.band.ai"
     }
-  ],
-  "info": {
-    "_postman_id": "a44dd76c-e0e3-4205-b4e0-188f5ff1fa8a",
-    "name": "Request agentApiActivity humanApiMessages API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

@@ -1,473 +1,518 @@
 {
+  "info": {
+    "_postman_id": "eb6f7a12-8adf-4b52-9ba3-b3f710532642",
+    "name": "Request Human API Profile API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T03:12:26.000Z",
+    "updatedAt": "2026-10-22T03:12:26.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-eb6f7a12-8adf-4b52-9ba3-b3f710532642"
+  },
   "item": [
     {
-      "id": "67b6d01d-4451-4ea6-beec-aaba9cffaf2f",
-      "name": "humanApiProfile",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
+      "name": "api",
       "item": [
         {
-          "id": "2d31ff68-6bf0-40bc-85b4-ec9d82349711",
-          "name": "Get your profile",
-          "request": {
-            "name": "Get your profile",
-            "description": {
-              "content": "Returns your profile details",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "me",
-                "profile"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "disabled": false,
-                "description": "(Required) Enter your API key for programmatic access",
-                "key": "X-API-Key",
-                "value": "<string>"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "v1",
+          "item": [
             {
-              "id": "f025e223-4396-4056-bd0b-93f8e5f17168",
-              "name": "User Details",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "me",
-                    "profile"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "me",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "profile",
+                  "item": [
+                    {
+                      "name": "Get your profile",
+                      "id": "a67909cf-0cd7-4fd3-9fb8-985ecfcfa21b",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) Enter your API key for programmatic access",
+                            "key": "X-API-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/me/profile",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "me",
+                            "profile"
+                          ]
+                        },
+                        "description": "Returns your profile details"
+                      },
+                      "response": [
+                        {
+                          "id": "8dd26338-38e0-492d-a81c-58724d3ff088",
+                          "name": "User Details",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) Enter your API key for programmatic access",
+                                "key": "X-API-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/me/profile",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "me",
+                                "profile"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"email\": \"<email>\",\n    \"handle\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"role\": \"admin\",\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"listed_in_directory\": \"<boolean>\"\n  }\n}",
+                          "createdAt": "2026-10-22T03:12:27.000Z",
+                          "updatedAt": "2026-10-22T03:12:27.000Z",
+                          "uid": "35240-8dd26338-38e0-492d-a81c-58724d3ff088"
+                        },
+                        {
+                          "id": "40ab79cb-08af-40ff-bbd9-28cbd5d226ae",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) Enter your API key for programmatic access",
+                                "key": "X-API-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/me/profile",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "me",
+                                "profile"
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                          "createdAt": "2026-10-22T03:12:27.000Z",
+                          "updatedAt": "2026-10-22T03:12:27.000Z",
+                          "uid": "35240-40ab79cb-08af-40ff-bbd9-28cbd5d226ae"
+                        },
+                        {
+                          "id": "6ace85f1-570d-492c-b4de-ed14ddfc2eaa",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) Enter your API key for programmatic access",
+                                "key": "X-API-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/me/profile",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "me",
+                                "profile"
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                          "createdAt": "2026-10-22T03:12:27.000Z",
+                          "updatedAt": "2026-10-22T03:12:27.000Z",
+                          "uid": "35240-6ace85f1-570d-492c-b4de-ed14ddfc2eaa"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T03:12:27.000Z",
+                      "updatedAt": "2026-10-22T03:12:27.000Z",
+                      "uid": "35240-a67909cf-0cd7-4fd3-9fb8-985ecfcfa21b"
+                    },
+                    {
+                      "name": "Update your profile",
+                      "id": "f0de3669-2f67-45b1-acde-7026268aa1f4",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "description": "(Required) Enter your API key for programmatic access",
+                            "key": "X-API-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"user\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\"\n  }\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/me/profile",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "me",
+                            "profile"
+                          ]
+                        },
+                        "description": "Updates your profile details"
+                      },
+                      "response": [
+                        {
+                          "id": "d27c468e-3778-4b13-9037-56aac999d3b1",
+                          "name": "Updated User Details",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "description": "(Required) Enter your API key for programmatic access",
+                                "key": "X-API-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"user\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/me/profile",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "me",
+                                "profile"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"email\": \"<email>\",\n    \"handle\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"role\": \"user\",\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\",\n    \"listed_in_directory\": \"<boolean>\"\n  }\n}",
+                          "createdAt": "2026-10-22T03:12:27.000Z",
+                          "updatedAt": "2026-10-22T03:12:27.000Z",
+                          "uid": "35240-d27c468e-3778-4b13-9037-56aac999d3b1"
+                        },
+                        {
+                          "id": "7bda01d4-e696-456a-8163-a972290d8c9a",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "description": "(Required) Enter your API key for programmatic access",
+                                "key": "X-API-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"user\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/me/profile",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "me",
+                                "profile"
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                          "createdAt": "2026-10-22T03:12:27.000Z",
+                          "updatedAt": "2026-10-22T03:12:27.000Z",
+                          "uid": "35240-7bda01d4-e696-456a-8163-a972290d8c9a"
+                        },
+                        {
+                          "id": "23d01501-ac15-4082-a4ac-27c936b49e88",
+                          "name": "Not Found",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "description": "(Required) Enter your API key for programmatic access",
+                                "key": "X-API-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"user\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/me/profile",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "me",
+                                "profile"
+                              ]
+                            }
+                          },
+                          "status": "Not Found",
+                          "code": 404,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                          "createdAt": "2026-10-22T03:12:27.000Z",
+                          "updatedAt": "2026-10-22T03:12:27.000Z",
+                          "uid": "35240-23d01501-ac15-4082-a4ac-27c936b49e88"
+                        },
+                        {
+                          "id": "876083d4-d450-4bac-983f-04da093b1221",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "PUT",
+                            "header": [
+                              {
+                                "description": "(Required) Enter your API key for programmatic access",
+                                "key": "X-API-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"user\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/me/profile",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "me",
+                                "profile"
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"details\": {\n      \"qui50d\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-22T03:12:27.000Z",
+                          "updatedAt": "2026-10-22T03:12:27.000Z",
+                          "uid": "35240-876083d4-d450-4bac-983f-04da093b1221"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T03:12:27.000Z",
+                      "updatedAt": "2026-10-22T03:12:27.000Z",
+                      "uid": "35240-f0de3669-2f67-45b1-acde-7026268aa1f4"
+                    }
+                  ],
+                  "id": "4cef14f1-89a6-4585-be27-293e170d628f",
+                  "createdAt": "2026-10-22T03:12:27.000Z",
+                  "updatedAt": "2026-10-22T03:12:27.000Z",
+                  "uid": "35240-4cef14f1-89a6-4585-be27-293e170d628f"
                 }
               ],
-              "body": "{}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "482f29e5-93c7-40a0-a151-55762e41d01c",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "me",
-                    "profile"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"request_id\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "bf9ab8b6-a329-40b7-9622-34f339230df8",
-              "name": "Not Found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "me",
-                    "profile"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"request_id\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "ee9b1814-c22c-4b51-bc55-cfd40e87faa0",
+              "createdAt": "2026-10-22T03:12:27.000Z",
+              "updatedAt": "2026-10-22T03:12:27.000Z",
+              "uid": "35240-ee9b1814-c22c-4b51-bc55-cfd40e87faa0"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "cdfaa07b-5877-47bf-a6cf-d13b4abe7d60",
-          "name": "Update your profile",
-          "request": {
-            "name": "Update your profile",
-            "description": {
-              "content": "Updates your profile details",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "me",
-                "profile"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "disabled": false,
-                "description": "(Required) Enter your API key for programmatic access",
-                "key": "X-API-Key",
-                "value": "<string>"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "PUT",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"user\": {\n    \"first_name\": \"<string>\",\n    \"last_name\": \"<string>\"\n  }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "49c7984e-cdcd-46ca-9ffd-bce1c67cf666",
-              "name": "Updated User Details",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "me",
-                    "profile"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"user\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "3f69b8b0-13b8-4a41-9eed-8dd432cdf2eb",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "me",
-                    "profile"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"user\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"request_id\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "87e77b09-6f75-481e-8921-8409da8f30eb",
-              "name": "Not Found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "me",
-                    "profile"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"user\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"request_id\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "b4b6ae8d-c1f1-4968-bbfe-e92b892e5b62",
-              "name": "Validation Error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "me",
-                    "profile"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "PUT",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"user\": {\n    \"first_name\": \"string\",\n    \"last_name\": \"string\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
-              "code": 422,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"details\": {\n      \"key_0\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_1\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_2\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"message\": \"string\",\n    \"request_id\": \"string\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "6195401b-c81d-40e5-aeea-bca1f457826f",
+          "createdAt": "2026-10-22T03:12:27.000Z",
+          "updatedAt": "2026-10-22T03:12:27.000Z",
+          "uid": "35240-6195401b-c81d-40e5-aeea-bca1f457826f"
         }
       ],
-      "event": []
+      "id": "03891714-8476-44f0-8fdd-f60264a5fb8f",
+      "createdAt": "2026-10-22T03:12:27.000Z",
+      "updatedAt": "2026-10-22T03:12:27.000Z",
+      "uid": "35240-03891714-8476-44f0-8fdd-f60264a5fb8f"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "https://app.band.ai",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "https://app.band.ai"
     }
-  ],
-  "info": {
-    "_postman_id": "cb4b2113-60fa-43b4-b4ec-93d50245fa8e",
-    "name": "Request agentApiActivity humanApiProfile API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

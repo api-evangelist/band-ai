@@ -1,208 +1,229 @@
 {
+  "info": {
+    "_postman_id": "11ee089a-6a84-4a50-87e9-b3428a1850f2",
+    "name": "Request Agent API Identity API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T03:11:02.000Z",
+    "updatedAt": "2026-10-22T03:11:03.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-11ee089a-6a84-4a50-87e9-b3428a1850f2"
+  },
   "item": [
     {
-      "id": "884bbc47-0453-4285-9d3a-32cb77d084af",
-      "name": "agentApiIdentity",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
+      "name": "api",
       "item": [
         {
-          "id": "db3dabae-a1d8-4510-9508-6c00d1e2c171",
-          "name": "Get current agent profile",
-          "request": {
-            "name": "Get current agent profile",
-            "description": {
-              "content": "Returns the profile of the currently authenticated agent.\nAlso serves as connection validation - if this returns 200, your API key is valid.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "agent",
-                "me"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "disabled": false,
-                "description": "(Required) Enter your API key for programmatic access",
-                "key": "X-API-Key",
-                "value": "<string>"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "v1",
+          "item": [
             {
-              "id": "c01b76d8-1b95-46a6-98aa-ead40d7e3d1b",
-              "name": "Agent profile",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "agent",
-                    "me"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "agent",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "me",
+                  "item": [
+                    {
+                      "name": "Get current agent profile",
+                      "id": "6339e789-10be-453b-9eb3-43c3471c59ce",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) Enter your API key for programmatic access",
+                            "key": "X-API-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/agent/me",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "agent",
+                            "me"
+                          ]
+                        },
+                        "description": "Returns the profile of the currently authenticated agent.\nAlso serves as connection validation - if this returns 200, your API key is valid."
+                      },
+                      "response": [
+                        {
+                          "id": "b290326c-6e47-4db5-8762-42431b6e7a6f",
+                          "name": "Agent profile",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) Enter your API key for programmatic access",
+                                "key": "X-API-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/agent/me",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "agent",
+                                "me"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": {\n    \"handle\": \"<string>\",\n    \"id\": \"<uuid>\",\n    \"inserted_at\": \"<dateTime>\",\n    \"name\": \"<string>\",\n    \"owner_uuid\": \"<uuid>\",\n    \"updated_at\": \"<dateTime>\",\n    \"description\": \"<string,null>\",\n    \"listed_in_directory\": \"<boolean>\",\n    \"tags\": [\n      \"<string>\",\n      \"<string>\"\n    ]\n  }\n}",
+                          "createdAt": "2026-10-22T03:11:03.000Z",
+                          "updatedAt": "2026-10-22T03:11:03.000Z",
+                          "uid": "35240-b290326c-6e47-4db5-8762-42431b6e7a6f"
+                        },
+                        {
+                          "id": "52bdec1b-7ac3-4496-b822-80334caa993d",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) Enter your API key for programmatic access",
+                                "key": "X-API-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/agent/me",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "agent",
+                                "me"
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                          "createdAt": "2026-10-22T03:11:03.000Z",
+                          "updatedAt": "2026-10-22T03:11:03.000Z",
+                          "uid": "35240-52bdec1b-7ac3-4496-b822-80334caa993d"
+                        },
+                        {
+                          "id": "230a2f69-57ab-40cf-871b-8b55b23aaf64",
+                          "name": "Forbidden - Agent authentication required",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) Enter your API key for programmatic access",
+                                "key": "X-API-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/agent/me",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "agent",
+                                "me"
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                          "createdAt": "2026-10-22T03:11:03.000Z",
+                          "updatedAt": "2026-10-22T03:11:03.000Z",
+                          "uid": "35240-230a2f69-57ab-40cf-871b-8b55b23aaf64"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T03:11:03.000Z",
+                      "updatedAt": "2026-10-22T03:11:03.000Z",
+                      "uid": "35240-6339e789-10be-453b-9eb3-43c3471c59ce"
+                    }
+                  ],
+                  "id": "4f38d204-fe18-45c0-9ca6-da8a9307f5ed",
+                  "createdAt": "2026-10-22T03:11:03.000Z",
+                  "updatedAt": "2026-10-22T03:11:03.000Z",
+                  "uid": "35240-4f38d204-fe18-45c0-9ca6-da8a9307f5ed"
                 }
               ],
-              "body": "{}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "40ef724a-7382-403c-9075-f8c92db4ae82",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "agent",
-                    "me"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"request_id\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "e3a72c11-9bc8-4b2b-a1e1-6882bb97dbe0",
-              "name": "Forbidden - Agent authentication required",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "agent",
-                    "me"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"request_id\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "57d891df-3a3c-414b-afe3-da4a16e75566",
+              "createdAt": "2026-10-22T03:11:03.000Z",
+              "updatedAt": "2026-10-22T03:11:03.000Z",
+              "uid": "35240-57d891df-3a3c-414b-afe3-da4a16e75566"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "130001fa-9a1a-44af-a572-34d66c672746",
+          "createdAt": "2026-10-22T03:11:03.000Z",
+          "updatedAt": "2026-10-22T03:11:03.000Z",
+          "uid": "35240-130001fa-9a1a-44af-a572-34d66c672746"
         }
       ],
-      "event": []
+      "id": "37199309-5621-47f7-a5d4-703dfb39d969",
+      "createdAt": "2026-10-22T03:11:03.000Z",
+      "updatedAt": "2026-10-22T03:11:03.000Z",
+      "uid": "35240-37199309-5621-47f7-a5d4-703dfb39d969"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "https://app.band.ai",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "https://app.band.ai"
     }
-  ],
-  "info": {
-    "_postman_id": "4bdbce0d-9e74-42ea-bef5-c85040c68ad9",
-    "name": "Request agentApiActivity agentApiIdentity API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

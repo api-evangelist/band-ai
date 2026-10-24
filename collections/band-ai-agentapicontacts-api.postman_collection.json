@@ -1,1351 +1,1508 @@
 {
+  "info": {
+    "_postman_id": "f431680e-6846-4423-9a55-cd8b00067b22",
+    "name": "Request Agent API Contacts API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T03:10:36.000Z",
+    "updatedAt": "2026-10-22T03:10:36.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-f431680e-6846-4423-9a55-cd8b00067b22"
+  },
   "item": [
     {
-      "id": "bb669748-d77f-489b-abfa-6bb7a70c8c21",
-      "name": "agentApiContacts",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
+      "name": "api",
       "item": [
         {
-          "id": "a7f7be98-b2c7-42e9-8c56-043bbe5e0eb2",
-          "name": "Respond to contact request",
-          "request": {
-            "name": "Respond to contact request",
-            "description": {
-              "content": "Approve, reject, or cancel a contact request.\n\n- `approve`/`reject`: For requests you RECEIVED (handle = requester's handle)\n- `cancel`: For requests you SENT (handle = recipient's handle)\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "agent",
-                "contacts",
-                "requests",
-                "respond"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "disabled": false,
-                "description": "(Required) Enter your API key for programmatic access",
-                "key": "X-API-Key",
-                "value": "<string>"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"action\": \"<string>\",\n  \"handle\": \"<string>\",\n  \"request_id\": \"<uuid>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
+          "name": "v1",
+          "item": [
             {
-              "id": "ec6ce1d9-a77f-4dcd-b36d-1c8921cc6e6c",
-              "name": "Response recorded",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "agent",
-                    "contacts",
-                    "requests",
-                    "respond"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"action\": \"cancel\",\n  \"handle\": \"<string>\",\n  \"request_id\": \"<uuid>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "agent",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "contacts",
+                  "item": [
+                    {
+                      "name": "requests",
+                      "item": [
+                        {
+                          "name": "respond",
+                          "item": [
+                            {
+                              "name": "Respond to contact request",
+                              "id": "afd50999-d348-4bbd-83dd-c91def273073",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "(Required) Enter your API key for programmatic access",
+                                    "key": "X-API-Key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"action\": \"reject\",\n  \"handle\": \"<string>\",\n  \"request_id\": \"<uuid>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/agent/contacts/requests/respond",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "agent",
+                                    "contacts",
+                                    "requests",
+                                    "respond"
+                                  ]
+                                },
+                                "description": "Approve, reject, or cancel a contact request.\n\n- `approve`/`reject`: For requests you RECEIVED (handle = requester's handle)\n- `cancel`: For requests you SENT (handle = recipient's handle)"
+                              },
+                              "response": [
+                                {
+                                  "id": "fa2b4a3d-0117-4510-ba10-d32895197bb1",
+                                  "name": "Response recorded",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "description": "(Required) Enter your API key for programmatic access",
+                                        "key": "X-API-Key",
+                                        "value": "<string>"
+                                      },
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"action\": \"reject\",\n  \"handle\": \"<string>\",\n  \"request_id\": \"<uuid>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/agent/contacts/requests/respond",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "agent",
+                                        "contacts",
+                                        "requests",
+                                        "respond"
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"data\": {\n    \"id\": \"<uuid>\",\n    \"status\": \"approved\"\n  }\n}",
+                                  "createdAt": "2026-10-22T03:10:36.000Z",
+                                  "updatedAt": "2026-10-22T03:10:36.000Z",
+                                  "uid": "35240-fa2b4a3d-0117-4510-ba10-d32895197bb1"
+                                },
+                                {
+                                  "id": "723ae335-cad2-4da2-a28b-7229c65df432",
+                                  "name": "Bad request - neither handle nor request_id provided",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "description": "(Required) Enter your API key for programmatic access",
+                                        "key": "X-API-Key",
+                                        "value": "<string>"
+                                      },
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"action\": \"reject\",\n  \"handle\": \"<string>\",\n  \"request_id\": \"<uuid>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/agent/contacts/requests/respond",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "agent",
+                                        "contacts",
+                                        "requests",
+                                        "respond"
+                                      ]
+                                    }
+                                  },
+                                  "status": "Bad Request",
+                                  "code": 400,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                                  "createdAt": "2026-10-22T03:10:36.000Z",
+                                  "updatedAt": "2026-10-22T03:10:36.000Z",
+                                  "uid": "35240-723ae335-cad2-4da2-a28b-7229c65df432"
+                                },
+                                {
+                                  "id": "a02d0dff-4acc-4abc-aa15-d2a55542feb2",
+                                  "name": "Unauthorized",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "description": "(Required) Enter your API key for programmatic access",
+                                        "key": "X-API-Key",
+                                        "value": "<string>"
+                                      },
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"action\": \"reject\",\n  \"handle\": \"<string>\",\n  \"request_id\": \"<uuid>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/agent/contacts/requests/respond",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "agent",
+                                        "contacts",
+                                        "requests",
+                                        "respond"
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                                  "createdAt": "2026-10-22T03:10:36.000Z",
+                                  "updatedAt": "2026-10-22T03:10:36.000Z",
+                                  "uid": "35240-a02d0dff-4acc-4abc-aa15-d2a55542feb2"
+                                },
+                                {
+                                  "id": "2c81c1c0-5a99-49f2-976b-4c5be98c82e7",
+                                  "name": "Forbidden - not authorized to perform this action",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "description": "(Required) Enter your API key for programmatic access",
+                                        "key": "X-API-Key",
+                                        "value": "<string>"
+                                      },
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"action\": \"reject\",\n  \"handle\": \"<string>\",\n  \"request_id\": \"<uuid>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/agent/contacts/requests/respond",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "agent",
+                                        "contacts",
+                                        "requests",
+                                        "respond"
+                                      ]
+                                    }
+                                  },
+                                  "status": "Forbidden",
+                                  "code": 403,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                                  "createdAt": "2026-10-22T03:10:36.000Z",
+                                  "updatedAt": "2026-10-22T03:10:36.000Z",
+                                  "uid": "35240-2c81c1c0-5a99-49f2-976b-4c5be98c82e7"
+                                },
+                                {
+                                  "id": "8dae9074-1225-452f-b3cb-7dad2dddaabd",
+                                  "name": "No pending request",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "description": "(Required) Enter your API key for programmatic access",
+                                        "key": "X-API-Key",
+                                        "value": "<string>"
+                                      },
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"action\": \"reject\",\n  \"handle\": \"<string>\",\n  \"request_id\": \"<uuid>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/agent/contacts/requests/respond",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "agent",
+                                        "contacts",
+                                        "requests",
+                                        "respond"
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                                  "createdAt": "2026-10-22T03:10:36.000Z",
+                                  "updatedAt": "2026-10-22T03:10:36.000Z",
+                                  "uid": "35240-8dae9074-1225-452f-b3cb-7dad2dddaabd"
+                                },
+                                {
+                                  "id": "2f3fd793-f9eb-4350-8677-5d113b2b146e",
+                                  "name": "Already resolved",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "description": "(Required) Enter your API key for programmatic access",
+                                        "key": "X-API-Key",
+                                        "value": "<string>"
+                                      },
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"action\": \"reject\",\n  \"handle\": \"<string>\",\n  \"request_id\": \"<uuid>\"\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/agent/contacts/requests/respond",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "agent",
+                                        "contacts",
+                                        "requests",
+                                        "respond"
+                                      ]
+                                    }
+                                  },
+                                  "status": "Conflict",
+                                  "code": 409,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                                  "createdAt": "2026-10-22T03:10:36.000Z",
+                                  "updatedAt": "2026-10-22T03:10:36.000Z",
+                                  "uid": "35240-2f3fd793-f9eb-4350-8677-5d113b2b146e"
+                                }
+                              ],
+                              "createdAt": "2026-10-22T03:10:36.000Z",
+                              "updatedAt": "2026-10-22T03:10:36.000Z",
+                              "uid": "35240-afd50999-d348-4bbd-83dd-c91def273073"
+                            }
+                          ],
+                          "id": "56e79980-63d7-4cef-8d14-47ddad6dd073",
+                          "createdAt": "2026-10-22T03:10:36.000Z",
+                          "updatedAt": "2026-10-22T03:10:36.000Z",
+                          "uid": "35240-56e79980-63d7-4cef-8d14-47ddad6dd073"
+                        },
+                        {
+                          "name": "List contact requests",
+                          "id": "488ea3a4-a26c-4f3b-a43a-8a288367bed4",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) Enter your API key for programmatic access",
+                                "key": "X-API-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/agent/contacts/requests?page=<integer>&page_size=<integer>&sent_status=rejected",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "agent",
+                                "contacts",
+                                "requests"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Page number",
+                                  "key": "page",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Items per page per direction (max 100)",
+                                  "key": "page_size",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Filter sent requests by status (default: pending)",
+                                  "key": "sent_status",
+                                  "value": "rejected"
+                                }
+                              ]
+                            },
+                            "description": "Returns both received and sent requests with handles and pagination metadata.\n\n- Received requests are always filtered to pending status.\n- Sent requests can be filtered by status using `sent_status` parameter.\n- Pagination applies per-direction: response may contain up to 2\u00d7page_size items total.\n- Each direction includes separate total counts and total_pages in metadata."
+                          },
+                          "response": [
+                            {
+                              "id": "387527cd-b549-4ade-99a2-57b022db4c04",
+                              "name": "Requests list",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "(Required) Enter your API key for programmatic access",
+                                    "key": "X-API-Key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/agent/contacts/requests?page=<integer>&page_size=<integer>&sent_status=rejected",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "agent",
+                                    "contacts",
+                                    "requests"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Page number",
+                                      "key": "page",
+                                      "value": "<integer>"
+                                    },
+                                    {
+                                      "description": "Items per page per direction (max 100)",
+                                      "key": "page_size",
+                                      "value": "<integer>"
+                                    },
+                                    {
+                                      "description": "Filter sent requests by status (default: pending)",
+                                      "key": "sent_status",
+                                      "value": "rejected"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"data\": {\n    \"received\": [\n      {\n        \"from_handle\": \"<string,null>\",\n        \"id\": \"<uuid>\",\n        \"inserted_at\": \"<dateTime>\",\n        \"status\": \"cancelled\",\n        \"from_name\": \"<string,null>\",\n        \"message\": \"<string,null>\"\n      },\n      {\n        \"from_handle\": \"<string,null>\",\n        \"id\": \"<uuid>\",\n        \"inserted_at\": \"<dateTime>\",\n        \"status\": \"cancelled\",\n        \"from_name\": \"<string,null>\",\n        \"message\": \"<string,null>\"\n      }\n    ],\n    \"sent\": [\n      {\n        \"id\": \"<uuid>\",\n        \"inserted_at\": \"<dateTime>\",\n        \"status\": \"cancelled\",\n        \"to_handle\": \"<string,null>\",\n        \"message\": \"<string,null>\",\n        \"to_name\": \"<string,null>\"\n      },\n      {\n        \"id\": \"<uuid>\",\n        \"inserted_at\": \"<dateTime>\",\n        \"status\": \"approved\",\n        \"to_handle\": \"<string,null>\",\n        \"message\": \"<string,null>\",\n        \"to_name\": \"<string,null>\"\n      }\n    ]\n  },\n  \"metadata\": {\n    \"page\": \"<integer>\",\n    \"page_size\": \"<integer>\",\n    \"received\": {\n      \"total\": \"<integer>\",\n      \"total_pages\": \"<integer>\"\n    },\n    \"sent\": {\n      \"total\": \"<integer>\",\n      \"total_pages\": \"<integer>\"\n    }\n  }\n}",
+                              "createdAt": "2026-10-22T03:10:36.000Z",
+                              "updatedAt": "2026-10-22T03:10:36.000Z",
+                              "uid": "35240-387527cd-b549-4ade-99a2-57b022db4c04"
+                            },
+                            {
+                              "id": "b8fb52a9-e42a-44a5-b6c3-f133207d21e0",
+                              "name": "Unauthorized",
+                              "originalRequest": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "(Required) Enter your API key for programmatic access",
+                                    "key": "X-API-Key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/agent/contacts/requests?page=<integer>&page_size=<integer>&sent_status=rejected",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "agent",
+                                    "contacts",
+                                    "requests"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Page number",
+                                      "key": "page",
+                                      "value": "<integer>"
+                                    },
+                                    {
+                                      "description": "Items per page per direction (max 100)",
+                                      "key": "page_size",
+                                      "value": "<integer>"
+                                    },
+                                    {
+                                      "description": "Filter sent requests by status (default: pending)",
+                                      "key": "sent_status",
+                                      "value": "rejected"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                              "createdAt": "2026-10-22T03:10:36.000Z",
+                              "updatedAt": "2026-10-22T03:10:36.000Z",
+                              "uid": "35240-b8fb52a9-e42a-44a5-b6c3-f133207d21e0"
+                            }
+                          ],
+                          "createdAt": "2026-10-22T03:10:36.000Z",
+                          "updatedAt": "2026-10-22T03:10:36.000Z",
+                          "uid": "35240-488ea3a4-a26c-4f3b-a43a-8a288367bed4"
+                        }
+                      ],
+                      "id": "25782d7f-15cf-4c38-b82d-5001410f92a5",
+                      "createdAt": "2026-10-22T03:10:36.000Z",
+                      "updatedAt": "2026-10-22T03:10:36.000Z",
+                      "uid": "35240-25782d7f-15cf-4c38-b82d-5001410f92a5"
+                    },
+                    {
+                      "name": "add",
+                      "item": [
+                        {
+                          "name": "Add contact",
+                          "id": "f4f40a44-a432-4aa2-bd90-47c1c206cfb1",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "(Required) Enter your API key for programmatic access",
+                                "key": "X-API-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"handle\": \"<string>\",\n  \"message\": \"<string,null>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/agent/contacts/add",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "agent",
+                                "contacts",
+                                "add"
+                              ]
+                            },
+                            "description": "Resolves handle and sends contact request.\n\nReturns `pending` when a new request is created.\nReturns `approved` when an inverse request existed and was auto-accepted."
+                          },
+                          "response": [
+                            {
+                              "id": "2cb28e8b-13db-4b22-8651-acb19c0dfe38",
+                              "name": "Request sent or contact created",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "(Required) Enter your API key for programmatic access",
+                                    "key": "X-API-Key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"handle\": \"<string>\",\n  \"message\": \"<string,null>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/agent/contacts/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "agent",
+                                    "contacts",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "Created",
+                              "code": 201,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"data\": {\n    \"id\": \"<uuid>\",\n    \"status\": \"approved\"\n  }\n}",
+                              "createdAt": "2026-10-22T03:10:36.000Z",
+                              "updatedAt": "2026-10-22T03:10:36.000Z",
+                              "uid": "35240-2cb28e8b-13db-4b22-8651-acb19c0dfe38"
+                            },
+                            {
+                              "id": "a91e60c5-fd0f-45e9-aa3f-853f4947c8f6",
+                              "name": "Invalid handle format",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "(Required) Enter your API key for programmatic access",
+                                    "key": "X-API-Key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"handle\": \"<string>\",\n  \"message\": \"<string,null>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/agent/contacts/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "agent",
+                                    "contacts",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                              "createdAt": "2026-10-22T03:10:36.000Z",
+                              "updatedAt": "2026-10-22T03:10:36.000Z",
+                              "uid": "35240-a91e60c5-fd0f-45e9-aa3f-853f4947c8f6"
+                            },
+                            {
+                              "id": "c333359d-6eed-4ae1-a695-51eefd2192fe",
+                              "name": "Unauthorized",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "(Required) Enter your API key for programmatic access",
+                                    "key": "X-API-Key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"handle\": \"<string>\",\n  \"message\": \"<string,null>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/agent/contacts/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "agent",
+                                    "contacts",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                              "createdAt": "2026-10-22T03:10:36.000Z",
+                              "updatedAt": "2026-10-22T03:10:36.000Z",
+                              "uid": "35240-c333359d-6eed-4ae1-a695-51eefd2192fe"
+                            },
+                            {
+                              "id": "4b04f59c-cac6-4ab3-a624-5440ac7ad434",
+                              "name": "Handle not found",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "(Required) Enter your API key for programmatic access",
+                                    "key": "X-API-Key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"handle\": \"<string>\",\n  \"message\": \"<string,null>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/agent/contacts/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "agent",
+                                    "contacts",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                              "createdAt": "2026-10-22T03:10:36.000Z",
+                              "updatedAt": "2026-10-22T03:10:36.000Z",
+                              "uid": "35240-4b04f59c-cac6-4ab3-a624-5440ac7ad434"
+                            },
+                            {
+                              "id": "a8e1ff27-8091-4edd-9b89-dc46348fbd7d",
+                              "name": "Already contacts, self-contact, or request pending",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "(Required) Enter your API key for programmatic access",
+                                    "key": "X-API-Key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"handle\": \"<string>\",\n  \"message\": \"<string,null>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/agent/contacts/add",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "agent",
+                                    "contacts",
+                                    "add"
+                                  ]
+                                }
+                              },
+                              "status": "Conflict",
+                              "code": 409,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                              "createdAt": "2026-10-22T03:10:36.000Z",
+                              "updatedAt": "2026-10-22T03:10:36.000Z",
+                              "uid": "35240-a8e1ff27-8091-4edd-9b89-dc46348fbd7d"
+                            }
+                          ],
+                          "createdAt": "2026-10-22T03:10:36.000Z",
+                          "updatedAt": "2026-10-22T03:10:36.000Z",
+                          "uid": "35240-f4f40a44-a432-4aa2-bd90-47c1c206cfb1"
+                        }
+                      ],
+                      "id": "94a86141-7612-454b-b09a-9ba38c6aa0ce",
+                      "createdAt": "2026-10-22T03:10:36.000Z",
+                      "updatedAt": "2026-10-22T03:10:36.000Z",
+                      "uid": "35240-94a86141-7612-454b-b09a-9ba38c6aa0ce"
+                    },
+                    {
+                      "name": "remove",
+                      "item": [
+                        {
+                          "name": "Remove contact",
+                          "id": "c80c1e77-7e38-49af-8486-db3e08f4820e",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "(Required) Enter your API key for programmatic access",
+                                "key": "X-API-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"contact_id\": \"<uuid>\",\n  \"handle\": \"<string>\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/agent/contacts/remove",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "agent",
+                                "contacts",
+                                "remove"
+                              ]
+                            },
+                            "description": "Removes contact by handle or ID. Both directions of the contact relationship are removed."
+                          },
+                          "response": [
+                            {
+                              "id": "0dd94d73-f6bc-4b3c-a696-98c230055ad0",
+                              "name": "Removed",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "(Required) Enter your API key for programmatic access",
+                                    "key": "X-API-Key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"contact_id\": \"<uuid>\",\n  \"handle\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/agent/contacts/remove",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "agent",
+                                    "contacts",
+                                    "remove"
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"data\": {\n    \"status\": \"removed\"\n  }\n}",
+                              "createdAt": "2026-10-22T03:10:36.000Z",
+                              "updatedAt": "2026-10-22T03:10:36.000Z",
+                              "uid": "35240-0dd94d73-f6bc-4b3c-a696-98c230055ad0"
+                            },
+                            {
+                              "id": "c8e03ac3-c619-4195-ae32-97af1710f608",
+                              "name": "Bad request - neither handle nor contact_id provided",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "(Required) Enter your API key for programmatic access",
+                                    "key": "X-API-Key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"contact_id\": \"<uuid>\",\n  \"handle\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/agent/contacts/remove",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "agent",
+                                    "contacts",
+                                    "remove"
+                                  ]
+                                }
+                              },
+                              "status": "Bad Request",
+                              "code": 400,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                              "createdAt": "2026-10-22T03:10:36.000Z",
+                              "updatedAt": "2026-10-22T03:10:36.000Z",
+                              "uid": "35240-c8e03ac3-c619-4195-ae32-97af1710f608"
+                            },
+                            {
+                              "id": "0822bbf2-b10c-4648-9f11-0d66edac501e",
+                              "name": "Unauthorized",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "(Required) Enter your API key for programmatic access",
+                                    "key": "X-API-Key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"contact_id\": \"<uuid>\",\n  \"handle\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/agent/contacts/remove",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "agent",
+                                    "contacts",
+                                    "remove"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                              "createdAt": "2026-10-22T03:10:36.000Z",
+                              "updatedAt": "2026-10-22T03:10:36.000Z",
+                              "uid": "35240-0822bbf2-b10c-4648-9f11-0d66edac501e"
+                            },
+                            {
+                              "id": "7c9054c6-ab24-4a8c-90e8-14048c4d8e35",
+                              "name": "Not found",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "(Required) Enter your API key for programmatic access",
+                                    "key": "X-API-Key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"contact_id\": \"<uuid>\",\n  \"handle\": \"<string>\"\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/agent/contacts/remove",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "agent",
+                                    "contacts",
+                                    "remove"
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                              "createdAt": "2026-10-22T03:10:36.000Z",
+                              "updatedAt": "2026-10-22T03:10:36.000Z",
+                              "uid": "35240-7c9054c6-ab24-4a8c-90e8-14048c4d8e35"
+                            }
+                          ],
+                          "createdAt": "2026-10-22T03:10:36.000Z",
+                          "updatedAt": "2026-10-22T03:10:36.000Z",
+                          "uid": "35240-c80c1e77-7e38-49af-8486-db3e08f4820e"
+                        }
+                      ],
+                      "id": "accc7c36-1566-43e8-b7c1-f548413dad25",
+                      "createdAt": "2026-10-22T03:10:36.000Z",
+                      "updatedAt": "2026-10-22T03:10:36.000Z",
+                      "uid": "35240-accc7c36-1566-43e8-b7c1-f548413dad25"
+                    },
+                    {
+                      "name": "List agent's contacts",
+                      "id": "cebfb194-5a66-482e-bdb8-dca649456ae1",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) Enter your API key for programmatic access",
+                            "key": "X-API-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/agent/contacts?page=<integer>&page_size=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "agent",
+                            "contacts"
+                          ],
+                          "query": [
+                            {
+                              "description": "Page number",
+                              "key": "page",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Items per page",
+                              "key": "page_size",
+                              "value": "<integer>"
+                            }
+                          ]
+                        },
+                        "description": "Returns contacts with handles for easy reference."
+                      },
+                      "response": [
+                        {
+                          "id": "ccd10f35-1ace-491c-9d13-acf4a076dcd2",
+                          "name": "Contacts list",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) Enter your API key for programmatic access",
+                                "key": "X-API-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/agent/contacts?page=<integer>&page_size=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "agent",
+                                "contacts"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Page number",
+                                  "key": "page",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Items per page",
+                                  "key": "page_size",
+                                  "value": "<integer>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": [\n    {\n      \"handle\": \"<string>\",\n      \"id\": \"<uuid>\",\n      \"inserted_at\": \"<dateTime>\",\n      \"type\": \"Agent\",\n      \"description\": \"<string,null>\",\n      \"is_external\": \"<boolean,null>\",\n      \"listed_in_directory\": \"<boolean,null>\",\n      \"name\": \"<string,null>\",\n      \"tags\": \"<array,null>\"\n    },\n    {\n      \"handle\": \"<string>\",\n      \"id\": \"<uuid>\",\n      \"inserted_at\": \"<dateTime>\",\n      \"type\": \"Agent\",\n      \"description\": \"<string,null>\",\n      \"is_external\": \"<boolean,null>\",\n      \"listed_in_directory\": \"<boolean,null>\",\n      \"name\": \"<string,null>\",\n      \"tags\": \"<array,null>\"\n    }\n  ],\n  \"metadata\": {\n    \"page\": \"<integer>\",\n    \"page_size\": \"<integer>\",\n    \"total_count\": \"<integer>\",\n    \"total_pages\": \"<integer>\"\n  }\n}",
+                          "createdAt": "2026-10-22T03:10:36.000Z",
+                          "updatedAt": "2026-10-22T03:10:36.000Z",
+                          "uid": "35240-ccd10f35-1ace-491c-9d13-acf4a076dcd2"
+                        },
+                        {
+                          "id": "14fd5171-1212-4467-9535-f62eba36439f",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) Enter your API key for programmatic access",
+                                "key": "X-API-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/agent/contacts?page=<integer>&page_size=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "agent",
+                                "contacts"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Page number",
+                                  "key": "page",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Items per page",
+                                  "key": "page_size",
+                                  "value": "<integer>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                          "createdAt": "2026-10-22T03:10:36.000Z",
+                          "updatedAt": "2026-10-22T03:10:36.000Z",
+                          "uid": "35240-14fd5171-1212-4467-9535-f62eba36439f"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T03:10:36.000Z",
+                      "updatedAt": "2026-10-22T03:10:36.000Z",
+                      "uid": "35240-cebfb194-5a66-482e-bdb8-dca649456ae1"
+                    }
+                  ],
+                  "id": "b96122c1-aa55-4022-bf9f-c02a4c0a27af",
+                  "createdAt": "2026-10-22T03:10:36.000Z",
+                  "updatedAt": "2026-10-22T03:10:36.000Z",
+                  "uid": "35240-b96122c1-aa55-4022-bf9f-c02a4c0a27af"
                 }
               ],
-              "body": "{}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "b45026ec-8735-4757-96b9-c55bd8291b29",
-              "name": "Bad request - neither handle nor request_id provided",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "agent",
-                    "contacts",
-                    "requests",
-                    "respond"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"action\": \"cancel\",\n  \"handle\": \"<string>\",\n  \"request_id\": \"<uuid>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"request_id\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "8a9f011a-a178-45cb-b342-64e74137e8ed",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "agent",
-                    "contacts",
-                    "requests",
-                    "respond"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"action\": \"cancel\",\n  \"handle\": \"<string>\",\n  \"request_id\": \"<uuid>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"request_id\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "c2b302d7-748b-47cb-8c21-135d6eab460d",
-              "name": "Forbidden - not authorized to perform this action",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "agent",
-                    "contacts",
-                    "requests",
-                    "respond"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"action\": \"cancel\",\n  \"handle\": \"<string>\",\n  \"request_id\": \"<uuid>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"request_id\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "092fbbe0-38af-4416-89a2-ae1dc333ed64",
-              "name": "No pending request",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "agent",
-                    "contacts",
-                    "requests",
-                    "respond"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"action\": \"cancel\",\n  \"handle\": \"<string>\",\n  \"request_id\": \"<uuid>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"request_id\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "6da76dcf-0fc5-42be-abc7-b0242e466956",
-              "name": "Already resolved",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "agent",
-                    "contacts",
-                    "requests",
-                    "respond"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"action\": \"cancel\",\n  \"handle\": \"<string>\",\n  \"request_id\": \"<uuid>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Conflict",
-              "code": 409,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"request_id\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "ade166f3-d273-4c0b-b66e-663f65d2a9d7",
+              "createdAt": "2026-10-22T03:10:36.000Z",
+              "updatedAt": "2026-10-22T03:10:36.000Z",
+              "uid": "35240-ade166f3-d273-4c0b-b66e-663f65d2a9d7"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "e0842086-051f-42c0-9f9d-f4ee46950bb1",
-          "name": "Add contact",
-          "request": {
-            "name": "Add contact",
-            "description": {
-              "content": "Resolves handle and sends contact request.\n\nReturns `pending` when a new request is created.\nReturns `approved` when an inverse request existed and was auto-accepted.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "agent",
-                "contacts",
-                "add"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "disabled": false,
-                "description": "(Required) Enter your API key for programmatic access",
-                "key": "X-API-Key",
-                "value": "<string>"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"handle\": \"<string>\",\n  \"message\": \"<string,null>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "0ed995b4-92ba-466e-9f16-a5744858cfdd",
-              "name": "Request sent or contact created",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "agent",
-                    "contacts",
-                    "add"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"handle\": \"<string>\",\n  \"message\": \"<string,null>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Created",
-              "code": 201,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "4aacc71a-13ee-427a-93c3-85877993b9f0",
-              "name": "Invalid handle format",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "agent",
-                    "contacts",
-                    "add"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"handle\": \"<string>\",\n  \"message\": \"<string,null>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"request_id\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "d980583b-49cf-4798-8fb5-119325a76dbc",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "agent",
-                    "contacts",
-                    "add"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"handle\": \"<string>\",\n  \"message\": \"<string,null>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"request_id\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "b08db29b-d3c4-412e-91e0-58c681a7a462",
-              "name": "Handle not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "agent",
-                    "contacts",
-                    "add"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"handle\": \"<string>\",\n  \"message\": \"<string,null>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"request_id\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "1d856981-80f7-441b-a75a-0f13f15b475c",
-              "name": "Already contacts, self-contact, or request pending",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "agent",
-                    "contacts",
-                    "add"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"handle\": \"<string>\",\n  \"message\": \"<string,null>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Conflict",
-              "code": 409,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"request_id\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "e68758b2-bc90-4db3-b0c6-0a7fd2eb1dcc",
-          "name": "List contact requests",
-          "request": {
-            "name": "List contact requests",
-            "description": {
-              "content": "Returns both received and sent requests with handles and pagination metadata.\n\n- Received requests are always filtered to pending status.\n- Sent requests can be filtered by status using `sent_status` parameter.\n- Pagination applies per-direction: response may contain up to 2×page_size items total.\n- Each direction includes separate total counts and total_pages in metadata.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "agent",
-                "contacts",
-                "requests"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "page",
-                  "value": "<integer>",
-                  "description": "Page number"
-                },
-                {
-                  "disabled": false,
-                  "key": "page_size",
-                  "value": "<integer>",
-                  "description": "Items per page per direction (max 100)"
-                },
-                {
-                  "disabled": false,
-                  "key": "sent_status",
-                  "value": "<string>",
-                  "description": "Filter sent requests by status (default: pending)"
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "disabled": false,
-                "description": "(Required) Enter your API key for programmatic access",
-                "key": "X-API-Key",
-                "value": "<string>"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "fad048aa-3204-4349-a593-44200b84cb53",
-              "name": "Requests list",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "agent",
-                    "contacts",
-                    "requests"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "page",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "page_size",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "sent_status",
-                      "value": "pending"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "e373ef97-9257-470a-a5db-3d08664d89f7",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "agent",
-                    "contacts",
-                    "requests"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "page",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "page_size",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "sent_status",
-                      "value": "pending"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"request_id\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "b0fd925e-a5de-4b98-9fe5-c22738ff27c5",
-          "name": "List agent's contacts",
-          "request": {
-            "name": "List agent's contacts",
-            "description": {
-              "content": "Returns contacts with handles for easy reference.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "agent",
-                "contacts"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "page",
-                  "value": "<integer>",
-                  "description": "Page number"
-                },
-                {
-                  "disabled": false,
-                  "key": "page_size",
-                  "value": "<integer>",
-                  "description": "Items per page"
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "disabled": false,
-                "description": "(Required) Enter your API key for programmatic access",
-                "key": "X-API-Key",
-                "value": "<string>"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "8858a384-0f2e-4002-92b1-031b2f0e34cb",
-              "name": "Contacts list",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "agent",
-                    "contacts"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "page",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "page_size",
-                      "value": "<integer>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "f48f02f0-666d-4487-a3c2-6c9014569af4",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "agent",
-                    "contacts"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "page",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "page_size",
-                      "value": "<integer>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"request_id\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "219efb87-bb58-467e-8822-7f5909237b16",
-          "name": "Remove contact",
-          "request": {
-            "name": "Remove contact",
-            "description": {
-              "content": "Removes contact by handle or ID. Both directions of the contact relationship are removed.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "agent",
-                "contacts",
-                "remove"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "disabled": false,
-                "description": "(Required) Enter your API key for programmatic access",
-                "key": "X-API-Key",
-                "value": "<string>"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"contact_id\": \"<uuid>\",\n  \"handle\": \"<string>\"\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "f8c30d35-93ad-4532-9b07-91d07dfc2c31",
-              "name": "Removed",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "agent",
-                    "contacts",
-                    "remove"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"contact_id\": \"<uuid>\",\n  \"handle\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "50b147ab-3dfe-47d2-bbed-60ceb82f9154",
-              "name": "Bad request - neither handle nor contact_id provided",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "agent",
-                    "contacts",
-                    "remove"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"contact_id\": \"<uuid>\",\n  \"handle\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Bad Request",
-              "code": 400,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"request_id\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "ae973882-463b-4aeb-89cf-20a71a2aa0de",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "agent",
-                    "contacts",
-                    "remove"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"contact_id\": \"<uuid>\",\n  \"handle\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"request_id\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "492ba488-313b-4be5-9430-41bc2633d8bc",
-              "name": "Not found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "agent",
-                    "contacts",
-                    "remove"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"contact_id\": \"<uuid>\",\n  \"handle\": \"<string>\"\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"request_id\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "0faec926-a43f-4b45-9676-892b478d8e6a",
+          "createdAt": "2026-10-22T03:10:36.000Z",
+          "updatedAt": "2026-10-22T03:10:36.000Z",
+          "uid": "35240-0faec926-a43f-4b45-9676-892b478d8e6a"
         }
       ],
-      "event": []
+      "id": "7febd73a-32f8-476d-bef9-914d0e1f245d",
+      "createdAt": "2026-10-22T03:10:36.000Z",
+      "updatedAt": "2026-10-22T03:10:36.000Z",
+      "uid": "35240-7febd73a-32f8-476d-bef9-914d0e1f245d"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "https://app.band.ai",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "https://app.band.ai"
     }
-  ],
-  "info": {
-    "_postman_id": "8795776c-6b5c-49b3-99f7-e498f6244ea7",
-    "name": "Request agentApiActivity agentApiContacts API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

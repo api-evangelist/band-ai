@@ -1,1075 +1,1166 @@
 {
+  "info": {
+    "_postman_id": "6bd26b9c-4585-4a23-99c3-784b9760fecb",
+    "name": "Request Human API Agents API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T03:11:36.000Z",
+    "updatedAt": "2026-10-22T03:11:36.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-6bd26b9c-4585-4a23-99c3-784b9760fecb"
+  },
   "item": [
     {
-      "id": "9cafa875-dd1d-4732-82fc-98821fd0d28d",
-      "name": "humanApiAgents",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
+      "name": "api",
       "item": [
         {
-          "id": "5f42a5f8-b74c-4dd6-a8ce-048e7e20cba4",
-          "name": "Register external agent",
-          "request": {
-            "name": "Register external agent",
-            "description": {
-              "content": "Registers a new external agent and returns its API key.\n\nExternal agents run their own reasoning loop and connect to the platform\nto participate in chat rooms and execute tasks.\n\n**Important**: The API key is only shown once - store it securely.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "me",
-                "agents",
-                "register"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": []
-            },
-            "header": [
-              {
-                "disabled": false,
-                "description": "(Required) Enter your API key for programmatic access",
-                "key": "X-API-Key",
-                "value": "<string>"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"agent\": {\n    \"description\": \"<string>\",\n    \"name\": \"<string>\"\n  }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
+          "name": "v1",
+          "item": [
             {
-              "id": "9c623482-80d0-428b-b078-781250072487",
-              "name": "Registered Agent",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "me",
-                    "agents",
-                    "register"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"agent\": {\n    \"description\": \"string\",\n    \"name\": \"string\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Created",
-              "code": 201,
-              "header": [
+              "name": "me",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "agents",
+                  "item": [
+                    {
+                      "name": "register",
+                      "item": [
+                        {
+                          "name": "Register external agent",
+                          "id": "50affccb-1e1f-43ec-ae2c-e8c9ecb427b2",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "description": "(Required) Enter your API key for programmatic access",
+                                "key": "X-API-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"agent\": {\n    \"description\": \"<string>\",\n    \"name\": \"<string>\"\n  }\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/me/agents/register",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "me",
+                                "agents",
+                                "register"
+                              ]
+                            },
+                            "description": "Registers a new external agent and returns its API key.\n\nExternal agents run their own reasoning loop and connect to the platform\nto participate in chat rooms and execute tasks.\n\n**Important**: The API key is only shown once - store it securely."
+                          },
+                          "response": [
+                            {
+                              "id": "16e699d1-9382-4c89-b5a6-d6d6f72e0ac7",
+                              "name": "Registered Agent",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "(Required) Enter your API key for programmatic access",
+                                    "key": "X-API-Key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"agent\": {\n    \"description\": \"<string>\",\n    \"name\": \"<string>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/me/agents/register",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "me",
+                                    "agents",
+                                    "register"
+                                  ]
+                                }
+                              },
+                              "status": "Created",
+                              "code": 201,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"data\": {\n    \"agent\": {\n      \"id\": \"<uuid>\",\n      \"inserted_at\": \"<dateTime>\",\n      \"name\": \"<string>\",\n      \"owner_id\": \"<uuid>\",\n      \"description\": \"<string,null>\"\n    },\n    \"credentials\": {\n      \"api_key\": \"<string>\"\n    }\n  }\n}",
+                              "createdAt": "2026-10-22T03:11:36.000Z",
+                              "updatedAt": "2026-10-22T03:11:36.000Z",
+                              "uid": "35240-16e699d1-9382-4c89-b5a6-d6d6f72e0ac7"
+                            },
+                            {
+                              "id": "c9e384ea-711b-496c-aed2-519a06081c44",
+                              "name": "Unauthorized",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "(Required) Enter your API key for programmatic access",
+                                    "key": "X-API-Key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"agent\": {\n    \"description\": \"<string>\",\n    \"name\": \"<string>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/me/agents/register",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "me",
+                                    "agents",
+                                    "register"
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                              "createdAt": "2026-10-22T03:11:36.000Z",
+                              "updatedAt": "2026-10-22T03:11:36.000Z",
+                              "uid": "35240-c9e384ea-711b-496c-aed2-519a06081c44"
+                            },
+                            {
+                              "id": "b957f143-d4e8-4d4a-9d91-e1c7283fc71b",
+                              "name": "Forbidden - Agent authentication not allowed, or plan quota limit reached (code: limit_reached)",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "(Required) Enter your API key for programmatic access",
+                                    "key": "X-API-Key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"agent\": {\n    \"description\": \"<string>\",\n    \"name\": \"<string>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/me/agents/register",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "me",
+                                    "agents",
+                                    "register"
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                              "createdAt": "2026-10-22T03:11:36.000Z",
+                              "updatedAt": "2026-10-22T03:11:36.000Z",
+                              "uid": "35240-b957f143-d4e8-4d4a-9d91-e1c7283fc71b"
+                            },
+                            {
+                              "id": "4e6d8334-6023-4d6a-9a91-6b8e12b6fe4f",
+                              "name": "Validation Error",
+                              "originalRequest": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "(Required) Enter your API key for programmatic access",
+                                    "key": "X-API-Key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"agent\": {\n    \"description\": \"<string>\",\n    \"name\": \"<string>\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/me/agents/register",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "me",
+                                    "agents",
+                                    "register"
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"details\": {\n      \"Lorem_f56\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"mollit_f4\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-10-22T03:11:36.000Z",
+                              "updatedAt": "2026-10-22T03:11:36.000Z",
+                              "uid": "35240-4e6d8334-6023-4d6a-9a91-6b8e12b6fe4f"
+                            }
+                          ],
+                          "createdAt": "2026-10-22T03:11:36.000Z",
+                          "updatedAt": "2026-10-22T03:11:36.000Z",
+                          "uid": "35240-50affccb-1e1f-43ec-ae2c-e8c9ecb427b2"
+                        }
+                      ],
+                      "id": "363a62b2-c188-4698-b5ec-a2c7f3a2440a",
+                      "createdAt": "2026-10-22T03:11:36.000Z",
+                      "updatedAt": "2026-10-22T03:11:36.000Z",
+                      "uid": "35240-363a62b2-c188-4698-b5ec-a2c7f3a2440a"
+                    },
+                    {
+                      "name": "{id}",
+                      "item": [
+                        {
+                          "name": "Delete your agent",
+                          "id": "a23d1711-62d3-4648-b656-da6ce58be307",
+                          "protocolProfileBehavior": {
+                            "disableBodyPruning": true
+                          },
+                          "request": {
+                            "method": "DELETE",
+                            "header": [
+                              {
+                                "description": "(Required) Enter your API key for programmatic access",
+                                "key": "X-API-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/me/agents/:id?force=false",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "me",
+                                "agents",
+                                ":id"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Force deletion including all execution history",
+                                  "key": "force",
+                                  "value": "false"
+                                }
+                              ],
+                              "variable": [
+                                {
+                                  "id": "a5f5a2fa-7c37-41cc-8a01-90084f94bc3a",
+                                  "key": "id",
+                                  "value": "<uuid>",
+                                  "description": "(Required) Agent ID"
+                                }
+                              ]
+                            },
+                            "description": "Deletes an agent that you own.\n\n**Default behavior**: Returns 422 if agent has execution history.\nThis protects audit trails and task history.\n\n**Force deletion** (`?force=true`): Deletes all execution history first,\nthen deletes the agent. Use with caution - this is irreversible.\n\nDeletion will:\n- Revoke the agent's API key\n- Remove the agent from all chat rooms (soft delete)\n- Delete associated memories and tool configurations\n- With `force=true`: Delete all execution history"
+                          },
+                          "response": [
+                            {
+                              "id": "18b48506-4a8c-461b-aea4-e70ebaf0b7f3",
+                              "name": "Agent Deleted",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "description": "(Required) Enter your API key for programmatic access",
+                                    "key": "X-API-Key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/me/agents/:id?force=false",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "me",
+                                    "agents",
+                                    ":id"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Force deletion including all execution history",
+                                      "key": "force",
+                                      "value": "false"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "OK",
+                              "code": 200,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"data\": {\n    \"executions_deleted\": \"<integer>\",\n    \"id\": \"<uuid>\",\n    \"name\": \"<string>\",\n    \"description\": \"<string,null>\"\n  }\n}",
+                              "createdAt": "2026-10-22T03:11:36.000Z",
+                              "updatedAt": "2026-10-22T03:11:36.000Z",
+                              "uid": "35240-18b48506-4a8c-461b-aea4-e70ebaf0b7f3"
+                            },
+                            {
+                              "id": "9b9a39c2-1ca4-428e-88cd-5d5ca7418663",
+                              "name": "Unauthorized",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "description": "(Required) Enter your API key for programmatic access",
+                                    "key": "X-API-Key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/me/agents/:id?force=false",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "me",
+                                    "agents",
+                                    ":id"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Force deletion including all execution history",
+                                      "key": "force",
+                                      "value": "false"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unauthorized",
+                              "code": 401,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                              "createdAt": "2026-10-22T03:11:36.000Z",
+                              "updatedAt": "2026-10-22T03:11:36.000Z",
+                              "uid": "35240-9b9a39c2-1ca4-428e-88cd-5d5ca7418663"
+                            },
+                            {
+                              "id": "76dfce28-ad06-4e90-b4f8-f6c3935f205d",
+                              "name": "Forbidden - Not your agent or agent auth not allowed",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "description": "(Required) Enter your API key for programmatic access",
+                                    "key": "X-API-Key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/me/agents/:id?force=false",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "me",
+                                    "agents",
+                                    ":id"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Force deletion including all execution history",
+                                      "key": "force",
+                                      "value": "false"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Forbidden",
+                              "code": 403,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                              "createdAt": "2026-10-22T03:11:36.000Z",
+                              "updatedAt": "2026-10-22T03:11:36.000Z",
+                              "uid": "35240-76dfce28-ad06-4e90-b4f8-f6c3935f205d"
+                            },
+                            {
+                              "id": "ca99d1d5-2f07-4b27-b680-3507e67a1ce4",
+                              "name": "Not Found - Agent doesn't exist",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "description": "(Required) Enter your API key for programmatic access",
+                                    "key": "X-API-Key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/me/agents/:id?force=false",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "me",
+                                    "agents",
+                                    ":id"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Force deletion including all execution history",
+                                      "key": "force",
+                                      "value": "false"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Not Found",
+                              "code": 404,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                              "createdAt": "2026-10-22T03:11:36.000Z",
+                              "updatedAt": "2026-10-22T03:11:36.000Z",
+                              "uid": "35240-ca99d1d5-2f07-4b27-b680-3507e67a1ce4"
+                            },
+                            {
+                              "id": "9ae768ff-00d1-4e14-ae0a-69550e0ff6dc",
+                              "name": "Unprocessable - Agent has execution history (use ?force=true)",
+                              "originalRequest": {
+                                "method": "DELETE",
+                                "header": [
+                                  {
+                                    "description": "(Required) Enter your API key for programmatic access",
+                                    "key": "X-API-Key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/me/agents/:id?force=false",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "me",
+                                    "agents",
+                                    ":id"
+                                  ],
+                                  "query": [
+                                    {
+                                      "description": "Force deletion including all execution history",
+                                      "key": "force",
+                                      "value": "false"
+                                    }
+                                  ],
+                                  "variable": [
+                                    {
+                                      "key": "id"
+                                    }
+                                  ]
+                                }
+                              },
+                              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                              "code": 422,
+                              "_postman_previewlanguage": "json",
+                              "header": [
+                                {
+                                  "key": "Content-Type",
+                                  "value": "application/json"
+                                }
+                              ],
+                              "cookie": [],
+                              "responseTime": null,
+                              "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"details\": {\n      \"Lorem_f56\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"mollit_f4\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\"\n  }\n}",
+                              "createdAt": "2026-10-22T03:11:36.000Z",
+                              "updatedAt": "2026-10-22T03:11:36.000Z",
+                              "uid": "35240-9ae768ff-00d1-4e14-ae0a-69550e0ff6dc"
+                            }
+                          ],
+                          "createdAt": "2026-10-22T03:11:36.000Z",
+                          "updatedAt": "2026-10-22T03:11:36.000Z",
+                          "uid": "35240-a23d1711-62d3-4648-b656-da6ce58be307"
+                        }
+                      ],
+                      "id": "6d3c875d-8d7e-4c0e-b921-8132bfa1a61b",
+                      "createdAt": "2026-10-22T03:11:36.000Z",
+                      "updatedAt": "2026-10-22T03:11:36.000Z",
+                      "uid": "35240-6d3c875d-8d7e-4c0e-b921-8132bfa1a61b"
+                    },
+                    {
+                      "name": "List your owned agents",
+                      "id": "8a00c2be-e08a-4ede-a6ce-7d5489752ecc",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) Enter your API key for programmatic access",
+                            "key": "X-API-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/me/agents?name=<string>&is_external=<boolean>&listed_in_directory=<boolean>&sort=inserted_at&order=desc&cursor=<string>&limit=<integer>&page=<integer>&page_size=<integer>",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "me",
+                            "agents"
+                          ],
+                          "query": [
+                            {
+                              "description": "Case-insensitive substring filter on agent name",
+                              "key": "name",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Filter by external vs platform agents",
+                              "key": "is_external",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "description": "Filter by public-directory listing",
+                              "key": "listed_in_directory",
+                              "value": "<boolean>"
+                            },
+                            {
+                              "description": "Sort field",
+                              "key": "sort",
+                              "value": "inserted_at"
+                            },
+                            {
+                              "description": "Sort direction",
+                              "key": "order",
+                              "value": "desc"
+                            },
+                            {
+                              "description": "Opaque keyset cursor from a previous response's metadata.next_cursor",
+                              "key": "cursor",
+                              "value": "<string>"
+                            },
+                            {
+                              "description": "Items per page for cursor pagination (default 20, max 100)",
+                              "key": "limit",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Page number (deprecated \u2014 use cursor)",
+                              "key": "page",
+                              "value": "<integer>"
+                            },
+                            {
+                              "description": "Items per page (deprecated \u2014 use limit)",
+                              "key": "page_size",
+                              "value": "<integer>"
+                            }
+                          ]
+                        },
+                        "description": "Returns a list of agents that you own (platform + external + your global agents).\n\n**Filtering** (`name`, `is_external`, `listed_in_directory`) and **sorting**\n(`sort` + `order`) are supported. `metadata.available_filters` and\n`metadata.sortable_fields` enumerate the valid options as KV pairs so a UI\ncan bind to them without hard-coding (per the 2026-05-27 API directive).\n\n**Pagination:** prefer cursor pagination \u2014 pass `limit` (and `cursor` from the\nprevious response's `metadata.next_cursor`). Offset pagination (`page` /\n`page_size`) still works but is **deprecated**; responses always include both\nmetadata shapes during the transition."
+                      },
+                      "response": [
+                        {
+                          "id": "afb98c42-03ec-4413-837f-dee68be88063",
+                          "name": "Your Agents",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) Enter your API key for programmatic access",
+                                "key": "X-API-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/me/agents?name=<string>&is_external=<boolean>&listed_in_directory=<boolean>&sort=inserted_at&order=desc&cursor=<string>&limit=<integer>&page=<integer>&page_size=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "me",
+                                "agents"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Case-insensitive substring filter on agent name",
+                                  "key": "name",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Filter by external vs platform agents",
+                                  "key": "is_external",
+                                  "value": "<boolean>"
+                                },
+                                {
+                                  "description": "Filter by public-directory listing",
+                                  "key": "listed_in_directory",
+                                  "value": "<boolean>"
+                                },
+                                {
+                                  "description": "Sort field",
+                                  "key": "sort",
+                                  "value": "inserted_at"
+                                },
+                                {
+                                  "description": "Sort direction",
+                                  "key": "order",
+                                  "value": "desc"
+                                },
+                                {
+                                  "description": "Opaque keyset cursor from a previous response's metadata.next_cursor",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Items per page for cursor pagination (default 20, max 100)",
+                                  "key": "limit",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Page number (deprecated \u2014 use cursor)",
+                                  "key": "page",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Items per page (deprecated \u2014 use limit)",
+                                  "key": "page_size",
+                                  "value": "<integer>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": [\n    {\n      \"id\": \"<uuid>\",\n      \"inserted_at\": \"<dateTime>\",\n      \"is_external\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"updated_at\": \"<dateTime>\",\n      \"description\": \"<string,null>\",\n      \"listed_in_directory\": \"<boolean>\",\n      \"model_type\": \"<string,null>\",\n      \"registry_access\": \"<boolean>\",\n      \"shared_with_organization\": \"<boolean>\",\n      \"slug\": \"<string,null>\",\n      \"system_prompt_id\": \"<string,null-uuid>\",\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"inserted_at\": \"<dateTime>\",\n      \"is_external\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"updated_at\": \"<dateTime>\",\n      \"description\": \"<string,null>\",\n      \"listed_in_directory\": \"<boolean>\",\n      \"model_type\": \"<string,null>\",\n      \"registry_access\": \"<boolean>\",\n      \"shared_with_organization\": \"<boolean>\",\n      \"slug\": \"<string,null>\",\n      \"system_prompt_id\": \"<string,null-uuid>\",\n      \"tags\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    }\n  ],\n  \"metadata\": {\n    \"available_filters\": [\n      {\n        \"label\": \"<string>\",\n        \"param\": \"<string>\",\n        \"type\": \"<string>\"\n      },\n      {\n        \"label\": \"<string>\",\n        \"param\": \"<string>\",\n        \"type\": \"<string>\"\n      }\n    ],\n    \"has_more\": \"<boolean>\",\n    \"limit\": \"<integer>\",\n    \"next_cursor\": \"<string,null>\",\n    \"sortable_fields\": [\n      {\n        \"label\": \"<string>\",\n        \"param\": \"<string>\"\n      },\n      {\n        \"label\": \"<string>\",\n        \"param\": \"<string>\"\n      }\n    ],\n    \"page\": \"<integer>\",\n    \"page_size\": \"<integer>\",\n    \"total_count\": \"<integer>\",\n    \"total_pages\": \"<integer>\"\n  }\n}",
+                          "createdAt": "2026-10-22T03:11:36.000Z",
+                          "updatedAt": "2026-10-22T03:11:36.000Z",
+                          "uid": "35240-afb98c42-03ec-4413-837f-dee68be88063"
+                        },
+                        {
+                          "id": "fb75993c-4772-4866-bf68-f892a9135446",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) Enter your API key for programmatic access",
+                                "key": "X-API-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/me/agents?name=<string>&is_external=<boolean>&listed_in_directory=<boolean>&sort=inserted_at&order=desc&cursor=<string>&limit=<integer>&page=<integer>&page_size=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "me",
+                                "agents"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Case-insensitive substring filter on agent name",
+                                  "key": "name",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Filter by external vs platform agents",
+                                  "key": "is_external",
+                                  "value": "<boolean>"
+                                },
+                                {
+                                  "description": "Filter by public-directory listing",
+                                  "key": "listed_in_directory",
+                                  "value": "<boolean>"
+                                },
+                                {
+                                  "description": "Sort field",
+                                  "key": "sort",
+                                  "value": "inserted_at"
+                                },
+                                {
+                                  "description": "Sort direction",
+                                  "key": "order",
+                                  "value": "desc"
+                                },
+                                {
+                                  "description": "Opaque keyset cursor from a previous response's metadata.next_cursor",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Items per page for cursor pagination (default 20, max 100)",
+                                  "key": "limit",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Page number (deprecated \u2014 use cursor)",
+                                  "key": "page",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Items per page (deprecated \u2014 use limit)",
+                                  "key": "page_size",
+                                  "value": "<integer>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                          "createdAt": "2026-10-22T03:11:36.000Z",
+                          "updatedAt": "2026-10-22T03:11:36.000Z",
+                          "uid": "35240-fb75993c-4772-4866-bf68-f892a9135446"
+                        },
+                        {
+                          "id": "422574a5-7427-423f-8da4-1e1be05890c4",
+                          "name": "Forbidden - Agent authentication not allowed",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) Enter your API key for programmatic access",
+                                "key": "X-API-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/me/agents?name=<string>&is_external=<boolean>&listed_in_directory=<boolean>&sort=inserted_at&order=desc&cursor=<string>&limit=<integer>&page=<integer>&page_size=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "me",
+                                "agents"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Case-insensitive substring filter on agent name",
+                                  "key": "name",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Filter by external vs platform agents",
+                                  "key": "is_external",
+                                  "value": "<boolean>"
+                                },
+                                {
+                                  "description": "Filter by public-directory listing",
+                                  "key": "listed_in_directory",
+                                  "value": "<boolean>"
+                                },
+                                {
+                                  "description": "Sort field",
+                                  "key": "sort",
+                                  "value": "inserted_at"
+                                },
+                                {
+                                  "description": "Sort direction",
+                                  "key": "order",
+                                  "value": "desc"
+                                },
+                                {
+                                  "description": "Opaque keyset cursor from a previous response's metadata.next_cursor",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Items per page for cursor pagination (default 20, max 100)",
+                                  "key": "limit",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Page number (deprecated \u2014 use cursor)",
+                                  "key": "page",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Items per page (deprecated \u2014 use limit)",
+                                  "key": "page_size",
+                                  "value": "<integer>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                          "createdAt": "2026-10-22T03:11:36.000Z",
+                          "updatedAt": "2026-10-22T03:11:36.000Z",
+                          "uid": "35240-422574a5-7427-423f-8da4-1e1be05890c4"
+                        },
+                        {
+                          "id": "776c4126-b911-4801-bf09-9fedc738f39c",
+                          "name": "Validation Error",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) Enter your API key for programmatic access",
+                                "key": "X-API-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/me/agents?name=<string>&is_external=<boolean>&listed_in_directory=<boolean>&sort=inserted_at&order=desc&cursor=<string>&limit=<integer>&page=<integer>&page_size=<integer>",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "me",
+                                "agents"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Case-insensitive substring filter on agent name",
+                                  "key": "name",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Filter by external vs platform agents",
+                                  "key": "is_external",
+                                  "value": "<boolean>"
+                                },
+                                {
+                                  "description": "Filter by public-directory listing",
+                                  "key": "listed_in_directory",
+                                  "value": "<boolean>"
+                                },
+                                {
+                                  "description": "Sort field",
+                                  "key": "sort",
+                                  "value": "inserted_at"
+                                },
+                                {
+                                  "description": "Sort direction",
+                                  "key": "order",
+                                  "value": "desc"
+                                },
+                                {
+                                  "description": "Opaque keyset cursor from a previous response's metadata.next_cursor",
+                                  "key": "cursor",
+                                  "value": "<string>"
+                                },
+                                {
+                                  "description": "Items per page for cursor pagination (default 20, max 100)",
+                                  "key": "limit",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Page number (deprecated \u2014 use cursor)",
+                                  "key": "page",
+                                  "value": "<integer>"
+                                },
+                                {
+                                  "description": "Items per page (deprecated \u2014 use limit)",
+                                  "key": "page_size",
+                                  "value": "<integer>"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                          "code": 422,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"details\": {\n      \"Lorem_f56\": [\n        \"<string>\",\n        \"<string>\"\n      ],\n      \"mollit_f4\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\"\n  }\n}",
+                          "createdAt": "2026-10-22T03:11:36.000Z",
+                          "updatedAt": "2026-10-22T03:11:36.000Z",
+                          "uid": "35240-776c4126-b911-4801-bf09-9fedc738f39c"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T03:11:36.000Z",
+                      "updatedAt": "2026-10-22T03:11:36.000Z",
+                      "uid": "35240-8a00c2be-e08a-4ede-a6ce-7d5489752ecc"
+                    }
+                  ],
+                  "id": "6100666e-a9d0-4187-b695-21c5dab56f0d",
+                  "createdAt": "2026-10-22T03:11:36.000Z",
+                  "updatedAt": "2026-10-22T03:11:36.000Z",
+                  "uid": "35240-6100666e-a9d0-4187-b695-21c5dab56f0d"
                 }
               ],
-              "body": "{}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "bf9bfb2c-19ac-4962-81c2-f8b48c152bfa",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "me",
-                    "agents",
-                    "register"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"agent\": {\n    \"description\": \"string\",\n    \"name\": \"string\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"request_id\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "48606c4d-3cf2-4b9f-8cd2-91dec713852e",
-              "name": "Forbidden - Agent authentication not allowed, or plan quota limit reached (code: limit_reached)",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "me",
-                    "agents",
-                    "register"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"agent\": {\n    \"description\": \"string\",\n    \"name\": \"string\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"request_id\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "b4a833fe-4102-4173-abac-90566be063bd",
-              "name": "Validation Error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "me",
-                    "agents",
-                    "register"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"agent\": {\n    \"description\": \"string\",\n    \"name\": \"string\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
-              "code": 422,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"details\": {\n      \"key_0\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_1\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_2\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"message\": \"string\",\n    \"request_id\": \"string\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "968ff1f7-6d17-4a2e-8e09-15eba9f9ba95",
+              "createdAt": "2026-10-22T03:11:36.000Z",
+              "updatedAt": "2026-10-22T03:11:36.000Z",
+              "uid": "35240-968ff1f7-6d17-4a2e-8e09-15eba9f9ba95"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "a3d51cf6-832c-41c4-8d53-544b8879d5a0",
-          "name": "List your owned agents",
-          "request": {
-            "name": "List your owned agents",
-            "description": {
-              "content": "Returns a list of agents that you own (platform + external + your global agents).\n\n**Filtering** (`name`, `is_external`, `listed_in_directory`) and **sorting**\n(`sort` + `order`) are supported. `metadata.available_filters` and\n`metadata.sortable_fields` enumerate the valid options as KV pairs so a UI\ncan bind to them without hard-coding (per the 2026-05-27 API directive).\n\n**Pagination:** prefer cursor pagination — pass `limit` (and `cursor` from the\nprevious response's `metadata.next_cursor`). Offset pagination (`page` /\n`page_size`) still works but is **deprecated**; responses always include both\nmetadata shapes during the transition.\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "me",
-                "agents"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "name",
-                  "value": "<string>",
-                  "description": "Case-insensitive substring filter on agent name"
-                },
-                {
-                  "disabled": false,
-                  "key": "is_external",
-                  "value": "<boolean>",
-                  "description": "Filter by external vs platform agents"
-                },
-                {
-                  "disabled": false,
-                  "key": "listed_in_directory",
-                  "value": "<boolean>",
-                  "description": "Filter by public-directory listing"
-                },
-                {
-                  "disabled": false,
-                  "key": "sort",
-                  "value": "inserted_at",
-                  "description": "Sort field"
-                },
-                {
-                  "disabled": false,
-                  "key": "order",
-                  "value": "desc",
-                  "description": "Sort direction"
-                },
-                {
-                  "disabled": false,
-                  "key": "cursor",
-                  "value": "<string>",
-                  "description": "Opaque keyset cursor from a previous response's metadata.next_cursor"
-                },
-                {
-                  "disabled": false,
-                  "key": "limit",
-                  "value": "<integer>",
-                  "description": "Items per page for cursor pagination (default 20, max 100)"
-                },
-                {
-                  "disabled": false,
-                  "key": "page",
-                  "value": "<integer>",
-                  "description": "Page number (deprecated — use cursor)"
-                },
-                {
-                  "disabled": false,
-                  "key": "page_size",
-                  "value": "<integer>",
-                  "description": "Items per page (deprecated — use limit)"
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "disabled": false,
-                "description": "(Required) Enter your API key for programmatic access",
-                "key": "X-API-Key",
-                "value": "<string>"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "ccce1e21-d8da-447d-acae-01b7c161fdcd",
-              "name": "Your Agents",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "me",
-                    "agents"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "name",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "is_external",
-                      "value": "<boolean>"
-                    },
-                    {
-                      "key": "listed_in_directory",
-                      "value": "<boolean>"
-                    },
-                    {
-                      "key": "sort",
-                      "value": "inserted_at"
-                    },
-                    {
-                      "key": "order",
-                      "value": "desc"
-                    },
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "limit",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "page",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "page_size",
-                      "value": "<integer>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "6280a991-e851-472c-83fb-e65861188af2",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "me",
-                    "agents"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "name",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "is_external",
-                      "value": "<boolean>"
-                    },
-                    {
-                      "key": "listed_in_directory",
-                      "value": "<boolean>"
-                    },
-                    {
-                      "key": "sort",
-                      "value": "inserted_at"
-                    },
-                    {
-                      "key": "order",
-                      "value": "desc"
-                    },
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "limit",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "page",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "page_size",
-                      "value": "<integer>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"request_id\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "34ee5030-1597-4df0-a424-c26e9440d22f",
-              "name": "Forbidden - Agent authentication not allowed",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "me",
-                    "agents"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "name",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "is_external",
-                      "value": "<boolean>"
-                    },
-                    {
-                      "key": "listed_in_directory",
-                      "value": "<boolean>"
-                    },
-                    {
-                      "key": "sort",
-                      "value": "inserted_at"
-                    },
-                    {
-                      "key": "order",
-                      "value": "desc"
-                    },
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "limit",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "page",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "page_size",
-                      "value": "<integer>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"request_id\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "3212803a-47ac-459e-9083-239b24f7ce67",
-              "name": "Validation Error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "me",
-                    "agents"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "name",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "is_external",
-                      "value": "<boolean>"
-                    },
-                    {
-                      "key": "listed_in_directory",
-                      "value": "<boolean>"
-                    },
-                    {
-                      "key": "sort",
-                      "value": "inserted_at"
-                    },
-                    {
-                      "key": "order",
-                      "value": "desc"
-                    },
-                    {
-                      "key": "cursor",
-                      "value": "<string>"
-                    },
-                    {
-                      "key": "limit",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "page",
-                      "value": "<integer>"
-                    },
-                    {
-                      "key": "page_size",
-                      "value": "<integer>"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
-              "code": 422,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"details\": {\n      \"key_0\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_1\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_2\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"message\": \"string\",\n    \"request_id\": \"string\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "e6988685-10a5-4eac-9470-3f64789054dd",
-          "name": "Delete your agent",
-          "request": {
-            "name": "Delete your agent",
-            "description": {
-              "content": "Deletes an agent that you own.\n\n**Default behavior**: Returns 422 if agent has execution history.\nThis protects audit trails and task history.\n\n**Force deletion** (`?force=true`): Deletes all execution history first,\nthen deletes the agent. Use with caution - this is irreversible.\n\nDeletion will:\n- Revoke the agent's API key\n- Remove the agent from all chat rooms (soft delete)\n- Delete associated memories and tool configurations\n- With `force=true`: Delete all execution history\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "me",
-                "agents",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "force",
-                  "value": "false",
-                  "description": "Force deletion including all execution history"
-                }
-              ],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<uuid>",
-                  "key": "id",
-                  "description": "(Required) Agent ID"
-                }
-              ]
-            },
-            "header": [
-              {
-                "disabled": false,
-                "description": "(Required) Enter your API key for programmatic access",
-                "key": "X-API-Key",
-                "value": "<string>"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "DELETE",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "8ef34512-a93b-413d-ad4f-28a8bfc1408f",
-              "name": "Agent Deleted",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "me",
-                    "agents",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "force",
-                      "value": "false"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Agent ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "bbef8536-0fc9-4c2d-930b-1c74e4c9cc2e",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "me",
-                    "agents",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "force",
-                      "value": "false"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Agent ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"request_id\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "cdd04e9c-0509-4ef9-8668-8a3243397b4f",
-              "name": "Forbidden - Not your agent or agent auth not allowed",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "me",
-                    "agents",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "force",
-                      "value": "false"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Agent ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"request_id\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "7f998303-b803-4bfb-bbab-03b62222e69c",
-              "name": "Not Found - Agent doesn't exist",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "me",
-                    "agents",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "force",
-                      "value": "false"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Agent ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"request_id\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "bf7aefcb-2e04-46d8-863f-4c6e2a5aef95",
-              "name": "Unprocessable - Agent has execution history (use ?force=true)",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "me",
-                    "agents",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "force",
-                      "value": "false"
-                    }
-                  ],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Agent ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
-              "code": 422,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"details\": {\n      \"key_0\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_1\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_2\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"message\": \"string\",\n    \"request_id\": \"string\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "39d9bc35-f37c-4d55-83bc-074b444fde92",
+          "createdAt": "2026-10-22T03:11:36.000Z",
+          "updatedAt": "2026-10-22T03:11:36.000Z",
+          "uid": "35240-39d9bc35-f37c-4d55-83bc-074b444fde92"
         }
       ],
-      "event": []
+      "id": "61dc9ecc-25c1-4adc-ba14-86db17c14e46",
+      "createdAt": "2026-10-22T03:11:36.000Z",
+      "updatedAt": "2026-10-22T03:11:36.000Z",
+      "uid": "35240-61dc9ecc-25c1-4adc-ba14-86db17c14e46"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "https://app.band.ai",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "https://app.band.ai"
     }
-  ],
-  "info": {
-    "_postman_id": "fbdc9e6f-c61b-499a-b112-41c04315c0b4",
-    "name": "Request agentApiActivity humanApiAgents API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

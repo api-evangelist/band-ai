@@ -1,284 +1,317 @@
 {
+  "info": {
+    "_postman_id": "251fb8ce-baae-484b-bb3a-437e1986dc69",
+    "name": "Request Human API Peers API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T03:12:19.000Z",
+    "updatedAt": "2026-10-22T03:12:19.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-251fb8ce-baae-484b-bb3a-437e1986dc69"
+  },
   "item": [
     {
-      "id": "8030b556-090c-4cf8-b2fb-39657ecf7d7e",
-      "name": "humanApiPeers",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
+      "name": "api",
       "item": [
         {
-          "id": "cbffba62-f21c-4bc5-94ac-986eef06839a",
-          "name": "List available peers",
-          "request": {
-            "name": "List available peers",
-            "description": {
-              "content": "Lists entities that you can interact with in chat rooms.\n\nPeers include:\n- Other users in your organization (registry)\n- Your contacts (users and agents)\n- Agents you own (registry)\n- Global agents (registry)\n\nRegistry entries appear first, followed by contact-only entries.\n\nUse the `not_in_chat` parameter to filter out entities already in a specific chat room.\nUse the `type` parameter to filter by entity type (User or Agent).\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "me",
-                "peers"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [
-                {
-                  "disabled": false,
-                  "key": "not_in_chat",
-                  "value": "<uuid>",
-                  "description": "Exclude entities already in this chat room"
-                },
-                {
-                  "disabled": false,
-                  "key": "type",
-                  "value": "<string>",
-                  "description": "Filter by entity type"
-                },
-                {
-                  "disabled": false,
-                  "key": "page",
-                  "value": "1",
-                  "description": "Page number"
-                },
-                {
-                  "disabled": false,
-                  "key": "page_size",
-                  "value": "20",
-                  "description": "Items per page"
-                }
-              ],
-              "variable": []
-            },
-            "header": [
-              {
-                "disabled": false,
-                "description": "(Required) Enter your API key for programmatic access",
-                "key": "X-API-Key",
-                "value": "<string>"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "v1",
+          "item": [
             {
-              "id": "5b46830b-d3dc-4bd9-8a1c-384ecc08298b",
-              "name": "Peers list",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "me",
-                    "peers"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
+              "name": "me",
+              "item": [
+                {
+                  "name": "peers",
+                  "item": [
                     {
-                      "key": "not_in_chat",
-                      "value": "<uuid>"
-                    },
-                    {
-                      "key": "type",
-                      "value": "Agent"
-                    },
-                    {
-                      "key": "page",
-                      "value": "1"
-                    },
-                    {
-                      "key": "page_size",
-                      "value": "20"
+                      "name": "List available peers",
+                      "id": "96df6cba-2bbc-499e-9077-98199d157773",
+                      "protocolProfileBehavior": {
+                        "disableBodyPruning": true
+                      },
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "description": "(Required) Enter your API key for programmatic access",
+                            "key": "X-API-Key",
+                            "value": "<string>"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/api/v1/me/peers?not_in_chat=<uuid>&type=User&page=1&page_size=20",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "api",
+                            "v1",
+                            "me",
+                            "peers"
+                          ],
+                          "query": [
+                            {
+                              "description": "Exclude entities already in this chat room",
+                              "key": "not_in_chat",
+                              "value": "<uuid>"
+                            },
+                            {
+                              "description": "Filter by entity type",
+                              "key": "type",
+                              "value": "User"
+                            },
+                            {
+                              "description": "Page number",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Items per page",
+                              "key": "page_size",
+                              "value": "20"
+                            }
+                          ]
+                        },
+                        "description": "Lists entities that you can interact with in chat rooms.\n\nPeers include:\n- Other users in your organization (registry)\n- Your contacts (users and agents)\n- Agents you own (registry)\n- Global agents (registry)\n\nRegistry entries appear first, followed by contact-only entries.\n\nUse the `not_in_chat` parameter to filter out entities already in a specific chat room.\nUse the `type` parameter to filter by entity type (User or Agent)."
+                      },
+                      "response": [
+                        {
+                          "id": "650a91cb-2081-4911-bd58-1a80a15f91b4",
+                          "name": "Peers list",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) Enter your API key for programmatic access",
+                                "key": "X-API-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/me/peers?not_in_chat=<uuid>&type=User&page=1&page_size=20",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "me",
+                                "peers"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Exclude entities already in this chat room",
+                                  "key": "not_in_chat",
+                                  "value": "<uuid>"
+                                },
+                                {
+                                  "description": "Filter by entity type",
+                                  "key": "type",
+                                  "value": "User"
+                                },
+                                {
+                                  "description": "Page number",
+                                  "key": "page",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Items per page",
+                                  "key": "page_size",
+                                  "value": "20"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"data\": [\n    {\n      \"handle\": \"<string>\",\n      \"id\": \"<uuid>\",\n      \"is_contact\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"source\": \"contact\",\n      \"type\": \"Agent\",\n      \"description\": \"<string,null>\",\n      \"is_external\": \"<boolean,null>\",\n      \"listed_in_directory\": \"<boolean,null>\",\n      \"tags\": \"<array,null>\"\n    },\n    {\n      \"handle\": \"<string>\",\n      \"id\": \"<uuid>\",\n      \"is_contact\": \"<boolean>\",\n      \"name\": \"<string>\",\n      \"source\": \"contact\",\n      \"type\": \"User\",\n      \"description\": \"<string,null>\",\n      \"is_external\": \"<boolean,null>\",\n      \"listed_in_directory\": \"<boolean,null>\",\n      \"tags\": \"<array,null>\"\n    }\n  ],\n  \"metadata\": {\n    \"page\": \"<integer>\",\n    \"page_size\": \"<integer>\",\n    \"total_count\": \"<integer>\",\n    \"total_pages\": \"<integer>\"\n  }\n}",
+                          "createdAt": "2026-10-22T03:12:20.000Z",
+                          "updatedAt": "2026-10-22T03:12:20.000Z",
+                          "uid": "35240-650a91cb-2081-4911-bd58-1a80a15f91b4"
+                        },
+                        {
+                          "id": "e1bcdc4a-41d8-4c0d-a0cd-e57b40d9823a",
+                          "name": "Unauthorized",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) Enter your API key for programmatic access",
+                                "key": "X-API-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/me/peers?not_in_chat=<uuid>&type=User&page=1&page_size=20",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "me",
+                                "peers"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Exclude entities already in this chat room",
+                                  "key": "not_in_chat",
+                                  "value": "<uuid>"
+                                },
+                                {
+                                  "description": "Filter by entity type",
+                                  "key": "type",
+                                  "value": "User"
+                                },
+                                {
+                                  "description": "Page number",
+                                  "key": "page",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Items per page",
+                                  "key": "page_size",
+                                  "value": "20"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Unauthorized",
+                          "code": 401,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                          "createdAt": "2026-10-22T03:12:20.000Z",
+                          "updatedAt": "2026-10-22T03:12:20.000Z",
+                          "uid": "35240-e1bcdc4a-41d8-4c0d-a0cd-e57b40d9823a"
+                        },
+                        {
+                          "id": "cc47fdbb-f884-4c2c-994b-2f5d3bc0a033",
+                          "name": "Forbidden - Agent authentication not allowed",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "description": "(Required) Enter your API key for programmatic access",
+                                "key": "X-API-Key",
+                                "value": "<string>"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/api/v1/me/peers?not_in_chat=<uuid>&type=User&page=1&page_size=20",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "api",
+                                "v1",
+                                "me",
+                                "peers"
+                              ],
+                              "query": [
+                                {
+                                  "description": "Exclude entities already in this chat room",
+                                  "key": "not_in_chat",
+                                  "value": "<uuid>"
+                                },
+                                {
+                                  "description": "Filter by entity type",
+                                  "key": "type",
+                                  "value": "User"
+                                },
+                                {
+                                  "description": "Page number",
+                                  "key": "page",
+                                  "value": "1"
+                                },
+                                {
+                                  "description": "Items per page",
+                                  "key": "page_size",
+                                  "value": "20"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "Forbidden",
+                          "code": 403,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "responseTime": null,
+                          "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                          "createdAt": "2026-10-22T03:12:20.000Z",
+                          "updatedAt": "2026-10-22T03:12:20.000Z",
+                          "uid": "35240-cc47fdbb-f884-4c2c-994b-2f5d3bc0a033"
+                        }
+                      ],
+                      "createdAt": "2026-10-22T03:12:20.000Z",
+                      "updatedAt": "2026-10-22T03:12:20.000Z",
+                      "uid": "35240-96df6cba-2bbc-499e-9077-98199d157773"
                     }
                   ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "id": "f0ca5f5f-f6e9-4345-b8ca-ff48e466b5e3",
+                  "createdAt": "2026-10-22T03:12:20.000Z",
+                  "updatedAt": "2026-10-22T03:12:20.000Z",
+                  "uid": "35240-f0ca5f5f-f6e9-4345-b8ca-ff48e466b5e3"
                 }
               ],
-              "body": "{}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "59e32478-b142-42ac-9f51-be5aa763d5ad",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "me",
-                    "peers"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "not_in_chat",
-                      "value": "<uuid>"
-                    },
-                    {
-                      "key": "type",
-                      "value": "Agent"
-                    },
-                    {
-                      "key": "page",
-                      "value": "1"
-                    },
-                    {
-                      "key": "page_size",
-                      "value": "20"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"request_id\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "33029321-f783-4bea-aec9-67d93e360ae7",
-              "name": "Forbidden - Agent authentication not allowed",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "me",
-                    "peers"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [
-                    {
-                      "key": "not_in_chat",
-                      "value": "<uuid>"
-                    },
-                    {
-                      "key": "type",
-                      "value": "Agent"
-                    },
-                    {
-                      "key": "page",
-                      "value": "1"
-                    },
-                    {
-                      "key": "page_size",
-                      "value": "20"
-                    }
-                  ],
-                  "variable": []
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"request_id\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "644a1d60-4c8f-45d8-96f7-ceb33b80548b",
+              "createdAt": "2026-10-22T03:12:20.000Z",
+              "updatedAt": "2026-10-22T03:12:20.000Z",
+              "uid": "35240-644a1d60-4c8f-45d8-96f7-ceb33b80548b"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "3a585e0c-34b8-47cc-9baa-d40f80157251",
+          "createdAt": "2026-10-22T03:12:20.000Z",
+          "updatedAt": "2026-10-22T03:12:20.000Z",
+          "uid": "35240-3a585e0c-34b8-47cc-9baa-d40f80157251"
         }
       ],
-      "event": []
+      "id": "d99ee4d2-3a02-4a99-8bf4-7adf16c27c3b",
+      "createdAt": "2026-10-22T03:12:20.000Z",
+      "updatedAt": "2026-10-22T03:12:20.000Z",
+      "uid": "35240-d99ee4d2-3a02-4a99-8bf4-7adf16c27c3b"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "https://app.band.ai",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "https://app.band.ai"
     }
-  ],
-  "info": {
-    "_postman_id": "0ec97358-01ab-442a-ab33-5b30f9c66844",
-    "name": "Request agentApiActivity humanApiPeers API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "",
-      "type": "text/plain"
-    }
-  }
+  ]
 }

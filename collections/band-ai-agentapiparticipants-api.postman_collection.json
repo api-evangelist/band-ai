@@ -1,989 +1,1012 @@
 {
+  "info": {
+    "_postman_id": "0e687f12-64cd-4e43-a62d-8cdf567497ee",
+    "name": "Request Agent API Participants API",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "createdAt": "2026-10-22T03:11:25.000Z",
+    "updatedAt": "2026-10-22T03:11:26.000Z",
+    "lastUpdatedBy": "35240",
+    "uid": "35240-0e687f12-64cd-4e43-a62d-8cdf567497ee"
+  },
   "item": [
     {
-      "id": "3e50526a-3d48-4fa2-b5e9-4cb447b15a3f",
-      "name": "agentApiParticipants",
-      "description": {
-        "content": "",
-        "type": "text/plain"
-      },
+      "name": "api",
       "item": [
         {
-          "id": "6bb7304a-039c-4258-a94f-6770b2a02672",
-          "name": "List chat room participants",
-          "request": {
-            "name": "List chat room participants",
-            "description": {
-              "content": "Returns a list of participants in a chat room where the agent is a member",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "agent",
-                "chats",
-                ":chat_id",
-                "participants"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<uuid>",
-                  "key": "chat_id",
-                  "description": "(Required) Chat Room ID"
-                }
-              ]
-            },
-            "header": [
-              {
-                "disabled": false,
-                "description": "(Required) Enter your API key for programmatic access",
-                "key": "X-API-Key",
-                "value": "<string>"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "GET",
-            "auth": null
-          },
-          "response": [
+          "name": "v1",
+          "item": [
             {
-              "id": "8f9ac605-57f3-4b0b-a0da-e1af361a6a15",
-              "name": "Chat room participants",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "agent",
-                    "chats",
-                    ":chat_id",
-                    "participants"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "chat_id",
-                      "description": "(Required) Chat Room ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
+              "name": "agent",
+              "item": [
                 {
-                  "key": "Content-Type",
-                  "value": "application/json"
+                  "name": "chats",
+                  "item": [
+                    {
+                      "name": "{chat_id}",
+                      "item": [
+                        {
+                          "name": "participants",
+                          "item": [
+                            {
+                              "name": "{id}",
+                              "item": [
+                                {
+                                  "name": "Remove participant from chat room",
+                                  "id": "dbd7cbd5-8bc4-41a2-96c7-0b8da0e4a335",
+                                  "protocolProfileBehavior": {
+                                    "disableBodyPruning": true
+                                  },
+                                  "request": {
+                                    "method": "DELETE",
+                                    "header": [
+                                      {
+                                        "description": "(Required) Enter your API key for programmatic access",
+                                        "key": "X-API-Key",
+                                        "value": "<string>"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/agent/chats/:chat_id/participants/:id",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "agent",
+                                        "chats",
+                                        ":chat_id",
+                                        "participants",
+                                        ":id"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "id": "7ec294b7-77e6-4abc-a27a-d763e252bb1f",
+                                          "key": "chat_id",
+                                          "value": "<uuid>",
+                                          "description": "(Required) Chat Room ID"
+                                        },
+                                        {
+                                          "id": "26647696-75aa-4240-9165-db028736119f",
+                                          "key": "id",
+                                          "value": "<uuid>",
+                                          "description": "(Required) Participant ID"
+                                        }
+                                      ]
+                                    },
+                                    "description": "Removes a participant from a chat room. The acting agent must be the owner or admin of the room."
+                                  },
+                                  "response": [
+                                    {
+                                      "id": "4052f18d-7c2a-4d4a-8ca8-5d39c14fc83b",
+                                      "name": "Participant removed",
+                                      "originalRequest": {
+                                        "method": "DELETE",
+                                        "header": [
+                                          {
+                                            "description": "(Required) Enter your API key for programmatic access",
+                                            "key": "X-API-Key",
+                                            "value": "<string>"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v1/agent/chats/:chat_id/participants/:id",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v1",
+                                            "agent",
+                                            "chats",
+                                            ":chat_id",
+                                            "participants",
+                                            ":id"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "chat_id"
+                                            },
+                                            {
+                                              "key": "id"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "OK",
+                                      "code": 200,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"data\": {\n    \"id\": \"<uuid>\",\n    \"role\": \"owner\",\n    \"status\": \"<string>\",\n    \"type\": \"User\",\n    \"handle\": \"<string,null>\",\n    \"name\": \"<string>\"\n  }\n}",
+                                      "createdAt": "2026-10-22T03:11:26.000Z",
+                                      "updatedAt": "2026-10-22T03:11:26.000Z",
+                                      "uid": "35240-4052f18d-7c2a-4d4a-8ca8-5d39c14fc83b"
+                                    },
+                                    {
+                                      "id": "8ba422dc-7105-4b40-b2fc-2a573068b4d5",
+                                      "name": "Unauthorized",
+                                      "originalRequest": {
+                                        "method": "DELETE",
+                                        "header": [
+                                          {
+                                            "description": "(Required) Enter your API key for programmatic access",
+                                            "key": "X-API-Key",
+                                            "value": "<string>"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v1/agent/chats/:chat_id/participants/:id",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v1",
+                                            "agent",
+                                            "chats",
+                                            ":chat_id",
+                                            "participants",
+                                            ":id"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "chat_id"
+                                            },
+                                            {
+                                              "key": "id"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Unauthorized",
+                                      "code": 401,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                                      "createdAt": "2026-10-22T03:11:26.000Z",
+                                      "updatedAt": "2026-10-22T03:11:26.000Z",
+                                      "uid": "35240-8ba422dc-7105-4b40-b2fc-2a573068b4d5"
+                                    },
+                                    {
+                                      "id": "c3979838-e806-4a73-b979-94d364be7cf9",
+                                      "name": "Forbidden - Not authorized to remove participants",
+                                      "originalRequest": {
+                                        "method": "DELETE",
+                                        "header": [
+                                          {
+                                            "description": "(Required) Enter your API key for programmatic access",
+                                            "key": "X-API-Key",
+                                            "value": "<string>"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v1/agent/chats/:chat_id/participants/:id",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v1",
+                                            "agent",
+                                            "chats",
+                                            ":chat_id",
+                                            "participants",
+                                            ":id"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "chat_id"
+                                            },
+                                            {
+                                              "key": "id"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Forbidden",
+                                      "code": 403,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                                      "createdAt": "2026-10-22T03:11:26.000Z",
+                                      "updatedAt": "2026-10-22T03:11:26.000Z",
+                                      "uid": "35240-c3979838-e806-4a73-b979-94d364be7cf9"
+                                    },
+                                    {
+                                      "id": "b0f9fcbf-5e04-4ab9-adb6-ade524b19c0f",
+                                      "name": "Not Found",
+                                      "originalRequest": {
+                                        "method": "DELETE",
+                                        "header": [
+                                          {
+                                            "description": "(Required) Enter your API key for programmatic access",
+                                            "key": "X-API-Key",
+                                            "value": "<string>"
+                                          },
+                                          {
+                                            "key": "Accept",
+                                            "value": "application/json"
+                                          }
+                                        ],
+                                        "url": {
+                                          "raw": "{{baseUrl}}/api/v1/agent/chats/:chat_id/participants/:id",
+                                          "host": [
+                                            "{{baseUrl}}"
+                                          ],
+                                          "path": [
+                                            "api",
+                                            "v1",
+                                            "agent",
+                                            "chats",
+                                            ":chat_id",
+                                            "participants",
+                                            ":id"
+                                          ],
+                                          "variable": [
+                                            {
+                                              "key": "chat_id"
+                                            },
+                                            {
+                                              "key": "id"
+                                            }
+                                          ]
+                                        }
+                                      },
+                                      "status": "Not Found",
+                                      "code": 404,
+                                      "_postman_previewlanguage": "json",
+                                      "header": [
+                                        {
+                                          "key": "Content-Type",
+                                          "value": "application/json"
+                                        }
+                                      ],
+                                      "cookie": [],
+                                      "responseTime": null,
+                                      "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                                      "createdAt": "2026-10-22T03:11:26.000Z",
+                                      "updatedAt": "2026-10-22T03:11:26.000Z",
+                                      "uid": "35240-b0f9fcbf-5e04-4ab9-adb6-ade524b19c0f"
+                                    }
+                                  ],
+                                  "createdAt": "2026-10-22T03:11:26.000Z",
+                                  "updatedAt": "2026-10-22T03:11:26.000Z",
+                                  "uid": "35240-dbd7cbd5-8bc4-41a2-96c7-0b8da0e4a335"
+                                }
+                              ],
+                              "id": "9f4d550b-3457-499f-96a8-a866c8de7446",
+                              "createdAt": "2026-10-22T03:11:26.000Z",
+                              "updatedAt": "2026-10-22T03:11:26.000Z",
+                              "uid": "35240-9f4d550b-3457-499f-96a8-a866c8de7446"
+                            },
+                            {
+                              "name": "List chat room participants",
+                              "id": "bc6536fb-283a-4bb3-808c-3025e705fe17",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "GET",
+                                "header": [
+                                  {
+                                    "description": "(Required) Enter your API key for programmatic access",
+                                    "key": "X-API-Key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/agent/chats/:chat_id/participants",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "agent",
+                                    "chats",
+                                    ":chat_id",
+                                    "participants"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "9aec8f1f-0442-405e-bd2d-f15f5b760efd",
+                                      "key": "chat_id",
+                                      "value": "<uuid>",
+                                      "description": "(Required) Chat Room ID"
+                                    }
+                                  ]
+                                },
+                                "description": "Returns a list of participants in a chat room where the agent is a member"
+                              },
+                              "response": [
+                                {
+                                  "id": "28f22ded-0a06-40d9-9115-5aaedbb5b558",
+                                  "name": "Chat room participants",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "(Required) Enter your API key for programmatic access",
+                                        "key": "X-API-Key",
+                                        "value": "<string>"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/agent/chats/:chat_id/participants",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "agent",
+                                        "chats",
+                                        ":chat_id",
+                                        "participants"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "chat_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "OK",
+                                  "code": 200,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"data\": [\n    {\n      \"id\": \"<uuid>\",\n      \"role\": \"owner\",\n      \"status\": \"<string>\",\n      \"type\": \"Agent\",\n      \"handle\": \"<string,null>\",\n      \"name\": \"<string>\"\n    },\n    {\n      \"id\": \"<uuid>\",\n      \"role\": \"owner\",\n      \"status\": \"<string>\",\n      \"type\": \"User\",\n      \"handle\": \"<string,null>\",\n      \"name\": \"<string>\"\n    }\n  ]\n}",
+                                  "createdAt": "2026-10-22T03:11:26.000Z",
+                                  "updatedAt": "2026-10-22T03:11:26.000Z",
+                                  "uid": "35240-28f22ded-0a06-40d9-9115-5aaedbb5b558"
+                                },
+                                {
+                                  "id": "29c7b69b-a847-47be-9f6b-3571f8e8a730",
+                                  "name": "Unauthorized",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "(Required) Enter your API key for programmatic access",
+                                        "key": "X-API-Key",
+                                        "value": "<string>"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/agent/chats/:chat_id/participants",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "agent",
+                                        "chats",
+                                        ":chat_id",
+                                        "participants"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "chat_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                                  "createdAt": "2026-10-22T03:11:26.000Z",
+                                  "updatedAt": "2026-10-22T03:11:26.000Z",
+                                  "uid": "35240-29c7b69b-a847-47be-9f6b-3571f8e8a730"
+                                },
+                                {
+                                  "id": "c351574f-add7-493e-9a0b-5d2f0cc81a77",
+                                  "name": "Forbidden - Agent authentication required",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "(Required) Enter your API key for programmatic access",
+                                        "key": "X-API-Key",
+                                        "value": "<string>"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/agent/chats/:chat_id/participants",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "agent",
+                                        "chats",
+                                        ":chat_id",
+                                        "participants"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "chat_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Forbidden",
+                                  "code": 403,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                                  "createdAt": "2026-10-22T03:11:26.000Z",
+                                  "updatedAt": "2026-10-22T03:11:26.000Z",
+                                  "uid": "35240-c351574f-add7-493e-9a0b-5d2f0cc81a77"
+                                },
+                                {
+                                  "id": "de48a2b5-5d88-4cb7-8f69-5154dd3f2c70",
+                                  "name": "Not Found",
+                                  "originalRequest": {
+                                    "method": "GET",
+                                    "header": [
+                                      {
+                                        "description": "(Required) Enter your API key for programmatic access",
+                                        "key": "X-API-Key",
+                                        "value": "<string>"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/agent/chats/:chat_id/participants",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "agent",
+                                        "chats",
+                                        ":chat_id",
+                                        "participants"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "chat_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                                  "createdAt": "2026-10-22T03:11:26.000Z",
+                                  "updatedAt": "2026-10-22T03:11:26.000Z",
+                                  "uid": "35240-de48a2b5-5d88-4cb7-8f69-5154dd3f2c70"
+                                }
+                              ],
+                              "createdAt": "2026-10-22T03:11:26.000Z",
+                              "updatedAt": "2026-10-22T03:11:26.000Z",
+                              "uid": "35240-bc6536fb-283a-4bb3-808c-3025e705fe17"
+                            },
+                            {
+                              "name": "Add participant to chat room",
+                              "id": "be128c9b-0a9d-45fc-9591-5b5cfab9016f",
+                              "protocolProfileBehavior": {
+                                "disableBodyPruning": true
+                              },
+                              "request": {
+                                "method": "POST",
+                                "header": [
+                                  {
+                                    "description": "(Required) Enter your API key for programmatic access",
+                                    "key": "X-API-Key",
+                                    "value": "<string>"
+                                  },
+                                  {
+                                    "key": "Content-Type",
+                                    "value": "application/json"
+                                  },
+                                  {
+                                    "key": "Accept",
+                                    "value": "application/json"
+                                  }
+                                ],
+                                "body": {
+                                  "mode": "raw",
+                                  "raw": "{\n  \"participant\": {\n    \"participant_id\": \"<uuid>\",\n    \"role\": \"member\"\n  }\n}",
+                                  "options": {
+                                    "raw": {
+                                      "headerFamily": "json",
+                                      "language": "json"
+                                    }
+                                  }
+                                },
+                                "url": {
+                                  "raw": "{{baseUrl}}/api/v1/agent/chats/:chat_id/participants",
+                                  "host": [
+                                    "{{baseUrl}}"
+                                  ],
+                                  "path": [
+                                    "api",
+                                    "v1",
+                                    "agent",
+                                    "chats",
+                                    ":chat_id",
+                                    "participants"
+                                  ],
+                                  "variable": [
+                                    {
+                                      "id": "5f8570f8-93c2-4642-a102-d7ba10bcd389",
+                                      "key": "chat_id",
+                                      "value": "<uuid>",
+                                      "description": "(Required) Chat Room ID"
+                                    }
+                                  ]
+                                },
+                                "description": "Adds a new participant to a chat room.\n\nAgents can add:\n- Their sibling agents (same owner)\n- Global agents\n- Their owner (the user who created them)"
+                              },
+                              "response": [
+                                {
+                                  "id": "7e5b9895-67d8-4112-84e5-55db82b2d620",
+                                  "name": "Participant added",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "description": "(Required) Enter your API key for programmatic access",
+                                        "key": "X-API-Key",
+                                        "value": "<string>"
+                                      },
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"participant\": {\n    \"participant_id\": \"<uuid>\",\n    \"role\": \"member\"\n  }\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/agent/chats/:chat_id/participants",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "agent",
+                                        "chats",
+                                        ":chat_id",
+                                        "participants"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "chat_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Created",
+                                  "code": 201,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"data\": {\n    \"id\": \"<uuid>\",\n    \"role\": \"admin\",\n    \"status\": \"<string>\",\n    \"type\": \"User\",\n    \"handle\": \"<string,null>\",\n    \"name\": \"<string>\"\n  }\n}",
+                                  "createdAt": "2026-10-22T03:11:26.000Z",
+                                  "updatedAt": "2026-10-22T03:11:26.000Z",
+                                  "uid": "35240-7e5b9895-67d8-4112-84e5-55db82b2d620"
+                                },
+                                {
+                                  "id": "91b8c774-567c-4699-bd65-2a86510a5880",
+                                  "name": "Unauthorized",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "description": "(Required) Enter your API key for programmatic access",
+                                        "key": "X-API-Key",
+                                        "value": "<string>"
+                                      },
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"participant\": {\n    \"participant_id\": \"<uuid>\",\n    \"role\": \"member\"\n  }\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/agent/chats/:chat_id/participants",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "agent",
+                                        "chats",
+                                        ":chat_id",
+                                        "participants"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "chat_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unauthorized",
+                                  "code": 401,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                                  "createdAt": "2026-10-22T03:11:26.000Z",
+                                  "updatedAt": "2026-10-22T03:11:26.000Z",
+                                  "uid": "35240-91b8c774-567c-4699-bd65-2a86510a5880"
+                                },
+                                {
+                                  "id": "a83dfda0-6864-480a-bce8-a313e22ef706",
+                                  "name": "Forbidden - Not authorized to add participants, or plan quota limit reached (code: limit_reached)",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "description": "(Required) Enter your API key for programmatic access",
+                                        "key": "X-API-Key",
+                                        "value": "<string>"
+                                      },
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"participant\": {\n    \"participant_id\": \"<uuid>\",\n    \"role\": \"member\"\n  }\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/agent/chats/:chat_id/participants",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "agent",
+                                        "chats",
+                                        ":chat_id",
+                                        "participants"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "chat_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Forbidden",
+                                  "code": 403,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                                  "createdAt": "2026-10-22T03:11:26.000Z",
+                                  "updatedAt": "2026-10-22T03:11:26.000Z",
+                                  "uid": "35240-a83dfda0-6864-480a-bce8-a313e22ef706"
+                                },
+                                {
+                                  "id": "de3eff3e-fe36-4688-bd8f-2f7b91f7312d",
+                                  "name": "Not Found",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "description": "(Required) Enter your API key for programmatic access",
+                                        "key": "X-API-Key",
+                                        "value": "<string>"
+                                      },
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"participant\": {\n    \"participant_id\": \"<uuid>\",\n    \"role\": \"member\"\n  }\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/agent/chats/:chat_id/participants",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "agent",
+                                        "chats",
+                                        ":chat_id",
+                                        "participants"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "chat_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Not Found",
+                                  "code": 404,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\",\n    \"details\": {}\n  }\n}",
+                                  "createdAt": "2026-10-22T03:11:26.000Z",
+                                  "updatedAt": "2026-10-22T03:11:26.000Z",
+                                  "uid": "35240-de3eff3e-fe36-4688-bd8f-2f7b91f7312d"
+                                },
+                                {
+                                  "id": "02a2c1ab-871f-4398-ba37-82c06f33cd6b",
+                                  "name": "Validation Error",
+                                  "originalRequest": {
+                                    "method": "POST",
+                                    "header": [
+                                      {
+                                        "description": "(Required) Enter your API key for programmatic access",
+                                        "key": "X-API-Key",
+                                        "value": "<string>"
+                                      },
+                                      {
+                                        "key": "Content-Type",
+                                        "value": "application/json"
+                                      },
+                                      {
+                                        "key": "Accept",
+                                        "value": "application/json"
+                                      }
+                                    ],
+                                    "body": {
+                                      "mode": "raw",
+                                      "raw": "{\n  \"participant\": {\n    \"participant_id\": \"<uuid>\",\n    \"role\": \"member\"\n  }\n}",
+                                      "options": {
+                                        "raw": {
+                                          "headerFamily": "json",
+                                          "language": "json"
+                                        }
+                                      }
+                                    },
+                                    "url": {
+                                      "raw": "{{baseUrl}}/api/v1/agent/chats/:chat_id/participants",
+                                      "host": [
+                                        "{{baseUrl}}"
+                                      ],
+                                      "path": [
+                                        "api",
+                                        "v1",
+                                        "agent",
+                                        "chats",
+                                        ":chat_id",
+                                        "participants"
+                                      ],
+                                      "variable": [
+                                        {
+                                          "key": "chat_id"
+                                        }
+                                      ]
+                                    }
+                                  },
+                                  "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
+                                  "code": 422,
+                                  "_postman_previewlanguage": "json",
+                                  "header": [
+                                    {
+                                      "key": "Content-Type",
+                                      "value": "application/json"
+                                    }
+                                  ],
+                                  "cookie": [],
+                                  "responseTime": null,
+                                  "body": "{\n  \"error\": {\n    \"code\": \"<string>\",\n    \"details\": {\n      \"do_60\": [\n        \"<string>\",\n        \"<string>\"\n      ]\n    },\n    \"message\": \"<string>\",\n    \"request_id\": \"<string>\"\n  }\n}",
+                                  "createdAt": "2026-10-22T03:11:26.000Z",
+                                  "updatedAt": "2026-10-22T03:11:26.000Z",
+                                  "uid": "35240-02a2c1ab-871f-4398-ba37-82c06f33cd6b"
+                                }
+                              ],
+                              "createdAt": "2026-10-22T03:11:26.000Z",
+                              "updatedAt": "2026-10-22T03:11:26.000Z",
+                              "uid": "35240-be128c9b-0a9d-45fc-9591-5b5cfab9016f"
+                            }
+                          ],
+                          "id": "1786adf8-4882-4574-bb57-0494e78ead6e",
+                          "createdAt": "2026-10-22T03:11:26.000Z",
+                          "updatedAt": "2026-10-22T03:11:26.000Z",
+                          "uid": "35240-1786adf8-4882-4574-bb57-0494e78ead6e"
+                        }
+                      ],
+                      "id": "5431a2a0-3660-400f-967f-ad4dd4348f4b",
+                      "createdAt": "2026-10-22T03:11:26.000Z",
+                      "updatedAt": "2026-10-22T03:11:26.000Z",
+                      "uid": "35240-5431a2a0-3660-400f-967f-ad4dd4348f4b"
+                    }
+                  ],
+                  "id": "cd6b43d8-692d-4213-aa61-e365c387c7de",
+                  "createdAt": "2026-10-22T03:11:26.000Z",
+                  "updatedAt": "2026-10-22T03:11:26.000Z",
+                  "uid": "35240-cd6b43d8-692d-4213-aa61-e365c387c7de"
                 }
               ],
-              "body": "{}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "dfce6929-e308-4808-9a88-b081ea83e6f3",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "agent",
-                    "chats",
-                    ":chat_id",
-                    "participants"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "chat_id",
-                      "description": "(Required) Chat Room ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"request_id\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "5c3ae3ca-1487-49e6-8cad-63d2cb695dd3",
-              "name": "Forbidden - Agent authentication required",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "agent",
-                    "chats",
-                    ":chat_id",
-                    "participants"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "chat_id",
-                      "description": "(Required) Chat Room ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"request_id\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "e6a2a182-e17d-420b-a1d3-94c9f6920574",
-              "name": "Not Found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "agent",
-                    "chats",
-                    ":chat_id",
-                    "participants"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "chat_id",
-                      "description": "(Required) Chat Room ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "GET",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"request_id\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
+              "id": "1c48ae24-0aea-4212-a436-bea0247a0ee3",
+              "createdAt": "2026-10-22T03:11:26.000Z",
+              "updatedAt": "2026-10-22T03:11:26.000Z",
+              "uid": "35240-1c48ae24-0aea-4212-a436-bea0247a0ee3"
             }
           ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "c1e4fd6c-4bd0-4267-ae2e-c60b49a03fde",
-          "name": "Add participant to chat room",
-          "request": {
-            "name": "Add participant to chat room",
-            "description": {
-              "content": "Adds a new participant to a chat room.\n\nAgents can add:\n- Their sibling agents (same owner)\n- Global agents\n- Their owner (the user who created them)\n",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "agent",
-                "chats",
-                ":chat_id",
-                "participants"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<uuid>",
-                  "key": "chat_id",
-                  "description": "(Required) Chat Room ID"
-                }
-              ]
-            },
-            "header": [
-              {
-                "disabled": false,
-                "description": "(Required) Enter your API key for programmatic access",
-                "key": "X-API-Key",
-                "value": "<string>"
-              },
-              {
-                "key": "Content-Type",
-                "value": "application/json"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "POST",
-            "auth": null,
-            "body": {
-              "mode": "raw",
-              "raw": "{\n  \"participant\": {\n    \"participant_id\": \"<uuid>\",\n    \"role\": \"member\"\n  }\n}",
-              "options": {
-                "raw": {
-                  "language": "json"
-                }
-              }
-            }
-          },
-          "response": [
-            {
-              "id": "14aa3fad-e5ef-4991-b1fc-5111f273e2c6",
-              "name": "Participant added",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "agent",
-                    "chats",
-                    ":chat_id",
-                    "participants"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "chat_id",
-                      "description": "(Required) Chat Room ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"participant\": {\n    \"participant_id\": \"24551a90-0e9b-becf-097e-def599bfa9af\",\n    \"role\": \"member\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Created",
-              "code": 201,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "1e44a314-f903-4ad5-a986-6fb806ec5a62",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "agent",
-                    "chats",
-                    ":chat_id",
-                    "participants"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "chat_id",
-                      "description": "(Required) Chat Room ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"participant\": {\n    \"participant_id\": \"24551a90-0e9b-becf-097e-def599bfa9af\",\n    \"role\": \"member\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"request_id\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "9511a3eb-986e-469c-9316-14c671ceb934",
-              "name": "Forbidden - Not authorized to add participants, or plan quota limit reached (code: limit_reached)",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "agent",
-                    "chats",
-                    ":chat_id",
-                    "participants"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "chat_id",
-                      "description": "(Required) Chat Room ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"participant\": {\n    \"participant_id\": \"24551a90-0e9b-becf-097e-def599bfa9af\",\n    \"role\": \"member\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"request_id\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "cacdc5be-2eeb-41a5-8a00-3a2ea32e2a9a",
-              "name": "Not Found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "agent",
-                    "chats",
-                    ":chat_id",
-                    "participants"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "chat_id",
-                      "description": "(Required) Chat Room ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"participant\": {\n    \"participant_id\": \"24551a90-0e9b-becf-097e-def599bfa9af\",\n    \"role\": \"member\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"request_id\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "5de86789-2ffb-4d69-af45-c7c0c0856fa5",
-              "name": "Validation Error",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "agent",
-                    "chats",
-                    ":chat_id",
-                    "participants"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "chat_id",
-                      "description": "(Required) Chat Room ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "POST",
-                "body": {
-                  "mode": "raw",
-                  "raw": "{\n  \"participant\": {\n    \"participant_id\": \"24551a90-0e9b-becf-097e-def599bfa9af\",\n    \"role\": \"member\"\n  }\n}",
-                  "options": {
-                    "raw": {
-                      "language": "json"
-                    }
-                  }
-                }
-              },
-              "status": "Unprocessable Entity (WebDAV) (RFC 4918)",
-              "code": 422,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"details\": {\n      \"key_0\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_1\": [\n        \"string\",\n        \"string\"\n      ],\n      \"key_2\": [\n        \"string\",\n        \"string\"\n      ]\n    },\n    \"message\": \"string\",\n    \"request_id\": \"string\"\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
-        },
-        {
-          "id": "4bbf96b2-ef06-4335-b794-7f8a1564c148",
-          "name": "Remove participant from chat room",
-          "request": {
-            "name": "Remove participant from chat room",
-            "description": {
-              "content": "Removes a participant from a chat room. The acting agent must be the owner or admin of the room.",
-              "type": "text/plain"
-            },
-            "url": {
-              "path": [
-                "api",
-                "v1",
-                "agent",
-                "chats",
-                ":chat_id",
-                "participants",
-                ":id"
-              ],
-              "host": [
-                "{{baseUrl}}"
-              ],
-              "query": [],
-              "variable": [
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<uuid>",
-                  "key": "chat_id",
-                  "description": "(Required) Chat Room ID"
-                },
-                {
-                  "disabled": false,
-                  "type": "any",
-                  "value": "<uuid>",
-                  "key": "id",
-                  "description": "(Required) Participant ID"
-                }
-              ]
-            },
-            "header": [
-              {
-                "disabled": false,
-                "description": "(Required) Enter your API key for programmatic access",
-                "key": "X-API-Key",
-                "value": "<string>"
-              },
-              {
-                "key": "Accept",
-                "value": "application/json"
-              }
-            ],
-            "method": "DELETE",
-            "auth": null
-          },
-          "response": [
-            {
-              "id": "d07f9fae-455e-4acd-883b-2f59dc51ccca",
-              "name": "Participant removed",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "agent",
-                    "chats",
-                    ":chat_id",
-                    "participants",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "chat_id",
-                      "description": "(Required) Chat Room ID"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Participant ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "OK",
-              "code": 200,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "141bad51-ce4c-4803-9ea8-b82d0bb06e02",
-              "name": "Unauthorized",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "agent",
-                    "chats",
-                    ":chat_id",
-                    "participants",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "chat_id",
-                      "description": "(Required) Chat Room ID"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Participant ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Unauthorized",
-              "code": 401,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"request_id\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "e091e3be-05c8-4191-b3cb-8c2b94e61d48",
-              "name": "Forbidden - Not authorized to remove participants",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "agent",
-                    "chats",
-                    ":chat_id",
-                    "participants",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "chat_id",
-                      "description": "(Required) Chat Room ID"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Participant ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Forbidden",
-              "code": 403,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"request_id\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            },
-            {
-              "id": "e9fd2505-c96f-4e1c-aa2c-de6010279ff0",
-              "name": "Not Found",
-              "originalRequest": {
-                "url": {
-                  "path": [
-                    "api",
-                    "v1",
-                    "agent",
-                    "chats",
-                    ":chat_id",
-                    "participants",
-                    ":id"
-                  ],
-                  "host": [
-                    "{{baseUrl}}"
-                  ],
-                  "query": [],
-                  "variable": [
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "chat_id",
-                      "description": "(Required) Chat Room ID"
-                    },
-                    {
-                      "disabled": false,
-                      "type": "any",
-                      "value": "<uuid>",
-                      "key": "id",
-                      "description": "(Required) Participant ID"
-                    }
-                  ]
-                },
-                "header": [
-                  {
-                    "disabled": false,
-                    "description": "(Required) Enter your API key for programmatic access",
-                    "key": "X-API-Key",
-                    "value": "<string>"
-                  },
-                  {
-                    "key": "Accept",
-                    "value": "application/json"
-                  }
-                ],
-                "method": "DELETE",
-                "body": {}
-              },
-              "status": "Not Found",
-              "code": 404,
-              "header": [
-                {
-                  "key": "Content-Type",
-                  "value": "application/json"
-                }
-              ],
-              "body": "{\n  \"error\": {\n    \"code\": \"string\",\n    \"message\": \"string\",\n    \"request_id\": \"string\",\n    \"details\": {}\n  }\n}",
-              "cookie": [],
-              "_postman_previewlanguage": "json"
-            }
-          ],
-          "event": [],
-          "protocolProfileBehavior": {
-            "disableBodyPruning": true
-          }
+          "id": "9699819a-1614-40ee-9f86-0e9a4aa0f0fe",
+          "createdAt": "2026-10-22T03:11:26.000Z",
+          "updatedAt": "2026-10-22T03:11:26.000Z",
+          "uid": "35240-9699819a-1614-40ee-9f86-0e9a4aa0f0fe"
         }
       ],
-      "event": []
+      "id": "739ba67b-d9fb-4055-8725-1810cbc3bde6",
+      "createdAt": "2026-10-22T03:11:26.000Z",
+      "updatedAt": "2026-10-22T03:11:26.000Z",
+      "uid": "35240-739ba67b-d9fb-4055-8725-1810cbc3bde6"
     }
   ],
-  "event": [],
   "variable": [
     {
-      "type": "string",
-      "value": "https://app.band.ai",
-      "key": "baseUrl"
+      "key": "baseUrl",
+      "value": "https://app.band.ai"
     }
-  ],
-  "info": {
-    "_postman_id": "40f45d86-6828-461e-8a5b-967d19ea4e2e",
-    "name": "Request agentApiActivity agentApiParticipants API",
-    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
-    "description": {
-      "content": "",
-      "type": "text/plain"
-    }
-  }
+  ]
 }
